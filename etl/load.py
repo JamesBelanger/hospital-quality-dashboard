@@ -45,6 +45,11 @@ def load():
     for c in ("is_texas", "is_houston_area"):
         hospitals[c] = hospitals[c].map({"True": "t", "False": "f"}).fillna("f")
     measures["higher_is_better"] = measures["higher_is_better"].map({"True": "t", "False": "f"}).fillna("")
+    # integer columns: pandas round-trips them as "4.0"; Postgres smallint/integer wants "4"
+    def as_int_str(col):
+        return pd.to_numeric(col, errors="coerce").round().astype("Int64").astype(str).replace({"<NA>": ""})
+    hospitals["overall_rating"] = as_int_str(hospitals["overall_rating"])
+    measures["n_rows"] = as_int_str(measures["n_rows"])
 
     with psycopg2.connect(db_url()) as conn:
         with conn.cursor() as cur:
