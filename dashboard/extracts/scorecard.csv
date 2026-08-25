@@ -1,0 +1,468 @@
+facility_id,facility_name,city,county,hospital_ownership,hospital_type,overall_rating,is_houston_area,readm_pn_pct,readm_hf_pct,mort_hf_pct,mort_pn_pct,hai_clabsi_sir,hai_cauti_sir,sepsis_bundle_pct,ed_left_without_seen_pct,recommend_pct,rated_9_10_pct,hcahps_star
+670102,"AD HOSPITAL EAST, LLC",HOUSTON,HARRIS,Proprietary,Acute Care Hospitals,,True,,,,,,,,1.0,64.0,60.0,
+670321,ADVANCED DALLAS HOSPITALS AND CLINICS,DALLAS,DALLAS,Proprietary,Acute Care Hospitals,,False,,,,,,,,0.0,,,
+450152,ADVENTHEALTH CENTRAL TEXAS,KILLEEN,BELL,Voluntary non-profit - Church,Acute Care Hospitals,3.0,False,17.9,23.1,12.9,17.0,,,45.0,2.0,68.0,76.0,4.0
+451323,ADVENTHEALTH ROLLINS BROOK,LAMPASAS,LAMPASAS,Voluntary non-profit - Church,Critical Access Hospitals,4.0,False,17.0,,,13.0,,,40.0,1.0,89.0,90.0,
+454101,ALLEGIANCE BEHAVIORAL HEALTH CENTER OF PLAINVIEW,PLAINVIEW,HALE,Proprietary,Psychiatric,,False,,,,,,,,,,,
+670135,"ALTUS HOUSTON HOSPITAL, LP",HOUSTON,HARRIS,Proprietary,Acute Care Hospitals,,True,,,,,,,,,,,
+670134,ALTUS LUMBERTON HOSPITAL,LUMBERTON,HARDIN,Proprietary,Acute Care Hospitals,,False,,,,,,,,1.0,89.0,91.0,
+670781,ANSON GENERAL HOSPITAL,ANSON,JONES,Government - Hospital District or Authority,Rural Emergency Hospital,,False,,,,,,,,,,,
+670056,ASCENSION  SETON HAYS,KYLE,HAYS,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,16.8,20.8,9.4,15.0,0.612,0.564,47.0,,66.0,67.0,3.0
+450042,ASCENSION PROVIDENCE,WACO,MC LENNAN,Voluntary non-profit - Private,Acute Care Hospitals,2.0,False,18.0,21.4,13.8,16.8,0.306,0.648,41.0,,69.0,70.0,3.0
+450865,ASCENSION SETON  SOUTHWEST,AUSTIN,HAYS,Voluntary non-profit - Private,Acute Care Hospitals,,False,,,,,,,71.0,,86.0,83.0,
+670043,ASCENSION SETON CEDAR PARK,CEDAR PARK,WILLIAMSON,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,19.4,21.5,9.3,18.7,,0.0,65.0,1.0,61.0,63.0,2.0
+451371,ASCENSION SETON EDGAR B DAVIS,LULING,CALDWELL,Voluntary non-profit - Private,Critical Access Hospitals,,False,17.3,20.8,,12.9,,,,1.0,,,
+451365,ASCENSION SETON HIGHLAND LAKES,BURNET,BURNET,Voluntary non-profit - Private,Critical Access Hospitals,5.0,False,16.8,21.2,9.6,12.5,,,,1.0,,,
+450056,ASCENSION SETON MEDICAL CENTER AUSTIN,AUSTIN,TRAVIS,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,16.5,20.3,9.6,16.4,0.535,0.394,41.0,,67.0,65.0,3.0
+450867,ASCENSION SETON NORTHWEST,AUSTIN,TRAVIS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,18.7,21.2,8.5,13.6,0.0,0.661,49.0,,70.0,71.0,3.0
+671304,ASCENSION SETON SMITHVILLE,SMITHVILLE,BASTROP,Voluntary non-profit - Private,Critical Access Hospitals,,False,,,,,,,,,,,
+670041,ASCENSION SETON WILLIAMSON,ROUND ROCK,WILLIAMSON,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.9,20.8,11.5,13.6,1.291,0.417,49.0,,71.0,70.0,2.0
+670093,ASPIRE HOSPITAL,CONROE,MONTGOMERY,Physician,Acute Care Hospitals,,True,,,,,,,,,,,
+452114,ATRIUM MEDICAL CENTER,STAFFORD,FORT BEND,Physician,Long-term,,True,,,,,,,,,,,
+454121,AUSTIN OAKS HOSPITAL,AUSTIN,TRAVIS,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454084,AUSTIN STATE HOSPITAL,AUSTIN,TRAVIS,Government - State,Psychiatric,,False,,,,,,,,,,,
+451310,BALLINGER MEMORIAL HOSPITAL,BALLINGER,RUNNELS,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+670336,BANDERA FAMILY HOSPITAL,SAN ANTONIO,BEXAR,Proprietary,Acute Care Hospitals,,False,,,,,,,,,,,
+450346,BAPTIST BEAUMONT HOSPITAL,BEAUMONT,JEFFERSON,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,18.0,21.1,10.6,20.5,0.173,0.273,73.0,3.0,71.0,69.0,3.0
+450058,BAPTIST MEDICAL CENTER,SAN ANTONIO,BEXAR,Proprietary,Acute Care Hospitals,3.0,False,15.0,19.8,9.9,16.9,0.327,0.311,64.0,3.0,64.0,66.0,2.0
+670078,BAPTIST NEIGHBORHOOD HOSPITAL THOUSAND OAKS,SAN ANTONIO,BEXAR,Proprietary,Acute Care Hospitals,5.0,False,16.9,,,11.7,,,80.0,2.0,79.0,82.0,4.0
+450883,BAYLOR MEDICAL CENTER AT TROPHY CLUB,TROPHY CLUB,DENTON,Proprietary,Acute Care Hospitals,,False,,,,,,,,2.0,69.0,67.0,3.0
+450885,BAYLOR SCOTT &  WHITE MEDICAL CENTER - CENTENNIAL,FRISCO,COLLIN,Voluntary non-profit - Private,Acute Care Hospitals,5.0,False,18.1,21.4,11.4,12.6,,,85.0,0.0,78.0,78.0,4.0
+670062,BAYLOR SCOTT & WHITE EMERGENCY HOSPITAL,AUBREY,DENTON,Proprietary,Acute Care Hospitals,,False,17.1,,,12.3,,,73.0,2.0,67.0,73.0,
+450851,BAYLOR SCOTT & WHITE HEART & VASCULAR HOSPITAL - DALLAS,DALLAS,DALLAS,Proprietary,Acute Care Hospitals,5.0,False,,21.7,9.3,,,,,,87.0,84.0,4.0
+670343,BAYLOR SCOTT & WHITE HOSPITAL BRENHAM,BRENHAM,WASHINGTON,Voluntary non-profit - Private,Acute Care Hospitals,,False,,,,,,,,,,,
+450563,BAYLOR SCOTT & WHITE MEDICAL CENTER  GRAPEVINE,GRAPEVINE,TARRANT,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.5,23.1,8.8,11.6,0.554,0.215,89.0,1.0,79.0,77.0,4.0
+670131,BAYLOR SCOTT & WHITE MEDICAL CENTER - BUDA,BUDA,HAYS,Voluntary non-profit - Private,Acute Care Hospitals,,False,,,,,,,89.0,1.0,88.0,91.0,
+450853,BAYLOR SCOTT & WHITE MEDICAL CENTER - FRISCO,FRISCO,DENTON,Proprietary,Acute Care Hospitals,3.0,False,,,,,,,73.0,0.0,76.0,79.0,4.0
+670108,BAYLOR SCOTT & WHITE MEDICAL CENTER - MARBLE FALLS,MARBLE FALLS,BURNET,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.7,20.5,11.4,17.0,,,75.0,2.0,79.0,77.0,4.0
+670034,BAYLOR SCOTT & WHITE MEDICAL CENTER - ROUND ROCK,ROUND ROCK,WILLIAMSON,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,17.6,21.6,8.6,12.9,0.0,0.498,81.0,3.0,77.0,76.0,4.0
+450054,BAYLOR SCOTT & WHITE MEDICAL CENTER - TEMPLE,TEMPLE,BELL,Voluntary non-profit - Private,Acute Care Hospitals,5.0,False,16.5,19.3,8.4,14.0,0.51,0.155,85.0,2.0,74.0,74.0,3.0
+451374,BAYLOR SCOTT & WHITE MEDICAL CENTER -TAYLOR,TAYLOR,WILLIAMSON,Voluntary non-profit - Private,Critical Access Hospitals,,False,16.0,20.2,,,,,,2.0,73.0,73.0,
+450079,BAYLOR SCOTT & WHITE MEDICAL CENTER AT IRVING,IRVING,DALLAS,Voluntary non-profit - Private,Acute Care Hospitals,5.0,False,18.7,21.1,7.7,12.0,1.187,0.0,91.0,0.0,78.0,75.0,3.0
+450101,BAYLOR SCOTT & WHITE MEDICAL CENTER HILLCREST,WACO,MC LENNAN,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,18.3,21.7,14.2,13.1,0.371,0.19,75.0,4.0,78.0,78.0,4.0
+670128,BAYLOR SCOTT & WHITE MEDICAL CENTER PFLUGERVILLE,PFLUGERVILLE,TRAVIS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.8,21.1,11.7,13.3,,,72.0,2.0,75.0,78.0,4.0
+450890,BAYLOR SCOTT & WHITE MEDICAL CENTER PLANO,PLANO,COLLIN,Voluntary non-profit - Other,Acute Care Hospitals,4.0,False,17.2,21.4,9.7,12.8,0.251,0.0,83.0,1.0,83.0,81.0,4.0
+670136,BAYLOR SCOTT & WHITE MEDICAL CENTER- AUSTIN,AUSTIN,TRAVIS,Voluntary non-profit - Private,Acute Care Hospitals,,False,17.3,,,15.3,,,78.0,1.0,85.0,81.0,
+670088,BAYLOR SCOTT & WHITE MEDICAL CENTER- COLLEGE STATI,COLLEGE STATION,BRAZOS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,17.0,21.5,10.9,14.1,0.948,1.411,73.0,2.0,81.0,80.0,4.0
+450372,BAYLOR SCOTT & WHITE MEDICAL CENTER- WAXAHACHIE,WAXAHACHIE,ELLIS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,18.6,21.5,12.6,12.6,,,81.0,3.0,77.0,75.0,4.0
+450864,BAYLOR SCOTT & WHITE TEXAS SPINE & JOINT HOSPITAL,TYLER,SMITH,Physician,Acute Care Hospitals,5.0,False,,,,,,0.0,,1.0,86.0,81.0,4.0
+670025,BAYLOR SCOTT & WHITE THE HEART HOSPITAL PLANO,PLANO,COLLIN,Physician,Acute Care Hospitals,4.0,False,16.2,20.2,11.0,12.1,,,42.0,1.0,88.0,87.0,4.0
+670082,BAYLOR SCOTT AND WHITE  MEDICAL CENTER  MCKINNEY,MC KINNEY,COLLIN,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,17.2,22.3,8.5,11.0,0.0,1.583,86.0,1.0,79.0,79.0,4.0
+450137,BAYLOR SCOTT AND WHITE ALL SAINTS MEDICAL CENTER,FORT WORTH,TARRANT,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,18.5,20.9,8.3,12.4,0.516,0.517,80.0,1.0,74.0,74.0,3.0
+670107,BAYLOR SCOTT AND WHITE EMERGENCY HOSPITAL,BURLESON,JOHNSON,Proprietary,Acute Care Hospitals,,False,,,,,,,,2.0,77.0,75.0,
+670346,BAYLOR SCOTT AND WHITE MEDICAL CENTER FRISCO AT PG,FRISCO,DENTON,Voluntary non-profit - Private,Acute Care Hospitals,,False,,,,,,,,,,,
+450742,BAYLOR SCOTT AND WHITE MEDICAL CENTER LAKE POINTE,ROWLETT,DALLAS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,18.8,21.7,11.7,13.4,0.0,0.0,77.0,2.0,69.0,72.0,3.0
+670060,BAYLOR SCOTT AND WHITE MEDICAL CENTER SUNNYVALE,SUNNYVALE,DALLAS,Proprietary,Acute Care Hospitals,2.0,False,17.9,19.5,12.7,14.7,0.912,2.363,42.0,2.0,51.0,55.0,2.0
+450422,BAYLOR SCOTT AND WHITE MEDICAL CENTER UPTOWN,DALLAS,DALLAS,Proprietary,Acute Care Hospitals,,False,,,,,,,,2.0,74.0,73.0,
+670067,BAYLOR SCOTT AND WHITE ORTHOPEDIC AND SPINE HOSPI,ARLINGTON,TARRANT,Proprietary,Acute Care Hospitals,,False,,,,,,,,0.0,82.0,82.0,5.0
+670076,BAYLOR SCOTT AND WHITE SURGICAL HOSPITAL AT SHERMA,SHERMAN,GRAYSON,Physician,Acute Care Hospitals,3.0,False,,,,,,,,1.0,86.0,82.0,
+450880,BAYLOR SCOTT AND WHITE SURGICAL HOSPITAL FORTWORTH,FORT WORTH,TARRANT,Physician,Acute Care Hospitals,,False,,,,,,,,0.0,74.0,75.0,4.0
+670347,BAYLOR SCOTT AND WHITE THE HEART HOSPITAL CORINTH,DENTON,DENTON,Physician,Acute Care Hospitals,,False,,,,,,,,,,,
+450895,BAYLOR SCOTT WHITE THE HEART HOSPITAL CORINTH,DENTON,DENTON,Proprietary,Acute Care Hospitals,,False,,,,,,,,,,,
+450193,Baylor St Lukes Medical Center,HOUSTON,HARRIS,Voluntary non-profit - Church,Acute Care Hospitals,4.0,True,17.1,20.0,7.2,11.7,0.77,0.417,70.0,2.0,66.0,70.0,2.0
+450874,BAYLOR SURGICAL HOSPITAL AT LAS COLINAS,IRVING,DALLAS,Proprietary,Acute Care Hospitals,,False,,,,,,,,1.0,78.0,77.0,3.0
+450021,BAYLOR UNIVERSITY MEDICAL CENTER,DALLAS,DALLAS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,17.3,22.6,12.9,9.8,0.463,0.428,70.0,3.0,74.0,71.0,3.0
+451320,BAYSIDE COMMUNITY HOSPITAL,ANAHUAC,CHAMBERS,Voluntary non-profit - Other,Critical Access Hospitals,,False,,,,,,,,1.0,,,
+670109,BAYTOWN MEDICAL CENTER LP,BAYTOWN,HARRIS,Proprietary,Acute Care Hospitals,,True,,,,,,,,1.0,,,
+454107,BEHAVIORAL HOSPITAL OF BELLAIRE,HOUSTON,HARRIS,Proprietary,Psychiatric,,True,,,,,,,,,,,
+450253,BELLVILLE MEDICAL CENTER,BELLVILLE,AUSTIN,Government - Hospital District or Authority,Acute Care Hospitals,,False,,,,,,,,1.0,,,
+451378,BIG BEND REGIONAL MEDICAL CENTER,ALPINE,BREWSTER,Proprietary,Critical Access Hospitals,,False,17.5,,,16.1,,,98.0,,64.0,64.0,4.0
+454000,BIG SPRING STATE HOSPITAL,BIG SPRING,HOWARD,Government - State,Psychiatric,,False,,,,,,,,,,,
+45069F,Brooke Army Medical Center (FT Sam Houston),Fort Sam Houston,BEXAR,Department of Defense,Acute Care - Department of Defense,,False,,,,,0.442,0.224,48.0,2.0,88.0,85.0,5.0
+450399,BROWNFIELD REGIONAL MEDICAL CENTER,BROWNFIELD,TERRY,Government - Hospital District or Authority,Acute Care Hospitals,,False,16.9,,,,,,,4.0,62.0,73.0,
+670326,BRUSHY CREEK FAMILY HOSPITAL LLC,ROUND ROCK,WILLIAMSON,Proprietary,Acute Care Hospitals,,False,,,,,,,,,,,
+450231,BSA HOSPITAL,AMARILLO,POTTER,Proprietary,Acute Care Hospitals,2.0,False,17.7,19.7,11.4,16.3,0.749,0.675,71.0,1.0,76.0,73.0,3.0
+451305,BURLESON ST JOSEPH HEALTH CENTER,CALDWELL,BURLESON,Voluntary non-profit - Private,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+454152,CANYON CREEK BEHAVIORAL HEALTH,TEMPLE,BELL,Proprietary,Psychiatric,,False,,,,,,,,,,,
+450730,CARROLLTON REGIONAL MEDICAL CENTER,CARROLLTON,DENTON,Proprietary,Acute Care Hospitals,2.0,False,18.6,22.5,12.1,12.7,,0.0,55.0,4.0,54.0,61.0,2.0
+454119,CARROLLTON SPRINGS,CARROLLTON,DENTON,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454153,CARRUS BEHAVIORAL HOSPITAL,SHERMAN,GRAYSON,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454114,CEDAR CREST HOSPITAL & RTC,BELTON,BELL,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454159,CEDAR HILLS BEHAVIORAL,SAN ANTONIO,BEXAR,Voluntary non-profit - Other,Psychiatric,,False,,,,,,,,,,,
+450011,CHI ST JOSEPH HEALTH REGIONAL HOSPITAL,BRYAN,BRAZOS,Voluntary non-profit - Private,Acute Care Hospitals,2.0,False,18.3,21.3,10.5,15.8,1.744,0.431,72.0,2.0,67.0,66.0,3.0
+450072,CHI ST LUKE'S HEALTH BRAZOSPORT,LAKE JACKSON,BRAZORIA,Voluntary non-profit - Private,Acute Care Hospitals,4.0,True,17.3,23.0,11.5,14.1,0.921,0.0,71.0,1.0,66.0,68.0,3.0
+450395,CHI ST LUKES HEALTH MEMORIAL LIVINGSTON,LIVINGSTON,POLK,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,18.9,20.8,11.0,13.5,,,80.0,2.0,65.0,75.0,4.0
+450211,CHI ST LUKES HEALTH MEMORIAL LUFKIN,LUFKIN,ANGELINA,Voluntary non-profit - Private,Acute Care Hospitals,2.0,False,17.7,21.3,10.2,12.6,1.574,0.231,65.0,3.0,71.0,71.0,4.0
+670783,CHI ST LUKES HEALTH MEMORIAL SAN AUGUSTINE,SAN AUGUSTINE,SAN AUGUSTINE,Voluntary non-profit - Private,Rural Emergency Hospital,,False,,,,,,,,,,,
+670059,CHI ST LUKES LAKESIDE HOSPITAL,THE WOODLANDS,MONTGOMERY,Voluntary non-profit - Other,Acute Care Hospitals,,True,,,,,,,,0.0,81.0,83.0,4.0
+453315,CHILDREN'S HOSPITAL OF SAN ANTONIO,SAN ANTONIO,BEXAR,Voluntary non-profit - Church,Childrens,,False,,,,,,,,,,,
+453316,CHILDRENS MEDICAL CENTER PLANO,PLANO,COLLIN,Voluntary non-profit - Private,Childrens,,False,,,,,,,,,,,
+453302,CHILDRENS MEDICAL CTR OF DALLAS,DALLAS,DALLAS,Voluntary non-profit - Private,Childrens,,False,,,,,,,,,,,
+450369,CHILDRESS REGIONAL MEDICAL CENTER,CHILDRESS,CHILDRESS,Government - Hospital District or Authority,Acute Care Hospitals,,False,17.0,21.4,,13.3,,,38.0,0.0,94.0,96.0,
+450032,CHRISTUS GOOD SHEPHERD MEDICAL CENTER,LONGVIEW,GREGG,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,19.7,22.8,8.6,13.3,0.34,0.387,94.0,1.0,70.0,74.0,4.0
+450573,CHRISTUS JASPER MEMORIAL HOSPITAL,JASPER,JASPER,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.9,20.9,10.3,13.9,,,58.0,1.0,72.0,72.0,
+450102,CHRISTUS MOTHER FRANCES HOSPITAL,TYLER,SMITH,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,17.0,20.7,12.1,15.3,0.301,0.063,84.0,0.0,75.0,72.0,3.0
+450236,CHRISTUS MOTHER FRANCES HOSPITAL SULPHUR SPRINGS,SULPHUR SPRINGS,HOPKINS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.6,19.2,10.2,16.9,,0.604,84.0,0.0,77.0,82.0,4.0
+451319,CHRISTUS MOTHER FRANCES HOSPITAL- JACKSONVILLE,JACKSONVILLE,CHEROKEE,Voluntary non-profit - Private,Critical Access Hospitals,,False,16.2,21.3,,15.3,,,81.0,0.0,92.0,90.0,5.0
+451381,CHRISTUS MOTHER FRANCES HOSPITAL- WINNSBORO,WINNSBORO,WOOD,Voluntary non-profit - Private,Critical Access Hospitals,,False,,,,,,,,,,,
+450272,CHRISTUS SANTA ROSA HOSPITAL-SAN MARCOS,SAN MARCOS,HAYS,Voluntary non-profit - Church,Acute Care Hospitals,4.0,False,17.8,21.6,10.1,14.5,0.548,0.436,78.0,1.0,71.0,71.0,3.0
+450237,CHRISTUS SANTA ROSA MEDICAL CENTER,SAN ANTONIO,BEXAR,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,17.7,20.7,9.0,16.5,1.091,0.703,81.0,1.0,70.0,72.0,3.0
+450034,CHRISTUS SOUTHEAST TEXAS- ST ELIZABETH,BEAUMONT,JEFFERSON,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,18.6,22.0,11.3,18.8,0.132,0.0,75.0,2.0,67.0,65.0,3.0
+450828,CHRISTUS SPOHN HOSPITAL ALICE,ALICE,JIM WELLS,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,15.7,19.6,9.6,16.5,,,75.0,4.0,69.0,77.0,4.0
+450082,CHRISTUS SPOHN HOSPITAL BEEVILLE,BEEVILLE,BEE,Voluntary non-profit - Private,Acute Care Hospitals,2.0,False,17.3,21.4,10.8,16.5,,,88.0,1.0,58.0,59.0,2.0
+450046,CHRISTUS SPOHN HOSPITAL CORPUS CHRISTI,CORPUS CHRISTI,NUECES,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,17.6,18.9,10.3,12.9,0.256,0.166,83.0,1.0,72.0,72.0,3.0
+450163,CHRISTUS SPOHN HOSPITAL KLEBERG,KINGSVILLE,KLEBERG,Voluntary non-profit - Private,Acute Care Hospitals,2.0,False,16.5,20.1,10.5,18.3,,,75.0,3.0,66.0,71.0,4.0
+450801,CHRISTUS ST MICHAEL HEALTH SYSTEM,TEXARKANA,BOWIE,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,17.8,20.3,13.3,19.2,0.421,0.493,75.0,3.0,68.0,71.0,4.0
+450023,CITIZENS MEDICAL CENTER,VICTORIA,VICTORIA,Voluntary non-profit - Other,Acute Care Hospitals,3.0,False,16.7,21.2,11.1,18.4,0.0,0.156,56.0,3.0,73.0,73.0,3.0
+451362,CLAY COUNTY MEMORIAL HOSPITAL,HENRIETTA,CLAY,Government - Local,Critical Access Hospitals,,False,,,,,,,,,,,
+670115,CLEVELAND EMERGENCY HOSPITAL,HUMBLE,HARRIS,Proprietary,Acute Care Hospitals,,True,,,,,,,,0.0,,,
+451366,COCHRAN MEMORIAL HOSPITAL,MORTON,COCHRAN,Government - Local,Critical Access Hospitals,,False,,,,,,,,,,,
+451384,COGDELL MEMORIAL HOSPITAL,SNYDER,SCURRY,Government - Hospital District or Authority,Critical Access Hospitals,,False,16.9,,,17.5,,,,1.0,75.0,79.0,
+451347,COLEMAN COUNTY MEDICAL CENTER COMPANY,COLEMAN,COLEMAN,Proprietary,Critical Access Hospitals,,False,18.0,,,21.3,,,,,89.0,93.0,
+451355,COLLINGSWORTH GENERAL HOSPITAL,WELLINGTON,COLLINGSWORTH,Proprietary,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+450370,COLUMBUS COMMUNITY HOSPITAL,COLUMBUS,COLORADO,Voluntary non-profit - Private,Acute Care Hospitals,2.0,False,16.8,21.6,11.2,16.6,,,48.0,2.0,72.0,67.0,3.0
+451382,COMANCHE COUNTY MEDICAL CENTER,COMANCHE,COMANCHE,Voluntary non-profit - Private,Critical Access Hospitals,3.0,False,17.5,22.2,11.4,15.9,,,,1.0,76.0,67.0,
+451325,CONCHO COUNTY HOSPITAL,EDEN,CONCHO,Government - Local,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+450108,CONNALLY MEMORIAL MEDICAL CENTER,FLORESVILLE,WILSON,Government - Hospital District or Authority,Acute Care Hospitals,3.0,False,16.7,21.5,,18.9,,,68.0,1.0,81.0,90.0,
+453300,COOK CHILDRENS MEDICAL CENTER,FORT WORTH,TARRANT,Voluntary non-profit - Private,Childrens,,False,,,,,,,,,,,
+453317,COOK CHILDRENS MEDICAL CENTER PROSPER,PROSPER,COLLIN,Voluntary non-profit - Private,Childrens,,False,,,,,,,,,,,
+451331,COON MEMORIAL HOSPITAL,DALHART,DALLAM,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,0.0,65.0,75.0,
+450825,CORNERSTONE REGIONAL HOSPITAL,EDINBURG,HIDALGO,Proprietary,Acute Care Hospitals,,False,,,,,,,,5.0,,,
+450788,"CORPUS CHRISTI MEDICAL CENTER,THE",CORPUS CHRISTI,NUECES,Voluntary non-profit - Other,Acute Care Hospitals,4.0,False,18.1,20.9,7.5,12.3,0.0,0.217,69.0,1.0,66.0,65.0,3.0
+451379,CORYELL MEMORIAL HOSPITAL,GATESVILLE,CORYELL,Government - Hospital District or Authority,Critical Access Hospitals,,False,18.8,,,20.0,,0.0,49.0,3.0,82.0,81.0,5.0
+453306,COVENANT CHILDRENS HOSPITAL,LUBBOCK,LUBBOCK,Voluntary non-profit - Private,Childrens,,False,,,,,,,,,,,
+450755,COVENANT HOSPITAL LEVELLAND,LEVELLAND,HOCKLEY,Voluntary non-profit - Private,Acute Care Hospitals,,False,16.4,,,15.0,,,62.0,1.0,79.0,75.0,
+450539,COVENANT HOSPITAL PLAINVIEW,PLAINVIEW,HALE,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.3,21.0,10.7,14.2,,,61.0,3.0,71.0,71.0,3.0
+450040,COVENANT MEDICAL CENTER,LUBBOCK,LUBBOCK,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,17.7,20.2,9.7,15.2,0.418,0.367,64.0,7.0,70.0,70.0,3.0
+451353,CRANE COUNTY HOSPITAL DISTRICT,CRANE,CRANE,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+670090,CRESCENT MEDICAL CENTER LANCASTER,LANCASTER,DALLAS,Proprietary,Acute Care Hospitals,2.0,False,17.1,21.8,,,,,,3.0,51.0,62.0,
+451393,CROCKETT MEDICAL CENTER,CROCKETT,HOUSTON,Physician,Critical Access Hospitals,,False,,,,,,,,1.0,,,
+670779,CROSBYTON CLINIC HOSPITAL,CROSBYTON,CROSBY,Voluntary non-profit - Private,Rural Emergency Hospital,,False,,,,,,,,,,,
+454133,CROSS CREEK HOSPITAL,AUSTIN,TRAVIS,Proprietary,Psychiatric,,False,,,,,,,,,,,
+450597,CUERO REGIONAL HOSPITAL,CUERO,DE WITT,Government - Hospital District or Authority,Acute Care Hospitals,4.0,False,16.8,21.3,11.8,15.6,,,61.0,5.0,71.0,74.0,
+451338,CULBERSON HOSPITAL,VAN HORN,CULBERSON,Voluntary non-profit - Other,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+454108,CYPRESS CREEK HOSPITAL,HOUSTON,HARRIS,Proprietary,Psychiatric,,True,,,,,,,,,,,
+454126,DALLAS BEHAVIORAL HEALTHCARE HOSPITAL LLC,DE SOTO,DALLAS,Voluntary non-profit - Other,Psychiatric,,False,,,,,,,,,,,
+450379,DALLAS MEDICAL CENTER,DALLAS,DALLAS,Proprietary,Acute Care Hospitals,3.0,False,17.5,20.5,,13.0,,,66.0,1.0,62.0,60.0,3.0
+450688,DALLAS REGIONAL MEDICAL CENTER,MESQUITE,DALLAS,Proprietary,Acute Care Hospitals,3.0,False,16.7,21.5,10.7,16.8,0.435,0.316,65.0,3.0,63.0,64.0,3.0
+45066F,DALLAS VA MEDICAL CENTER (VA NORTH TEXAS HEALTHCARE SYSTEM),DALLAS,DALLAS,Veterans Health Administration,Acute Care - Veterans Administration,3.0,False,16.2,20.8,5.8,10.2,0.38,0.206,,,63.0,66.0,3.0
+45070F,Darnall AMC (FT Cavazos),Fort Cavazos,BELL,Department of Defense,Acute Care - Department of Defense,,False,,,,,,,58.0,2.0,77.0,77.0,4.0
+450147,DE TAR HOSPITAL NAVARRO,VICTORIA,VICTORIA,Proprietary,Acute Care Hospitals,2.0,False,16.9,21.8,11.6,13.9,1.471,0.0,60.0,2.0,66.0,65.0,2.0
+453310,DELL CHILDREN'S MEDICAL CENTER,AUSTIN,TRAVIS,Voluntary non-profit - Private,Childrens,,False,,,,,,,,,,,
+450124,DELL SETON  MED CENTER AT THE UNIVERSITY OF TX,AUSTIN,TRAVIS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,17.3,21.8,9.7,14.4,0.628,0.253,42.0,,78.0,78.0,4.0
+451390,DIMMIT REGIONAL HOSPITAL,CARRIZO SPRINGS,DIMMIT,Voluntary non-profit - Private,Critical Access Hospitals,,False,,,,,,,,,,,
+450643,DOCTORS HOSPITAL OF LAREDO,LAREDO,WEBB,Proprietary,Acute Care Hospitals,4.0,False,19.0,22.4,10.5,15.2,0.446,0.0,55.0,1.0,67.0,67.0,3.0
+450869,DOCTORS HOSPTAL AT RENAISSANCE,EDINBURG,HIDALGO,Physician,Acute Care Hospitals,3.0,False,16.7,19.9,10.1,15.1,0.0,0.252,71.0,1.0,70.0,69.0,3.0
+453321,DRISCOLL CHILDREN'S HOSPITAL RIO GRANDE VALLEY,EDINBURG,HIDALGO,Voluntary non-profit - Private,Childrens,,False,,,,,,,,,,,
+453301,DRISCOLL CHILDRENS HOSPITAL,CORPUS CHRISTI,NUECES,Voluntary non-profit - Private,Childrens,,False,,,,,,,,,,,
+670320,EAST HOUSTON MEDICAL CENTER,HOUSTON,HARRIS,Proprietary,Acute Care Hospitals,,True,,,,,,,,2.0,,,
+671303,EASTLAND MEMORIAL HOSPITAL,EASTLAND,EASTLAND,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+450694,EL CAMPO MEMORIAL HOSPITAL,EL CAMPO,WHARTON,Voluntary non-profit - Other,Acute Care Hospitals,3.0,False,17.5,22.3,11.9,14.3,,,46.0,0.0,53.0,53.0,3.0
+454109,EL PASO BEHAVIORAL HEALTH SYSTEM,EL PASO,EL PASO,Proprietary,Psychiatric,,False,,,,,,,,,,,
+453313,EL PASO CHILDREN'S HOSPITAL,EL PASO,EL PASO,Voluntary non-profit - Private,Childrens,,False,,,,,,,,,,,
+454100,EL PASO PSYCHIATRIC CENTER,EL PASO,EL PASO,Government - State,Psychiatric,,False,,,,,,,,,,,
+451343,ELECTRA MEMORIAL HOSPITAL,ELECTRA,WICHITA,Government - Hospital District or Authority,Critical Access Hospitals,,False,17.4,,,13.8,,,,1.0,96.0,95.0,
+670285,ELITE HOSPITAL KINGWOOD,KINGWOOD,HARRIS,Proprietary,Acute Care Hospitals,,True,,,,,,,23.0,1.0,,,
+450833,ENNIS REGIONAL MEDICAL CENTER,ENNIS,ELLIS,Proprietary,Acute Care Hospitals,,False,17.2,,,16.3,,,47.0,5.0,82.0,78.0,
+670327,EXCEPTIONAL COMMUNITY HOSPITAL LUBBOCK,LUBBOCK,LUBBOCK,Proprietary,Acute Care Hospitals,,False,,,,,,,,,,,
+450241,FAITH COMMUNITY HOSPITAL,JACKSBORO,JACK,Government - Hospital District or Authority,Acute Care Hospitals,,False,16.9,,,16.5,,,17.0,1.0,67.0,75.0,
+670780,FALLS COMMUNITY HOSPITAL AND CLINIC,MARLIN,FALLS,Voluntary non-profit - Private,Rural Emergency Hospital,,False,,,,,,,,,,,
+451313,FISHER COUNTY HOSPITAL DISTRICT,ROTAN,FISHER,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+450092,FORT DUNCAN MEDICAL CENTER,EAGLE PASS,MAVERICK,Proprietary,Acute Care Hospitals,3.0,False,15.9,22.5,11.0,17.8,,0.0,44.0,0.0,55.0,59.0,3.0
+670054,FOUNDATION SURGICAL HOSPITAL OF SAN ANTONIO,SAN ANTONIO,BEXAR,Proprietary,Acute Care Hospitals,,False,,,,,,,,,81.0,80.0,
+450658,FREESTONE MEDICAL CENTER,FAIRFIELD,FREESTONE,Government - Hospital District or Authority,Acute Care Hospitals,,False,16.7,21.4,,15.0,,,62.0,2.0,,,
+451391,FRIO REGIONAL HOSPITAL,PEARSALL,FRIO,Voluntary non-profit - Private,Critical Access Hospitals,,False,17.2,,,,,,56.0,,66.0,78.0,
+454129,GEORGETOWN BEHAVIORAL HEALTH INSTITUTE,GEORGETOWN,WILLIAMSON,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454050,GLEN OAKS HOSPITAL,GREENVILLE,HUNT,Proprietary,Psychiatric,,False,,,,,,,,,,,
+450451,GLEN ROSE MEDICAL CENTER,GLEN ROSE,SOMERVELL,Government - Hospital District or Authority,Acute Care Hospitals,,False,17.0,,,17.1,,,74.0,1.0,87.0,89.0,
+451369,GOLDEN PLAINS COMMUNITY HOSPITAL,BORGER,HUTCHINSON,Proprietary,Critical Access Hospitals,,False,,,,,,,,,55.0,74.0,
+451385,GOODALL WITCHER HOSPITAL,CLIFTON,BOSQUE,Government - Hospital District or Authority,Critical Access Hospitals,,False,16.6,22.3,,14.1,,,,1.0,,,
+450162,GRACE SURGICAL HOSPITAL,LUBBOCK,LUBBOCK,Voluntary non-profit - Private,Acute Care Hospitals,,False,,,,,,,,,88.0,87.0,
+671300,GRAHAM REGIONAL MEDICAL CENTER,GRAHAM,YOUNG,Government - Hospital District or Authority,Critical Access Hospitals,,False,17.1,,,15.0,,,93.0,1.0,88.0,87.0,
+451322,GRIMES ST JOSEPH HEALTH CENTER,NAVASOTA,GRIMES,Voluntary non-profit - Private,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+450104,GUADALUPE REGIONAL MEDICAL CENTER,SEGUIN,GUADALUPE,Government - Local,Acute Care Hospitals,2.0,False,16.9,21.7,12.2,15.0,0.842,2.326,71.0,2.0,80.0,84.0,5.0
+451392,HAMILTON GENERAL HOSPITAL,HAMILTON,HAMILTON,Government - Hospital District or Authority,Critical Access Hospitals,,False,16.2,21.5,,16.9,,,68.0,0.0,84.0,87.0,
+451354,HAMILTON HOSPITAL,OLNEY,YOUNG,Government - Hospital District or Authority,Critical Access Hospitals,,False,17.2,,,17.3,,,,0.0,81.0,85.0,
+451344,HANSFORD COUNTY HOSPITAL,SPEARMAN,HANSFORD,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,16.7,,,,0.0,,,
+451352,HARDEMAN COUNTY MEMORIAL HOSPITAL,QUANAH,HARDEMAN,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+450855,HARLINGEN MEDICAL CENTER,HARLINGEN,CAMERON,Proprietary,Acute Care Hospitals,4.0,False,16.0,20.5,8.8,11.0,0.954,0.265,49.0,1.0,77.0,73.0,3.0
+454076,HARRIS COUNTY PSYCHIATRIC CENTER,HOUSTON,HARRIS,Government - State,Psychiatric,,True,,,,,,,,,,,
+450289,HARRIS HEALTH,HOUSTON,HARRIS,Government - Hospital District or Authority,Acute Care Hospitals,3.0,True,16.7,21.0,9.7,15.4,1.142,0.654,49.0,3.0,71.0,71.0,3.0
+451341,HASKELL MEMORIAL HOSPITAL,HASKELL,HASKELL,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,1.0,,,
+450617,HCA HOUSTON HEALTHCARE CLEAR LAKE,WEBSTER,HARRIS,Proprietary,Acute Care Hospitals,4.0,True,18.4,20.3,8.1,14.7,0.269,0.157,71.0,1.0,60.0,63.0,2.0
+450222,HCA HOUSTON HEALTHCARE CONROE,CONROE,MONTGOMERY,Proprietary,Acute Care Hospitals,2.0,True,18.3,22.7,9.8,15.8,0.702,0.089,75.0,1.0,56.0,61.0,2.0
+450775,HCA HOUSTON HEALTHCARE KINGWOOD,KINGWOOD,HARRIS,Proprietary,Acute Care Hospitals,3.0,True,18.3,22.3,8.8,13.2,0.531,0.352,68.0,1.0,53.0,57.0,1.0
+450659,HCA HOUSTON HEALTHCARE MEDICAL CENTER,HOUSTON,HARRIS,Proprietary,Acute Care Hospitals,4.0,True,18.1,21.2,9.1,12.5,0.585,0.87,63.0,1.0,63.0,66.0,2.0
+450638,HCA HOUSTON HEALTHCARE NORTHWEST,HOUSTON,HARRIS,Proprietary,Acute Care Hospitals,2.0,True,18.1,22.8,9.9,13.2,0.248,0.371,74.0,1.0,59.0,62.0,2.0
+670106,HCA HOUSTON HEALTHCARE PEARLAND,PEARLAND,BRAZORIA,Proprietary,Acute Care Hospitals,3.0,True,17.8,23.5,11.1,10.9,0.898,0.963,73.0,0.0,61.0,65.0,2.0
+450097,HCA HOUSTON HEALTHCARE SOUTHEAST,PASADENA,HARRIS,Proprietary,Acute Care Hospitals,3.0,True,17.0,21.1,12.0,15.3,0.629,0.0,82.0,1.0,64.0,67.0,2.0
+450670,HCA HOUSTON HEALTHCARE TOMBALL,TOMBALL,HARRIS,Proprietary,Acute Care Hospitals,3.0,True,18.5,20.8,8.8,15.1,0.0,0.0,81.0,1.0,63.0,65.0,2.0
+450644,HCA HOUSTON HEALTHCARE WEST,HOUSTON,HARRIS,Proprietary,Acute Care Hospitals,1.0,True,16.9,21.0,8.8,13.3,0.225,0.0,67.0,1.0,56.0,59.0,2.0
+453309,HEALTHBRIDGE CHILDRENS'S HOSPITAL OF HOUSTON,HOUSTON,HARRIS,Voluntary non-profit - Private,Childrens,,True,,,,,,,,,,,
+451348,HEART OF TEXAS MEMORIAL HOSPITAL,BRADY,MC CULLOCH,Voluntary non-profit - Private,Critical Access Hospitals,,False,,,,,,,,,,,
+671301,HEMPHILL COUNTY HOSPITAL,CANADIAN,HEMPHILL,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+450229,HENDRICK MEDICAL CENTER,ABILENE,TAYLOR,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,16.5,19.9,13.0,18.7,1.07,0.809,54.0,3.0,63.0,63.0,3.0
+450587,HENDRICK MEDICAL CENTER BROWNWOOD,BROWNWOOD,BROWN,Voluntary non-profit - Private,Acute Care Hospitals,1.0,False,19.1,21.3,12.0,18.1,,,60.0,2.0,54.0,57.0,2.0
+450155,HEREFORD REGIONAL MEDICAL CENTER,HEREFORD,DEAF SMITH,Government - Hospital District or Authority,Acute Care Hospitals,,False,16.8,,,16.8,,,,1.0,74.0,83.0,
+454065,HICKORY TRAIL HOSPITAL,DESOTO,DALLAS,Proprietary,Psychiatric,,False,,,,,,,,,,,
+450604,HILL COUNTRY MEMORIAL HOSPITAL,FREDERICKSBURG,GILLESPIE,Proprietary,Acute Care Hospitals,4.0,False,16.9,21.8,16.0,14.8,,,65.0,0.0,72.0,74.0,4.0
+451395,HILL REGIONAL HOSPITAL,HILLSBORO,HILL,Voluntary non-profit - Private,Critical Access Hospitals,1.0,False,18.0,21.4,16.8,19.4,,,,,60.0,66.0,3.0
+454135,HOUSTON BEHAVIORAL HEALTHCARE HOSPITAL LLC,HOUSTON,HARRIS,Proprietary,Psychiatric,,True,,,,,,,,,,,
+450424,HOUSTON METHODIST BAYTOWN HOSPITAL,BAYTOWN,HARRIS,Voluntary non-profit - Private,Acute Care Hospitals,5.0,True,16.7,19.2,7.7,12.8,0.0,0.0,74.0,2.0,78.0,79.0,4.0
+450709,HOUSTON METHODIST CLEAR LAKE HOSPITAL,NASSAU BAY,HARRIS,Voluntary non-profit - Private,Acute Care Hospitals,5.0,True,17.8,21.2,9.1,11.7,0.589,0.0,65.0,1.0,84.0,82.0,4.0
+670342,HOUSTON METHODIST CYPRESS HOSPITAL,CYPRESS,HARRIS,Voluntary non-profit - Private,Acute Care Hospitals,,True,,21.6,,,,,,,,,
+450358,HOUSTON METHODIST HOSPITAL,HOUSTON,HARRIS,Voluntary non-profit - Private,Acute Care Hospitals,5.0,True,15.3,18.9,6.0,8.0,0.363,0.278,60.0,2.0,82.0,79.0,4.0
+450820,HOUSTON METHODIST SUGARLAND HOSPITAL,SUGAR LAND,FORT BEND,Voluntary non-profit - Private,Acute Care Hospitals,5.0,True,17.3,20.5,6.9,11.1,0.826,0.114,75.0,1.0,80.0,78.0,4.0
+670122,HOUSTON METHODIST THE WOODLANDS HOSPITAL,THE WOODLANDS,MONTGOMERY,Voluntary non-profit - Private,Acute Care Hospitals,5.0,True,15.9,19.2,7.6,9.3,0.357,0.325,88.0,0.0,84.0,82.0,4.0
+670077,HOUSTON METHODIST WEST HOSPITAL,HOUSTON,HARRIS,Voluntary non-profit - Private,Acute Care Hospitals,5.0,True,17.6,21.9,9.3,15.1,0.469,0.358,77.0,1.0,83.0,80.0,4.0
+450844,HOUSTON METHODIST WILLOWBROOK HOSPITAL,HOUSTON,HARRIS,Voluntary non-profit - Private,Acute Care Hospitals,5.0,True,17.6,20.0,6.1,10.7,0.183,0.078,82.0,1.0,79.0,79.0,4.0
+45074F,HOUSTON VA MEDICAL CENTER,HOUSTON,HARRIS,Veterans Health Administration,Acute Care - Veterans Administration,5.0,True,17.9,22.9,7.0,12.3,0.313,0.397,,,71.0,74.0,4.0
+450352,HUNT REGIONAL MEDICAL CENTER,GREENVILLE,HUNT,Government - Hospital District or Authority,Acute Care Hospitals,2.0,False,18.6,21.3,11.4,14.0,2.071,0.639,57.0,4.0,65.0,62.0,3.0
+450347,HUNTSVILLE MEMORIAL HOSPITAL,HUNTSVILLE,WALKER,Voluntary non-profit - Private,Acute Care Hospitals,2.0,False,15.4,23.4,9.9,18.1,1.739,0.0,68.0,1.0,63.0,64.0,3.0
+451307,IRAAN GENERAL HOSPITAL,IRAAN,PECOS,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+451363,JACKSON HEALTHCARE CENTER,EDNA,JACKSON,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+450039,JPS HEALTH NETWORK,FORT WORTH,TARRANT,Government - Hospital District or Authority,Acute Care Hospitals,4.0,False,16.7,21.2,8.6,11.3,1.289,0.664,85.0,2.0,71.0,69.0,3.0
+451306,KIMBLE HOSPITAL,JUNCTION,KIMBLE,Proprietary,Critical Access Hospitals,,False,,,,,,,,,,,
+454103,KINGWOOD PINES HOSPITAL,KINGWOOD,HARRIS,Proprietary,Psychiatric,,True,,,,,,,,,,,
+450128,KNAPP MEDICAL CENTER,WESLACO,HIDALGO,Voluntary non-profit - Private,Acute Care Hospitals,5.0,False,17.4,20.3,7.4,14.5,0.47,0.0,69.0,0.0,63.0,63.0,3.0
+451394,KNOX COUNTY HOSPITAL,KNOX CITY,KNOX,Government - Local,Critical Access Hospitals,,False,,,,,,,,1.0,,,
+450596,LAKE GRANBURY MEDICAL CENTER,GRANBURY,HOOD,Proprietary,Acute Care Hospitals,3.0,False,16.0,22.6,11.4,14.5,,0.0,65.0,1.0,51.0,57.0,2.0
+450698,LAMB HEALTHCARE CENTER,LITTLEFIELD,LAMB,Government - Local,Acute Care Hospitals,,False,17.4,,,16.4,,,53.0,3.0,74.0,70.0,
+450029,LAREDO MEDICAL CENTER,LAREDO,WEBB,Proprietary,Acute Care Hospitals,4.0,False,16.5,22.6,9.9,13.4,0.121,0.0,55.0,1.0,59.0,58.0,2.0
+450107,LAS PALMAS MEDICAL CENTER A CAMPUS OF LPDS HEALTHC,EL PASO,EL PASO,Proprietary,Acute Care Hospitals,2.0,False,20.5,22.3,11.6,14.9,0.498,0.072,80.0,1.0,60.0,64.0,2.0
+454060,LAUREL RIDGE TREATMENT CENTER,SAN ANTONIO,BEXAR,Proprietary,Psychiatric,,False,,,,,,,,,,,
+451376,LAVACA MEDICAL CENTER,HALLETTSVILLE,LAVACA,Government - Hospital District or Authority,Critical Access Hospitals,4.0,False,15.7,21.6,10.3,12.0,,,,0.0,,,
+670345,LEGENT NORTH HOUSTON SURGICAL HOSPITAL,BELLAIRE,HARRIS,Physician,Acute Care Hospitals,,True,,,,,,,,,,,
+670112,LEGENT ORTHOPEDIC + SPINE,SAN ANTONIO,BEXAR,Proprietary,Acute Care Hospitals,,False,,,,,,,,,83.0,84.0,5.0
+670265,LEGENT ORTHOPEDIC HOSPITAL,GRAPEVINE,TARRANT,Proprietary,Acute Care Hospitals,,False,,,,,,,,,70.0,67.0,3.0
+670322,LEGENT SURGICAL HOSPITAL PLANO,PLANO,COLLIN,Proprietary,Acute Care Hospitals,,False,,,,,,,,,75.0,72.0,
+451375,LIBERTY DAYTON REGIONAL MEDICAL CENTER,LIBERTY,LIBERTY,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,2.0,,,
+451324,LILLIAN M HUDSPETH MEMORIAL HOSPITAL,SONORA,SUTTON,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+451303,LIMESTONE MEDICAL CENTER,GROESBECK,LIMESTONE,Government - Hospital District or Authority,Critical Access Hospitals,,False,17.1,,,,,,,3.0,,,
+454118,LONE STAR BEHAVIORAL HEALTH CYPRESS,CYPRESS,HARRIS,Proprietary,Psychiatric,,True,,,,,,,,,,,
+450702,LONGVIEW REGIONAL MEDICAL CENTER,LONGVIEW,GREGG,Proprietary,Acute Care Hospitals,3.0,False,17.1,23.3,10.9,14.7,0.508,0.19,42.0,1.0,73.0,70.0,3.0
+450876,LUBBOCK HEART HOSPITAL LP,LUBBOCK,LUBBOCK,Government - Hospital District or Authority,Acute Care Hospitals,2.0,False,16.9,21.5,14.4,14.6,,,50.0,0.0,81.0,80.0,4.0
+451351,LYNN COUNTY HOSPITAL DISTRICT,TAHOKA,LYNN,Government - Hospital District or Authority,Critical Access Hospitals,,False,17.2,,,16.0,,,,0.0,82.0,85.0,
+451316,MADISON ST JOSEPH HEALTH CENTER,MADISONVILLE,MADISON,Voluntary non-profit - Private,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+451333,MARTIN COUNTY HOSPITAL DISTRICT,STANTON,MARTIN,Government - Hospital District or Authority,Critical Access Hospitals,,False,17.0,,,,,,,2.0,93.0,93.0,
+450465,MATAGORDA REGIONAL MEDICAL CENTER,BAY CITY,MATAGORDA,Government - Hospital District or Authority,Acute Care Hospitals,5.0,False,15.9,20.5,9.0,13.2,,,72.0,1.0,67.0,75.0,4.0
+670010,MAYHILL HOSPITAL,DENTON,DENTON,Proprietary,Acute Care Hospitals,,False,,,,,,,,,,,
+451309,MC CAMEY HOSPITAL,MCCAMEY,UPTON,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+450489,MEDICAL ARTS HOSPITAL,LAMESA,DAWSON,Government - Hospital District or Authority,Acute Care Hospitals,,False,16.6,,,16.1,,,,2.0,,,
+454151,"MEDICAL BEHAVIORAL HOSPITAL OF CLEAR LAKE, LLC",CLEAR LAKE CITY,HARRIS,Proprietary,Psychiatric,,True,,,,,,,,,,,
+450132,MEDICAL CENTER HOSPITAL,ODESSA,ECTOR,Government - Hospital District or Authority,Acute Care Hospitals,3.0,False,16.9,20.5,10.9,17.8,0.991,0.367,64.0,3.0,70.0,69.0,3.0
+450403,MEDICAL CENTER OF MCKINNEY,MCKINNEY,COLLIN,Proprietary,Acute Care Hospitals,3.0,False,18.3,23.9,10.0,11.4,0.238,0.0,66.0,0.0,67.0,67.0,3.0
+670103,MEDICAL CITY ALLIANCE,FORT WORTH,TARRANT,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,16.9,20.8,9.3,16.5,1.037,0.0,67.0,1.0,69.0,71.0,3.0
+450675,MEDICAL CITY ARLINGTON,ARLINGTON,TARRANT,Proprietary,Acute Care Hospitals,2.0,False,17.2,22.1,8.6,14.8,0.195,0.537,60.0,1.0,58.0,59.0,2.0
+450647,MEDICAL CITY DALLAS HOSPITAL,DALLAS,DALLAS,Proprietary,Acute Care Hospitals,3.0,False,17.7,21.3,10.7,17.2,0.767,0.68,66.0,0.0,66.0,65.0,2.0
+450634,MEDICAL CITY DENTON,DENTON,DENTON,Proprietary,Acute Care Hospitals,4.0,False,19.2,21.4,8.4,16.5,0.138,0.107,74.0,0.0,67.0,65.0,2.0
+450672,MEDICAL CITY FORT WORTH,FORT WORTH,TARRANT,Proprietary,Acute Care Hospitals,2.0,False,18.3,20.4,7.9,14.3,0.522,0.342,68.0,0.0,68.0,69.0,3.0
+454094,MEDICAL CITY GREEN OAKS HOSPITAL,DALLAS,DALLAS,Voluntary non-profit - Other,Psychiatric,,False,,,,,,,,,,,
+450822,MEDICAL CITY LAS COLINAS,IRVING,DALLAS,Proprietary,Acute Care Hospitals,4.0,False,17.5,20.9,11.2,14.7,1.999,,74.0,1.0,64.0,66.0,2.0
+450669,MEDICAL CITY LEWISVILLE,LEWISVILLE,DENTON,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,17.7,20.4,12.1,12.9,0.405,0.0,86.0,0.0,71.0,70.0,3.0
+454079,MEDICAL CITY MENTAL HEALTH AND WELLNESS CENTER,FORT WORTH,TARRANT,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454161,MEDICAL CITY MENTAL HEALTH AND WELLNESS CENTER,FRISCO,DENTON,Proprietary,Psychiatric,,False,,,,,,,,,,,
+450087,MEDICAL CITY NORTH HILLS,NORTH RICHLAND HILLS,TARRANT,Proprietary,Acute Care Hospitals,2.0,False,18.9,23.7,11.4,16.7,0.3,0.0,66.0,0.0,70.0,71.0,3.0
+450651,MEDICAL CITY PLANO,PLANO,COLLIN,Proprietary,Acute Care Hospitals,3.0,False,19.3,21.8,11.0,13.9,0.53,0.284,57.0,0.0,66.0,65.0,2.0
+450203,MEDICAL CITY WEATHERFORD,WEATHERFORD,PARKER,Proprietary,Acute Care Hospitals,2.0,False,18.4,23.3,11.7,14.7,0.0,0.0,69.0,0.0,64.0,69.0,3.0
+451330,MEDINA REGIONAL HOSPITAL,HONDO,MEDINA,Government - Hospital District or Authority,Critical Access Hospitals,,False,17.3,,,16.7,,,,1.0,77.0,83.0,
+450068,MEMORIAL HERMANN - TEXAS MEDICAL CENTER,HOUSTON,HARRIS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,True,17.2,21.4,8.2,12.3,0.317,0.233,39.0,5.0,71.0,72.0,3.0
+450184,MEMORIAL HERMANN HOSPITAL SYSTEM,HOUSTON,HARRIS,Voluntary non-profit - Private,Acute Care Hospitals,3.0,True,18.0,21.4,9.9,14.2,0.507,0.196,43.0,1.0,71.0,72.0,3.0
+670008,MEMORIAL HERMANN HOUSTON PHYSICIANS HOSPITAL,WEBSTER,HARRIS,Physician,Acute Care Hospitals,,True,,,,,,,,1.0,87.0,83.0,5.0
+450847,MEMORIAL HERMANN KATY HOSPITAL,KATY,FORT BEND,Voluntary non-profit - Private,Acute Care Hospitals,3.0,True,17.4,21.5,12.1,15.8,0.15,0.0,63.0,1.0,67.0,67.0,3.0
+450610,MEMORIAL HERMANN MEMORIAL CITY HOSPITAL,HOUSTON,HARRIS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,True,16.3,21.3,8.1,13.2,0.638,0.207,41.0,1.0,71.0,70.0,3.0
+450684,MEMORIAL HERMANN NORTHEAST HOSPITAL,HUMBLE,HARRIS,Voluntary non-profit - Private,Acute Care Hospitals,3.0,True,17.9,22.0,10.3,15.1,0.595,1.293,39.0,1.0,71.0,71.0,3.0
+450848,MEMORIAL HERMANN SUGAR LAND HOSPITAL,SUGAR LAND,FORT BEND,Voluntary non-profit - Private,Acute Care Hospitals,4.0,True,16.8,21.9,9.9,12.6,0.531,0.493,46.0,0.0,69.0,70.0,3.0
+670005,MEMORIAL HERMANN SURGICAL HOSPITAL KINGWOOD,KINGWOOD,HARRIS,Proprietary,Acute Care Hospitals,,True,,,,,,,,,73.0,72.0,
+450235,MEMORIAL HOSPITAL,GONZALES,GONZALES,Government - Hospital District or Authority,Acute Care Hospitals,,False,17.1,,,14.5,,,,1.0,70.0,77.0,
+451386,MEMORIAL HOSPITAL,DUMAS,MOORE,Government - Hospital District or Authority,Critical Access Hospitals,,False,16.9,,,,,,,0.0,87.0,84.0,
+451358,MEMORIAL HOSPITAL,SEMINOLE,GAINES,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+451356,MEMORIAL MEDICAL CENTER,PORT LAVACA,CALHOUN,Government - Local,Critical Access Hospitals,4.0,False,17.5,,13.2,15.0,,,,,74.0,77.0,
+454124,MESA SPRINGS,FORT WORTH,TARRANT,Proprietary,Psychiatric,,False,,,,,,,,,,,
+670340,METHODIST CELINA MEDICAL CENTER,CELINA,COLLIN,Voluntary non-profit - Private,Acute Care Hospitals,,False,,,,,,,,,,,
+450723,METHODIST CHARLTON MEDICAL CENTER,DALLAS,DALLAS,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,15.9,21.7,11.1,14.5,0.311,0.0,86.0,1.0,68.0,72.0,3.0
+450051,METHODIST DALLAS MEDICAL CENTER,DALLAS,DALLAS,Voluntary non-profit - Other,Acute Care Hospitals,3.0,False,15.7,19.6,9.9,13.5,0.577,0.58,86.0,2.0,74.0,75.0,3.0
+450388,METHODIST HOSPITAL,SAN ANTONIO,BEXAR,Proprietary,Acute Care Hospitals,4.0,False,17.8,21.1,8.4,15.7,0.41,0.404,61.0,1.0,67.0,69.0,3.0
+670055,METHODIST HOSPITAL  STONE OAK,SAN ANTONIO,BEXAR,Proprietary,Acute Care Hospitals,4.0,False,17.9,20.9,10.9,12.6,0.695,0.397,73.0,0.0,72.0,70.0,3.0
+450165,METHODIST HOSPITAL ATASCOSA,JOURDANTON,ATASCOSA,Proprietary,Acute Care Hospitals,3.0,False,16.8,21.1,11.8,12.9,,,67.0,1.0,68.0,69.0,3.0
+670073,METHODIST HOSPITAL FOR SURGERY,ADDISON,DALLAS,Proprietary,Acute Care Hospitals,4.0,False,,,,,,0.0,,0.0,84.0,84.0,4.0
+670023,METHODIST MANSFIELD MEDICAL CENTER,MANSFIELD,TARRANT,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,17.7,20.4,10.2,12.9,0.697,0.373,89.0,2.0,83.0,80.0,4.0
+670069,METHODIST MCKINNEY HOSPITAL,MCKINNEY,COLLIN,Physician,Acute Care Hospitals,,False,,,,,,,,0.0,89.0,87.0,
+670300,METHODIST MIDLOTHIAN MEDICAL CENTER,MIDLOTHIAN,ELLIS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,15.6,19.4,10.1,14.5,,,95.0,1.0,83.0,83.0,4.0
+450537,METHODIST RICHARDSON MEDICAL CENTER,RICHARDSON,COLLIN,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.4,20.4,12.0,14.8,0.401,0.094,85.0,2.0,78.0,79.0,4.0
+670132,METHODIST SOUTHLAKE MEDICAL CENTER,SOUTHLAKE,TARRANT,Proprietary,Acute Care Hospitals,,False,,21.0,,,,,86.0,0.0,90.0,90.0,5.0
+451396,MID COAST MEDICAL CENTER - CENTRAL,LLANO,LLANO,Physician,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+670331,MID COAST MEDICAL CENTER-TRINITY,TRINITY,TRINITY,Voluntary non-profit - Other,Acute Care Hospitals,,False,,,,,,,,1.0,,,
+450133,MIDLAND MEMORIAL HOSPITAL,MIDLAND,MIDLAND,Government - Hospital District or Authority,Acute Care Hospitals,1.0,False,17.2,20.1,15.1,19.5,1.194,0.484,68.0,4.0,67.0,62.0,3.0
+454012,MILLWOOD HOSPITAL,ARLINGTON,TARRANT,Proprietary,Psychiatric,,False,,,,,,,,,,,
+450176,MISSION REGIONAL MEDICAL CENTER,MISSION,HIDALGO,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,17.7,22.9,9.6,11.1,0.0,0.0,58.0,0.0,69.0,67.0,3.0
+451342,MITCHELL COUNTY HOSPITAL DISTRICT,COLORADO CITY,MITCHELL,Government - Hospital District or Authority,Critical Access Hospitals,,False,17.3,,,14.1,,,,,83.0,80.0,
+451335,MUENSTER MEMORIAL HOSPITAL,MUENSTER,COOKE,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+451372,MULESHOE AREA MEDICAL CENTER,MULESHOE,BAILEY,Proprietary,Critical Access Hospitals,,False,,,,,,,,,,,
+450656,NACOGDOCHES MEDICAL CENTER,NACOGDOCHES,NACOGDOCHES,Voluntary non-profit - Other,Acute Care Hospitals,3.0,False,20.4,23.6,10.5,15.6,0.685,0.23,61.0,2.0,70.0,73.0,4.0
+450508,NACOGDOCHES MEMORIAL HOSPITAL,NACOGDOCHES,NACOGDOCHES,Proprietary,Acute Care Hospitals,2.0,False,18.5,21.7,10.3,15.6,0.0,,51.0,2.0,78.0,71.0,3.0
+450447,NAVARRO REGIONAL HOSPITAL,CORSICANA,NAVARRO,Government - Hospital District or Authority,Acute Care Hospitals,2.0,False,17.5,24.1,13.4,15.3,0.0,0.862,64.0,3.0,53.0,61.0,3.0
+453318,NEXUS CHILDRENS HOSPITAL DALLAS,DALLAS,DALLAS,Proprietary,Childrens,,False,,,,,,,,,,,
+450641,NOCONA GENERAL HOSPITAL,NOCONA,MONTAGUE,Government - Hospital District or Authority,Acute Care Hospitals,1.0,False,17.0,21.4,10.6,17.7,,,57.0,2.0,85.0,78.0,
+450809,NORTH AUSTIN MEDICAL CENTER,AUSTIN,TRAVIS,Proprietary,Acute Care Hospitals,3.0,False,18.8,20.1,10.1,16.8,0.234,0.543,66.0,1.0,69.0,66.0,2.0
+670049,NORTH CENTRAL SURGICAL CENTER LLP,DALLAS,DALLAS,Voluntary non-profit - Other,Acute Care Hospitals,,False,,,,,,,,1.0,79.0,77.0,4.0
+451315,NORTH RUNNELS HOSPITAL,WINTERS,RUNNELS,Government - Hospital District or Authority,Critical Access Hospitals,,False,16.6,,,14.1,,,,1.0,86.0,87.0,
+450090,NORTH TEXAS MEDICAL CENTER,GAINESVILLE,COOKE,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.0,20.2,11.4,12.2,,0.0,78.0,2.0,73.0,71.0,4.0
+454008,NORTH TEXAS STATE HOSPITAL,WICHITA FALLS,WICHITA,Government - State,Psychiatric,,False,,,,,,,,,,,
+450808,NORTHWEST HILLS SURGICAL HOSPITAL,AUSTIN,TRAVIS,Voluntary non-profit - Private,Acute Care Hospitals,,False,,,,,,,,,79.0,81.0,
+450209,NORTHWEST TEXAS HOSPITAL,AMARILLO,POTTER,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,17.7,21.8,12.7,17.7,0.7,0.415,44.0,2.0,66.0,65.0,3.0
+450330,OAKBEND MEDICAL CENTER,RICHMOND,FORT BEND,Government - Hospital District or Authority,Acute Care Hospitals,3.0,True,16.7,22.4,10.7,15.6,0.968,,59.0,0.0,59.0,60.0,2.0
+454110,OCEANS BEHAVIORAL  HOSPITAL OF PERMIAN BASIN,MIDLAND,MIDLAND,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454122,OCEANS BEHAVIORAL HOSPITAL OF ABILENE,ABILENE,TAYLOR,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454154,OCEANS BEHAVIORAL HOSPITAL OF AMARILLO,AMARILLO,POTTER,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454155,OCEANS BEHAVIORAL HOSPITAL OF CORPUS CHRISTI,CORPUS CHRISTI,NUECES,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454136,OCEANS BEHAVIORAL HOSPITAL OF KATY,KATY,HARRIS,Proprietary,Psychiatric,,True,,,,,,,,,,,
+454117,OCEANS BEHAVIORAL HOSPITAL OF LONGVIEW,LONGVIEW,GREGG,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454157,OCEANS BEHAVIORAL HOSPITAL OF LUBBOCK,LUBBOCK,LUBBOCK,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454123,OCEANS BEHAVIORAL HOSPITAL OF LUFKIN LLC,LUFKIN,ANGELINA,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454147,OCEANS BEHAVIORAL HOSPITAL OF PASADENA,PASADENA,HARRIS,Proprietary,Psychiatric,,True,,,,,,,,,,,
+454150,OCEANS BEHAVIORAL HOSPITAL OF WACO,WACO,MC LENNAN,Proprietary,Psychiatric,,False,,,,,,,,,,,
+451359,OCHILTREE GENERAL HOSPITAL,PERRYTON,OCHILTREE,Government - Hospital District or Authority,Critical Access Hospitals,,False,16.7,,,18.7,,,,0.0,81.0,85.0,
+450661,ODESSA REGIONAL MEDICAL CENTER,ODESSA,ECTOR,Proprietary,Acute Care Hospitals,3.0,False,17.1,20.9,9.6,13.5,0.523,0.785,60.0,6.0,61.0,61.0,2.0
+451364,OTTO KAISER MEMORIAL HOSPITAL,KENEDY,KARNES,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+451332,PALACIOS COMMUNITY MEDICAL CENTER,PALACIOS,MATAGORDA,Voluntary non-profit - Private,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+450747,PALESTINE REGIONAL MEDICAL CENTER,PALESTINE,ANDERSON,Proprietary,Acute Care Hospitals,1.0,False,17.7,21.2,15.6,16.9,,0.0,56.0,1.0,60.0,61.0,3.0
+454141,PALMS BEHAVIORAL HEALTH,HARLINGEN,CAMERON,Proprietary,Psychiatric,,False,,,,,,,,,,,
+450565,PALO PINTO GENERAL HOSPITAL,MINERAL WELLS,PALO PINTO,Government - Hospital District or Authority,Acute Care Hospitals,3.0,False,17.5,21.3,9.7,13.6,,,54.0,1.0,67.0,68.0,3.0
+451398,PAMPA REGIONAL MEDICAL CENTER,PAMPA,GRAY,Voluntary non-profit - Private,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+450196,PARIS REGIONAL MEDICAL CENTER,PARIS,LAMAR,Proprietary,Acute Care Hospitals,1.0,False,18.7,22.5,11.6,17.3,0.222,0.406,52.0,3.0,54.0,56.0,2.0
+450015,PARKLAND HEALTH & HOSPITAL SYSTEM,DALLAS,DALLAS,Government - Hospital District or Authority,Acute Care Hospitals,3.0,False,16.4,20.5,9.1,10.9,0.677,0.936,51.0,2.0,70.0,70.0,3.0
+451334,PARKVIEW HOSPITAL,WHEELER,WHEELER,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+450400,PARKVIEW REGIONAL HOSPITAL,MEXIA,LIMESTONE,Proprietary,Acute Care Hospitals,,False,16.8,21.7,9.4,14.7,,,76.0,1.0,83.0,89.0,
+451300,PARMER COUNTY COMMUNITY HOSPITAL,FRIONA,PARMER,Voluntary non-profit - Private,Critical Access Hospitals,,False,,,,,,,,,,,
+451389,PECOS COUNTY MEMORIAL HOSPITAL,FORT STOCKTON,PECOS,Government - Local,Critical Access Hospitals,,False,,,,,,,,,,,
+454148,PERIMETER BEHAVIORAL HOSPITAL OF ARLINGTON,ARLINGTON,TARRANT,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454149,PERIMETER BEHAVIORAL HOSPITAL OF DALLAS,GARLAND,DALLAS,Proprietary,Psychiatric,,False,,,,,,,,,,,
+450144,PERMIAN REGIONAL MEDICAL CENTER ANDREWS COUNTY HO,ANDREWS,ANDREWS,Government - Hospital District or Authority,Acute Care Hospitals,,False,17.0,,,17.0,,,,2.0,89.0,86.0,
+450007,PETERSON REGIONAL MEDICAL CENTER,KERRVILLE,KERR,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,15.9,21.0,11.5,15.4,0.0,0.468,71.0,1.0,79.0,80.0,4.0
+450834,"PHYSICIANS CENTRE,THE",BRYAN,BRAZOS,Proprietary,Acute Care Hospitals,,False,,,,,,,,5.0,85.0,84.0,5.0
+451350,PLAINS MEMORIAL HOSPITAL,DIMMITT,CASTRO,Government - Local,Critical Access Hospitals,,False,,,,,,,,,,,
+450875,QUAIL CREEK SURGICAL HOSPITAL,AMARILLO,POTTER,Proprietary,Acute Care Hospitals,,False,,,,,,,,,90.0,90.0,5.0
+451329,RANKIN HOSPITAL MEDICAL CLINIC,RANKIN,UPTON,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+451301,REAGAN MEMORIAL HOSPITAL,BIG LAKE,REAGAN,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+454018,RED RIVER HOSPITAL,WICHITA FALLS,WICHITA,Proprietary,Psychiatric,,False,,,,,,,,,,,
+451377,REEVES REGIONAL HEALTH,PECOS,REEVES,Government - Hospital District or Authority,Critical Access Hospitals,2.0,False,17.5,22.2,12.5,16.7,,,,,78.0,84.0,
+451317,REFUGIO COUNTY MEMORIAL HOSPITAL,REFUGIO,REFUGIO,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+670098,RESOLUTE HEALTH HOSPITAL,NEW BRAUNFELS,COMAL,Proprietary,Acute Care Hospitals,4.0,False,19.7,22.1,10.9,15.5,0.0,0.0,70.0,1.0,74.0,74.0,3.0
+451312,RICE MEDICAL CENTER,EAGLE LAKE,COLORADO,Proprietary,Critical Access Hospitals,,False,,,,,,,,,,,
+451328,RICELAND MEDICAL CENTER,WINNIE,CHAMBERS,Proprietary,Critical Access Hospitals,,False,,,,,,,,,,,
+450711,RIO GRANDE REGIONAL HOSPITAL,MCALLEN,HIDALGO,Proprietary,Acute Care Hospitals,4.0,False,15.7,21.0,8.5,14.1,0.0,0.698,84.0,2.0,65.0,66.0,2.0
+454088,RIO GRANDE STATE CENTER,HARLINGEN,CAMERON,Government - State,Psychiatric,,False,,,,,,,,,,,
+454146,RIO VISTA BEHAVIORAL HEALTH,EL PASO,EL PASO,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454127,ROCK SPRINGS,GEORGETOWN,WILLIAMSON,Proprietary,Psychiatric,,False,,,,,,,,,,,
+450055,ROLLING PLAINS MEMORIAL HOSPITAL,SWEETWATER,NOLAN,Government - Hospital District or Authority,Acute Care Hospitals,,False,17.5,21.9,,18.7,,,90.0,0.0,75.0,86.0,4.0
+450718,ROUND ROCK MEDICAL CENTER,ROUND ROCK,WILLIAMSON,Proprietary,Acute Care Hospitals,3.0,False,18.7,19.6,11.3,15.5,0.296,0.0,78.0,1.0,72.0,71.0,3.0
+454009,RUSK STATE HOSP,RUSK,CHEROKEE,Government - State,Psychiatric,,False,,,,,,,,,,,
+451361,SABINE COUNTY HOSPITAL,HEMPHILL,SABINE,Proprietary,Critical Access Hospitals,,False,16.7,,,14.8,,,,1.0,,,
+670121,SAINT CAMILLUS MEDICAL CENTER,HURST,TARRANT,Proprietary,Acute Care Hospitals,,False,,,,,,,,,,,
+454132,SAN ANTONIO BEHAVIORAL HEALTHCARE HOSPITAL,SAN ANTONIO,BEXAR,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454011,SAN ANTONIO STATE HOSP  STATE SCHOOL,SAN ANTONIO,BEXAR,Government - State,Psychiatric,,False,,,,,,,,,,,
+45090F,SAN ANTONIO VA MEDICAL CENTER (VA SOUTH TEXAS HEALTHCARE SYSTEM),SAN ANTONIO,BEXAR,Veterans Health Administration,Acute Care - Veterans Administration,5.0,False,19.1,22.3,6.6,10.0,0.452,0.327,,,79.0,81.0,4.0
+450653,SCENIC MOUNTAIN MEDICAL CENTER,BIG SPRING,HOWARD,Proprietary,Acute Care Hospitals,,False,17.6,21.1,13.2,19.5,,,61.0,4.0,45.0,53.0,
+451304,SCHLEICHER COUNTY MEDICAL CENTER,ELDORADO,SCHLEICHER,Proprietary,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+670080,SETON MEDICAL CENTER HARKER HEIGHTS,HARKER HEIGHTS,BELL,Proprietary,Acute Care Hospitals,4.0,False,19.8,24.0,9.8,14.6,0.0,0.0,86.0,2.0,70.0,71.0,4.0
+451399,SEYMOUR HOSPITAL,SEYMOUR,BAYLOR,Government - Hospital District or Authority,Critical Access Hospitals,,False,17.8,,,15.6,,,82.0,0.0,79.0,82.0,
+451340,SHAMROCK GENERAL HOSPITAL,SHAMROCK,WHEELER,Proprietary,Critical Access Hospitals,,False,,,,,,,,,,,
+450571,SHANNON MEDICAL CENTER,SAN ANGELO,TOM GREEN,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,16.6,20.6,11.8,13.5,0.309,0.831,67.0,2.0,66.0,68.0,3.0
+453311,SHRINERS HOSPITALS FOR CHILDREN,GALVESTON,GALVESTON,Voluntary non-profit - Private,Childrens,,True,,,,,,,,,,,
+450668,SIERRA MEDICAL CENTER,EL PASO,EL PASO,Proprietary,Acute Care Hospitals,2.0,False,16.9,22.4,11.0,17.4,0.85,0.242,42.0,2.0,64.0,63.0,2.0
+450119,SOUTH TEXAS HEALTH SYSTEM,EDINBURG,HIDALGO,Proprietary,Acute Care Hospitals,4.0,False,18.4,22.0,11.4,12.9,0.849,0.823,72.0,0.0,67.0,67.0,2.0
+450856,SOUTH TEXAS SPINE AND SURGICAL HOSPITAL,SAN ANTONIO,BEXAR,Physician,Acute Care Hospitals,,False,,,,,,,,1.0,83.0,83.0,4.0
+450431,ST DAVID'S MEDICAL CENTER,AUSTIN,TRAVIS,Proprietary,Acute Care Hospitals,4.0,False,17.8,20.5,8.4,13.2,0.401,0.262,75.0,1.0,75.0,73.0,3.0
+450713,ST DAVID'S SOUTH AUSTIN MEDICAL CENTER,AUSTIN,TRAVIS,Proprietary,Acute Care Hospitals,3.0,False,17.0,20.4,10.6,18.3,0.788,0.065,79.0,1.0,70.0,66.0,3.0
+450035,ST JOSEPH MEDICAL CENTER,HOUSTON,HARRIS,Physician,Acute Care Hospitals,3.0,True,17.0,22.4,,,0.0,0.5,61.0,7.0,55.0,58.0,2.0
+670075,ST LUKE'S HOSPITAL AT THE VINTAGE,HOUSTON,HARRIS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,True,16.3,20.9,10.4,13.5,0.0,0.0,64.0,0.0,81.0,79.0,3.0
+670031,ST LUKE'S PATIENTS MEDICAL CENTER,PASADENA,HARRIS,Proprietary,Acute Care Hospitals,3.0,True,14.7,23.0,10.8,15.1,0.0,0.0,60.0,0.0,67.0,69.0,2.0
+670053,ST LUKE'S SUGAR LAND HOSPITAL,SUGAR LAND,FORT BEND,Voluntary non-profit - Private,Acute Care Hospitals,3.0,True,16.4,20.7,8.7,14.1,0.0,0.502,69.0,0.0,63.0,65.0,2.0
+450862,ST LUKE'S THE WOODLANDS HOSPITAL,THE WOODLANDS,MONTGOMERY,Voluntary non-profit - Private,Acute Care Hospitals,3.0,True,16.8,20.7,11.1,14.3,0.527,0.68,64.0,1.0,78.0,78.0,4.0
+670314,ST MICHAELS MEDICAL HOSPITAL LLC,SUGAR LAND,FORT BEND,Proprietary,Acute Care Hospitals,,True,,,,,,,,3.0,,,
+454093,STARCARE SPECIALTY HEALTH /SUNRISE CANYON HOSPITAL,LUBBOCK,LUBBOCK,Voluntary non-profit - Other,Psychiatric,,False,,,,,,,,,,,
+450654,STARR COUNTY MEMORIAL HOSPITAL,RIO GRANDE CITY,STARR,Government - Hospital District or Authority,Acute Care Hospitals,2.0,False,17.5,20.7,,13.8,,,52.0,3.0,62.0,67.0,
+671302,STEPHENS MEMORIAL HOSPITAL,BRECKENRIDGE,STEPHENS,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+451318,STONEWALL MEMORIAL HOSPITAL DISTRICT,ASPERMONT,STONEWALL,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,0.0,,,
+450860,SUGAR LAND SURGICAL HOSPITAL LLP,SUGAR LAND,FORT BEND,Physician,Acute Care Hospitals,,True,,,,,,,,,82.0,88.0,
+454139,SUN BEHAVIORAL HOUSTON,HOUSTON,HARRIS,Proprietary,Psychiatric,,True,,,,,,,,,,,
+450831,SURGERY SPECIALTY HOSPITALS OF AMERICA SE HOUSTON,PASADENA,HARRIS,Proprietary,Acute Care Hospitals,,True,,,,,,,,0.0,,,
+451311,SWEENY COMMUNITY HOSPITAL,SWEENY,BRAZORIA,Government - Hospital District or Authority,Critical Access Hospitals,,True,16.8,,,,,,43.0,3.0,79.0,78.0,
+451349,SWISHER MEMORIAL HOSPITAL,TULIA,SWISHER,Voluntary non-profit - Private,Critical Access Hospitals,,False,,,,,,,,,,,
+45086F,TEMPLE VA MEDICAL CENTER (VA CENTRAL TEXAS HEALTHCARE SYSTEM),TEMPLE,BELL,Veterans Health Administration,Acute Care - Veterans Administration,4.0,False,17.3,20.3,8.4,9.8,,1.922,,,77.0,81.0,4.0
+454006,TERRELL STATE HOSPITAL,TERRELL,KAUFMAN,Government - State,Psychiatric,,False,,,,,,,,,,,
+670125,TEXAS CENTER FOR INFECTIOUS DISEASE,SAN ANTONIO,BEXAR,Government - State,Acute Care Hospitals,,False,,,,,,,,,,,
+453304,TEXAS CHILDRENS HOSPITAL,HOUSTON,HARRIS,Voluntary non-profit - Private,Childrens,,True,,,,,,,,,,,
+453319,TEXAS CHILDRENS HOSPITAL NORTH AUSTIN CAMPUS,AUSTIN,WILLIAMSON,Voluntary non-profit - Private,Childrens,,False,,,,,,,,,,,
+450064,TEXAS HEALTH ARLINGTON MEMORIAL HOSPITAL,ARLINGTON,TARRANT,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.9,21.6,10.5,13.5,0.277,0.0,81.0,1.0,73.0,70.0,3.0
+450891,TEXAS HEALTH CENTER FOR DIAGNOSTICS & SURGERY PLAN,PLANO,COLLIN,Physician,Acute Care Hospitals,,False,,,,,,,,7.0,87.0,87.0,4.0
+450135,TEXAS HEALTH HARRIS METHODIST FORT WORTH,FORT WORTH,TARRANT,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,17.2,20.3,10.4,14.4,0.108,0.251,76.0,0.0,76.0,75.0,3.0
+670085,TEXAS HEALTH HARRIS METHODIST HOSPITAL ALLIANCE,FORT WORTH,TARRANT,Voluntary non-profit - Private,Acute Care Hospitals,5.0,False,15.4,21.0,12.0,16.3,0.0,0.0,77.0,2.0,72.0,71.0,3.0
+450419,TEXAS HEALTH HARRIS METHODIST HOSPITAL AZLE,AZLE,TARRANT,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.2,20.6,10.5,14.4,,,93.0,1.0,67.0,67.0,3.0
+450148,TEXAS HEALTH HARRIS METHODIST HOSPITAL CLEBURNE,CLEBURNE,JOHNSON,Voluntary non-profit - Private,Acute Care Hospitals,5.0,False,15.4,19.9,12.2,11.6,,,81.0,1.0,71.0,72.0,4.0
+450888,TEXAS HEALTH HARRIS METHODIST HOSPITAL SOUTHLAKE,SOUTHLAKE,TARRANT,Proprietary,Acute Care Hospitals,,False,,,,,,,,2.0,87.0,86.0,4.0
+450779,TEXAS HEALTH HARRIS METHODIST HOSPITAL SOUTHWEST F,FORT WORTH,TARRANT,Voluntary non-profit - Private,Acute Care Hospitals,5.0,False,16.6,20.6,9.5,13.5,0.897,0.261,82.0,1.0,79.0,77.0,4.0
+450351,TEXAS HEALTH HARRIS METHODIST HOSPITAL STEPHENVILL,STEPHENVILLE,ERATH,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.7,20.7,12.5,16.8,,,85.0,1.0,78.0,79.0,4.0
+450639,TEXAS HEALTH HARRIS METHODIST HURST-EULESS-BEDFORD,BEDFORD,TARRANT,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,19.2,20.6,12.3,16.5,0.277,0.0,80.0,0.0,74.0,71.0,3.0
+670071,TEXAS HEALTH HEART & VASCULAR HOSPITAL ARLINGTON,ARLINGTON,TARRANT,Physician,Acute Care Hospitals,4.0,False,,21.7,9.7,,,,,,85.0,83.0,4.0
+670260,TEXAS HEALTH HOSPITAL FRISCO,FRISCO,DENTON,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,15.8,20.6,10.8,12.4,0.0,0.885,80.0,1.0,80.0,78.0,3.0
+670309,TEXAS HEALTH HOSPITAL MANSFIELD,MANSFIELD,TARRANT,Voluntary non-profit - Private,Acute Care Hospitals,5.0,False,16.8,20.2,10.6,16.5,,,90.0,1.0,80.0,82.0,4.0
+450677,TEXAS HEALTH HUGULEY HOSPITAL FORT WORTH SOUTH,FORT WORTH,TARRANT,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,16.7,20.2,9.7,12.3,0.0,0.429,76.0,2.0,73.0,74.0,3.0
+450840,TEXAS HEALTH PRESBYTERIAN HOSPITAL ALLEN,ALLEN,COLLIN,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,16.8,22.4,9.9,16.1,,0.0,74.0,1.0,77.0,76.0,4.0
+450462,TEXAS HEALTH PRESBYTERIAN HOSPITAL DALLAS,DALLAS,DALLAS,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,18.6,19.5,12.3,14.7,0.161,0.188,72.0,1.0,72.0,69.0,3.0
+450743,TEXAS HEALTH PRESBYTERIAN HOSPITAL DENTON,DENTON,DENTON,Voluntary non-profit - Private,Acute Care Hospitals,5.0,False,17.7,19.5,9.3,14.3,0.0,0.617,85.0,2.0,79.0,78.0,4.0
+670068,TEXAS HEALTH PRESBYTERIAN HOSPITAL FLOWER MOUND,FLOWER MOUND,DENTON,Proprietary,Acute Care Hospitals,5.0,False,16.7,19.7,10.4,14.3,0.617,0.505,78.0,1.0,79.0,78.0,4.0
+450292,TEXAS HEALTH PRESBYTERIAN HOSPITAL KAUFMAN,KAUFMAN,KAUFMAN,Voluntary non-profit - Private,Acute Care Hospitals,,False,16.0,20.8,,14.9,,,88.0,3.0,71.0,79.0,4.0
+450771,TEXAS HEALTH PRESBYTERIAN HOSPITAL PLANO,PLANO,COLLIN,Voluntary non-profit - Private,Acute Care Hospitals,4.0,False,17.9,20.6,10.5,12.9,0.202,0.218,72.0,0.0,72.0,72.0,3.0
+670044,TEXAS HEALTH PRESBYTERIAN HOSPITAL ROCKWALL,ROCKWALL,ROCKWALL,Proprietary,Acute Care Hospitals,5.0,False,16.3,21.7,9.3,18.7,0.0,0.0,72.0,2.0,79.0,79.0,4.0
+450889,TEXAS INSTITUTE FOR SURGERY AT PRESBYTERIAN HOSPIT,DALLAS,DALLAS,Physician,Acute Care Hospitals,,False,,,,,,,,,88.0,87.0,5.0
+450804,TEXAS ORTHOPEDIC HOSPITAL,HOUSTON,HARRIS,Voluntary non-profit - Other,Acute Care Hospitals,,True,,,,,,,,1.0,83.0,83.0,4.0
+453314,TEXAS SCOTTISH RITE HOSPITAL FOR CHILDREN,DALLAS,DALLAS,Voluntary non-profit - Private,Childrens,,False,,,,,,,,,,,
+450324,TEXOMA MEDICAL CENTER,DENISON,GRAYSON,Proprietary,Acute Care Hospitals,4.0,False,18.8,22.6,9.2,11.2,0.491,0.429,62.0,1.0,69.0,65.0,3.0
+450893,THE HEART HOSPITAL BAYLOR DENTON,DENTON,DENTON,Physician,Acute Care Hospitals,5.0,False,,22.1,9.7,,,,62.0,0.0,86.0,86.0,4.0
+670006,THE HOSPITAL AT WESTLAKE MEDICAL CENTER,AUSTIN,TRAVIS,Physician,Acute Care Hospitals,,False,,,,,,,,0.0,65.0,62.0,3.0
+670047,THE HOSPITALS OF PROVIDENCE - EAST CAMPUS,EL PASO,EL PASO,Proprietary,Acute Care Hospitals,2.0,False,17.7,20.7,13.7,15.9,1.233,0.479,46.0,1.0,57.0,58.0,2.0
+450002,THE HOSPITALS OF PROVIDENCE - MEMORIAL CAMPUS,EL PASO,EL PASO,Proprietary,Acute Care Hospitals,2.0,False,17.1,20.6,11.0,14.1,0.408,0.251,53.0,1.0,56.0,54.0,2.0
+670124,THE HOSPITALS OF PROVIDENCE HORIZON CITY CAMPUS,HORIZON CITY,EL PASO,Proprietary,Acute Care Hospitals,,False,17.0,,,15.5,,,77.0,0.0,86.0,81.0,
+670120,THE HOSPITALS OF PROVIDENCE TRANSMOUNTAIN CAMPUS,EL PASO,EL PASO,Proprietary,Acute Care Hospitals,2.0,False,16.5,20.0,10.8,17.7,0.0,0.0,50.0,2.0,64.0,66.0,2.0
+450518,THE MEDICAL CENTER OF SOUTHEAST TEXAS,PORT ARTHUR,JEFFERSON,Physician,Acute Care Hospitals,3.0,False,17.3,21.9,11.1,12.7,,,35.0,5.0,53.0,61.0,3.0
+670267,THE WOODLANDS SPECIALTY HOSPITAL,SPRING,MONTGOMERY,Proprietary,Acute Care Hospitals,,True,,,,,,,,1.0,55.0,66.0,
+451339,THROCKMORTON COUNTY MEMORIAL HOSPITAL,THROCKMORTON,THROCKMORTON,Government - Local,Critical Access Hospitals,,False,,,,,,,,,,,
+450080,TITUS REGIONAL MEDICAL CENTER,MOUNT PLEASANT,TITUS,Government - Hospital District or Authority,Acute Care Hospitals,3.0,False,17.2,21.8,10.7,12.4,,,72.0,1.0,71.0,68.0,4.0
+451370,TMC- BONHAM HOSPITAL,BONHAM,FANNIN,Government - Hospital District or Authority,Critical Access Hospitals,,False,17.8,20.7,,,,,,1.0,73.0,73.0,
+450774,TOPS SURGICAL SPECIALTY HOSPITAL,HOUSTON,HARRIS,Physician,Acute Care Hospitals,,True,,,,,,,,,80.0,79.0,4.0
+670266,TOWNSEN MEMORIAL HOSPITAL,HUMBLE,HARRIS,Proprietary,Acute Care Hospitals,,True,,,,,,,,1.0,61.0,67.0,
+450460,TYLER COUNTY HOSPITAL,WOODVILLE,TYLER,Government - Hospital District or Authority,Acute Care Hospitals,,False,16.8,,,14.0,,,,2.0,85.0,87.0,
+450010,UNITED REGIONAL HEALTH CARE SYSTEM,WICHITA FALLS,WICHITA,Voluntary non-profit - Private,Acute Care Hospitals,3.0,False,21.5,23.9,11.3,17.2,0.0,0.269,69.0,3.0,73.0,71.0,4.0
+454104,UNIVERSITY BEHAVIORAL HEALTH OF DENTON,DENTON,DENTON,Government - State,Psychiatric,,False,,,,,,,,,,,
+450213,UNIVERSITY HEALTH SYSTEM,SAN ANTONIO,BEXAR,Government - Hospital District or Authority,Acute Care Hospitals,3.0,False,16.5,20.6,10.6,13.3,0.388,0.405,82.0,2.0,78.0,77.0,4.0
+450686,UNIVERSITY MEDICAL CENTER,LUBBOCK,LUBBOCK,Government - Hospital District or Authority,Acute Care Hospitals,2.0,False,15.4,19.9,10.7,15.1,0.076,0.319,36.0,0.0,78.0,76.0,3.0
+450024,UNIVERSITY MEDICAL CENTER OF EL PASO,EL PASO,EL PASO,Physician,Acute Care Hospitals,3.0,False,16.8,21.0,13.7,16.2,0.686,0.441,62.0,0.0,71.0,67.0,3.0
+450690,UNIVERSITY OF TEXAS HEALTH SCIENCE CENTER AT TYLER,TYLER,SMITH,Government - State,Acute Care Hospitals,4.0,False,16.3,20.9,11.7,15.0,1.936,,77.0,1.0,81.0,78.0,5.0
+450018,UNIVERSITY OF TEXAS MEDICAL BRANCH GALVESTON,GALVESTON,GALVESTON,Government - State,Acute Care Hospitals,3.0,True,16.5,22.2,8.6,11.9,0.231,0.675,35.0,0.0,72.0,73.0,3.0
+450872,USMD HOSPITAL AT ARLINGTON L P,ARLINGTON,TARRANT,Physician,Acute Care Hospitals,,False,,,,,,,63.0,1.0,68.0,70.0,3.0
+450389,UT HEALTH EAST TEXAS ATHENS HOSPITAL,ATHENS,HENDERSON,Proprietary,Acute Care Hospitals,2.0,False,18.4,22.8,14.8,17.0,1.994,0.0,80.0,2.0,72.0,72.0,4.0
+450210,UT HEALTH EAST TEXAS CARTHAGE HOSPITAL,CARTHAGE,PANOLA,Proprietary,Acute Care Hospitals,5.0,False,16.9,21.2,11.7,14.1,,,50.0,1.0,72.0,85.0,
+450475,UT HEALTH EAST TEXAS HENDERSON HOSPITAL,HENDERSON,RUSK,Proprietary,Acute Care Hospitals,5.0,False,16.4,20.5,10.8,15.6,,,87.0,1.0,70.0,71.0,4.0
+450194,UT HEALTH EAST TEXAS JACKSONVILLE HOSPITAL,JACKSONVILLE,CHEROKEE,Proprietary,Acute Care Hospitals,,False,16.5,21.9,,16.1,,,69.0,1.0,75.0,75.0,4.0
+451367,UT HEALTH EAST TEXAS PITTSBURG HOSPITAL,PITTSBURG,CAMP,Proprietary,Critical Access Hospitals,3.0,False,17.2,20.9,11.7,14.7,,,87.0,1.0,88.0,86.0,5.0
+451380,UT HEALTH EAST TEXAS QUITMAN HOSPITAL,QUITMAN,WOOD,Voluntary non-profit - Other,Critical Access Hospitals,4.0,False,18.8,21.7,13.1,12.0,,0.0,67.0,1.0,79.0,81.0,4.0
+450083,UT HEALTH EAST TEXAS TYLER REGIONAL HOSPITAL,TYLER,SMITH,Proprietary,Acute Care Hospitals,2.0,False,18.5,22.2,11.1,13.8,1.371,0.524,75.0,0.0,67.0,65.0,2.0
+670335,UT HEALTH SAN ANTONIO MULTISPECIALTY & RESEARCH HO,SAN ANTONIO,BEXAR,Government - State,Acute Care Hospitals,,False,,,,,,,85.0,,,,
+450044,UT OF TEXAS  SOUTHWESTERN UNIVERSITY HOSPITAL - WILLIAM P. CLEMENTS JR.,DALLAS,DALLAS,Government - State,Acute Care Hospitals,4.0,False,17.3,19.2,7.0,9.1,0.582,0.416,42.0,1.0,84.0,83.0,4.0
+451387,UVALDE MEMORIAL HOSPITAL,UVALDE,UVALDE,Government - Hospital District or Authority,Critical Access Hospitals,3.0,False,17.6,20.5,10.7,15.5,,,80.0,,75.0,75.0,4.0
+45060F,VA AMARILLO HEALTHCARE SYSTEM,AMARILLO,POTTER,Veterans Health Administration,Acute Care - Veterans Administration,5.0,False,18.0,21.7,8.6,11.6,,2.83,,,81.0,80.0,4.0
+450154,VAL VERDE REGIONAL MEDICAL CENTER,DEL RIO,VAL VERDE,Government - Hospital District or Authority,Acute Care Hospitals,3.0,False,17.5,20.3,12.1,13.6,,,62.0,1.0,54.0,59.0,3.0
+450028,VALLEY BAPTIST MEDICAL CENTER- BROWNSVILLE,BROWNSVILLE,CAMERON,Proprietary,Acute Care Hospitals,3.0,False,18.0,20.9,11.0,14.3,0.0,0.181,56.0,1.0,57.0,57.0,2.0
+450662,VALLEY REGIONAL MEDICAL CENTER,BROWNSVILLE,CAMERON,Proprietary,Acute Care Hospitals,2.0,False,18.2,21.1,10.9,13.8,0.87,0.556,67.0,2.0,65.0,62.0,2.0
+450033,VHS HARLINGEN HOSPITAL COMPANY LLC,HARLINGEN,CAMERON,Proprietary,Acute Care Hospitals,2.0,False,17.9,20.1,7.9,13.4,0.931,0.213,55.0,2.0,62.0,63.0,2.0
+454158,VOYAGES BEHAVIORAL HEALTH OF CONROE,CONROE,MONTGOMERY,Proprietary,Psychiatric,,True,,,,,,,,,,,
+454156,VOYAGES BEHAVIORAL HEALTH OF SUGAR LAND,SUGAR LAND,FORT BEND,Proprietary,Psychiatric,,True,,,,,,,,,,,
+451337,W J MANGOLD MEMORIAL HOSPITAL,LOCKNEY,FLOYD,Physician,Critical Access Hospitals,,False,,,,13.6,,,,,94.0,89.0,
+450200,WADLEY REGIONAL MEDICAL CENTER,TEXARKANA,BOWIE,Physician,Acute Care Hospitals,,False,,,,,,,,,,,
+451373,WARD MEMORIAL HOSPITAL,MONAHANS,WARD,Government - Local,Critical Access Hospitals,,False,16.8,,,15.7,,,,1.0,88.0,84.0,
+454128,WELLBRIDGE HEALTHCARE FORT WORTH,FORT WORTH,TARRANT,Proprietary,Psychiatric,,False,,,,,,,,,,,
+454026,WEST OAKS HOSPITAL,HOUSTON,HARRIS,Proprietary,Psychiatric,,True,,,,,,,,,,,
+670333,WESTOVER HILLS BAPTIST HOSPITAL,SAN ANTONIO,BEXAR,Proprietary,Acute Care Hospitals,,False,17.3,20.9,,14.4,,,73.0,,,,
+454131,WESTPARK SPRINGS LLC,RICHMOND,FORT BEND,Proprietary,Psychiatric,,True,,,,,,,,,,,
+450678,WHITE ROCK MEDICAL CENTER,DALLAS,DALLAS,Proprietary,Acute Care Hospitals,2.0,False,19.1,22.7,11.1,16.3,,,15.0,4.0,,,
+450584,WILBARGER GENERAL HOSPITAL,VERNON,WILBARGER,Government - Hospital District or Authority,Acute Care Hospitals,,False,17.0,,,18.4,,,17.0,1.0,67.0,72.0,
+45068F,William Beaumont AMG (FT Bliss),El Paso,EL PASO,Department of Defense,Acute Care - Department of Defense,,False,,,,,1.787,1.235,46.0,5.0,87.0,84.0,5.0
+450469,WILSON N JONES REGIONAL MEDICAL CENTER,SHERMAN,GRAYSON,Proprietary,Acute Care Hospitals,2.0,False,18.3,21.8,10.5,13.1,,0.0,56.0,3.0,62.0,55.0,3.0
+451314,WINKLER COUNTY MEMORIAL HOSPITAL,KERMIT,WINKLER,Government - Hospital District or Authority,Critical Access Hospitals,,False,,,,,,,,,,,
+450674,"WOMANS HOSPITAL OF TEXAS,THE",HOUSTON,HARRIS,Proprietary,Acute Care Hospitals,4.0,True,,,,,0.553,,83.0,1.0,69.0,67.0,3.0
+450484,WOODLAND HEIGHTS MEDICAL CENTER,LUFKIN,ANGELINA,Proprietary,Acute Care Hospitals,3.0,False,19.2,22.1,11.0,15.4,0.504,0.757,40.0,1.0,67.0,64.0,2.0
+454144,WOODLAND SPRINGS,CONROE,MONTGOMERY,Proprietary,Psychiatric,,True,,,,,,,,,,,
+451346,YOAKUM COMMUNITY HOSPITAL,YOAKUM,LAVACA,Voluntary non-profit - Private,Critical Access Hospitals,3.0,False,17.7,21.5,12.6,16.1,,,80.0,,82.0,78.0,
+451308,YOAKUM COUNTY HOSPITAL,DENVER CITY,YOAKUM,Voluntary non-profit - Other,Critical Access Hospitals,,False,16.5,,,,,,,,77.0,75.0,

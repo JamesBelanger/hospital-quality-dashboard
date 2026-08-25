@@ -1,0 +1,12 @@
+measure_id,measure_name,higher_is_better,tx_avg,national_avg,tx_hospitals,tx_beating_national,tx_share_beating_pct
+HAI_2_SIR,Catheter Associated Urinary Tract Infections (ICU + select Wards),False,0.37,0.48,161,117,72.7
+OP_22,Left before being seen,False,1.37,1.69,298,197,66.1
+HAI_1_SIR,Central Line Associated Bloodstream Infection (ICU + select Wards),False,0.52,0.58,151,99,65.6
+MORT_30_HF,Death rate for heart failure patients,False,10.52,11.07,206,132,64.1
+MORT_30_PN,Death rate for pneumonia patients,False,14.69,15.32,249,158,63.5
+SEP_1,Appropriate care for severe sepsis and septic shock,True,66.54,63.79,233,146,62.7
+READM_30_PN,Pneumonia (PN) 30-Day Readmission Rate,False,17.32,17.34,258,150,58.1
+H_HSP_RATING_9_10,"Patients who gave their hospital a rating of 9 or 10 on a scale from 0 (lowest) to 10 (highest) — Patients who gave a rating of ""9"" or ""10"" (high)",True,73.52,71.75,297,167,56.2
+READM_30_HF,Heart failure (HF) 30-Day Readmission Rate,False,21.26,21.38,224,124,55.4
+H_RECMND_DY,"Patients who reported YES, they would definitely recommend the hospital — ""YES"", patients would definitely recommend the hospital",True,72.87,71.22,297,158,53.2
+H_STAR_RATING,Summary star rating — Summary star rating,True,3.27,3.27,229,92,40.2
