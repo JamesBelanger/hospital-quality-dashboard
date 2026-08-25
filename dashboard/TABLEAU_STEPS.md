@@ -2,9 +2,9 @@
 
 Files: `dashboard/extracts/scorecard.csv`, `benchmarks.csv`, `hcahps.csv`, `tx_vs_national.csv`. Open **Tableau Desktop Public Edition**, sign in.
 
-## 0. Connect (5 min)
-1. Start page → **Connect → To a File → Text file** → pick `scorecard.csv`.
-2. In the data-source canvas, click **Add** (top-left, next to Connections) → Text file → add `benchmarks.csv`, `hcahps.csv`, `tx_vs_national.csv`. Don't join them — drag each onto the canvas as a *separate* data source (or use the **New Data Source** icon per file). Four independent sources is simplest.
+## 0. Connect (2 min — simplest path)
+1. Start page → **Connect → To a File → Microsoft Excel** → pick `dashboard/extracts/dashboard_source.xlsx` (all four feeds are sheets in this one workbook).
+2. Drag the **scorecard** sheet onto the canvas. For each of the other sheets, use **Data → New Data Source → Microsoft Excel** (same file) so each sheet is its own data source — no joins needed. (CSV fallback: the four `.csv` files sit next to the workbook.)
 3. Check types: in each source, `facility_id` should be a **String** (Abc), scores **Number (decimal)**, `is_houston_area` **Boolean**. Click the data-type icon above a column to change it.
 
 ## 1. Sheet "Scorecard" — highlight table (15 min)
