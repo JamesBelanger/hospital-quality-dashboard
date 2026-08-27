@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hospital Quality Explorer — any U.S. hospital against its peers</title>
+<meta name="description" content="Look up any of 5,419 U.S. hospitals and see how it compares on 33 CMS quality measures against national, state, and custom peer groups. Built from six CMS Care Compare datasets with PostgreSQL, SQL, and D3.">
+<link rel="stylesheet" href="app.css">
+<script src="vendor/d3.v7.min.js"></script>
+<script src="vendor/topojson-client.min.js"></script>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="#/story">Hospital Quality Explorer<small>CMS Care Compare · 5,419 hospitals · 33 key measures</small></a>
+  <nav class="tabs" id="tabs">
+    <a href="#/story" data-view="story">Story</a>
+    <a href="#/report" data-view="report">Report card</a>
+    <a href="#/compare" data-view="compare">Compare</a>
+    <a href="#/measures" data-view="measures">Measures</a>
+    <a href="#/map" data-view="map">Map</a>
+    <a href="#/rankings" data-view="rankings">Rankings</a>
+    <a href="#/sql" data-view="sql">SQL</a>
+  </nav>
+</div></div>
+<div class="peerbar" id="peerbar" style="display:none"><div class="wrap">
+  <label>Peer group <select id="scope"></select></label>
+  <label>Ownership <select id="f-own"><option value="">any</option></select></label>
+  <label>Type <select id="f-type"><option value="">any</option></select></label>
+  <label><input type="checkbox" id="f-er"> Emergency dept only</label>
+  <span class="count" id="peercount"></span>
+</div></div>
+<main><div class="wrap">
+  <div id="loading" class="loading">Loading 5,419 hospitals and 103,870 scores…</div>
+  <section class="view" id="view-story"></section>
+  <section class="view" id="view-report"></section>
+  <section class="view" id="view-compare"></section>
+  <section class="view" id="view-measures"></section>
+  <section class="view" id="view-map"></section>
+  <section class="view" id="view-rankings"></section>
+  <section class="view" id="view-sql"></section>
+  <footer>
+    <p><b>Method.</b> Six CMS Care Compare datasets (July 2026 release) are pulled through the data.cms.gov metastore and reduced to one tidy fact table in PostgreSQL. Every benchmark on this page — national and state averages, percentiles, peer-group ranks, the composite — is computed from hospital-level rows; nothing is loaded from a pre-aggregated table. The same computations run here in the browser from a static export of the tables, and in SQL on the <a href="#/sql">SQL</a> tab.</p>
+    <p><b>Limitations.</b> One reporting period per measure in this release, so there are no trends. CMS suppresses small-denominator scores; many measures are missing for over half of hospitals (see <a href="#/measures">Measures</a>). Hospital locations are ZIP-centroid approximations. The weighted composite on the Rankings tab is illustrative and is not the CMS Overall Star Rating methodology. Built by <a href="https://jamesbelanger.com">James Belanger</a> · <a href="https://github.com/JamesBelanger/hospital-quality-dashboard">source on GitHub</a> · <a href="https://jamesbelanger.com/projects/hospital-quality/">case study</a>.</p>
+  </footer>
+</div></main>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

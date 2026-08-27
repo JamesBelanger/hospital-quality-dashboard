@@ -24,3 +24,23 @@ _(filled in at Phase 5)_
 
 ## Method & limitations
 _(filled in at Phase 5)_
+
+## Interactive explorer (`dashboard/explorer/`)
+
+A static, no-backend web app (vanilla ES modules + D3 v7) built from the same tables. Live at
+https://jamesbelanger.com/projects/hospital-quality/explore/.
+
+| Tab | What it does | SQL behind it |
+|---|---|---|
+| Story | Scrollytelling intro: 3,049 US hospitals → Texas → Houston → one hospital → the outcomes-vs-experience mismatch | `06`, `09` |
+| Report card | Search any of 5,419 hospitals; every key measure placed on the peer-group distribution with a direction-aware "beats X% of peers" badge; shareable URL; CSV | `06_national_percentile` |
+| Compare | Brush a measure's distribution; the scorecard table and HCAHPS heatmap follow; hover a row to find its dot | `05`, `11`, `v_hcahps` |
+| Measures | All 161 measures: national vs peer histogram, best/worst ten, missingness | `02_sparse_measures_tx` |
+| Map | State choropleth of medians → zoom into a state for hospital dots colored by peer percentile | `10_county_rollup` |
+| Rankings | Five-slider weighted composite that re-ranks live (illustrative, not CMS stars) + mismatch quadrant with brush | `08`, `09` |
+| SQL | DuckDB-WASM console over the Parquet export of `hospitals` / `measures` / `measure_values` + the five views; the twelve exercises as presets | all |
+
+Build the data bundle: `python etl/export_web.py --assets <dir with 2023_Gaz_zcta_national.txt, states-10m.json, counties-10m.json>`
+(ZIP-centroid geocoding from the Census ZCTA gazetteer; maps from us-atlas). Serve locally with
+`python -m http.server` from `dashboard/explorer/`. Peer groups (scope × ownership × type × ED) are shared
+across tabs via the bar under the header; state lives in the URL hash so any view is linkable.
