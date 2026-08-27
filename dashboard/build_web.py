@@ -9,6 +9,7 @@ Usage: python dashboard/build_web.py
 """
 from __future__ import annotations
 import json
+import re
 from pathlib import Path
 import pandas as pd
 import plotly.graph_objects as go
@@ -26,6 +27,23 @@ BLUE = "#2a78d6"            # series-1 / emphasis
 DEEMPH = "#c3c2b7"          # de-emphasis gray for context marks
 SEQ = ["#86b6ef", "#6da7ec", "#5598e7", "#3987e5", "#2a78d6", "#256abf", "#1c5cab", "#184f95", "#104281", "#0d366b"]
 FONT = 'system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+
+ACR = {"LLP","LLC","HCA","VA","UT","ED","MD","USA","TMC","NW","SW","SE","NE","PLLC","LP","LTD","DBA","CHI","UTMB"}
+SMALL = {"of","and","the","at","in","for","on"}
+def nice(name):
+    """Title-case hospital/county names without breaking apostrophes or known acronyms."""
+    if not isinstance(name, str):
+        return name
+    out = []
+    for i, w in enumerate(name.split()):
+        core = re.sub(r"[^A-Za-z]", "", w)
+        if core.upper() in ACR:
+            out.append(w.upper()); continue
+        w = w.lower()
+        if i and w in SMALL:
+            out.append(w); continue
+        out.append(re.sub(r"(^|[\-/(])([a-z])", lambda m: m.group(1) + m.group(2).upper(), w))
+    return " ".join(out)
 
 def base_layout(height, title=None, subtitle=None):
     lay = dict(
@@ -64,18 +82,18 @@ def cell(v, col, hb):
     if not hb:  # lower is better → longer bar = better; flip the fill so the eye reads "more bar = better"
         w = 100 - w
     better = (v >= tx_avg[col]) if hb else (v <= tx_avg[col])
-    return f'<td><span class="bar {"emph" if better else "ctx"}" style="width:{max(w,2):.0f}%"></span><span class="v">{v:g}</span></td>'
+    return f'<td><div class="c"><span class="track"><span class="bar {"emph" if better else "ctx"}" style="width:{max(w,2):.0f}%"></span></span><span class="v">{v:g}</span></div></td>'
 
 hou_sorted = hou.sort_values("recommend_pct", ascending=False, na_position="last")
 rows_html = "\n".join(
-    "<tr><th scope='row'>" + f"{r.facility_name.title()}<span class='meta'>{str(r.county).title()} County · {r.hospital_ownership}</span></th>"
+    "<tr><th scope='row'>" + f"{nice(r.facility_name)}<span class='meta'>{nice(str(r.county))} County · {r.hospital_ownership}</span></th>"
     + "".join(cell(getattr(r, c), c, hb) for c, _, _, hb in COLS) + "</tr>"
     for r in hou_sorted.itertuples())
 head_html = "<th>Hospital</th>" + "".join(
     f"<th><span class='h'>{lbl}</span><span class='dir'>{'higher is better' if hb else 'lower is better'}{(' · ' + unit) if unit else ''}</span></th>"
     for _, lbl, unit, hb in COLS)
 table_html = f"""<div class="tablewrap"><table class="scorecard"><thead><tr>{head_html}</tr></thead><tbody>{rows_html}</tbody></table></div>
-<p class="caption"><span class="key emph"></span> at or better than the Texas average &nbsp; <span class="key ctx"></span> worse than the Texas average &nbsp; · &nbsp; bar length = position within the Texas range, oriented so longer is always better &nbsp; · &nbsp; “–” = not reported (CMS suppresses small denominators)</p>"""
+<p class="caption"><span class="key emph"></span> at or better than the Texas average &nbsp; <span class="key ctx"></span> worse than the Texas average &nbsp; · &nbsp; bar length = position within the Texas range, oriented so longer is always better &nbsp; · &nbsp; “–” = not reported (CMS suppresses small denominators) &nbsp; · &nbsp; scroll the table for all {n_hou} hospitals</p>"""
 
 # ================= Panel 2 — readmission dot plot (emphasis: Houston blue, other Texas gray) =================
 r = bm[bm.measure_id == "READM_30_PN"].dropna(subset=["score"]).sort_values("score").reset_index(drop=True)
@@ -86,19 +104,21 @@ fig2 = go.Figure()
 oth = r[~r.is_houston_area]; hs = r[r.is_houston_area]
 fig2.add_trace(go.Scatter(x=oth.score, y=jitter(len(oth), 1.0), mode="markers", name="Other Texas hospitals",
                           marker=dict(color=DEEMPH, size=8, line=dict(width=2, color=SURFACE)),
-                          text=oth.facility_name.str.title(), customdata=(oth.national_pct_rank * 100).round(0),
+                          text=oth.facility_name.map(nice), customdata=(oth.national_pct_rank * 100).round(0),
                           hovertemplate="%{text}<br>Readmission %{x:.1f}%  ·  national percentile %{customdata:.0f}<extra></extra>"))
 fig2.add_trace(go.Scatter(x=hs.score, y=jitter(len(hs), 2.0), mode="markers", name="Houston-area hospitals",
                           marker=dict(color=BLUE, size=10, line=dict(width=2, color=SURFACE)),
-                          text=hs.facility_name.str.title(), customdata=(hs.national_pct_rank * 100).round(0),
+                          text=hs.facility_name.map(nice), customdata=(hs.national_pct_rank * 100).round(0),
                           hovertemplate="%{text}<br>Readmission %{x:.1f}%  ·  national percentile %{customdata:.0f}<extra></extra>"))
-for x, lbl in [(nat, f"National average {nat:.1f}%"), (tx, f"Texas average {tx:.1f}%")]:
+marks = sorted([(nat, f"National average {nat:.1f}%"), (tx, f"Texas average {tx:.1f}%")])
+for i, (x, lbl) in enumerate(marks):
     fig2.add_shape(type="line", x0=x, x1=x, y0=0.4, y1=2.75, line=dict(color=INK2, width=1))
-    fig2.add_annotation(x=x, y=2.8, text=lbl, showarrow=False, yanchor="bottom", font=dict(size=11, color=INK2), xanchor="left", xshift=4)
+    fig2.add_annotation(x=x, y=2.8, text=lbl, showarrow=False, yanchor="bottom", font=dict(size=11, color=INK2),
+                        xanchor="right" if i == 0 else "left", xshift=-5 if i == 0 else 5)
 best = hs.iloc[0]
-fig2.add_annotation(x=best.score, y=2.0 + 0.12 * ((0 * 7) % 5 - 2), text=f"{best.facility_name.title()}  {best.score:.1f}%", showarrow=True,
+fig2.add_annotation(x=best.score, y=2.0 + 0.12 * ((0 * 7) % 5 - 2), text=f"{nice(best.facility_name)}  {best.score:.1f}%", showarrow=True,
                     arrowhead=0, arrowwidth=1, arrowcolor=INK2, ax=60, ay=-42, font=dict(size=11, color=INK), xanchor="left")
-lay = base_layout(360, "Pneumonia readmission rate, 30-day", f"{len(r)} Texas hospitals · lower is better · Houston-area hospitals in blue, the rest of Texas in gray")
+lay = base_layout(340)
 lay["xaxis"].update(title="Readmission rate (%)", ticksuffix="%", showgrid=True)
 lay["yaxis"].update(visible=False, range=[0.3, 3.2])
 lay["showlegend"] = True
@@ -113,14 +133,14 @@ h = hc[hc.is_houston_area].pivot_table(index="facility_name", columns="measure_i
 h = h.reindex(columns=[c for c in QLABEL if c in h.columns]).dropna(how="all")
 if "H_RECMND_DY" in h:
     h = h.loc[h["H_RECMND_DY"].sort_values(ascending=False, na_position="last").index]
-fig3 = go.Figure(go.Heatmap(z=h.values, x=[QLABEL[c] for c in h.columns], y=[n.title() for n in h.index],
+fig3 = go.Figure(go.Heatmap(z=h.values, x=[QLABEL[c] for c in h.columns], y=[nice(n) for n in h.index],
                             colorscale=[[i / (len(SEQ) - 1), c] for i, c in enumerate(SEQ)], zmin=40, zmax=95, xgap=2, ygap=2,
                             colorbar=dict(title=dict(text="Top-box %", font=dict(size=11, color=MUTED)), thickness=8, len=0.5, y=1, yanchor="top", tickfont=dict(size=10, color=MUTED), outlinewidth=0),
                             hovertemplate="%{y}<br>%{x}: %{z:.0f}% answered top-box<extra></extra>"))
-lay = base_layout(max(440, 17 * len(h) + 130), "Patient experience, HCAHPS top-box answers", f"{len(h)} Houston-area hospitals · share of patients giving the best answer · darker is better")
+lay = base_layout(max(440, 18 * len(h) + 120))
 lay["xaxis"].update(side="top", tickangle=-35, showgrid=False)
 lay["yaxis"].update(autorange="reversed", tickfont=dict(size=10, color=INK2), showgrid=False)
-lay["margin"].update(l=8, t=140)
+lay["margin"].update(l=8, t=110, b=12)
 fig3.update_layout(**lay)
 
 # ================= Panel 4 — Texas vs national (single series, thin rounded bars, value at tip) =================
@@ -136,10 +156,10 @@ fig4 = go.Figure(go.Bar(x=t.tx_share_beating_pct, y=labels, orientation="h", wid
                         hovertemplate="%{y}<br>%{x:.0f}% of Texas hospitals beat the national average<br>Texas %{customdata[0]} vs national %{customdata[1]} · n = %{customdata[2]}<extra></extra>"))
 fig4.add_shape(type="line", x0=50, x1=50, y0=-0.5, y1=len(labels) - 0.5, line=dict(color=INK2, width=1))
 fig4.add_annotation(x=50, y=len(labels) - 0.5, text="half of Texas hospitals", showarrow=False, yanchor="bottom", xanchor="left", xshift=4, font=dict(size=11, color=INK2))
-lay = base_layout(420, "Share of Texas hospitals beating the national average", "by measure, latest CMS release · above half on 10 of 11 measures")
+lay = base_layout(400)
 lay["xaxis"].update(range=[0, 100], ticksuffix="%", showgrid=True)
 lay["yaxis"].update(showgrid=False, tickfont=dict(size=11, color=INK2))
-lay["margin"].update(l=8, r=40)
+lay["margin"].update(l=8, r=40, t=28)
 lay["bargap"] = 0.45
 fig4.update_layout(**lay)
 
@@ -149,7 +169,11 @@ figs = {"fig2": fig2, "fig3": fig3, "fig4": fig4}
 divs = {k: pio.to_html(f, full_html=False, include_plotlyjs=(k == "fig2"), config=cfg, div_id=k) for k, f in figs.items()}
 (OUT / "figures.json").write_text(json.dumps({k: json.loads(f.to_json()) for k, f in figs.items()}), encoding="utf-8")
 
-best_name = best.facility_name.title()
+hf = bm[(bm.measure_id == "MORT_30_HF") & bm.is_houston_area].dropna(subset=["score"]).sort_values("score")
+hero = hf.iloc[0]
+hero_name, hero_score, hero_pct = nice(hero.facility_name), float(hero.score), float(hero.national_pct_rank) * 100
+hero_num = f"{hero_pct:.1f}" if hero_pct < 10 else f"{hero_pct:.0f}"
+n_beat = int((txn.tx_share_beating_pct > 50).sum()); n_meas = int(len(txn))
 html = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Houston Hospital Quality Explorer</title>
 <style>
@@ -178,11 +202,12 @@ table.scorecard{{width:100%;border-collapse:collapse;font-size:13px}}
 .scorecard thead th .h{{display:block}} .scorecard thead th .dir{{display:block;font-weight:400;font-size:11px;color:var(--muted)}}
 .scorecard tbody th{{text-align:left;font-weight:500;padding:9px 10px 9px 0;border-bottom:1px solid var(--grid);min-width:230px;color:var(--ink)}}
 .scorecard tbody th .meta{{display:block;font-size:11.5px;color:var(--muted);font-weight:400}}
-.scorecard td{{padding:9px 10px 9px 0;border-bottom:1px solid var(--grid);position:relative;min-width:120px;font-variant-numeric:tabular-nums;color:var(--ink2)}}
-.scorecard td .bar{{position:absolute;left:0;top:14px;height:16px;border-radius:0 4px 4px 0;opacity:.9}}
-.bar.emph{{background:var(--blue);opacity:.28}} .bar.ctx{{background:var(--deemph);opacity:.45}}
-.scorecard td .v{{position:relative;padding-left:6px}} td.na{{color:var(--muted);text-align:center}}
-.caption{{font-size:12px;color:var(--muted);margin:10px 0 0}} .key{{display:inline-block;width:14px;height:10px;vertical-align:middle;margin-right:4px}} .key.emph{{background:var(--blue);opacity:.35}} .key.ctx{{background:var(--deemph);opacity:.6}}
+.scorecard td{{padding:9px 12px 9px 0;border-bottom:1px solid var(--grid);min-width:124px;font-variant-numeric:tabular-nums;color:var(--ink2)}}
+.scorecard td .c{{display:flex;align-items:center;gap:8px}} .scorecard td .track{{flex:1;display:block;height:12px}}
+.scorecard td .bar{{display:block;height:12px;border-radius:0 4px 4px 0}}
+.bar.emph{{background:var(--blue)}} .bar.ctx{{background:var(--deemph)}}
+.scorecard td .v{{width:44px;text-align:right;color:var(--ink);font-size:12.5px}} td.na{{color:var(--muted);text-align:center}}
+.caption{{font-size:12px;color:var(--muted);margin:10px 0 0}} .key{{display:inline-block;width:14px;height:10px;vertical-align:middle;margin-right:4px}} .key.emph{{background:var(--blue)}} .key.ctx{{background:var(--deemph)}}
 footer{{margin-top:36px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--ink2);max-width:80ch}}
 footer h3{{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}}
 @media (max-width:720px){{.hero{{grid-template-columns:1fr}} .kpis{{grid-template-columns:1fr}} .kpi{{border-right:0;border-bottom:1px solid var(--border);padding-left:0}} h1{{font-size:28px}}}}
@@ -195,12 +220,12 @@ footer h3{{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:va
 </header>
 
 <div class="hero">
-  <div><div class="num">0.4<span style="font-size:28px;font-weight:500;color:var(--ink2)">th</span></div><div class="lbl">national percentile: {best_name}'s heart-failure mortality rate (6.0%)</div></div>
-  <p>Among roughly 3,000 U.S. hospitals reporting 30-day heart-failure mortality, {best_name} sits at the very bottom of the distribution — the best outcome in the Houston area, and among the best in the country.</p>
+  <div><div class="num">{hero_num}<span style="font-size:28px;font-weight:500;color:var(--ink2)">th</span></div><div class="lbl">national percentile: {hero_name}'s 30-day heart-failure mortality rate ({hero_score:.1f}%)</div></div>
+  <p>Among roughly 3,000 U.S. hospitals reporting 30-day heart-failure mortality, {hero_name} sits at the very bottom of the distribution — the best outcome in the Houston area, and among the best in the country.</p>
 </div>
 
 <div class="kpis">
-  <div class="kpi"><div class="v">10 of 11</div><div class="l">key measures on which more than half of Texas hospitals beat the national average</div></div>
+  <div class="kpi"><div class="v">{n_beat} of {n_meas}</div><div class="l">key measures on which more than half of Texas hospitals beat the national average</div></div>
   <div class="kpi"><div class="v">66</div><div class="l">Texas hospitals beat the state on pneumonia readmission yet fall below it on “would recommend”</div></div>
   <div class="kpi"><div class="v">90 / 168</div><div class="l">measures missing for over half of Texas hospitals — coverage is the first caveat</div></div>
 </div>
@@ -213,13 +238,13 @@ footer h3{{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:va
 
 <section>
   <h2>Readmissions against the benchmarks</h2>
-  <p class="sub">Every Texas hospital's pneumonia readmission rate on one axis. The benchmark lines are computed from the hospital-level data, not loaded from a separate table.</p>
+  <p class="sub">30-day pneumonia readmission rate for {len(r)} Texas hospitals on one axis, lower is better. Houston-area hospitals in blue, the rest of Texas in gray. The benchmark lines are computed from the hospital-level rows, not loaded from a separate table.</p>
   <div class="card">{divs['fig2']}</div>
 </section>
 
 <section>
   <h2>What patients said</h2>
-  <p class="sub">Ten HCAHPS survey questions, Houston-area hospitals only. Each cell is the share of patients who gave the best possible answer.</p>
+  <p class="sub">Ten HCAHPS survey questions for {len(h)} Houston-area hospitals. Each cell is the share of patients who gave the best possible answer; darker is better.</p>
   <div class="card">{divs['fig3']}</div>
 </section>
 
