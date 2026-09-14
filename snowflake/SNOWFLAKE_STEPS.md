@@ -12,10 +12,13 @@ Everything you need is in this folder: `setup.sql` (DDL) and `queries.sql` (four
    (the web UI).
 
 ## 2. Create the database and warehouse (~5 min)
-1. Left sidebar → **Projects → Worksheets** → "+ Worksheet".
-2. Paste the CREATE statements from `setup.sql` **section 1** and click the ▶ Run All button.
-   This makes warehouse `HQ_WH` (X-Small, auto-suspend 60s), database `HQ`, schema `PUBLIC`,
-   and the three empty tables.
+Newer Snowsight calls worksheets **Workspaces / SQL files** (the "SQL file" button on the Welcome
+screen, or Add new → SQL file in the left sidebar).
+1. Open a SQL file, paste ALL of `setup.sql`.
+2. ⚠️ The ▶ button runs only the statement under the cursor. To run the whole script: click in the
+   editor, **Ctrl+A**, then **Ctrl+Shift+Enter** (Run all). Every object is fully qualified
+   (HQ.PUBLIC.x), so it works even if the session shows "Choose database" / COMPUTE_WH.
+   This makes warehouse `HQ_WH` (X-Small, auto-suspend 60s), database `HQ`, and the three empty tables.
 
 ## 3. Load the three CSVs (~20 min)
 Files are in `C:\Users\james\projects\hospital-quality-dashboard\data\processed\`
@@ -33,8 +36,8 @@ For EACH of the three tables:
    "Date format: AUTO" or allowing empty values as NULL ("Replace empty with NULL").
 
 ## 4. Run the analyses (~15 min)
-Open a new worksheet, paste ALL of `queries.sql`, run statement by statement (Ctrl+Enter runs the
-statement under the cursor). The four queries mirror the PostgreSQL exercises but use Snowflake
+Open a new SQL file, paste ALL of `queries.sql`, run statement by statement (click inside a query,
+Ctrl+Enter). Tables are fully qualified, so no USE statements are needed. The four queries mirror the PostgreSQL exercises but use Snowflake
 idioms — `QUALIFY ROW_NUMBER()` instead of `DISTINCT ON`, `COUNT_IF` instead of `FILTER (WHERE)`.
 Expected shapes: Q1 ≈ 32 rows (Houston HF-mortality percentiles), Q2 = 11 rows (TX vs national),
 Q3 ≈ 20 rows, Q4 = 90 rows. If anything errors, copy the message to Claude.

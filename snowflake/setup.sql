@@ -1,5 +1,7 @@
 -- setup.sql — Snowflake DDL for the hospital-quality star schema (mirrors schema.sql on PostgreSQL).
--- Section 1: run everything below once, top to bottom, in a Snowsight worksheet.
+-- Run ALL of it at once: click into the editor, press Ctrl+A, then Ctrl+Shift+Enter (Run all).
+-- Every object below is fully qualified (HQ.PUBLIC.x), so the script works regardless of which
+-- database or warehouse the session happens to have selected.
 
 CREATE WAREHOUSE IF NOT EXISTS HQ_WH
   WAREHOUSE_SIZE = 'XSMALL'
@@ -8,11 +10,8 @@ CREATE WAREHOUSE IF NOT EXISTS HQ_WH
   INITIALLY_SUSPENDED = TRUE;
 
 CREATE DATABASE IF NOT EXISTS HQ;
-USE DATABASE HQ;
-USE SCHEMA PUBLIC;
-USE WAREHOUSE HQ_WH;
 
-CREATE OR REPLACE TABLE hospitals (
+CREATE OR REPLACE TABLE HQ.PUBLIC.hospitals (
     facility_id         VARCHAR PRIMARY KEY,
     facility_name       VARCHAR,
     address             VARCHAR,
@@ -28,7 +27,7 @@ CREATE OR REPLACE TABLE hospitals (
     is_houston_area     BOOLEAN
 );
 
-CREATE OR REPLACE TABLE measures (
+CREATE OR REPLACE TABLE HQ.PUBLIC.measures (
     measure_id          VARCHAR,
     domain              VARCHAR,
     measure_name        VARCHAR,
@@ -37,7 +36,7 @@ CREATE OR REPLACE TABLE measures (
     higher_is_better    BOOLEAN
 );
 
-CREATE OR REPLACE TABLE measure_values (
+CREATE OR REPLACE TABLE HQ.PUBLIC.measure_values (
     facility_id         VARCHAR,
     measure_id          VARCHAR,
     measure_name        VARCHAR,
@@ -52,8 +51,7 @@ CREATE OR REPLACE TABLE measure_values (
     period_end          DATE
 );
 
--- After loading the CSVs (SNOWFLAKE_STEPS.md section 3), sanity-check the row counts:
--- SELECT 'hospitals' t, COUNT(*) FROM hospitals
--- UNION ALL SELECT 'measures', COUNT(*) FROM measures
--- UNION ALL SELECT 'measure_values', COUNT(*) FROM measure_values;
--- Expect roughly: 5,419 / a few hundred / 799,104-ish (rows with scores + nulls).
+-- Sanity check (returns three rows; counts are 0 until the CSVs are loaded in the next step):
+SELECT 'hospitals' AS t, COUNT(*) AS n FROM HQ.PUBLIC.hospitals
+UNION ALL SELECT 'measures', COUNT(*) FROM HQ.PUBLIC.measures
+UNION ALL SELECT 'measure_values', COUNT(*) FROM HQ.PUBLIC.measure_values;
