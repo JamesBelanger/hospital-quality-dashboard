@@ -6,7 +6,7 @@ Outputs (data/processed/, gitignored):
   measures.csv        one row per measure (dimension) with domain + higher_is_better heuristic
   measure_values.csv  long/tidy fact table: facility_id, measure_id, score, denominator, lower/upper, period, value_type
 
-Design notes (interview talking points):
+Design notes:
   * Long/tidy fact table instead of one wide table per dataset: every CMS file has a different column set,
     but they all reduce to (facility, measure, period, value). One shape = one schema = one set of SQL.
   * Benchmarks (state / national) are NOT loaded from CMS's separate benchmark files on purpose —

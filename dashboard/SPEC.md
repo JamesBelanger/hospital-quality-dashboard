@@ -23,4 +23,4 @@
 
 **Color rules:** sequential blue for "higher is better," sequential orange for "lower is better," neutral gray for missing; benchmark lines in black (national) and dark teal (Texas). Direction icons (▲/▼) next to column headers so no one reads a readmission bar as "more is good."
 
-**Build order in Tableau Public (James, ~60–90 min with the step-by-step):** connect the four CSVs → build panel 1 as a highlight table → panel 2 as a dot plot with reference lines → panel 3 heatmap → panel 4 bar → assemble on one dashboard (1200×900) with the filter bar on the left → add the four annotations → publish → copy embed code + URL into `dashboard/PUBLISHED.md`.
+**Build order in Tableau Public (~60–90 min with the step-by-step):** connect the four CSVs → build panel 1 as a highlight table → panel 2 as a dot plot with reference lines → panel 3 heatmap → panel 4 bar → assemble on one dashboard (1200×900) with the filter bar on the left → add the four annotations → publish → copy embed code + URL into `dashboard/PUBLISHED.md`.

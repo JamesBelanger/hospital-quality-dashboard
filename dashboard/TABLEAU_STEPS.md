@@ -1,4 +1,4 @@
-# Tableau Public build — click-by-click (James, ~60–90 min)
+# Tableau Public build — click-by-click (~60–90 min)
 
 Files: `dashboard/extracts/scorecard.csv`, `benchmarks.csv`, `hcahps.csv`, `tx_vs_national.csv`. Open **Tableau Desktop Public Edition**, sign in.
 
@@ -23,6 +23,6 @@ Source: tx_vs_national. Rows: **measure_name** (alias to short labels). Columns:
 New Dashboard → Size: **Custom 1200 × 900**. Layout: left column (220 px) = title text object + a **filter bar** (from sheet 1, show filter for county & hospital_ownership; set them to *Apply to Worksheets → All using related data sources* — or simply per-sheet); right: sheet 1 on top (height ~40%), then sheets 2 and 3 side by side, sheet 4 bottom. Add 4 **Text objects** with the headline findings (copy from `SPEC.md`). Add a small footer text with the method + limitations sentence.
 
 ## 6. Publish (5 min)
-**File → Save to Tableau Public As…** → title "Houston Hospital Quality Explorer" → Save. Tableau opens the published page. Toggle **"Show sheets as tabs"** off, keep **"Allow access"** on so it's embeddable. Click **Share** → copy the **Embed Code** and the **Link**. Paste both into `dashboard/PUBLISHED.md` (create it) and tell Claude — that unlocks the site page.
+**File → Save to Tableau Public As…** → title "Houston Hospital Quality Explorer" → Save. Tableau opens the published page. Toggle **"Show sheets as tabs"** off, keep **"Allow access"** on so it's embeddable. Click **Share** → copy the **Embed Code** and the **Link**. Paste both into `dashboard/PUBLISHED.md` (create it).
 
 Tips: Ctrl+Z is generous; "Show Me" (top right) is fine for the first pass of any sheet; if a CSV won't load, open it once in Excel and re-save as CSV UTF-8.

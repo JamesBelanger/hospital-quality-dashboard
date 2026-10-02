@@ -1,4 +1,4 @@
-# SQL daily log - one line per day James ran + tweaked a query
+# SQL daily log
 
 How: open sql/daily/dayNN.sql -> paste into Supabase SQL Editor -> Run -> apply the ONE tweak in the header -> Run again -> tick the row below with what changed.
 

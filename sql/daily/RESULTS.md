@@ -1,6 +1,6 @@
-# Daily card results (pre-computed by Claude on 2026-08-26 so James's daily run is confirm + tick)
+# Daily card results — expected output
 
-For each card: the as-is row count, the tweaked row count, and what to notice. James still runs both in Supabase (that is the log); these are the answers to check against.
+For each card: the as-is row count, the row count after the header's parameter change, and what to notice.
 
 ## day01  (day01.sql)
 - tweak: `'READM_30_PN'` -> `'READM_30_HF'`

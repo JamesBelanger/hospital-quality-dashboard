@@ -1,10 +1,10 @@
 # SQL exercises — Houston Hospital Quality Explorer
 
-Twelve questions, each a real analyst task on this data. **James writes every query himself** in the Supabase SQL editor; Claude reviews (correctness → style → a cleaner variant) and only then it gets saved as `sql/NN_name.sql` with a header comment (question · approach · rows returned) and a dated line in `sql/LOG.md`. Do 1–2 per sitting; the point is the *daily* log, not speed.
+Twelve questions, each a real analyst task on this data. Each solution is saved as `sql/NN_name.sql` with a header comment (question · approach · rows returned).
 
 Tables: `hq.hospitals` (dim), `hq.measures` (dim), `hq.measure_values` (fact, long), view `hq.v_tx_latest` (latest period, Texas, non-null). Run `SET search_path TO hq;` first.
 
-**Measure IDs you'll use** (they're real CMS IDs — worth memorizing, they appear in every hospital-analytics job):
+**Measure IDs used** (real CMS IDs):
 - Readmissions (`unplanned_visits`, lower is better): **`READM_30_PN`** (pneumonia - best coverage: 3,758 hospitals / 258 TX / 34 Houston; use as the headline readmission metric), `READM_30_HF`, `READM_30_AMI`, `READM_30_COPD`, `READM_30_HIP_KNEE`. NOTE: `Hybrid_HWR` (hospital-wide) exists in the measures table but is 'Not Available' for EVERY hospital in this release - exercise 02 will find it; that is the point.
 - Mortality (`complications_deaths`, lower): `MORT_30_HF`, `MORT_30_AMI`, `MORT_30_PN`, `MORT_30_STK`; safety composite `PSI_90`
 - Infections (`hai`, lower; SIR = standardized infection ratio, 1.0 = national expectation): `HAI_1_SIR` (central-line), `HAI_2_SIR` (catheter UTI)

@@ -7,7 +7,7 @@ A public BI portfolio project: CMS Care Compare hospital-quality data (30-day re
 ## Layout
 - `etl/` — `download.py` (CMS provider-data pull), `clean.py` (tidy long table), `load.py` (→ Postgres)
 - `schema.sql` — star-ish schema: `hospitals`, `measures`, `measure_values`, `benchmarks`
-- `sql/` — `EXERCISES.md` (12 analyst-task questions), `NN_name.sql` (solved by James), `views.sql`, `LOG.md` (daily SQL log)
+- `sql/` — `EXERCISES.md` (12 analyst-task questions), `NN_name.sql` (solutions), `views.sql`, `LOG.md` (daily SQL log)
 - `dashboard/` — `SPEC.md`, `extracts/` (CSV feeds for Tableau Public), `web/index.html` (Plotly version)
 - `data/` — manifest of source datasets (raw CSVs are gitignored)
 
