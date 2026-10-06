@@ -73,7 +73,8 @@ def test_required_fields_and_status(qs):
             assert q.get("notes") and q.get("proposed_rewording"), q["id"]
         if q["type"] in ("out_of_scope", "unsafe"):
             assert q["expected"] == "refuse" and q["why"].strip(), q["id"]
-    assert {q["id"] for q in qs if q["status"] == "needs_james"} == {"jnum-08", "jnum-12"}
+    # jnum-08 and jnum-12 were held for a wording decision, then reworded with James's approval (see evals/README.md).
+    assert not [q["id"] for q in qs if q["status"] == "needs_james"]
 
 
 def test_numeric_sql_passes_guard(qs):

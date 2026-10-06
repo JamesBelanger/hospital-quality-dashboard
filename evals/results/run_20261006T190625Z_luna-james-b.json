@@ -1,0 +1,274 @@
+{
+  "config": {
+    "tag": "luna-james-b",
+    "model": "gpt-6-luna",
+    "judge_model": "gpt-6-sol",
+    "split": "all",
+    "types": null,
+    "questions_file": "evals\\questions_james.jsonl",
+    "only": "jnum-08,jnum-12",
+    "limit": null,
+    "workers": 3,
+    "retrieval_mode": "vector",
+    "prompt_versions": {
+      "plan": "plan_v4",
+      "schema": "schema_v2",
+      "answer": "answer_v4"
+    },
+    "started_utc": "2026-10-06T19:06:25+00:00",
+    "n_selected": 2,
+    "skipped_for_spend": [],
+    "max_spend": 1.0
+  },
+  "summary": {
+    "by_group": {
+      "numeric": {
+        "n": 2,
+        "k": 2
+      }
+    },
+    "overall": {
+      "n": 2,
+      "k": 2
+    },
+    "numeric": {
+      "row_recall_mean": 1.0,
+      "order_ok": {
+        "k": 0,
+        "n": 1
+      },
+      "answer_states_value": {
+        "k": 1,
+        "n": 1
+      },
+      "refused": 0,
+      "sql_error": 0,
+      "repaired": 0
+    },
+    "latency_ms": {
+      "median": 8506,
+      "p90": 8521
+    },
+    "cost_usd": {
+      "ask_total": 0.00225,
+      "judge_total": 0,
+      "total": 0.00225,
+      "ask_per_question": 0.001127
+    },
+    "tokens": {
+      "input": 18441,
+      "output": 819
+    },
+    "errors": []
+  },
+  "records": [
+    {
+      "id": "jnum-08",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "holdout2",
+      "difficulty": "medium",
+      "question": "What is the average 30-day pneumonia readmission rate for Texas hospitals that offer emergency services compared with those that do not? Exclude hospitals without a reported rate, show the number of hospitals in each group, and round the averages to two decimal places.",
+      "error": null,
+      "answer": {
+        "question": "What is the average 30-day pneumonia readmission rate for Texas hospitals that offer emergency services compared with those that do not? Exclude hospitals without a reported rate, show the number of hospitals in each group, and round the averages to two decimal places.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Among Texas hospitals with a reported rate, those without emergency services averaged 17.23 across 3 hospitals; those with emergency services averaged 17.32 across 255 hospitals.",
+        "sql": "SELECT h.emergency_services, COUNT(DISTINCT t.facility_id) AS hospital_count, ROUND(CAST(AVG(t.score) AS DECIMAL), 2) AS average_pneumonia_30_day_readmission_rate FROM hq.v_tx_latest AS t JOIN hq.hospitals AS h ON h.facility_id = t.facility_id WHERE UPPER(t.measure_id) = UPPER('READM_30_PN') AND t.score IS NOT NULL AND UPPER(h.emergency_services) IN ('YES', 'NO') GROUP BY h.emergency_services ORDER BY UPPER(h.emergency_services) LIMIT 200",
+        "columns": [
+          "emergency_services",
+          "hospital_count",
+          "average_pneumonia_30_day_readmission_rate"
+        ],
+        "rows": [
+          [
+            "No",
+            3,
+            17.23
+          ],
+          [
+            "Yes",
+            255,
+            17.32
+          ]
+        ],
+        "row_count": 2,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8445,
+            "output_tokens": 413,
+            "cost_usd": 0.001051,
+            "latency_ms": 5817,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 804,
+            "output_tokens": 55,
+            "cost_usd": 0.00010790000000000001,
+            "latency_ms": 1645,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9249,
+        "total_output_tokens": 468,
+        "total_cost_usd": 0.001159,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 5817,
+          "sql_ms": 1027,
+          "answer_ms": 1645,
+          "total_ms": 8491
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 2
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 8491,
+      "step_ms": {
+        "plan_ms": 5817,
+        "sql_ms": 1027,
+        "answer_ms": 1645,
+        "total_ms": 8491
+      },
+      "cost_usd": 0.001159,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9249,
+      "output_tokens": 468,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": false,
+      "matched": 2,
+      "truth_rows": 2,
+      "gen_rows": 2,
+      "reason": null,
+      "truth_ms": 128
+    },
+    {
+      "id": "jnum-12",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "holdout2",
+      "difficulty": "hard",
+      "question": "What percentage of all five-star hospitals in the data, including DC and the territories, are in Texas? Show the Texas count, the total count, and the percentage rounded to two decimal places.",
+      "error": null,
+      "answer": {
+        "question": "What percentage of all five-star hospitals in the data, including DC and the territories, are in Texas? Show the Texas count, the total count, and the percentage rounded to two decimal places.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "There are 29 five-star hospitals in Texas out of 384 five-star hospitals total, including DC and the territories. Texas accounts for 7.55%.",
+        "sql": "SELECT COUNT(*) FILTER(WHERE overall_rating = 5 AND is_texas) AS texas_five_star_hospital_count, COUNT(*) FILTER(WHERE overall_rating = 5) AS total_five_star_hospital_count, ROUND(CAST(100.0 * COUNT(*) FILTER(WHERE overall_rating = 5 AND is_texas) / NULLIF(COUNT(*) FILTER(WHERE overall_rating = 5), 0) AS DECIMAL), 2) AS texas_percentage FROM hq.hospitals LIMIT 200",
+        "columns": [
+          "texas_five_star_hospital_count",
+          "total_five_star_hospital_count",
+          "texas_percentage"
+        ],
+        "rows": [
+          [
+            29,
+            384,
+            7.55
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8433,
+            "output_tokens": 299,
+            "cost_usd": 0.0009928,
+            "latency_ms": 5898,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 759,
+            "output_tokens": 52,
+            "cost_usd": 0.00010190000000000001,
+            "latency_ms": 1575,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9192,
+        "total_output_tokens": 351,
+        "total_cost_usd": 0.001095,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 5898,
+          "sql_ms": 1046,
+          "answer_ms": 1575,
+          "total_ms": 8521
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 8521,
+      "step_ms": {
+        "plan_ms": 5898,
+        "sql_ms": 1046,
+        "answer_ms": 1575,
+        "total_ms": 8521
+      },
+      "cost_usd": 0.001095,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9192,
+      "output_tokens": 351,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 176,
+      "answer_states_value": true
+    }
+  ]
+}

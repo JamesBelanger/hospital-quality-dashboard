@@ -137,25 +137,21 @@ NUMERIC = [
       notes="Same ask as num-24 (HF minus PN gap, Texas) except top 5 instead of 10. 219 Texas hospitals have both. Four hospitals tie at 6.6; "
             "the name tie-break puts three of them in the top 5."),
     N("jnum-08", "medium",
-      "What is the average 30-day COPD readmission rate for Texas hospitals that offer emergency services compared with those "
-      "that do not? Exclude hospitals without a reported rate, show the number of hospitals in each group, and round the "
-      "averages to two decimal places.",
+      "What is the average 30-day pneumonia readmission rate for Texas hospitals that offer emergency services compared with those "
+      "that do not? Exclude hospitals without a reported rate, show the number of hospitals in each group, and round the averages "
+      "to two decimal places.",
       """
-      SELECT h.emergency_services, count(v.score) AS hospitals_with_rate, round(avg(v.score), 2) AS avg_readm_30_copd_pct
-      FROM hq.hospitals h LEFT JOIN hq.measure_values v ON v.facility_id = h.facility_id AND v.measure_id = 'READM_30_COPD'
-      WHERE h.state = 'TX'
+      SELECT h.emergency_services, count(*) AS hospitals_with_rate, round(avg(v.score), 2) AS avg_readm_30_pn_pct
+      FROM hq.hospitals h JOIN hq.measure_values v ON v.facility_id = h.facility_id AND v.measure_id = 'READM_30_PN'
+      WHERE h.state = 'TX' AND v.score IS NOT NULL
       GROUP BY h.emergency_services
       ORDER BY h.emergency_services DESC
       """,
-      "emergency_services", ["hospitals_with_rate", "avg_readm_30_copd_pct"], ["READM_30_COPD"], [],
-      status="needs_james",
-      notes="PROBLEM: no Texas hospital without emergency services has a reported COPD readmission rate (77 hospitals, 22 with a row, 0 with a score), "
-            "so the comparison is empty. Reading A (rows with a rate only): one row, Yes = 198 hospitals, 19.85. Reading B (both groups listed): "
-            "Yes = 198 / 19.85 and No = 0 / no average (the draft truth_sql here). Which row set is correct is a matter of taste and the grader needs one. "
-            "For comparison, the pneumonia rate has both groups (Yes 255, 17.32; No 3, 17.23) and heart failure too (Yes 222, 21.25; No 2, 21.75).",
-      proposed_rewording="What is the average 30-day pneumonia readmission rate for Texas hospitals that offer emergency services compared with those "
-                         "that do not? Exclude hospitals without a reported rate, show the number of hospitals in each group, and round the averages "
-                         "to two decimal places."),
+      "emergency_services", ["hospitals_with_rate", "avg_readm_30_pn_pct"], ["READM_30_PN"], [],
+      notes="REWORDED 2026-10-06 with James's approval (COPD -> pneumonia): as first approved, the question compared a group that does not exist "
+            "(no Texas hospital without emergency services has a reported COPD readmission rate). The no-emergency-services group has only "
+            "3 hospitals, so its average is thin. Finalized after the first run of the other 23 questions; no service output for this question "
+            "had been seen."),
     N("jnum-09", "medium",
       "Which five Texas counties have the most hospitals with an overall rating of four or five stars? Show each county's "
       "count, exclude hospitals without a reported county, and break ties alphabetically by county name.",
@@ -199,21 +195,19 @@ NUMERIC = [
       "county", ["overall_rating", "rated_hospitals"], [], [],
       notes="Only 19 Texas counties have at least three rated hospitals, so the 'first 20' limit returns 19 rows."),
     N("jnum-12", "hard",
-      "What percentage of all five-star hospitals nationwide are in Texas? Show the Texas count, the nationwide count, and the "
-      "percentage rounded to two decimal places.",
+      "What percentage of all five-star hospitals in the data, including DC and the territories, are in Texas? Show the Texas "
+      "count, the total count, and the percentage rounded to two decimal places.",
       """
       SELECT count(*) FILTER (WHERE state = 'TX') AS texas_five_star,
-             count(*) AS nationwide_five_star,
+             count(*) AS total_five_star,
              round(100.0 * count(*) FILTER (WHERE state = 'TX') / count(*), 2) AS pct_in_texas
       FROM hq.hospitals
       WHERE overall_rating = 5
       """,
-      None, ["texas_five_star", "nationwide_five_star", "pct_in_texas"], [], [],
-      status="needs_james",
-      notes="PROBLEM: 'nationwide' is ambiguous here. All rows in the data (50 states + DC + territories): 29 of 384 = 7.55%. 50 states only: "
-            "29 of 383 = 7.57% (the one extra five-star hospital is Sibley Memorial in DC). The draft truth_sql is the all-rows reading.",
-      proposed_rewording="What percentage of all five-star hospitals in the data, including DC and the territories, are in Texas? Show the Texas "
-                         "count, the total count, and the percentage rounded to two decimal places."),
+      None, ["texas_five_star", "total_five_star", "pct_in_texas"], [], [],
+      notes="REWORDED 2026-10-06 with James's approval: 'nationwide' was ambiguous (29 of 384 = 7.55% with DC and the territories; 29 of 383 = "
+            "7.57% for the 50 states; the difference is one hospital in DC). Finalized after the first run of the other 23 questions; no "
+            "service output for this question had been seen."),
 ]
 
 
