@@ -86,11 +86,16 @@ if ($GitHub) {
     }
     $scope = "/subscriptions/$sub/resourceGroups/$ResourceGroup"   # this resource group only
     Az role assignment create --assignee $clientId --role Contributor --scope $scope --only-show-errors --output none
-    $cred = @{ name = "github-$Branch"; issuer = "https://token.actions.githubusercontent.com"
-               subject = "repo:${Repo}:ref:refs/heads/$Branch"; audiences = @("api://AzureADTokenExchange") }
+    # GitHub's sign-in token names the repository with its permanent ids as well as its name
+    # ("repo:Owner@123/name@456:ref:..."). The first deploy was refused because this used the name-only form.
+    $ownerId = gh api "repos/$Repo" --jq .owner.id
+    $repoId = gh api "repos/$Repo" --jq .id
+    $owner, $name = $Repo.Split("/")
+    $cred = @{ name = "github-$Branch-ids"; issuer = "https://token.actions.githubusercontent.com"
+               subject = "repo:${owner}@${ownerId}/${name}@${repoId}:ref:refs/heads/$Branch"; audiences = @("api://AzureADTokenExchange") }
     $credFile = Join-Path $env:TEMP "hq-ask-federated.json"
     $cred | ConvertTo-Json | Set-Content -Encoding ascii $credFile
-    $have = & $AzPy -IBm azure.cli ad app federated-credential list --id $clientId --query "[?name=='github-$Branch'].name" -o tsv
+    $have = & $AzPy -IBm azure.cli ad app federated-credential list --id $clientId --query "[?name=='github-$Branch-ids'].name" -o tsv
     if (-not $have) { Az ad app federated-credential create --id $clientId --parameters "@$credFile" --only-show-errors --output none }
     Remove-Item $credFile
 
