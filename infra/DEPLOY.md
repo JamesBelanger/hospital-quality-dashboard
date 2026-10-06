@@ -71,9 +71,30 @@ Created by `infra/setup_reader_role.py` (re-running it rotates all three passwor
 |---|---|---|---|---|
 | `hq_reader` | `HQ_READER_URL` | SELECT on schema `hq` (model-written SQL runs here; read-only transactions) | write anything; read `hq_docs`, `hq_app`, other schemas | 5 s |
 | `hq_service` | `HQ_SERVICE_URL` | SELECT on `hq_docs.chunks` (documentation retrieval, pgvector) | write anything; read `hq` or `hq_app` | 10 s |
-| `hq_logger` | `HQ_LOG_URL` | INSERT and SELECT on `hq_app.request_log` | UPDATE, DELETE, TRUNCATE, create or drop; read `hq` or `hq_docs` | 5 s |
+| `hq_logger` | `HQ_LOG_URL` | INSERT and SELECT on `hq_app.request_log` and `hq_app.alert_log` | UPDATE, DELETE, TRUNCATE, create or drop; read `hq` or `hq_docs` | 5 s |
 
-Not yet covered: alerts. Nothing pages anyone when the budget is hit or the error rate rises; `/status` has to be looked at.
+## Alerts
+`ops/alert_check.py` runs from `.github/workflows/alert.yml` (cron every 30 minutes, plus a manual run). It runs outside the service, so it works when the service is down or scaled to zero. It reads `hq_app.request_log` as `hq_logger` and checks:
+
+| Rule | Fires when | At most once per |
+|---|---|---|
+| `budget_80` | today's (UTC) spend is at least 80% of `HQ_DAILY_BUDGET_USD` | UTC day |
+| `budget_100` | today's spend is at least the daily budget (the service is refusing) | UTC day |
+| `error_spike` | in the last 60 minutes at least 3 requests failed (`error` not null) and at least 25% of requests | 6-hour UTC block (00, 06, 12, 18) |
+| `check_failed` | the check cannot reach the database or the query fails | every run |
+
+Thresholds are environment variables (defaults above): `HQ_DAILY_BUDGET_USD`, `ALERT_BUDGET_WARN_FRACTION`, `ALERT_ERROR_MIN_COUNT`, `ALERT_ERROR_MIN_RATE`, `ALERT_ERROR_WINDOW_MIN`. In the workflow the budget comes from the repository variable `HQ_DAILY_BUDGET_USD` (default 0.50): **keep it equal to the value set on the Container App**, or the alert and the cap disagree.
+
+- **Repeat suppression.** A true rule tries to insert `(alert_key, period)` into `hq_app.alert_log` (primary key on those two columns); only a row that was really inserted is a new alert. `hq_logger` has INSERT and SELECT on that table and cannot update or delete. `infra/setup_reader_role.py` creates it; to clear a row by hand, delete it as the owner.
+- **What happens on a new alert.** One plain-text email (only counts, dollars, the release id, the time window and what to do; never question text or client hashes), the same text in the job summary and log, and the run exits 1, so GitHub's own failed-run notification is a second channel that needs no secret. If SMTP fails the alert is still logged and the run still fails. If spend passes both budget thresholds between two checks, both are recorded but only the "reached" alert is sent.
+- **Test it.** Actions -> ask-service-alerts -> Run workflow -> tick `test`. It sends a synthetic alert through the whole path (the run will show as failed; that is expected). Locally: `python -m ops.alert_check --dry-run` evaluates and prints without writing or sending; `--test` fires the synthetic alert.
+- **Secrets by name.** `HQ_LOG_URL`, `ALERT_SMTP_USER`, `ALERT_SMTP_PASSWORD` (a Gmail app password), `ALERT_TO`. Optional repository variables: `HQ_DAILY_BUDGET_USD`, `ALERT_STATUS_URL`. Without the three SMTP secrets the check still runs and fails the run on a new alert, but sends no email.
+
+Limits, stated plainly:
+- It checks every 30 minutes at best. GitHub can delay or skip scheduled runs, and scheduled workflows run only from the default branch.
+- GitHub disables scheduled workflows in a repository with no activity for 60 days; re-enable it under Actions.
+- Requests rejected for a rate limit (429) or a failed limit check (503) are not logged, so a flood of them is not detected.
+- An alert is a notification. The spend cap in the service is what stops spending, and the budget alert can arrive up to half an hour after the cap is hit.
 
 ## Drill results (2026-10-06)
 Steps are in `infra/ROLLBACK_DRILL.md`.
