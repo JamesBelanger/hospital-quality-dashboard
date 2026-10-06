@@ -7,6 +7,9 @@ on:
   push:
     branches: [master]
     paths: ["service/**", "evals/**", "Dockerfile", ".github/workflows/deploy.yml"]
+  pull_request:   # the gate runs on proposed changes; nothing is built or deployed from a pull request
+    branches: [master]
+    paths: ["service/**", "evals/**", "Dockerfile", ".github/workflows/deploy.yml"]
   workflow_dispatch:
     inputs:
       skip_eval:
@@ -55,6 +58,7 @@ jobs:
 
   build-and-deploy:
     needs: test-and-evaluate
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
