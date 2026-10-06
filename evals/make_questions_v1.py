@@ -1000,7 +1000,7 @@ def check_schema(q: dict, fails: list) -> bool:
     if q.get("difficulty") not in ("easy", "medium", "hard"):
         fails.append(f"{q.get('id')}: bad difficulty {q.get('difficulty')!r}")
         ok = False
-    if q.get("split") not in ("dev", "test"):
+    if q.get("split") not in ("dev", "test", "holdout", "holdout2"):
         fails.append(f"{q.get('id')}: bad split {q.get('split')!r}")
         ok = False
     if q.get("type") in ("definition_unanswerable", "out_of_scope", "unsafe") and q.get("expected") != "refuse":
