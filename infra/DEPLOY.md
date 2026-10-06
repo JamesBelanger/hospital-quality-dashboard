@@ -1,6 +1,15 @@
 # Deploying the "Ask the data" service
 
-Status: written 2026-10-06, **not yet run**. Treat every step as untested until the first deploy.
+Status: **live since 2026-10-06** at https://hq-ask.victoriousdesert-e769edf4.southcentralus.azurecontainerapps.io (first release `924c9e9`).
+
+## What broke on the first deploy
+| Symptom | Cause | Fix |
+|---|---|---|
+| `azure_bootstrap.ps1` stopped at "container app" | `az containerapp show` on a missing app writes to stderr, which Windows PowerShell treats as fatal | Use `containerapp list` for the existence check |
+| Evaluation gate scored 0/63, every question raised `UnicodeEncodeError` in milliseconds | Secrets were piped into `gh secret set`; Windows PowerShell prepends a byte-order mark and appends CRLF, so every secret was corrupted | Pass the value with `--body` |
+| `azure/login` failed with AADSTS700213 | GitHub's OIDC subject now carries ids: `repo:Owner@<id>/name@<id>:ref:...`; the federated credential used the name-only form | Build the subject from `gh api repos/<repo>` ids |
+
+The gate did its job in the second case: a broken configuration could not ship.
 
 ## Shape
 - **Azure Container Apps**, resource group `rg-hq-ask`, South Central US. One app, `hq-ask`.
@@ -32,7 +41,7 @@ Every deploy is a new revision tagged with its commit.
 `az group delete --name rg-hq-ask` removes everything Azure-side. Delete the app registration `github-hq-ask-deploy` separately.
 
 ## Operating it
-**Nothing in this section has been run in Azure yet.** The code was exercised locally in a container against the real database; the Azure commands below are written from the CLI reference and are untested.
+`/health`, `/ask` and `/status` are verified on the live service. The `az containerapp update --set-env-vars` commands below (prompt roll-back, limits) are written from the CLI reference and have **not** been run yet.
 
 The container keeps no state, so everything it needs to remember is a row in `hq_app.request_log` (Supabase). The daily budget, the per-client and global rate limits and `/status` are all computed from that table. If the table cannot be read, `/ask` answers 503 and does not call the model (it will not run unmetered).
 
