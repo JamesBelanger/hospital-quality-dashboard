@@ -1,0 +1,93 @@
+# Test -> evaluate -> build -> deploy for the "Ask the data" service.
+# A release goes out only if the evaluation set scores no worse than evals/baseline.json
+# (the gate allows one question of noise per question type).
+name: ask-service
+
+on:
+  push:
+    branches: [master]
+    paths: ["service/**", "evals/**", "Dockerfile", ".github/workflows/deploy.yml"]
+  workflow_dispatch:
+    inputs:
+      skip_eval:
+        description: "Deploy without running the evaluation gate (use only to roll back)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write   # short-lived Azure sign-in (OpenID Connect); no Azure password is stored here
+
+env:
+  IMAGE: ghcr.io/jamesbelanger/hospital-quality-ask
+  RESOURCE_GROUP: rg-hq-ask
+  APP: hq-ask
+
+jobs:
+  test-and-evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: service/requirements.txt
+      - run: pip install -r service/requirements.txt pytest httpx
+      - name: Unit and safety tests (offline; tests that need the live database skip here)
+        run: python -m pytest tests -q
+      - name: Evaluation gate (test split vs. baseline)
+        if: ${{ !inputs.skip_eval }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          HQ_READER_URL: ${{ secrets.HQ_READER_URL }}
+          HQ_SERVICE_URL: ${{ secrets.HQ_SERVICE_URL }}
+        run: python -m evals.run --split test --tag ci-${{ github.sha }} --compare-baseline
+      - name: Keep the evaluation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-report-${{ github.sha }}
+          path: evals/results/run_*ci-*
+          if-no-files-found: ignore
+
+  build-and-deploy:
+    needs: test-and-evaluate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:${{ github.sha }}
+            ${{ env.IMAGE }}:latest
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Deploy this commit
+        run: |
+          az config set extension.use_dynamic_install=yes_without_prompt --only-show-errors
+          az containerapp update --name "$APP" --resource-group "$RESOURCE_GROUP" \
+            --image "$IMAGE:${{ github.sha }}" \
+            --set-env-vars "HQ_RELEASE=${{ github.sha }}" --only-show-errors --output none
+      - name: Smoke test (the app wakes from zero, so allow a cold start)
+        run: |
+          url="https://${{ vars.HQ_SERVICE_FQDN }}"
+          for i in $(seq 1 12); do
+            body=$(curl -fsS -m 20 "$url/health" || true)
+            echo "$body" | grep -q "${{ github.sha }}" && { echo "healthy: $body"; exit 0; }
+            sleep 10
+          done
+          echo "service did not report release ${{ github.sha }}"; exit 1

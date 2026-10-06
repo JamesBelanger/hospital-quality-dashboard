@@ -7,3 +7,8 @@ data/raw/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+.venv/
+__pycache__/
+.pytest_cache/
+docs_index/raw/

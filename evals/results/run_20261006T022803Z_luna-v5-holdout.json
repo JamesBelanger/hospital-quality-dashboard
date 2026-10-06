@@ -1,0 +1,3588 @@
+{
+  "config": {
+    "tag": "luna-v5-holdout",
+    "model": "gpt-6-luna",
+    "judge_model": "gpt-6-sol",
+    "split": "all",
+    "types": null,
+    "questions_file": "evals\\questions_holdout_v1.jsonl",
+    "only": null,
+    "limit": null,
+    "workers": 3,
+    "retrieval_mode": "vector",
+    "prompt_versions": {
+      "plan": "plan_v4",
+      "schema": "schema_v2",
+      "answer": "answer_v4"
+    },
+    "started_utc": "2026-10-06T02:28:03+00:00",
+    "n_selected": 26,
+    "skipped_for_spend": [],
+    "max_spend": 0.3
+  },
+  "summary": {
+    "by_group": {
+      "numeric": {
+        "n": 8,
+        "k": 8
+      },
+      "definition": {
+        "n": 15,
+        "k": 11
+      },
+      "unanswerable": {
+        "n": 3,
+        "k": 3
+      }
+    },
+    "overall": {
+      "n": 26,
+      "k": 22
+    },
+    "numeric": {
+      "row_recall_mean": 1.0,
+      "order_ok": {
+        "k": 5,
+        "n": 5
+      },
+      "answer_states_value": {
+        "k": 3,
+        "n": 3
+      },
+      "refused": 0,
+      "sql_error": 0,
+      "repaired": 0
+    },
+    "definition": {
+      "retrieval_hit": {
+        "k": 12,
+        "n": 15
+      },
+      "doc_hit": {
+        "k": 13,
+        "n": 15
+      },
+      "cited_expected": {
+        "k": 12,
+        "n": 15
+      },
+      "refused": 2,
+      "points_covered_mean": 0.7778
+    },
+    "refusal_stage": {
+      "plan": 2,
+      "after plan: answer step": 1
+    },
+    "latency_ms": {
+      "median": 8924,
+      "p90": 15137
+    },
+    "cost_usd": {
+      "ask_total": 0.03384,
+      "judge_total": 0.02394,
+      "total": 0.05778,
+      "ask_per_question": 0.001302
+    },
+    "tokens": {
+      "input": 276092,
+      "output": 12542
+    },
+    "errors": []
+  },
+  "records": [
+    {
+      "id": "hnum-01",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "holdout",
+      "difficulty": "easy",
+      "question": "Across the whole country, how many hospitals earned the top overall rating of 5 stars?",
+      "error": null,
+      "answer": {
+        "question": "Across the whole country, how many hospitals earned the top overall rating of 5 stars?",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Across the country, 384 hospitals earned an overall rating of 5 stars.",
+        "sql": "SELECT COUNT(*) AS hospitals_with_5_star_overall_rating FROM hq.hospitals WHERE overall_rating = 5 LIMIT 200",
+        "columns": [
+          "hospitals_with_5_star_overall_rating"
+        ],
+        "rows": [
+          [
+            384
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8412,
+            "output_tokens": 155,
+            "cost_usd": 0.0009187,
+            "latency_ms": 3903,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 640,
+            "output_tokens": 35,
+            "cost_usd": 8.15e-05,
+            "latency_ms": 1234,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9052,
+        "total_output_tokens": 190,
+        "total_cost_usd": 0.001,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3903,
+          "sql_ms": 960,
+          "answer_ms": 1234,
+          "total_ms": 6099
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 6099,
+      "step_ms": {
+        "plan_ms": 3903,
+        "sql_ms": 960,
+        "answer_ms": 1234,
+        "total_ms": 6099
+      },
+      "cost_usd": 0.001,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9052,
+      "output_tokens": 190,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 192,
+      "answer_states_value": true
+    },
+    {
+      "id": "hnum-02",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "holdout",
+      "difficulty": "easy",
+      "question": "How many hospitals does the data list for Cook County, Illinois?",
+      "error": null,
+      "answer": {
+        "question": "How many hospitals does the data list for Cook County, Illinois?",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The data lists 56 hospitals for Cook County, Illinois.",
+        "sql": "SELECT COUNT(*) AS hospital_count FROM hq.hospitals WHERE UPPER(county) = UPPER('Cook') AND state = 'IL' LIMIT 200",
+        "columns": [
+          "hospital_count"
+        ],
+        "rows": [
+          [
+            56
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8407,
+            "output_tokens": 170,
+            "cost_usd": 0.0009257,
+            "latency_ms": 4352,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 633,
+            "output_tokens": 31,
+            "cost_usd": 7.880000000000002e-05,
+            "latency_ms": 2019,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9040,
+        "total_output_tokens": 201,
+        "total_cost_usd": 0.001004,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4352,
+          "sql_ms": 1022,
+          "answer_ms": 2019,
+          "total_ms": 7396
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 7396,
+      "step_ms": {
+        "plan_ms": 4352,
+        "sql_ms": 1022,
+        "answer_ms": 2019,
+        "total_ms": 7396
+      },
+      "cost_usd": 0.001004,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9040,
+      "output_tokens": 201,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 146,
+      "answer_states_value": true
+    },
+    {
+      "id": "hnum-03",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "holdout",
+      "difficulty": "easy",
+      "question": "Nationwide, how many hospitals report a pneumonia readmission rate under 15 percent within 30 days?",
+      "error": null,
+      "answer": {
+        "question": "Nationwide, how many hospitals report a pneumonia readmission rate under 15 percent within 30 days?",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Nationwide, 22 hospitals reported a pneumonia readmission rate under 15 percent within 30 days.",
+        "sql": "WITH latest AS (SELECT mv.facility_id, mv.score, ROW_NUMBER() OVER (PARTITION BY mv.facility_id, mv.measure_id ORDER BY mv.period_end DESC NULLS LAST) AS rn FROM hq.measure_values AS mv WHERE UPPER(mv.measure_id) = UPPER('READM_30_PN') AND mv.score IS NOT NULL) SELECT COUNT(DISTINCT h.facility_id) AS hospitals_under_15_percent FROM latest AS l JOIN hq.hospitals AS h ON h.facility_id = l.facility_id WHERE l.rn = 1 AND l.score < 15 LIMIT 200",
+        "columns": [
+          "hospitals_under_15_percent"
+        ],
+        "rows": [
+          [
+            22
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8414,
+            "output_tokens": 422,
+            "cost_usd": 0.0010524,
+            "latency_ms": 6101,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 740,
+            "output_tokens": 40,
+            "cost_usd": 9.4e-05,
+            "latency_ms": 1977,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9154,
+        "total_output_tokens": 462,
+        "total_cost_usd": 0.001146,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6101,
+          "sql_ms": 2082,
+          "answer_ms": 1977,
+          "total_ms": 10162
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 10162,
+      "step_ms": {
+        "plan_ms": 6101,
+        "sql_ms": 2082,
+        "answer_ms": 1977,
+        "total_ms": 10162
+      },
+      "cost_usd": 0.001146,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9154,
+      "output_tokens": 462,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 132,
+      "answer_states_value": true
+    },
+    {
+      "id": "hnum-04",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "Which five U.S. states or territories have the highest percentage of their rated hospitals at 5 stars, counting only those with at least 25 hospitals that have an overall star rating? Give the state code, the number of rated hospitals, the number with 5 stars and the percentage (1 decimal), highest first. Break ties by state abbreviation.",
+      "error": null,
+      "answer": {
+        "question": "Which five U.S. states or territories have the highest percentage of their rated hospitals at 5 stars, counting only those with at least 25 hospitals that have an overall star rating? Give the state code, the number of rated hospitals, the number with 5 stars and the percentage (1 decimal), highest first. Break ties by state abbreviation.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The five states with the highest percentage of rated hospitals at 5 stars, among those with at least 25 rated hospitals, are:\n\n| State | Rated hospitals | 5-star hospitals | 5-star percentage |\n|---|---:|---:|---:|\n| UT | 29 | 15 | 51.7% |\n| CO | 49 | 14 | 28.6% |\n| WI | 86 | 21 | 24.4% |\n| MN | 56 | 13 | 23.2% |\n| MA | 54 | 9 | 16.7% |",
+        "sql": "SELECT h.state AS state_code, COUNT(*) AS rated_hospitals, COUNT(*) FILTER(WHERE h.overall_rating = 5) AS five_star_hospitals, ROUND(CAST((COUNT(*) FILTER(WHERE h.overall_rating = 5) * 100.0 / COUNT(*)) AS DECIMAL), 1) AS five_star_percentage FROM hq.hospitals AS h WHERE h.overall_rating IS NOT NULL GROUP BY h.state HAVING COUNT(*) >= 25 ORDER BY five_star_percentage DESC, h.state ASC LIMIT 5",
+        "columns": [
+          "state_code",
+          "rated_hospitals",
+          "five_star_hospitals",
+          "five_star_percentage"
+        ],
+        "rows": [
+          [
+            "UT",
+            29,
+            15,
+            51.7
+          ],
+          [
+            "CO",
+            49,
+            14,
+            28.6
+          ],
+          [
+            "WI",
+            86,
+            21,
+            24.4
+          ],
+          [
+            "MN",
+            56,
+            13,
+            23.2
+          ],
+          [
+            "MA",
+            54,
+            9,
+            16.7
+          ]
+        ],
+        "row_count": 5,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8464,
+            "output_tokens": 324,
+            "cost_usd": 0.0010084,
+            "latency_ms": 4516,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 854,
+            "output_tokens": 158,
+            "cost_usd": 0.0001644,
+            "latency_ms": 2180,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9318,
+        "total_output_tokens": 482,
+        "total_cost_usd": 0.001173,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4516,
+          "sql_ms": 903,
+          "answer_ms": 2180,
+          "total_ms": 7601
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 5
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 7601,
+      "step_ms": {
+        "plan_ms": 4516,
+        "sql_ms": 903,
+        "answer_ms": 2180,
+        "total_ms": 7601
+      },
+      "cost_usd": 0.001173,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9318,
+      "output_tokens": 482,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 5,
+      "truth_rows": 5,
+      "gen_rows": 5,
+      "reason": null,
+      "truth_ms": 142
+    },
+    {
+      "id": "hnum-05",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "List the hospitals in Philadelphia, Pennsylvania that have a 30-day heart failure readmission rate, with the rate and the number of eligible discharges behind it, lowest rate first. Break ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "List the hospitals in Philadelphia, Pennsylvania that have a 30-day heart failure readmission rate, with the rate and the number of eligible discharges behind it, lowest rate first. Break ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "30-day heart failure readmission rates, lowest first:\n- PENN PRESBYTERIAN MEDICAL CENTER \u2014 19.0; 855 eligible discharges\n- HOSPITAL OF UNIV OF PENNSYLVANIA \u2014 19.7; 1,025 eligible discharges\n- PENNSYLVANIA HOSPITAL \u2014 20.8; 655 eligible discharges\n- JEFFERSON EINSTEIN PHILADELPHIA HOSPITAL \u2014 20.9; 867 eligible discharges\n- THOMAS JEFFERSON UNIVERSITY HOSPITAL \u2014 21.0; 1,075 eligible discharges\n- PHILADELPHIA VA MEDICAL CENTER \u2014 21.1; 458 eligible discharges\n- TEMPLE UNIVERSITY HOSPITAL \u2014 21.3; 1,587 eligible discharges\n- NAZARETH HOSPITAL \u2014 22.2; 362 eligible discharges\n- TEMPLE HEALTH - CHESTNUT HILL HOSPITAL \u2014 22.5; 511 eligible discharges\n- JEFFERSON HEALTH- NORTHEAST \u2014 23.2; 1,477 eligible discharges\n- ROXBOROUGH MEMORIAL HOSPITAL \u2014 24.0; 214 eligible discharges",
+        "sql": "WITH ranked_values AS (SELECT h.facility_name, mv.measure_id, mv.measure_name, mv.score, mv.denominator, ROW_NUMBER() OVER (PARTITION BY mv.facility_id, mv.measure_id ORDER BY mv.period_end DESC NULLS LAST) AS period_rank FROM hq.measure_values AS mv JOIN hq.hospitals AS h ON h.facility_id = mv.facility_id WHERE UPPER(h.city) = UPPER('Philadelphia') AND UPPER(h.state) = UPPER('PA') AND UPPER(mv.measure_id) = UPPER('READM_30_HF')) SELECT facility_name AS hospital_name, measure_id, measure_name, score AS readmission_rate, denominator AS eligible_discharges FROM ranked_values WHERE period_rank = 1 AND score IS NOT NULL ORDER BY readmission_rate ASC, hospital_name ASC LIMIT 200",
+        "columns": [
+          "hospital_name",
+          "measure_id",
+          "measure_name",
+          "readmission_rate",
+          "eligible_discharges"
+        ],
+        "rows": [
+          [
+            "PENN PRESBYTERIAN MEDICAL CENTER",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            19.0,
+            855.0
+          ],
+          [
+            "HOSPITAL OF UNIV OF PENNSYLVANIA",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            19.7,
+            1025.0
+          ],
+          [
+            "PENNSYLVANIA HOSPITAL",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            20.8,
+            655.0
+          ],
+          [
+            "JEFFERSON EINSTEIN PHILADELPHIA HOSPITAL",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            20.9,
+            867.0
+          ],
+          [
+            "THOMAS JEFFERSON UNIVERSITY HOSPITAL",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            21.0,
+            1075.0
+          ],
+          [
+            "PHILADELPHIA VA MEDICAL CENTER",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            21.1,
+            458.0
+          ],
+          [
+            "TEMPLE UNIVERSITY HOSPITAL",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            21.3,
+            1587.0
+          ],
+          [
+            "NAZARETH HOSPITAL",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            22.2,
+            362.0
+          ],
+          [
+            "TEMPLE HEALTH - CHESTNUT HILL HOSPITAL",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            22.5,
+            511.0
+          ],
+          [
+            "JEFFERSON HEALTH- NORTHEAST",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            23.2,
+            1477.0
+          ],
+          [
+            "ROXBOROUGH MEMORIAL HOSPITAL",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            24.0,
+            214.0
+          ]
+        ],
+        "row_count": 11,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8436,
+            "output_tokens": 552,
+            "cost_usd": 0.0011196,
+            "latency_ms": 9245,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1297,
+            "output_tokens": 363,
+            "cost_usd": 0.00031120000000000003,
+            "latency_ms": 4861,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9733,
+        "total_output_tokens": 915,
+        "total_cost_usd": 0.001431,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 9245,
+          "sql_ms": 1030,
+          "answer_ms": 4861,
+          "total_ms": 15137
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 11
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 15137,
+      "step_ms": {
+        "plan_ms": 9245,
+        "sql_ms": 1030,
+        "answer_ms": 4861,
+        "total_ms": 15137
+      },
+      "cost_usd": 0.001431,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9733,
+      "output_tokens": 915,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 11,
+      "truth_rows": 11,
+      "gen_rows": 11,
+      "reason": null,
+      "truth_ms": 196
+    },
+    {
+      "id": "hnum-06",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "In Florida, what is the average 30-day heart failure death rate by hospital ownership type? Include only ownership types with at least 5 hospitals that have the rate, and show the number of hospitals and the average (2 decimals), highest average first. Break ties by ownership type.",
+      "error": null,
+      "answer": {
+        "question": "In Florida, what is the average 30-day heart failure death rate by hospital ownership type? Include only ownership types with at least 5 hospitals that have the rate, and show the number of hospitals and the average (2 decimals), highest average first. Break ties by ownership type.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Florida\u2019s average 30-day heart failure death rate by ownership type, including only types with at least 5 hospitals, highest first:\n- Voluntary non-profit - Private: 58 hospitals, 10.42\n- Proprietary: 64 hospitals, 10.26\n- Government - Hospital District or Authority: 20 hospitals, 10.23\n- Voluntary non-profit - Church: 12 hospitals, 9.92\n- Voluntary non-profit - Other: 5 hospitals, 9.8\n- Veterans Health Administration: 7 hospitals, 8.0",
+        "sql": "WITH ranked AS (SELECT mv.facility_id, mv.measure_id, mv.score, ROW_NUMBER() OVER (PARTITION BY mv.facility_id, mv.measure_id ORDER BY mv.period_end DESC NULLS LAST) AS rn FROM hq.measure_values AS mv WHERE UPPER(mv.measure_id) = UPPER('MORT_30_HF')) SELECT h.hospital_ownership AS ownership_type, m.measure_id, m.measure_name, COUNT(*) AS hospital_count, ROUND(CAST(AVG(r.score) AS DECIMAL), 2) AS average_death_rate FROM ranked AS r JOIN hq.hospitals AS h ON h.facility_id = r.facility_id JOIN hq.measures AS m ON UPPER(m.measure_id) = UPPER(r.measure_id) WHERE r.rn = 1 AND r.score IS NOT NULL AND UPPER(h.state) = UPPER('FL') GROUP BY h.hospital_ownership, m.measure_id, m.measure_name HAVING COUNT(*) >= 5 ORDER BY average_death_rate DESC, ownership_type LIMIT 200",
+        "columns": [
+          "ownership_type",
+          "measure_id",
+          "measure_name",
+          "hospital_count",
+          "average_death_rate"
+        ],
+        "rows": [
+          [
+            "Voluntary non-profit - Private",
+            "MORT_30_HF",
+            "Death rate for heart failure patients",
+            58,
+            10.42
+          ],
+          [
+            "Proprietary",
+            "MORT_30_HF",
+            "Death rate for heart failure patients",
+            64,
+            10.26
+          ],
+          [
+            "Government - Hospital District or Authority",
+            "MORT_30_HF",
+            "Death rate for heart failure patients",
+            20,
+            10.23
+          ],
+          [
+            "Voluntary non-profit - Church",
+            "MORT_30_HF",
+            "Death rate for heart failure patients",
+            12,
+            9.92
+          ],
+          [
+            "Voluntary non-profit - Other",
+            "MORT_30_HF",
+            "Death rate for heart failure patients",
+            5,
+            9.8
+          ],
+          [
+            "Veterans Health Administration",
+            "MORT_30_HF",
+            "Death rate for heart failure patients",
+            7,
+            8.0
+          ]
+        ],
+        "row_count": 6,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8451,
+            "output_tokens": 737,
+            "cost_usd": 0.0012136,
+            "latency_ms": 9356,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1064,
+            "output_tokens": 142,
+            "cost_usd": 0.0001774,
+            "latency_ms": 2252,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9515,
+        "total_output_tokens": 879,
+        "total_cost_usd": 0.001391,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 9356,
+          "sql_ms": 2843,
+          "answer_ms": 2252,
+          "total_ms": 14452
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 6
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 14452,
+      "step_ms": {
+        "plan_ms": 9356,
+        "sql_ms": 2843,
+        "answer_ms": 2252,
+        "total_ms": 14452
+      },
+      "cost_usd": 0.001391,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9515,
+      "output_tokens": 879,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 6,
+      "truth_rows": 6,
+      "gen_rows": 6,
+      "reason": null,
+      "truth_ms": 373
+    },
+    {
+      "id": "hnum-07",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "holdout",
+      "difficulty": "hard",
+      "question": "In Los Angeles County, California, which 10 hospitals have the highest 30-day pneumonia death rate? Show the hospital, its city, its rate, the national average rate (average over all U.S. hospitals with that rate, 2 decimals) and how far the hospital's rate is above the national average (2 decimals), highest rate first. Break ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "In Los Angeles County, California, which 10 hospitals have the highest 30-day pneumonia death rate? Show the hospital, its city, its rate, the national average rate (average over all U.S. hospitals with that rate, 2 decimals) and how far the hospital's rate is above the national average (2 decimals), highest rate first. Break ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The 10 Los Angeles County hospitals with the highest 30-day pneumonia death rates are:\n\n| Hospital | City | Rate | National average | Above national average |\n|---|---|---:|---:|---:|\n| ANTELOPE VALLEY HOSPITAL | LANCASTER | 21.7 | 15.32 | 6.38 |\n| GARFIELD MEDICAL CENTER | MONTEREY PARK | 18.8 | 15.32 | 3.48 |\n| KAISER FOUNDATION HOSPITAL - LOS ANGELES | LOS ANGELES | 17.5 | 15.32 | 2.18 |\n| EMANATE HEALTH INTER-COMMUNITY HOSPITAL | COVINA | 17.2 | 15.32 | 1.88 |\n| KAISER FOUNDATION HOSPITAL - DOWNEY | DOWNEY | 16.8 | 15.32 | 1.48 |\n| SAN DIMAS COMMUNITY HOSPITAL | SAN DIMAS | 16.7 | 15.32 | 1.38 |\n| PALMDALE REGIONAL MEDICAL CENTER | PALMDALE | 16.4 | 15.32 | 1.08 |\n| EAST LOS ANGELES DOCTORS HOSPITAL | LOS ANGELES | 16.1 | 15.32 | 0.78 |\n| KAISER FOUNDATION HOSPITAL - WEST LA | LOS ANGELES | 15.6 | 15.32 | 0.28 |\n| GREATER EL MONTE COMMUNITY HOSPITAL | SOUTH EL MONTE | 15.5 | 15.32 | 0.18 |",
+        "sql": "WITH ranked AS (SELECT hq.hospitals.facility_id, hq.hospitals.facility_name, hq.hospitals.city, hq.hospitals.state, hq.hospitals.county, hq.measure_values.score, ROW_NUMBER() OVER (PARTITION BY hq.measure_values.facility_id, hq.measure_values.measure_id ORDER BY hq.measure_values.period_end DESC NULLS LAST, hq.measure_values.period_start DESC NULLS LAST) AS period_rank FROM hq.measure_values JOIN hq.hospitals ON hq.hospitals.facility_id = hq.measure_values.facility_id WHERE UPPER(hq.measure_values.measure_id) = UPPER('MORT_30_PN')), latest AS (SELECT ranked.facility_id, ranked.facility_name, ranked.city, ranked.state, ranked.county, ranked.score FROM ranked WHERE ranked.period_rank = 1 AND ranked.score IS NOT NULL), national AS (SELECT AVG(latest.score) AS national_avg FROM latest), california_county AS (SELECT latest.* FROM latest WHERE UPPER(latest.state) = UPPER('CA') AND UPPER(latest.county) = UPPER('LOS ANGELES')) SELECT california_county.facility_name AS hospital, california_county.city, california_county.score AS rate, ROUND(CAST(national.national_avg AS DECIMAL), 2) AS national_average_rate, ROUND(CAST((california_county.score - national.national_avg) AS DECIMAL), 2) AS above_national_average FROM california_county CROSS JOIN national ORDER BY california_county.score DESC, california_county.facility_name ASC LIMIT 10",
+        "columns": [
+          "hospital",
+          "city",
+          "rate",
+          "national_average_rate",
+          "above_national_average"
+        ],
+        "rows": [
+          [
+            "ANTELOPE VALLEY HOSPITAL",
+            "LANCASTER",
+            21.7,
+            15.32,
+            6.38
+          ],
+          [
+            "GARFIELD MEDICAL CENTER",
+            "MONTEREY PARK",
+            18.8,
+            15.32,
+            3.48
+          ],
+          [
+            "KAISER FOUNDATION HOSPITAL - LOS ANGELES",
+            "LOS ANGELES",
+            17.5,
+            15.32,
+            2.18
+          ],
+          [
+            "EMANATE HEALTH INTER-COMMUNITY HOSPITAL",
+            "COVINA",
+            17.2,
+            15.32,
+            1.88
+          ],
+          [
+            "KAISER FOUNDATION HOSPITAL - DOWNEY",
+            "DOWNEY",
+            16.8,
+            15.32,
+            1.48
+          ],
+          [
+            "SAN DIMAS COMMUNITY HOSPITAL",
+            "SAN DIMAS",
+            16.7,
+            15.32,
+            1.38
+          ],
+          [
+            "PALMDALE REGIONAL MEDICAL CENTER",
+            "PALMDALE",
+            16.4,
+            15.32,
+            1.08
+          ],
+          [
+            "EAST LOS ANGELES DOCTORS HOSPITAL",
+            "LOS ANGELES",
+            16.1,
+            15.32,
+            0.78
+          ],
+          [
+            "KAISER FOUNDATION HOSPITAL - WEST LA",
+            "LOS ANGELES",
+            15.6,
+            15.32,
+            0.28
+          ],
+          [
+            "GREATER EL MONTE COMMUNITY HOSPITAL",
+            "SOUTH EL MONTE",
+            15.5,
+            15.32,
+            0.18
+          ]
+        ],
+        "row_count": 10,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8471,
+            "output_tokens": 971,
+            "cost_usd": 0.0013326,
+            "latency_ms": 9668,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1327,
+            "output_tokens": 418,
+            "cost_usd": 0.00034170000000000007,
+            "latency_ms": 4917,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9798,
+        "total_output_tokens": 1389,
+        "total_cost_usd": 0.001674,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 9668,
+          "sql_ms": 2173,
+          "answer_ms": 4917,
+          "total_ms": 16759
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 10
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 16759,
+      "step_ms": {
+        "plan_ms": 9668,
+        "sql_ms": 2173,
+        "answer_ms": 4917,
+        "total_ms": 16759
+      },
+      "cost_usd": 0.001674,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9798,
+      "output_tokens": 1389,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 10,
+      "truth_rows": 10,
+      "gen_rows": 10,
+      "reason": null,
+      "truth_ms": 273
+    },
+    {
+      "id": "hnum-08",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "holdout",
+      "difficulty": "hard",
+      "question": "Among states and territories with at least 30 hospitals that report the sepsis care score (appropriate care for severe sepsis and septic shock), which 10 have an average score furthest below the national average (average over all U.S. hospitals with a score)? Give the state code, the number of hospitals, the state average, the national average and the difference (state minus national), all averages and the difference to 1 decimal, most below first. Break ties by state abbreviation.",
+      "error": null,
+      "answer": {
+        "question": "Among states and territories with at least 30 hospitals that report the sepsis care score (appropriate care for severe sepsis and septic shock), which 10 have an average score furthest below the national average (average over all U.S. hospitals with a score)? Give the state code, the number of hospitals, the state average, the national average and the difference (state minus national), all averages and the difference to 1 decimal, most below first. Break ties by state abbreviation.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The 10 states and territories with the lowest averages among those with at least 30 hospitals reporting sepsis care scores are, most below the national average first:\n\n| State | Hospitals | State average | National average | Difference (state minus national) |\n|---|---:|---:|---:|---:|\n| MA | 49 | 53.9 | 63.8 | -9.9 |\n| OR | 47 | 56.2 | 63.8 | -7.6 |\n| MN | 60 | 56.6 | 63.8 | -7.2 |\n| WV | 30 | 58.1 | 63.8 | -5.7 |\n| NY | 129 | 58.6 | 63.8 | -5.2 |\n| GA | 98 | 59.0 | 63.8 | -4.8 |\n| MI | 93 | 59.7 | 63.8 | -4.1 |\n| AZ | 58 | 60.0 | 63.8 | -3.8 |\n| TN | 73 | 60.1 | 63.8 | -3.7 |\n| WA | 54 | 60.2 | 63.8 | -3.6 |",
+        "sql": "WITH latest AS (SELECT DISTINCT ON (mv.facility_id, mv.measure_id) h.state, mv.facility_id, mv.score FROM hq.measure_values AS mv JOIN hq.hospitals AS h ON h.facility_id = mv.facility_id WHERE UPPER(mv.measure_id) = UPPER('SEP_1') ORDER BY mv.facility_id, mv.measure_id, mv.period_end DESC NULLS LAST, mv.id DESC), scored AS (SELECT state, facility_id, score FROM latest WHERE score IS NOT NULL), state_averages AS (SELECT state, COUNT(*) AS hospital_count, AVG(score) AS state_average FROM scored GROUP BY state HAVING COUNT(*) >= 30), national_average AS (SELECT AVG(score) AS average_score FROM scored) SELECT m.measure_id, m.measure_name, s.state AS state_code, s.hospital_count, ROUND(CAST(s.state_average AS DECIMAL), 1) AS state_average, ROUND(CAST(n.average_score AS DECIMAL), 1) AS national_average, ROUND(CAST((s.state_average - n.average_score) AS DECIMAL), 1) AS difference FROM state_averages AS s CROSS JOIN national_average AS n JOIN hq.measures AS m ON UPPER(m.measure_id) = UPPER('SEP_1') ORDER BY s.state_average - n.average_score, s.state LIMIT 10",
+        "columns": [
+          "measure_id",
+          "measure_name",
+          "state_code",
+          "hospital_count",
+          "state_average",
+          "national_average",
+          "difference"
+        ],
+        "rows": [
+          [
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            "MA",
+            49,
+            53.9,
+            63.8,
+            -9.9
+          ],
+          [
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            "OR",
+            47,
+            56.2,
+            63.8,
+            -7.6
+          ],
+          [
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            "MN",
+            60,
+            56.6,
+            63.8,
+            -7.2
+          ],
+          [
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            "WV",
+            30,
+            58.1,
+            63.8,
+            -5.7
+          ],
+          [
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            "NY",
+            129,
+            58.6,
+            63.8,
+            -5.2
+          ],
+          [
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            "GA",
+            98,
+            59.0,
+            63.8,
+            -4.8
+          ],
+          [
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            "MI",
+            93,
+            59.7,
+            63.8,
+            -4.1
+          ],
+          [
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            "AZ",
+            58,
+            60.0,
+            63.8,
+            -3.8
+          ],
+          [
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            "TN",
+            73,
+            60.1,
+            63.8,
+            -3.7
+          ],
+          [
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            "WA",
+            54,
+            60.2,
+            63.8,
+            -3.6
+          ]
+        ],
+        "row_count": 10,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8492,
+            "output_tokens": 1283,
+            "cost_usd": 0.0014907,
+            "latency_ms": 15653,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1367,
+            "output_tokens": 343,
+            "cost_usd": 0.00030820000000000006,
+            "latency_ms": 3733,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9859,
+        "total_output_tokens": 1626,
+        "total_cost_usd": 0.001799,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 15653,
+          "sql_ms": 2027,
+          "answer_ms": 3733,
+          "total_ms": 21413
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 10
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 21413,
+      "step_ms": {
+        "plan_ms": 15653,
+        "sql_ms": 2027,
+        "answer_ms": 3733,
+        "total_ms": 21413
+      },
+      "cost_usd": 0.001799,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9859,
+      "output_tokens": 1626,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 10,
+      "truth_rows": 10,
+      "gen_rows": 10,
+      "reason": null,
+      "truth_ms": 372
+    },
+    {
+      "id": "hdef-01",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "In hospital value-based purchasing, how much of the Total Performance Score comes from the patient-experience domain that is based on HCAHPS, and which two scores make up that domain's score?",
+      "error": null,
+      "answer": {
+        "question": "In hospital value-based purchasing, how much of the Total Performance Score comes from the patient-experience domain that is based on HCAHPS, and which two scores make up that domain's score?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The HCAHPS-based Person and Community Engagement domain accounts for 25% of the Hospital VBP Total Performance Score. Its score consists of the HCAHPS Base Score (0\u201380 points) and the HCAHPS Consistency Score (0\u201320 points).",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "hcahps_fact_sheet:6",
+            "doc_title": "HCAHPS Fact Sheet (CAHPS Hospital Survey), December 2024",
+            "section_title": "HCAHPS and Hospital Value-Based Purchasing",
+            "page_start": 3,
+            "source_url": "https://hcahpsonline.org/globalassets/hcahps/facts/hcahps_fact_sheet_december_2024.pdf",
+            "quote": "The Person and Community Engagement (PCE) domain, which accounts for 25% of the Hospital VBP Total Performance Score, is based on HCAHPS."
+          },
+          {
+            "chunk_id": "hcahps_fact_sheet:6",
+            "doc_title": "HCAHPS Fact Sheet (CAHPS Hospital Survey), December 2024",
+            "section_title": "HCAHPS and Hospital Value-Based Purchasing",
+            "page_start": 3,
+            "source_url": "https://hcahpsonline.org/globalassets/hcahps/facts/hcahps_fact_sheet_december_2024.pdf",
+            "quote": "The PCE domain score (0\u2013100 points) consists of the HCAHPS Base Score (0\u201380 points) and HCAHPS Consistency Score (0\u201320 points)."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8434,
+            "output_tokens": 117,
+            "cost_usd": 0.0009019000000000001,
+            "latency_ms": 6428,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 35,
+            "output_tokens": 0,
+            "cost_usd": 7e-07,
+            "latency_ms": 2184,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 3583,
+            "output_tokens": 273,
+            "cost_usd": 0.0004948,
+            "latency_ms": 4497,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 12052,
+        "total_output_tokens": 390,
+        "total_cost_usd": 0.001397,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6428,
+          "retrieval_ms": 2184,
+          "answer_ms": 4497,
+          "total_ms": 13110
+        },
+        "retrieved_chunk_ids": [
+          "cms_hospital_data_dictionary:17",
+          "hcahps_fact_sheet:6",
+          "cms_hospital_data_dictionary:68",
+          "cms_hospital_data_dictionary:72",
+          "cms_hospital_data_dictionary:123",
+          "cms_hospital_data_dictionary:69",
+          "cms_hospital_data_dictionary:70",
+          "cms_hospital_data_dictionary:71"
+        ],
+        "doc_top_similarity": 0.783424119462555,
+        "doc_query": "Hospital Value-Based Purchasing (HVBP) Total Performance Score: patient experience of care domain weight and the two HCAHPS-based scores/components used to calculate the domain score",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 13110,
+      "step_ms": {
+        "plan_ms": 6428,
+        "retrieval_ms": 2184,
+        "answer_ms": 4497,
+        "total_ms": 13110
+      },
+      "cost_usd": 0.001397,
+      "judge_cost_usd": 0.002006,
+      "input_tokens": 12052,
+      "output_tokens": 390,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "cms_hospital_data_dictionary:17",
+        "hcahps_fact_sheet:6",
+        "cms_hospital_data_dictionary:68",
+        "cms_hospital_data_dictionary:72",
+        "cms_hospital_data_dictionary:123",
+        "cms_hospital_data_dictionary:69",
+        "cms_hospital_data_dictionary:70",
+        "cms_hospital_data_dictionary:71"
+      ],
+      "doc_top_similarity": 0.783424119462555,
+      "judge_tokens": [
+        393,
+        122
+      ],
+      "judge_verdicts": [
+        {
+          "point": "The patient-experience (Person and Community Engagement) domain accounts for 25% of the Total Performance Score",
+          "stated": true,
+          "reason": "The answer says the HCAHPS-based Person and Community Engagement domain accounts for 25% of the Hospital VBP Total Performance Score."
+        },
+        {
+          "point": "One part is the HCAHPS Base Score, worth 0 to 80 points",
+          "stated": true,
+          "reason": "The answer names the HCAHPS Base Score and gives its range as 0\u201380 points."
+        },
+        {
+          "point": "The other part is the HCAHPS Consistency Score, worth 0 to 20 points",
+          "stated": true,
+          "reason": "The answer names the HCAHPS Consistency Score and gives its range as 0\u201320 points."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "hdef-02",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "easy",
+      "question": "How many publicly reported measures does the updated HCAHPS survey produce, and how many of them are composite (multi-item) versus single-item measures?",
+      "error": null,
+      "answer": {
+        "question": "How many publicly reported measures does the updated HCAHPS survey produce, and how many of them are composite (multi-item) versus single-item measures?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The updated HCAHPS survey produces 11 publicly reported measures: 7 composite (multi-item) measures and 4 single-item measures.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "hcahps_fact_sheet:2",
+            "doc_title": "HCAHPS Fact Sheet (CAHPS Hospital Survey), December 2024",
+            "section_title": "Measures in the Updated HCAHPS Survey",
+            "page_start": 1,
+            "source_url": "https://hcahpsonline.org/globalassets/hcahps/facts/hcahps_fact_sheet_december_2024.pdf",
+            "quote": "The updated HCAHPS Survey produces 11 publicly reported measures: 7 composite (multi-item) measures and 4 single-item measures"
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8425,
+            "output_tokens": 200,
+            "cost_usd": 0.0009425,
+            "latency_ms": 3648,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 24,
+            "output_tokens": 0,
+            "cost_usd": 4.800000000000001e-07,
+            "latency_ms": 1882,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 2465,
+            "output_tokens": 124,
+            "cost_usd": 0.0003085,
+            "latency_ms": 3352,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10914,
+        "total_output_tokens": 324,
+        "total_cost_usd": 0.001251,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3648,
+          "retrieval_ms": 1882,
+          "answer_ms": 3352,
+          "total_ms": 8883
+        },
+        "retrieved_chunk_ids": [
+          "hcahps_fact_sheet:2",
+          "hcahps_star_tech_notes:3",
+          "hcahps_fact_sheet:1",
+          "hcahps_star_tech_notes:2",
+          "cms_hospital_data_dictionary:130",
+          "hcahps_fact_sheet:4",
+          "hcahps_star_tech_notes:15",
+          "cms_hospital_data_dictionary:50"
+        ],
+        "doc_top_similarity": 0.783761489962122,
+        "doc_query": "Updated HCAHPS survey publicly reported measures: total number and classification as composite (multi-item) versus single-item measures",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 8883,
+      "step_ms": {
+        "plan_ms": 3648,
+        "retrieval_ms": 1882,
+        "answer_ms": 3352,
+        "total_ms": 8883
+      },
+      "cost_usd": 0.001251,
+      "judge_cost_usd": 0.00161,
+      "input_tokens": 10914,
+      "output_tokens": 324,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "hcahps_fact_sheet:2",
+        "hcahps_star_tech_notes:3",
+        "hcahps_fact_sheet:1",
+        "hcahps_star_tech_notes:2",
+        "cms_hospital_data_dictionary:130",
+        "hcahps_fact_sheet:4",
+        "hcahps_star_tech_notes:15",
+        "cms_hospital_data_dictionary:50"
+      ],
+      "doc_top_similarity": 0.783761489962122,
+      "judge_tokens": [
+        325,
+        96
+      ],
+      "judge_verdicts": [
+        {
+          "point": "The updated survey produces 11 publicly reported measures",
+          "stated": true,
+          "reason": "The answer explicitly says the updated HCAHPS survey produces 11 publicly reported measures."
+        },
+        {
+          "point": "7 of them are composite (multi-item) measures",
+          "stated": true,
+          "reason": "The answer explicitly identifies 7 measures as composite (multi-item) measures."
+        },
+        {
+          "point": "4 of them are single-item measures",
+          "stated": true,
+          "reason": "The answer explicitly identifies 4 measures as single-item measures."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "hdef-03",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "How are the four quarterly HCAHPS linear scores combined into one score for the reporting period, and what determines the weight of each quarter?",
+      "error": null,
+      "answer": {
+        "question": "How are the four quarterly HCAHPS linear scores combined into one score for the reporting period, and what determines the weight of each quarter?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The four quarterly linear scores are combined as a weighted average: multiply each quarter\u2019s score by its weight, then add the four results. Each quarter\u2019s weight is its eligible discharge size divided by the total eligible discharge size across all four quarters. The resulting four-quarter average is rounded to the nearest whole number using standard rounding rules.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "hcahps_star_tech_notes:10",
+            "doc_title": "Technical Notes for HCAHPS Star Ratings (January 2024 Public Reporting)",
+            "section_title": "Five: Weighted Average of Quarters of HCAHPS linear scores",
+            "page_start": 3,
+            "source_url": "https://hcahpsonline.org/globalassets/hcahps/star-ratings/tech-notes/january-2024_star-ratings_tech-notes.pdf",
+            "quote": "each quarter's score has a quarterly weight equal to that quarter's eligible discharge size divided by the total eligible discharge size for the four quarters"
+          },
+          {
+            "chunk_id": "hcahps_star_tech_notes:11",
+            "doc_title": "Technical Notes for HCAHPS Star Ratings (January 2024 Public Reporting)",
+            "section_title": "Six: Rounding of HCAHPS linear scores",
+            "page_start": 3,
+            "source_url": "https://hcahpsonline.org/globalassets/hcahps/star-ratings/tech-notes/january-2024_star-ratings_tech-notes.pdf",
+            "quote": "If the unrounded four-quarter average is less than [X.5], then round down to nearest whole integer. If the unrounded four-quarter average is equal to or greater than [X.5], then round up to nearest whole integer."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8423,
+            "output_tokens": 92,
+            "cost_usd": 0.0008883000000000001,
+            "latency_ms": 2455,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 24,
+            "output_tokens": 0,
+            "cost_usd": 4.8e-07,
+            "latency_ms": 1875,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 2750,
+            "output_tokens": 297,
+            "cost_usd": 0.0004235,
+            "latency_ms": 4541,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11197,
+        "total_output_tokens": 389,
+        "total_cost_usd": 0.001312,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2455,
+          "retrieval_ms": 1875,
+          "answer_ms": 4541,
+          "total_ms": 8872
+        },
+        "retrieved_chunk_ids": [
+          "hcahps_star_tech_notes:10",
+          "hcahps_star_tech_notes:12",
+          "hcahps_star_tech_notes:11",
+          "hcahps_star_tech_notes:5",
+          "hcahps_star_tech_notes:7",
+          "hcahps_star_tech_notes:9",
+          "hcahps_fact_sheet:4",
+          "hcahps_star_tech_notes:8"
+        ],
+        "doc_top_similarity": 0.828586688313116,
+        "doc_query": "CMS HCAHPS linear mean score calculation across four quarters in the reporting period; quarterly weighting by number of completed surveys",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 8872,
+      "step_ms": {
+        "plan_ms": 2455,
+        "retrieval_ms": 1875,
+        "answer_ms": 4541,
+        "total_ms": 8872
+      },
+      "cost_usd": 0.001312,
+      "judge_cost_usd": 0.00202,
+      "input_tokens": 11197,
+      "output_tokens": 389,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "hcahps_star_tech_notes:10",
+        "hcahps_star_tech_notes:12",
+        "hcahps_star_tech_notes:11",
+        "hcahps_star_tech_notes:5",
+        "hcahps_star_tech_notes:7",
+        "hcahps_star_tech_notes:9",
+        "hcahps_fact_sheet:4",
+        "hcahps_star_tech_notes:8"
+      ],
+      "doc_top_similarity": 0.828586688313116,
+      "judge_tokens": [
+        365,
+        129
+      ],
+      "judge_verdicts": [
+        {
+          "point": "The four quarterly scores are averaged with weights proportional to the number of eligible patients each quarter",
+          "stated": true,
+          "reason": "The answer says the four quarterly scores are combined in a weighted average, with weights based on each quarter\u2019s eligible discharge size."
+        },
+        {
+          "point": "A quarter's weight is its eligible discharge size divided by the total eligible discharge size for the four quarters",
+          "stated": true,
+          "reason": "The answer explicitly defines each quarter\u2019s weight as its eligible discharge size divided by the total across all four quarters."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "hdef-04",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "For the HCAHPS star ratings, which survey modes are adjusted for, where does the mode adjustment come from, and on what scale is it applied?",
+      "error": null,
+      "answer": {
+        "question": "For the HCAHPS star ratings, which survey modes are adjusted for, where does the mode adjustment come from, and on what scale is it applied?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The survey modes adjusted for are mail, telephone, mixed mode, and Interactive Voice Response. CMS derived the adjustments from a large-scale, randomized mode experiment. They are applied to each measure\u2019s rescaled 0\u2013100 linear mean score.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "hcahps_star_tech_notes:9",
+            "doc_title": "Technical Notes for HCAHPS Star Ratings (January 2024 Public Reporting)",
+            "section_title": "Four: Survey Mode Adjustment",
+            "page_start": 3,
+            "source_url": "https://hcahpsonline.org/globalassets/hcahps/star-ratings/tech-notes/january-2024_star-ratings_tech-notes.pdf",
+            "quote": "HCAHPS quarterly scores are adjusted for the effect of mode of survey administration (mail, telephone, mixed mode or Interactive Voice Response)."
+          },
+          {
+            "chunk_id": "hcahps_star_tech_notes:9",
+            "doc_title": "Technical Notes for HCAHPS Star Ratings (January 2024 Public Reporting)",
+            "section_title": "Four: Survey Mode Adjustment",
+            "page_start": 3,
+            "source_url": "https://hcahpsonline.org/globalassets/hcahps/star-ratings/tech-notes/january-2024_star-ratings_tech-notes.pdf",
+            "quote": "CMS derived the survey mode adjustments from a large-scale, randomized mode experiment."
+          },
+          {
+            "chunk_id": "hcahps_star_tech_notes:9",
+            "doc_title": "Technical Notes for HCAHPS Star Ratings (January 2024 Public Reporting)",
+            "section_title": "Four: Survey Mode Adjustment",
+            "page_start": 3,
+            "source_url": "https://hcahpsonline.org/globalassets/hcahps/star-ratings/tech-notes/january-2024_star-ratings_tech-notes.pdf",
+            "quote": "These adjustments are applied on the rescaled (0-100) linear mean score for each measure."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8426,
+            "output_tokens": 109,
+            "cost_usd": 0.0008971000000000001,
+            "latency_ms": 2284,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 27,
+            "output_tokens": 0,
+            "cost_usd": 5.399999999999999e-07,
+            "latency_ms": 1875,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 2909,
+            "output_tokens": 179,
+            "cost_usd": 0.00038040000000000003,
+            "latency_ms": 2512,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11362,
+        "total_output_tokens": 288,
+        "total_cost_usd": 0.001278,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2284,
+          "retrieval_ms": 1875,
+          "answer_ms": 2512,
+          "total_ms": 6672
+        },
+        "retrieved_chunk_ids": [
+          "hcahps_star_tech_notes:9",
+          "hcahps_star_tech_notes:5",
+          "hcahps_star_tech_notes:7",
+          "hcahps_star_tech_notes:8",
+          "hcahps_star_tech_notes:12",
+          "hcahps_fact_sheet:7",
+          "hcahps_fact_sheet:2",
+          "hcahps_star_tech_notes:2"
+        ],
+        "doc_top_similarity": 0.824533471960337,
+        "doc_query": "HCAHPS star ratings survey mode adjustment: adjusted survey modes, source of the mode adjustment, and scale on which it is applied",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 6672,
+      "step_ms": {
+        "plan_ms": 2284,
+        "retrieval_ms": 1875,
+        "answer_ms": 2512,
+        "total_ms": 6672
+      },
+      "cost_usd": 0.001278,
+      "judge_cost_usd": 0.00181,
+      "input_tokens": 11362,
+      "output_tokens": 288,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "hcahps_star_tech_notes:9",
+        "hcahps_star_tech_notes:5",
+        "hcahps_star_tech_notes:7",
+        "hcahps_star_tech_notes:8",
+        "hcahps_star_tech_notes:12",
+        "hcahps_fact_sheet:7",
+        "hcahps_fact_sheet:2",
+        "hcahps_star_tech_notes:2"
+      ],
+      "doc_top_similarity": 0.824533471960337,
+      "judge_tokens": [
+        365,
+        108
+      ],
+      "judge_verdicts": [
+        {
+          "point": "Scores are adjusted for the mode of survey administration: mail, telephone, mixed mode or Interactive Voice Response",
+          "stated": true,
+          "reason": "The answer lists mail, telephone, mixed mode, and Interactive Voice Response as the adjusted survey modes."
+        },
+        {
+          "point": "The adjustments were derived from a large-scale randomized mode experiment",
+          "stated": true,
+          "reason": "The answer says CMS derived the adjustments from a large-scale, randomized mode experiment."
+        },
+        {
+          "point": "They are applied to the rescaled 0-100 linear mean score for each measure",
+          "stated": true,
+          "reason": "The answer says the adjustments are applied to each measure\u2019s rescaled 0\u2013100 linear mean score."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "hdef-05",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "What kind of data does the BPCI Advanced version of the severe sepsis and septic shock management bundle measure use, what calendar period does it cover, and what decides the year a claim belongs to?",
+      "error": null,
+      "answer": {
+        "question": "What kind of data does the BPCI Advanced version of the severe sepsis and septic shock management bundle measure use, what calendar period does it cover, and what decides the year a claim belongs to?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The BPCI Advanced measure uses chart-abstracted data that participants already submit for the Hospital Inpatient Quality Reporting Program. It covers January 1 through December 31, rather than any rolling 12-month period. The date of discharge from the index admission determines the calendar year to which the claim belongs.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_bpci_sep1_fact_sheet:8",
+            "doc_title": "Quality Measures Fact Sheet: Severe Sepsis and Septic Shock: Management Bundle (SEP-1), BPCI Advanced (August 2020)",
+            "section_title": "Measure Submission",
+            "page_start": 4,
+            "source_url": "https://www.cms.gov/priorities/innovation/media/document/bpci-advanced-alt-fs-my4-sepsis",
+            "quote": "using chart-abstracted data which BPCI Advanced Participants are already submitting for the Hospital IQR Program"
+          },
+          {
+            "chunk_id": "cms_bpci_sep1_fact_sheet:8",
+            "doc_title": "Quality Measures Fact Sheet: Severe Sepsis and Septic Shock: Management Bundle (SEP-1), BPCI Advanced (August 2020)",
+            "section_title": "Measure Submission",
+            "page_start": 4,
+            "source_url": "https://www.cms.gov/priorities/innovation/media/document/bpci-advanced-alt-fs-my4-sepsis",
+            "quote": "the Model uses January 1 through December 31 for measure calculation"
+          },
+          {
+            "chunk_id": "cms_bpci_sep1_fact_sheet:8",
+            "doc_title": "Quality Measures Fact Sheet: Severe Sepsis and Septic Shock: Management Bundle (SEP-1), BPCI Advanced (August 2020)",
+            "section_title": "Measure Submission",
+            "page_start": 4,
+            "source_url": "https://www.cms.gov/priorities/innovation/media/document/bpci-advanced-alt-fs-my4-sepsis",
+            "quote": "The date of discharge on the index admission will determine the calendar year in which the claim belongs."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8434,
+            "output_tokens": 129,
+            "cost_usd": 0.0009079000000000001,
+            "latency_ms": 2531,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 34,
+            "output_tokens": 0,
+            "cost_usd": 6.800000000000001e-07,
+            "latency_ms": 1875,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 2590,
+            "output_tokens": 181,
+            "cost_usd": 0.0003495,
+            "latency_ms": 4745,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11058,
+        "total_output_tokens": 310,
+        "total_cost_usd": 0.001258,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2531,
+          "retrieval_ms": 1875,
+          "answer_ms": 4745,
+          "total_ms": 9153
+        },
+        "retrieved_chunk_ids": [
+          "cms_bpci_sep1_fact_sheet:5",
+          "cms_bpci_sep1_fact_sheet:2",
+          "cms_bpci_sep1_fact_sheet:8",
+          "cms_bpci_sep1_fact_sheet:4",
+          "cms_bpci_psi90_fact_sheet:7",
+          "cms_bpci_sep1_fact_sheet:3",
+          "cms_bpci_psi90_fact_sheet:3",
+          "cms_bpci_sep1_fact_sheet:9"
+        ],
+        "doc_top_similarity": 0.773784192358908,
+        "doc_query": "BPCI Advanced Severe Sepsis and Septic Shock Management Bundle measure: data sources, calendar-period measurement window, and rule for assigning a claim to a measurement year",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 9153,
+      "step_ms": {
+        "plan_ms": 2531,
+        "retrieval_ms": 1875,
+        "answer_ms": 4745,
+        "total_ms": 9153
+      },
+      "cost_usd": 0.001258,
+      "judge_cost_usd": 0.001816,
+      "input_tokens": 11058,
+      "output_tokens": 310,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "cms_bpci_sep1_fact_sheet:5",
+        "cms_bpci_sep1_fact_sheet:2",
+        "cms_bpci_sep1_fact_sheet:8",
+        "cms_bpci_sep1_fact_sheet:4",
+        "cms_bpci_psi90_fact_sheet:7",
+        "cms_bpci_sep1_fact_sheet:3",
+        "cms_bpci_psi90_fact_sheet:3",
+        "cms_bpci_sep1_fact_sheet:9"
+      ],
+      "doc_top_similarity": 0.773784192358908,
+      "judge_tokens": [
+        383,
+        105
+      ],
+      "judge_verdicts": [
+        {
+          "point": "It uses chart-abstracted data that BPCI Advanced participants already submit for the Hospital IQR Program",
+          "stated": true,
+          "reason": "The answer says the measure uses chart-abstracted data participants already submit for the Hospital Inpatient Quality Reporting Program."
+        },
+        {
+          "point": "The model measures January 1 through December 31",
+          "stated": true,
+          "reason": "The answer explicitly says it covers January 1 through December 31."
+        },
+        {
+          "point": "The date of discharge on the index admission determines the calendar year of the claim",
+          "stated": true,
+          "reason": "The answer says the discharge date from the index admission determines the claim's calendar year."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "hdef-06",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "easy",
+      "question": "How many Patient Safety Indicators did AHRQ develop, how many of them are provider-level indicators, and what kind of events do they highlight?",
+      "error": null,
+      "answer": {
+        "question": "How many Patient Safety Indicators did AHRQ develop, how many of them are provider-level indicators, and what kind of events do they highlight?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "AHRQ developed 26 Patient Safety Indicators, including 18 provider-level indicators. They highlight safety-related adverse events in hospitals following operations, procedures, and childbirth.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_bpci_psi90_fact_sheet:1",
+            "doc_title": "Quality Measures Fact Sheet: Patient Safety Indicators (PSI 90), BPCI Advanced (October 2020)",
+            "section_title": "Background on CMS Patient Safety Indicators 90",
+            "page_start": 1,
+            "source_url": "https://www.cms.gov/priorities/innovation/media/document/bpciadvancedmy123psi90fact-sheet",
+            "quote": "These Patient Safety Indicators (PSIs) are comprised of 26 measures (including 18 provider-level indicators) that highlight safety-related adverse events occurring in hospitals following operations, procedures, and childbirth."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8423,
+            "output_tokens": 209,
+            "cost_usd": 0.0009468,
+            "latency_ms": 4100,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 29,
+            "output_tokens": 0,
+            "cost_usd": 5.800000000000002e-07,
+            "latency_ms": 2123,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 4287,
+            "output_tokens": 231,
+            "cost_usd": 0.0005442,
+            "latency_ms": 2740,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 12739,
+        "total_output_tokens": 440,
+        "total_cost_usd": 0.001492,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4100,
+          "retrieval_ms": 2123,
+          "answer_ms": 2740,
+          "total_ms": 8965
+        },
+        "retrieved_chunk_ids": [
+          "cms_bpci_psi90_fact_sheet:1",
+          "cms_bpci_psi90_fact_sheet:9",
+          "cms_hospital_data_dictionary:9",
+          "cms_bpci_psi90_fact_sheet:2",
+          "cms_hospital_data_dictionary:116",
+          "cms_hospital_data_dictionary:71",
+          "cms_bpci_psi90_fact_sheet:5",
+          "cms_hospital_data_dictionary:65"
+        ],
+        "doc_top_similarity": 0.776672798175219,
+        "doc_query": "AHRQ Patient Safety Indicators (PSIs): total number developed, number of provider-level indicators, and the types of adverse events they identify",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 8965,
+      "step_ms": {
+        "plan_ms": 4100,
+        "retrieval_ms": 2123,
+        "answer_ms": 2740,
+        "total_ms": 8965
+      },
+      "cost_usd": 0.001492,
+      "judge_cost_usd": 0.001608,
+      "input_tokens": 12739,
+      "output_tokens": 440,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "cms_bpci_psi90_fact_sheet:1",
+        "cms_bpci_psi90_fact_sheet:9",
+        "cms_hospital_data_dictionary:9",
+        "cms_bpci_psi90_fact_sheet:2",
+        "cms_hospital_data_dictionary:116",
+        "cms_hospital_data_dictionary:71",
+        "cms_bpci_psi90_fact_sheet:5",
+        "cms_hospital_data_dictionary:65"
+      ],
+      "doc_top_similarity": 0.776672798175219,
+      "judge_tokens": [
+        329,
+        95
+      ],
+      "judge_verdicts": [
+        {
+          "point": "There are 26 Patient Safety Indicator measures",
+          "stated": true,
+          "reason": "The answer explicitly says AHRQ developed 26 Patient Safety Indicators."
+        },
+        {
+          "point": "18 of them are provider-level indicators",
+          "stated": true,
+          "reason": "The answer explicitly identifies 18 as provider-level indicators."
+        },
+        {
+          "point": "They highlight safety-related adverse events in hospitals after operations, procedures and childbirth",
+          "stated": true,
+          "reason": "The answer says they highlight safety-related adverse events in hospitals following operations, procedures, and childbirth."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "hdef-07",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "Under the Hospital-Acquired Condition Reduction Program, which hospitals have their Medicare payments reduced, by how much, and how is the Total HAC Score formed?",
+      "error": null,
+      "answer": {
+        "question": "Under the Hospital-Acquired Condition Reduction Program, which hospitals have their Medicare payments reduced, by how much, and how is the Total HAC Score formed?",
+        "route": "refuse",
+        "refused": true,
+        "refusal_reason": "The database does not contain Hospital-Acquired Condition Reduction Program payment-penalty status or amounts, nor documentation defining its Total HAC Score.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8425,
+            "output_tokens": 243,
+            "cost_usd": 0.000964,
+            "latency_ms": 4515,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          }
+        ],
+        "total_input_tokens": 8425,
+        "total_output_tokens": 243,
+        "total_cost_usd": 0.000964,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4515,
+          "total_ms": 4516
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "refuse",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 4516,
+      "step_ms": {
+        "plan_ms": 4515,
+        "total_ms": 4516
+      },
+      "cost_usd": 0.000964,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 8425,
+      "output_tokens": 243,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "plan",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at plan; expected chunk not retrieved"
+    },
+    {
+      "id": "hdef-08",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "How many complications does the hip and knee replacement complication measure look for, and why does CMS limit them to specified time periods after admission?",
+      "error": null,
+      "answer": {
+        "question": "How many complications does the hip and knee replacement complication measure look for, and why does CMS limit them to specified time periods after admission?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "CMS looks for 8 complications: heart attack, pneumonia, sepsis/septicemia/shock, surgical-site bleeding, pulmonary embolism, death, mechanical complications, and periprosthetic joint infection/wound infection. Heart attack, pneumonia, and sepsis are counted during the admission or within 7 days of admission; bleeding, pulmonary embolism, and death during the admission or within 30 days; and mechanical complications or joint/wound infection during the admission or within 90 days. CMS limits the periods because complications arising later may be affected by factors outside the hospital\u2019s control, including other illnesses, patients\u2019 own behavior, or care after discharge.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_hospital_data_dictionary:8",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "Complications: Surgical Complications \u2013 Hip/Knee Measure",
+            "page_start": 8,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "CMS measures the likelihood that at least 1 of 8 complications occurs"
+          },
+          {
+            "chunk_id": "cms_hospital_data_dictionary:8",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "Complications: Surgical Complications \u2013 Hip/Knee Measure",
+            "page_start": 8,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "heart attack, (acute myocardial infarction [AMI]), pneumonia, or sepsis/septicemia/shock during the index admission or within 7 days of admission"
+          },
+          {
+            "chunk_id": "cms_hospital_data_dictionary:8",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "Complications: Surgical Complications \u2013 Hip/Knee Measure",
+            "page_start": 8,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "surgical site bleeding, pulmonary embolism, or death during the index admission or within 30 days of admission"
+          },
+          {
+            "chunk_id": "cms_hospital_data_dictionary:8",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "Complications: Surgical Complications \u2013 Hip/Knee Measure",
+            "page_start": 8,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "mechanical complications or periprosthetic joint infection/wound infection during the index admission or within 90 days of admission"
+          },
+          {
+            "chunk_id": "cms_hospital_data_dictionary:8",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "Complications: Surgical Complications \u2013 Hip/Knee Measure",
+            "page_start": 8,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "complications over a longer period may be impacted by factors outside the hospitals' control like other complicating illnesses, patients' own behavior, or care provided to patients after discharge"
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8421,
+            "output_tokens": 181,
+            "cost_usd": 0.0009326,
+            "latency_ms": 3199,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 42,
+            "output_tokens": 0,
+            "cost_usd": 8.4e-07,
+            "latency_ms": 1915,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 4020,
+            "output_tokens": 520,
+            "cost_usd": 0.000662,
+            "latency_ms": 5891,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 12483,
+        "total_output_tokens": 701,
+        "total_cost_usd": 0.001595,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3199,
+          "retrieval_ms": 1915,
+          "answer_ms": 5891,
+          "total_ms": 11007
+        },
+        "retrieved_chunk_ids": [
+          "cms_hospital_data_dictionary:8",
+          "cms_hospital_data_dictionary:49",
+          "cms_hospital_data_dictionary:34",
+          "cms_hospital_data_dictionary:9",
+          "cms_hospital_data_dictionary:12",
+          "cms_hospital_data_dictionary:117",
+          "cms_hospital_data_dictionary:115",
+          "cms_hybrid_hwm_methodology:49"
+        ],
+        "doc_top_similarity": 0.818850736395491,
+        "doc_query": "CMS Rate of Complications for Hip/Knee Replacement Patients (COMP_HIP_KNEE): number and types of complications included, specified time periods after admission for measuring complications, and CMS rationale for those time windows",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 11007,
+      "step_ms": {
+        "plan_ms": 3199,
+        "retrieval_ms": 1915,
+        "answer_ms": 5891,
+        "total_ms": 11007
+      },
+      "cost_usd": 0.001595,
+      "judge_cost_usd": 0.002112,
+      "input_tokens": 12483,
+      "output_tokens": 701,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "cms_hospital_data_dictionary:8",
+        "cms_hospital_data_dictionary:49",
+        "cms_hospital_data_dictionary:34",
+        "cms_hospital_data_dictionary:9",
+        "cms_hospital_data_dictionary:12",
+        "cms_hospital_data_dictionary:117",
+        "cms_hospital_data_dictionary:115",
+        "cms_hybrid_hwm_methodology:49"
+      ],
+      "doc_top_similarity": 0.818850736395491,
+      "judge_tokens": [
+        431,
+        125
+      ],
+      "judge_verdicts": [
+        {
+          "point": "The measure estimates the likelihood that at least 1 of 8 complications occurs",
+          "stated": false,
+          "reason": "The answer lists eight complications but does not say the measure estimates the likelihood of at least one occurring."
+        },
+        {
+          "point": "Longer periods could be affected by factors outside the hospital's control such as other illnesses, patient behavior or care after discharge",
+          "stated": true,
+          "reason": "The answer says later complications may be influenced by factors outside the hospital\u2019s control, including other illnesses, patient behavior, and care after discharge."
+        }
+      ],
+      "points_covered": 0.5,
+      "points_missing": 1,
+      "correct": false,
+      "reason": "1/2 points missing: The measure estimates the likelihood that at least 1 of 8 co"
+    },
+    {
+      "id": "hdef-09",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "What period of care does the Medicare spending per beneficiary measure cover, which payments does it include, and how are those payments adjusted?",
+      "error": null,
+      "answer": {
+        "question": "What period of care does the Medicare spending per beneficiary measure cover, which payments does it include, and how are those payments adjusted?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The episode runs from three days before an inpatient hospital admission through 30 days after discharge. It includes Medicare Part A and Part B payments for services provided during the episode, and those payments are price-standardized and risk-adjusted.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_hospital_data_dictionary:22",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "Payment Measure",
+            "page_start": 12,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "episode that spans from three days prior to an inpatient hospital admission through 30 days after discharge."
+          },
+          {
+            "chunk_id": "cms_hospital_data_dictionary:22",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "Payment Measure",
+            "page_start": 12,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "assesses Medicare Part A and Part B payments for services provided to a Medicare beneficiary"
+          },
+          {
+            "chunk_id": "cms_hospital_data_dictionary:22",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "Payment Measure",
+            "page_start": 12,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "payments included in this measure are price-standardized and risk-adjusted."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8420,
+            "output_tokens": 144,
+            "cost_usd": 0.000914,
+            "latency_ms": 2655,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 26,
+            "output_tokens": 0,
+            "cost_usd": 5.200000000000003e-07,
+            "latency_ms": 1667,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 1555,
+            "output_tokens": 277,
+            "cost_usd": 0.000294,
+            "latency_ms": 4815,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10001,
+        "total_output_tokens": 421,
+        "total_cost_usd": 0.001209,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2655,
+          "retrieval_ms": 1667,
+          "answer_ms": 4815,
+          "total_ms": 9139
+        },
+        "retrieved_chunk_ids": [
+          "cms_hospital_data_dictionary:22",
+          "cms_hospital_data_dictionary:79",
+          "cms_hospital_data_dictionary:126",
+          "cms_hospital_data_dictionary:80",
+          "cms_hospital_data_dictionary:78",
+          "cms_hospital_data_dictionary:82",
+          "cms_hospital_data_dictionary:81",
+          "cms_bpci_psi90_fact_sheet:7"
+        ],
+        "doc_top_similarity": 0.858651790940157,
+        "doc_query": "Medicare Spending per Beneficiary (MSPB) measure: beneficiary episode of care period, included Medicare payments, and payment adjustments",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 9139,
+      "step_ms": {
+        "plan_ms": 2655,
+        "retrieval_ms": 1667,
+        "answer_ms": 4815,
+        "total_ms": 9139
+      },
+      "cost_usd": 0.001209,
+      "judge_cost_usd": 0.00174,
+      "input_tokens": 10001,
+      "output_tokens": 421,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "cms_hospital_data_dictionary:22",
+        "cms_hospital_data_dictionary:79",
+        "cms_hospital_data_dictionary:126",
+        "cms_hospital_data_dictionary:80",
+        "cms_hospital_data_dictionary:78",
+        "cms_hospital_data_dictionary:82",
+        "cms_hospital_data_dictionary:81",
+        "cms_bpci_psi90_fact_sheet:7"
+      ],
+      "doc_top_similarity": 0.858651790940157,
+      "judge_tokens": [
+        350,
+        104
+      ],
+      "judge_verdicts": [
+        {
+          "point": "It covers Medicare Part A and Part B payments for services provided to a beneficiary",
+          "stated": true,
+          "reason": "The answer explicitly includes Medicare Part A and Part B payments for services provided during the episode."
+        },
+        {
+          "point": "The episode spans from three days before an inpatient admission through 30 days after discharge",
+          "stated": true,
+          "reason": "The answer states that the episode runs from three days before inpatient admission through 30 days after discharge."
+        },
+        {
+          "point": "The payments are price-standardized and risk-adjusted",
+          "stated": true,
+          "reason": "The answer explicitly says the payments are price-standardized and risk-adjusted."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "hdef-10",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "easy",
+      "question": "Which health system supplied the data used to develop the hybrid hospital-wide readmission measure, and what range of admission dates did the datasets cover?",
+      "error": null,
+      "answer": {
+        "question": "Which health system supplied the data used to develop the hybrid hospital-wide readmission measure, and what range of admission dates did the datasets cover?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The data came from the 21 hospitals in the Kaiser Permanente Northern California (KPNC) network. The provided evidence describes a 3-year dataset but does not give the admission-date range.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_hybrid_hwr_methodology:39",
+            "doc_title": "Hybrid Hospital-Wide Readmission Measure with Electronic Health Record Extracted Risk Factors, Methodology Report v1.2 (March 2023)",
+            "section_title": "Original HWR Hybrid eHWR",
+            "page_start": 32,
+            "source_url": "https://www.cms.gov/files/document/hybrid-hospital-wide-readmission-methodology-report-03202023.pdf",
+            "quote": "We used a 3-year dataset from the 21 hospitals in the KPNC network"
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8422,
+            "output_tokens": 136,
+            "cost_usd": 0.0009102,
+            "latency_ms": 2749,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 30,
+            "output_tokens": 0,
+            "cost_usd": 6e-07,
+            "latency_ms": 1919,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 4515,
+            "output_tokens": 249,
+            "cost_usd": 0.000576,
+            "latency_ms": 6893,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 12967,
+        "total_output_tokens": 385,
+        "total_cost_usd": 0.001487,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2749,
+          "retrieval_ms": 1919,
+          "answer_ms": 6893,
+          "total_ms": 11563
+        },
+        "retrieved_chunk_ids": [
+          "cms_hybrid_hwr_methodology:44",
+          "cms_hybrid_hwr_methodology:39",
+          "cms_hybrid_hwr_methodology:45",
+          "cms_hybrid_hwr_methodology:13",
+          "cms_hybrid_hwr_methodology:43",
+          "cms_hybrid_hwr_methodology:109",
+          "cms_hybrid_hwr_methodology:103",
+          "cms_hybrid_hwr_methodology:16"
+        ],
+        "doc_top_similarity": 0.798073574101908,
+        "doc_query": "Hybrid Hospital-Wide All-Cause Readmission Measure (HWR): health system that supplied the development data and admission-date range covered by the datasets",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 11563,
+      "step_ms": {
+        "plan_ms": 2749,
+        "retrieval_ms": 1919,
+        "answer_ms": 6893,
+        "total_ms": 11563
+      },
+      "cost_usd": 0.001487,
+      "judge_cost_usd": 0.001428,
+      "input_tokens": 12967,
+      "output_tokens": 385,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": false,
+      "doc_hit": true,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [
+        "cms_hybrid_hwr_methodology:44",
+        "cms_hybrid_hwr_methodology:39",
+        "cms_hybrid_hwr_methodology:45",
+        "cms_hybrid_hwr_methodology:13",
+        "cms_hybrid_hwr_methodology:43",
+        "cms_hybrid_hwr_methodology:109",
+        "cms_hybrid_hwr_methodology:103",
+        "cms_hybrid_hwr_methodology:16"
+      ],
+      "doc_top_similarity": 0.798073574101908,
+      "judge_tokens": [
+        334,
+        76
+      ],
+      "judge_verdicts": [
+        {
+          "point": "The data came from Kaiser Permanente of Northern California (KPNC)",
+          "stated": true,
+          "reason": "The answer explicitly identifies Kaiser Permanente Northern California (KPNC) as the source of the data."
+        },
+        {
+          "point": "The datasets cover admissions between January 1, 2009 and January 31, 2013",
+          "stated": false,
+          "reason": "The answer does not state the admission-date range and instead says it is not given."
+        }
+      ],
+      "points_covered": 0.5,
+      "points_missing": 1,
+      "correct": false,
+      "reason": "1/2 points missing: The datasets cover admissions between January 1, 2009 and Ja; retrieval miss"
+    },
+    {
+      "id": "hdef-11",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "Which EHR systems were included in the feasibility testing for the hybrid hospital-wide readmission measure, and roughly what share of Meaningful Use hospitals used them?",
+      "error": null,
+      "answer": {
+        "question": "Which EHR systems were included in the feasibility testing for the hybrid hospital-wide readmission measure, and roughly what share of Meaningful Use hospitals used them?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The feasibility testing included Epic, Cerner, Meditech, and Allscripts. Together, they were used by approximately 50% of hospitals attesting for Meaningful Use in 2013.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_hybrid_hwr_methodology:104",
+            "doc_title": "Hybrid Hospital-Wide Readmission Measure with Electronic Health Record Extracted Risk Factors, Methodology Report v1.2 (March 2023)",
+            "section_title": "STATISTICAL METHODS",
+            "page_start": 85,
+            "source_url": "https://www.cms.gov/files/document/hybrid-hospital-wide-readmission-methodology-report-03202023.pdf",
+            "quote": "The four EHR systems included in testing (Epic, Cerner, Meditech, and Allscripts) are the most common inpatient medical records. Together they are used in approximately 50% of hospitals attesting for Meaningful Use in 2013."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8425,
+            "output_tokens": 120,
+            "cost_usd": 0.0009025,
+            "latency_ms": 2315,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 33,
+            "output_tokens": 0,
+            "cost_usd": 6.599999999999996e-07,
+            "latency_ms": 1710,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 4455,
+            "output_tokens": 126,
+            "cost_usd": 0.0005085,
+            "latency_ms": 2112,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 12913,
+        "total_output_tokens": 246,
+        "total_cost_usd": 0.001412,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2315,
+          "retrieval_ms": 1710,
+          "answer_ms": 2112,
+          "total_ms": 6139
+        },
+        "retrieved_chunk_ids": [
+          "cms_hybrid_hwr_methodology:45",
+          "cms_hybrid_hwr_methodology:44",
+          "cms_hybrid_hwr_methodology:39",
+          "cms_hybrid_hwr_methodology:104",
+          "cms_hybrid_hwr_methodology:103",
+          "cms_hybrid_hwm_methodology:21",
+          "cms_hybrid_hwr_methodology:4",
+          "cms_hybrid_hwr_methodology:109"
+        ],
+        "doc_top_similarity": 0.778706570797974,
+        "doc_query": "Hybrid Hospital-Wide All-Cause Readmission Measure (Hybrid HWR): EHR systems included in feasibility testing and their approximate share of Meaningful Use hospitals",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 6139,
+      "step_ms": {
+        "plan_ms": 2315,
+        "retrieval_ms": 1710,
+        "answer_ms": 2112,
+        "total_ms": 6139
+      },
+      "cost_usd": 0.001412,
+      "judge_cost_usd": 0.001568,
+      "input_tokens": 12913,
+      "output_tokens": 246,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "cms_hybrid_hwr_methodology:45",
+        "cms_hybrid_hwr_methodology:44",
+        "cms_hybrid_hwr_methodology:39",
+        "cms_hybrid_hwr_methodology:104",
+        "cms_hybrid_hwr_methodology:103",
+        "cms_hybrid_hwm_methodology:21",
+        "cms_hybrid_hwr_methodology:4",
+        "cms_hybrid_hwr_methodology:109"
+      ],
+      "doc_top_similarity": 0.778706570797974,
+      "judge_tokens": [
+        344,
+        88
+      ],
+      "judge_verdicts": [
+        {
+          "point": "Epic, Cerner, Meditech and Allscripts were the four EHR systems included in testing",
+          "stated": true,
+          "reason": "The answer explicitly names Epic, Cerner, Meditech, and Allscripts as the systems included in feasibility testing."
+        },
+        {
+          "point": "Together they are used in approximately 50% of hospitals attesting for Meaningful Use in 2013",
+          "stated": true,
+          "reason": "The answer states that together they were used by approximately 50% of hospitals attesting for Meaningful Use in 2013."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "hdef-12",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "hard",
+      "question": "What three principles does the planned readmission algorithm use to decide whether a readmission counts as planned?",
+      "error": null,
+      "answer": {
+        "question": "What three principles does the planned readmission algorithm use to decide whether a readmission counts as planned?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The algorithm uses three principles: (1) certain limited types of care are always planned, including transplant surgery, maintenance chemotherapy/radiotherapy/immunotherapy, and rehabilitation; (2) otherwise, a planned readmission is a non-acute readmission for a scheduled procedure; and (3) admissions for acute illness or complications of care are never planned.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_hybrid_hwr_methodology:14",
+            "doc_title": "Hybrid Hospital-Wide Readmission Measure with Electronic Health Record Extracted Risk Factors, Methodology Report v1.2 (March 2023)",
+            "section_title": "Admitted for medical treatment of cancer",
+            "page_start": 14,
+            "source_url": "https://www.cms.gov/files/document/hybrid-hospital-wide-readmission-methodology-report-03202023.pdf",
+            "quote": "A few specific, limited types of care are always considered planned (transplant surgery, maintenance chemotherapy/radiotherapy/ immunotherapy, rehabilitation); 2. Otherwise, a planned readmission is defined as a non-acute readmission for a scheduled procedure; and 3. Admissions for acute illness or for complications of care are never planned."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8414,
+            "output_tokens": 83,
+            "cost_usd": 0.0008829,
+            "latency_ms": 2405,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 18,
+            "output_tokens": 0,
+            "cost_usd": 3.5999999999999994e-07,
+            "latency_ms": 1692,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 4017,
+            "output_tokens": 175,
+            "cost_usd": 0.0004892000000000001,
+            "latency_ms": 2187,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 12449,
+        "total_output_tokens": 258,
+        "total_cost_usd": 0.001372,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2405,
+          "retrieval_ms": 1692,
+          "answer_ms": 2187,
+          "total_ms": 6286
+        },
+        "retrieved_chunk_ids": [
+          "cms_hybrid_hwr_methodology:14",
+          "cms_hybrid_hwr_methodology:66",
+          "cms_hybrid_hwr_methodology:15",
+          "cms_hospital_data_dictionary:29",
+          "cms_hospital_data_dictionary:31",
+          "cms_hospital_data_dictionary:140",
+          "cms_hybrid_hwr_methodology:11",
+          "cms_hybrid_hwr_methodology:13"
+        ],
+        "doc_top_similarity": 0.71513454362672,
+        "doc_query": "CMS planned readmission algorithm: three principles and criteria for classifying a readmission as planned",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 6286,
+      "step_ms": {
+        "plan_ms": 2405,
+        "retrieval_ms": 1692,
+        "answer_ms": 2187,
+        "total_ms": 6286
+      },
+      "cost_usd": 0.001372,
+      "judge_cost_usd": 0.001842,
+      "input_tokens": 12449,
+      "output_tokens": 258,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "cms_hybrid_hwr_methodology:14",
+        "cms_hybrid_hwr_methodology:66",
+        "cms_hybrid_hwr_methodology:15",
+        "cms_hospital_data_dictionary:29",
+        "cms_hospital_data_dictionary:31",
+        "cms_hospital_data_dictionary:140",
+        "cms_hybrid_hwr_methodology:11",
+        "cms_hybrid_hwr_methodology:13"
+      ],
+      "doc_top_similarity": 0.71513454362672,
+      "judge_tokens": [
+        376,
+        109
+      ],
+      "judge_verdicts": [
+        {
+          "point": "A few specific types of care are always considered planned, such as transplant surgery, maintenance chemotherapy or rehabilitation",
+          "stated": true,
+          "reason": "The answer says certain limited types of care are always planned and gives transplant surgery, maintenance chemotherapy, and rehabilitation as examples."
+        },
+        {
+          "point": "Otherwise a planned readmission is a non-acute readmission for a scheduled procedure",
+          "stated": true,
+          "reason": "The answer explicitly defines other planned readmissions as non-acute readmissions for scheduled procedures."
+        },
+        {
+          "point": "Admissions for acute illness or for complications of care are never planned",
+          "stated": true,
+          "reason": "The answer explicitly says admissions for acute illness or complications of care are never planned."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "hdef-13",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "According to the rationale for the hospital-wide mortality measure, roughly how many patients die each year from preventable harm in hospitals, and why do existing condition-specific mortality measures fall short?",
+      "error": null,
+      "answer": {
+        "question": "According to the rationale for the hospital-wide mortality measure, roughly how many patients die each year from preventable harm in hospitals, and why do existing condition-specific mortality measures fall short?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The provided rationale does not state how many patients die each year from preventable harm, so I can\u2019t give a number from this evidence. Existing measures cover conditions such as heart failure, pneumonia, and stroke, as well as coronary artery bypass surgery, but they do not capture admissions for most other conditions or procedures or show a hospital\u2019s broader performance. They also do not always allow performance measurement at smaller-volume hospitals.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_hybrid_hwm_methodology:15",
+            "doc_title": "Hybrid Hospital-Wide (All-Condition, All-Procedure) Risk-Standardized Mortality Measure with EHR Extracted Risk Factors, Methodology Report v2.1",
+            "section_title": "Overview of Report",
+            "page_start": 11,
+            "source_url": "https://www.cms.gov/files/document/hybrid-hospital-wide-all-condition-all-procedure-risk-standardized-mortality-measure-electronic.pdf",
+            "quote": "They do not, however, capture admissions for patients admitted for a majority of the conditions or procedures for which a patient may use the hospital or allow for measurement of a hospital's broader performance."
+          },
+          {
+            "chunk_id": "cms_hybrid_hwm_methodology:15",
+            "doc_title": "Hybrid Hospital-Wide (All-Condition, All-Procedure) Risk-Standardized Mortality Measure with EHR Extracted Risk Factors, Methodology Report v2.1",
+            "section_title": "Overview of Report",
+            "page_start": 11,
+            "source_url": "https://www.cms.gov/files/document/hybrid-hospital-wide-all-condition-all-procedure-risk-standardized-mortality-measure-electronic.pdf",
+            "quote": "In addition, the condition and procedure-specific mortality measures do not always allow for performance measurement for smaller volume hospitals."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8430,
+            "output_tokens": 117,
+            "cost_usd": 0.0009015,
+            "latency_ms": 2601,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 38,
+            "output_tokens": 0,
+            "cost_usd": 7.599999999999999e-07,
+            "latency_ms": 1806,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 3995,
+            "output_tokens": 510,
+            "cost_usd": 0.0006545,
+            "latency_ms": 6908,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 12463,
+        "total_output_tokens": 627,
+        "total_cost_usd": 0.001557,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2601,
+          "retrieval_ms": 1806,
+          "answer_ms": 6908,
+          "total_ms": 11316
+        },
+        "retrieved_chunk_ids": [
+          "cms_hybrid_hwm_methodology:9",
+          "cms_hybrid_hwm_methodology:15",
+          "cms_hybrid_hwm_methodology:20",
+          "cms_hybrid_hwm_methodology:80",
+          "cms_hybrid_hwm_methodology:19",
+          "cms_hybrid_hwm_methodology:24",
+          "cms_hybrid_hwm_methodology:71",
+          "cms_hybrid_hwm_methodology:75"
+        ],
+        "doc_top_similarity": 0.825236042358606,
+        "doc_query": "Rationale for the Hybrid Hospital-Wide All-Cause Risk Standardized Mortality Measure (Hybrid HWM): estimated annual deaths from preventable hospital harm and limitations of condition-specific mortality measures",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 11316,
+      "step_ms": {
+        "plan_ms": 2601,
+        "retrieval_ms": 1806,
+        "answer_ms": 6908,
+        "total_ms": 11316
+      },
+      "cost_usd": 0.001557,
+      "judge_cost_usd": 0.00252,
+      "input_tokens": 12463,
+      "output_tokens": 627,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "cms_hybrid_hwm_methodology:9",
+        "cms_hybrid_hwm_methodology:15",
+        "cms_hybrid_hwm_methodology:20",
+        "cms_hybrid_hwm_methodology:80",
+        "cms_hybrid_hwm_methodology:19",
+        "cms_hybrid_hwm_methodology:24",
+        "cms_hybrid_hwm_methodology:71",
+        "cms_hybrid_hwm_methodology:75"
+      ],
+      "doc_top_similarity": 0.825236042358606,
+      "judge_tokens": [
+        395,
+        173
+      ],
+      "judge_verdicts": [
+        {
+          "point": "More than 400,000 patients die each year from preventable harm in hospitals",
+          "stated": false,
+          "reason": "The answer explicitly declines to give a number and does not state that more than 400,000 patients die each year."
+        },
+        {
+          "point": "Condition-specific measures do not measure a hospital's broader performance",
+          "stated": true,
+          "reason": "The answer says condition-specific measures do not show a hospital\u2019s broader performance."
+        },
+        {
+          "point": "They also do not meaningfully capture performance for smaller-volume hospitals",
+          "stated": true,
+          "reason": "The answer says those measures do not always allow performance measurement at smaller-volume hospitals."
+        }
+      ],
+      "points_covered": 0.6666666666666666,
+      "points_missing": 1,
+      "correct": true
+    },
+    {
+      "id": "hdef-14",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "medium",
+      "question": "What range of annual cost does the hospital-wide mortality report give for potentially preventable deaths, and what assumption about lost years of life does it use?",
+      "error": null,
+      "answer": {
+        "question": "What range of annual cost does the hospital-wide mortality report give for potentially preventable deaths, and what assumption about lost years of life does it use?",
+        "route": "refuse",
+        "refused": true,
+        "refusal_reason": "This asks for cost estimates and a life-years assumption from a report, not CMS hospital-quality data or a measure definition covered by the available sources.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8424,
+            "output_tokens": 308,
+            "cost_usd": 0.0009964000000000002,
+            "latency_ms": 4604,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          }
+        ],
+        "total_input_tokens": 8424,
+        "total_output_tokens": 308,
+        "total_cost_usd": 0.000996,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4604,
+          "total_ms": 4604
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "refuse",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 4604,
+      "step_ms": {
+        "plan_ms": 4604,
+        "total_ms": 4604
+      },
+      "cost_usd": 0.000996,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 8424,
+      "output_tokens": 308,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "plan",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at plan; expected chunk not retrieved"
+    },
+    {
+      "id": "hdef-15",
+      "type": "definition",
+      "group": "definition",
+      "split": "holdout",
+      "difficulty": "hard",
+      "question": "For the original (ICD-9) development of the hospital-wide mortality measure, which Medicare beneficiaries and admission period make up the claims-only development dataset, and what admission dates does the clinical hybrid development dataset cover?",
+      "error": null,
+      "answer": {
+        "question": "For the original (ICD-9) development of the hospital-wide mortality measure, which Medicare beneficiaries and admission period make up the claims-only development dataset, and what admission dates does the clinical hybrid development dataset cover?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The original ICD-9 claims-only development dataset included fee-for-service Medicare beneficiaries aged 65 or older on admission, hospitalized from July 1, 2014, through June 30, 2015. The clinical hybrid development dataset included matched claims and EHR data for admissions dated January 1, 2009, through June 30, 2015.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_hybrid_hwm_methodology:27",
+            "doc_title": "Hybrid Hospital-Wide (All-Condition, All-Procedure) Risk-Standardized Mortality Measure with EHR Extracted Risk Factors, Methodology Report v2.1",
+            "section_title": "Data Sources",
+            "page_start": 17,
+            "source_url": "https://www.cms.gov/files/document/hybrid-hospital-wide-all-condition-all-procedure-risk-standardized-mortality-measure-electronic.pdf",
+            "quote": "FFS Medicare beneficiaries, 65 and older on admission, hospitalized from July 1, 2014 \u2013 June 30, 2015. b. Clinical Hybrid Development Dataset. Provides similar data as the Clinical Hybrid Re- specification Dataset with matched administrative claims and EHR data, admission dates from January 1, 2009 \u2013 June 30, 2015."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8437,
+            "output_tokens": 149,
+            "cost_usd": 0.0009182000000000001,
+            "latency_ms": 2588,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 45,
+            "output_tokens": 0,
+            "cost_usd": 9.000000000000003e-07,
+            "latency_ms": 2030,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 4538,
+            "output_tokens": 281,
+            "cost_usd": 0.0005943,
+            "latency_ms": 3617,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 13020,
+        "total_output_tokens": 430,
+        "total_cost_usd": 0.001513,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2588,
+          "retrieval_ms": 2030,
+          "answer_ms": 3617,
+          "total_ms": 8236
+        },
+        "retrieved_chunk_ids": [
+          "cms_hybrid_hwm_methodology:26",
+          "cms_hybrid_hwm_methodology:27",
+          "cms_hybrid_hwm_methodology:24",
+          "cms_hybrid_hwm_methodology:125",
+          "cms_hybrid_hwm_methodology:11",
+          "cms_hybrid_hwr_methodology:41",
+          "cms_hybrid_hwm_methodology:80",
+          "cms_hybrid_hwm_methodology:17"
+        ],
+        "doc_top_similarity": 0.793195691889879,
+        "doc_query": "Original ICD-9 development of the Hybrid Hospital-Wide All-Cause Risk Standardized Mortality Rate (Hybrid HWM): claims-only development dataset Medicare beneficiary eligibility and admission period; clinical hybrid development dataset admission-date coverage",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 8236,
+      "step_ms": {
+        "plan_ms": 2588,
+        "retrieval_ms": 2030,
+        "answer_ms": 3617,
+        "total_ms": 8236
+      },
+      "cost_usd": 0.001513,
+      "judge_cost_usd": 0.001856,
+      "input_tokens": 13020,
+      "output_tokens": 430,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "cms_hybrid_hwm_methodology:26",
+        "cms_hybrid_hwm_methodology:27",
+        "cms_hybrid_hwm_methodology:24",
+        "cms_hybrid_hwm_methodology:125",
+        "cms_hybrid_hwm_methodology:11",
+        "cms_hybrid_hwr_methodology:41",
+        "cms_hybrid_hwm_methodology:80",
+        "cms_hybrid_hwm_methodology:17"
+      ],
+      "doc_top_similarity": 0.793195691889879,
+      "judge_tokens": [
+        408,
+        104
+      ],
+      "judge_verdicts": [
+        {
+          "point": "The claims-only development dataset covers fee-for-service Medicare beneficiaries aged 65 and older hospitalized from July 1, 2014 to June 30, 2015",
+          "stated": true,
+          "reason": "The answer states that the claims-only dataset included fee-for-service Medicare beneficiaries aged 65 or older hospitalized from July 1, 2014, through June 30, 2015."
+        },
+        {
+          "point": "The clinical hybrid development dataset has admission dates from January 1, 2009 to June 30, 2015",
+          "stated": true,
+          "reason": "The answer gives the clinical hybrid dataset admission dates as January 1, 2009, through June 30, 2015."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "hdefx-01",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "holdout",
+      "difficulty": "hard",
+      "question": "How much does it cost a hospital to hire an approved vendor to administer the HCAHPS survey?",
+      "error": null,
+      "answer": {
+        "question": "How much does it cost a hospital to hire an approved vendor to administer the HCAHPS survey?",
+        "route": "refuse",
+        "refused": true,
+        "refusal_reason": "The database and documentation cover hospital-quality measures, not the fees charged by approved HCAHPS survey vendors.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8415,
+            "output_tokens": 135,
+            "cost_usd": 0.000909,
+            "latency_ms": 2706,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          }
+        ],
+        "total_input_tokens": 8415,
+        "total_output_tokens": 135,
+        "total_cost_usd": 0.000909,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2706,
+          "total_ms": 2706
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "refuse",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 2706,
+      "step_ms": {
+        "plan_ms": 2706,
+        "total_ms": 2706
+      },
+      "cost_usd": 0.000909,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 8415,
+      "output_tokens": 135,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "plan",
+      "correct": true,
+      "reason": null
+    },
+    {
+      "id": "hdefx-02",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "holdout",
+      "difficulty": "hard",
+      "question": "How many acute care hospitals are currently enrolled in the BPCI Advanced Model?",
+      "error": null,
+      "answer": {
+        "question": "How many acute care hospitals are currently enrolled in the BPCI Advanced Model?",
+        "route": "refuse",
+        "refused": true,
+        "refusal_reason": "BPCI Advanced Model enrollment counts are not available in the hospital-quality data or measure documentation.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8409,
+            "output_tokens": 70,
+            "cost_usd": 0.0008759000000000001,
+            "latency_ms": 3439,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          }
+        ],
+        "total_input_tokens": 8409,
+        "total_output_tokens": 70,
+        "total_cost_usd": 0.000876,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3439,
+          "total_ms": 3440
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "refuse",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 3440,
+      "step_ms": {
+        "plan_ms": 3439,
+        "total_ms": 3440
+      },
+      "cost_usd": 0.000876,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 8409,
+      "output_tokens": 70,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "plan",
+      "correct": true,
+      "reason": null
+    },
+    {
+      "id": "hdefx-03",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "holdout",
+      "difficulty": "hard",
+      "question": "What minimum Total Performance Score must a hospital reach to avoid a payment reduction under Hospital Value-Based Purchasing?",
+      "error": null,
+      "answer": {
+        "question": "What minimum Total Performance Score must a hospital reach to avoid a payment reduction under Hospital Value-Based Purchasing?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "The evidence found does not answer the question: The provided evidence does not specify a minimum Total Performance Score needed to avoid a payment reduction. It says the program first reduces participating hospitals\u2019 Medicare payments, but gives no score threshold. [cms_hospital_data_dictionary:18]",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v4",
+          "schema": "schema_v2",
+          "answer": "answer_v4"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8414,
+            "output_tokens": 168,
+            "cost_usd": 0.0009254,
+            "latency_ms": 3551,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 20,
+            "output_tokens": 0,
+            "cost_usd": 4.000000000000002e-07,
+            "latency_ms": 1899,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 2898,
+            "output_tokens": 265,
+            "cost_usd": 0.0004223,
+            "latency_ms": 5201,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11332,
+        "total_output_tokens": 433,
+        "total_cost_usd": 0.001348,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3551,
+          "retrieval_ms": 1899,
+          "answer_ms": 5201,
+          "total_ms": 10652
+        },
+        "retrieved_chunk_ids": [
+          "cms_hospital_data_dictionary:17",
+          "cms_hospital_data_dictionary:18",
+          "cms_hospital_data_dictionary:72",
+          "cms_hospital_data_dictionary:70",
+          "cms_hospital_data_dictionary:123",
+          "cms_hospital_data_dictionary:152",
+          "hcahps_fact_sheet:6",
+          "cms_hospital_data_dictionary:71"
+        ],
+        "doc_top_similarity": 0.759618841837776,
+        "doc_query": "Hospital Value-Based Purchasing (HVBP) Total Performance Score minimum threshold to avoid a Medicare payment reduction",
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v4",
+        "schema": "schema_v2",
+        "answer": "answer_v4"
+      },
+      "total_ms": 10652,
+      "step_ms": {
+        "plan_ms": 3551,
+        "retrieval_ms": 1899,
+        "answer_ms": 5201,
+        "total_ms": 10652
+      },
+      "cost_usd": 0.001348,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 11332,
+      "output_tokens": 433,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: answer step",
+      "correct": true,
+      "reason": null
+    }
+  ]
+}

@@ -1,0 +1,1021 @@
+{
+  "config": {
+    "tag": "smoke2",
+    "model": "gpt-6-luna",
+    "judge_model": "gpt-6-sol",
+    "split": "test",
+    "types": null,
+    "only": "num-09,num-13,def-01,def-02,def-03,defx-01,oos-01,oos-02",
+    "limit": null,
+    "workers": 3,
+    "retrieval_mode": "hybrid",
+    "prompt_versions": {
+      "plan": "plan_v2",
+      "schema": "schema_v1",
+      "answer": "answer_v3"
+    },
+    "started_utc": "2026-10-06T00:37:02+00:00",
+    "n_selected": 8,
+    "skipped_for_spend": [],
+    "max_spend": 1.0
+  },
+  "summary": {
+    "by_group": {
+      "numeric": {
+        "n": 2,
+        "k": 2
+      },
+      "definition": {
+        "n": 3,
+        "k": 0
+      },
+      "unanswerable": {
+        "n": 1,
+        "k": 1
+      },
+      "oos_unsafe": {
+        "n": 2,
+        "k": 2
+      }
+    },
+    "overall": {
+      "n": 8,
+      "k": 5
+    },
+    "numeric": {
+      "row_recall_mean": 1.0,
+      "order_ok": {
+        "k": 2,
+        "n": 2
+      },
+      "answer_states_value": {
+        "k": 0,
+        "n": 0
+      },
+      "refused": 0,
+      "sql_error": 0,
+      "repaired": 0
+    },
+    "definition": {
+      "retrieval_hit": {
+        "k": 3,
+        "n": 3
+      },
+      "doc_hit": {
+        "k": 3,
+        "n": 3
+      },
+      "cited_expected": {
+        "k": 3,
+        "n": 3
+      },
+      "refused": 0,
+      "points_covered_mean": 0.4444
+    },
+    "refusal_stage": {
+      "after plan: answer step": 1,
+      "plan": 2
+    },
+    "latency_ms": {
+      "median": 16365,
+      "p90": 21046
+    },
+    "cost_usd": {
+      "ask_total": 0.00865,
+      "judge_total": 0.00711,
+      "total": 0.01576,
+      "ask_per_question": 0.001081
+    },
+    "tokens": {
+      "input": 74048,
+      "output": 2504
+    },
+    "errors": []
+  },
+  "records": [
+    {
+      "id": "num-09",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "Which five states or territories have the highest average 30-day heart failure readmission rate, counting only those with at least 20 hospitals that report it? Give the state code, number of hospitals and average (2 decimals). Break ties by state abbreviation.",
+      "error": null,
+      "answer": {
+        "question": "Which five states or territories have the highest average 30-day heart failure readmission rate, counting only those with at least 20 hospitals that report it? Give the state code, number of hospitals and average (2 decimals). Break ties by state abbreviation.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The five states or territories with the highest average 30-day heart failure readmission rates among those with at least 20 reporting hospitals are: PR \u2014 40 hospitals, 23.29; WV \u2014 37 hospitals, 22.1; MA \u2014 53 hospitals, 22.03; NY \u2014 137 hospitals, 21.89; and NH \u2014 23 hospitals, 21.86.",
+        "sql": "SELECT state AS state_code, COUNT(DISTINCT facility_id) AS hospitals_reporting, ROUND(CAST(AVG(score) AS DECIMAL), 2) AS average_readmission_rate FROM hq.v_benchmarks WHERE measure_id = 'READM_30_HF' AND score IS NOT NULL AND state IS NOT NULL GROUP BY state HAVING COUNT(DISTINCT facility_id) >= 20 ORDER BY AVG(score) DESC, state ASC LIMIT 5",
+        "columns": [
+          "state_code",
+          "hospitals_reporting",
+          "average_readmission_rate"
+        ],
+        "rows": [
+          [
+            "PR",
+            40,
+            23.29
+          ],
+          [
+            "WV",
+            37,
+            22.1
+          ],
+          [
+            "MA",
+            53,
+            22.03
+          ],
+          [
+            "NY",
+            137,
+            21.89
+          ],
+          [
+            "NH",
+            23,
+            21.86
+          ]
+        ],
+        "row_count": 5,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7548,
+            "output_tokens": 408,
+            "cost_usd": 0.0009588000000000001,
+            "latency_ms": 10819,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 756,
+            "output_tokens": 103,
+            "cost_usd": 0.0001271,
+            "latency_ms": 2791,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 8304,
+        "total_output_tokens": 511,
+        "total_cost_usd": 0.001086,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 10819,
+          "sql_ms": 2972,
+          "answer_ms": 2791,
+          "total_ms": 16584
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 5
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 16584,
+      "step_ms": {
+        "plan_ms": 10819,
+        "sql_ms": 2972,
+        "answer_ms": 2791,
+        "total_ms": 16584
+      },
+      "cost_usd": 0.001086,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 8304,
+      "output_tokens": 511,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 5,
+      "truth_rows": 5,
+      "gen_rows": 5,
+      "reason": null,
+      "truth_ms": 779
+    },
+    {
+      "id": "num-13",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "How many Texas hospitals have each overall star rating from 1 to 5? Leave out hospitals with no rating. List by rating, 1 first.",
+      "error": null,
+      "answer": {
+        "question": "How many Texas hospitals have each overall star rating from 1 to 5? Leave out hospitals with no rating. List by rating, 1 first.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Texas hospitals by overall star rating: 1 star: 7; 2 stars: 37; 3 stars: 69; 4 stars: 74; 5 stars: 29. Hospitals with no rating are excluded.",
+        "sql": "SELECT h.overall_rating AS overall_star_rating, COUNT(*) AS hospital_count FROM hq.hospitals AS h WHERE h.is_texas = TRUE AND h.overall_rating BETWEEN 1 AND 5 GROUP BY h.overall_rating ORDER BY h.overall_rating LIMIT 200",
+        "columns": [
+          "overall_star_rating",
+          "hospital_count"
+        ],
+        "rows": [
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            37
+          ],
+          [
+            3,
+            69
+          ],
+          [
+            4,
+            74
+          ],
+          [
+            5,
+            29
+          ]
+        ],
+        "row_count": 5,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7528,
+            "output_tokens": 148,
+            "cost_usd": 0.0008268,
+            "latency_ms": 8468,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 668,
+            "output_tokens": 68,
+            "cost_usd": 0.0001008,
+            "latency_ms": 1826,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 8196,
+        "total_output_tokens": 216,
+        "total_cost_usd": 0.000928,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 8468,
+          "sql_ms": 3947,
+          "answer_ms": 1826,
+          "total_ms": 14242
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 5
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 14242,
+      "step_ms": {
+        "plan_ms": 8468,
+        "sql_ms": 3947,
+        "answer_ms": 1826,
+        "total_ms": 14242
+      },
+      "cost_usd": 0.000928,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 8196,
+      "output_tokens": 216,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 5,
+      "truth_rows": 5,
+      "gen_rows": 5,
+      "reason": null,
+      "truth_ms": 359
+    },
+    {
+      "id": "def-01",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "Which measure groups feed a hospital's overall star rating, and how many stars can a hospital get?",
+      "error": null,
+      "answer": {
+        "question": "Which measure groups feed a hospital's overall star rating, and how many stars can a hospital get?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "A hospital\u2019s overall star rating combines measures from five groups: mortality, safety of care, readmission, patient experience, and timely and effective care. A hospital can receive one to five stars, with five stars being the highest rating.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_hospital_data_dictionary:6",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "General Information: Overall Rating",
+            "page_start": 8,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "measures in five measure groups: mortality, safety of care, readmission, patient experience, timely & effective care. The hospitals can receive between one and five stars"
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7517,
+            "output_tokens": 100,
+            "cost_usd": 0.0008017,
+            "latency_ms": 8467,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 23,
+            "output_tokens": 0,
+            "cost_usd": 4.6e-07,
+            "latency_ms": 6643,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 3143,
+            "output_tokens": 162,
+            "cost_usd": 0.0003953,
+            "latency_ms": 3625,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10683,
+        "total_output_tokens": 262,
+        "total_cost_usd": 0.001197,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 8467,
+          "retrieval_ms": 6643,
+          "answer_ms": 3625,
+          "total_ms": 18736
+        },
+        "retrieved_chunk_ids": [
+          "cms_hospital_data_dictionary:6",
+          "cms_hybrid_hwm_methodology:76",
+          "cms_hybrid_hwm_methodology:77",
+          "cms_hospital_data_dictionary:113",
+          "cms_hospital_data_dictionary:149",
+          "cms_hospital_data_dictionary:120"
+        ],
+        "doc_top_similarity": 0.753456579256448,
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 18736,
+      "step_ms": {
+        "plan_ms": 8467,
+        "retrieval_ms": 6643,
+        "answer_ms": 3625,
+        "total_ms": 18736
+      },
+      "cost_usd": 0.001197,
+      "judge_cost_usd": 0.002396,
+      "input_tokens": 10683,
+      "output_tokens": 262,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "cms_hospital_data_dictionary:6",
+        "cms_hybrid_hwm_methodology:76",
+        "cms_hybrid_hwm_methodology:77",
+        "cms_hospital_data_dictionary:113",
+        "cms_hospital_data_dictionary:149",
+        "cms_hospital_data_dictionary:120"
+      ],
+      "doc_top_similarity": 0.753456579256448,
+      "judge_tokens": [
+        358,
+        168
+      ],
+      "judge_verdicts": [
+        {
+          "point": "The overall star rating summarizes measures reported on Care Compare into a single rating",
+          "stated": false,
+          "reason": "The answer says the rating combines measures but does not say they are reported on Care Compare."
+        },
+        {
+          "point": "It uses five measure groups: mortality, safety of care, readmission, patient experience, timely and effective care",
+          "stated": true,
+          "reason": "The answer names all five measure groups."
+        },
+        {
+          "point": "Hospitals receive one to five stars, five being best",
+          "stated": true,
+          "reason": "The answer says hospitals can receive one to five stars and that five is highest."
+        },
+        {
+          "point": "Most hospitals display three stars",
+          "stated": false,
+          "reason": "The answer does not say that most hospitals display three stars."
+        }
+      ],
+      "points_covered": 0.5,
+      "points_missing": 2,
+      "correct": false,
+      "reason": "2/4 points missing: The overall star rating summarizes measures reported on Care | Most hospitals display three stars"
+    },
+    {
+      "id": "def-02",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "What is the standardized infection ratio for hospital-acquired infections, and how is it judged against the national benchmark?",
+      "error": null,
+      "answer": {
+        "question": "What is the standardized infection ratio for hospital-acquired infections, and how is it judged against the national benchmark?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The standardized infection ratio (SIR) is calculated by the CDC for hospital-acquired infection measures and may account for factors such as patient care location, hospital size, and patient health. A hospital\u2019s SIR is judged against the national benchmark as better (lower), no different, or worse (higher); no specific hospital\u2019s SIR is provided here.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_hospital_data_dictionary:10",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "Complications: Healthcare-Associated Infections (HAI) Measures",
+            "page_start": 9,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "The CDC calculates a Standardized Infection Ratio (SIR) which may take into account the type of patient care location"
+          },
+          {
+            "chunk_id": "cms_hospital_data_dictionary:10",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "Complications: Healthcare-Associated Infections (HAI) Measures",
+            "page_start": 9,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "Hospitals' SIRs are compared to the national benchmark to determine if hospitals' performance on these measures is better than the national benchmark (lower), no different than the national benchmark, or worse than the national benchmark (higher)."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7519,
+            "output_tokens": 219,
+            "cost_usd": 0.0008614000000000001,
+            "latency_ms": 5839,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 27,
+            "output_tokens": 0,
+            "cost_usd": 5.4e-07,
+            "latency_ms": 8056,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 3607,
+            "output_tokens": 299,
+            "cost_usd": 0.0005102,
+            "latency_ms": 4758,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11153,
+        "total_output_tokens": 518,
+        "total_cost_usd": 0.001372,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 5839,
+          "retrieval_ms": 8056,
+          "answer_ms": 4758,
+          "total_ms": 18655
+        },
+        "retrieved_chunk_ids": [
+          "cms_hospital_data_dictionary:10",
+          "cms_hospital_data_dictionary:122",
+          "cms_hybrid_hwr_methodology:24",
+          "cms_hybrid_hwr_methodology:25",
+          "cms_hybrid_hwm_methodology:147",
+          "cms_hybrid_hwm_methodology:74"
+        ],
+        "doc_top_similarity": 0.654900860011442,
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 18655,
+      "step_ms": {
+        "plan_ms": 5839,
+        "retrieval_ms": 8056,
+        "answer_ms": 4758,
+        "total_ms": 18655
+      },
+      "cost_usd": 0.001372,
+      "judge_cost_usd": 0.002476,
+      "input_tokens": 11153,
+      "output_tokens": 518,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "cms_hospital_data_dictionary:10",
+        "cms_hospital_data_dictionary:122",
+        "cms_hybrid_hwr_methodology:24",
+        "cms_hybrid_hwr_methodology:25",
+        "cms_hybrid_hwm_methodology:147",
+        "cms_hybrid_hwm_methodology:74"
+      ],
+      "doc_top_similarity": 0.654900860011442,
+      "judge_tokens": [
+        388,
+        170
+      ],
+      "judge_verdicts": [
+        {
+          "point": "CDC calculates the Standardized Infection Ratio (SIR)",
+          "stated": true,
+          "reason": "The answer explicitly says the CDC calculates the SIR."
+        },
+        {
+          "point": "SIRs are calculated for the hospital, the state and the nation",
+          "stated": false,
+          "reason": "The answer does not say SIRs are calculated for the hospital, state, and nation."
+        },
+        {
+          "point": "A hospital is better (lower), no different, or worse (higher) than the national benchmark",
+          "stated": true,
+          "reason": "The answer explicitly gives the better (lower), no different, and worse (higher) comparisons to the national benchmark."
+        },
+        {
+          "point": "Infection types include central line bloodstream infections (CLABSI)",
+          "stated": false,
+          "reason": "The answer does not mention central line bloodstream infections (CLABSI)."
+        }
+      ],
+      "points_covered": 0.5,
+      "points_missing": 2,
+      "correct": false,
+      "reason": "2/4 points missing: SIRs are calculated for the hospital, the state and the nati | Infection types include central line bloodstream infections "
+    },
+    {
+      "id": "def-03",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "What does a negative hospital return days (EDAC) result mean, and in what units is it reported?",
+      "error": null,
+      "answer": {
+        "question": "What does a negative hospital return days (EDAC) result mean, and in what units is it reported?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "A negative EDAC result means patients spent fewer days in acute care than expected compared with patients at an average-performing hospital with a similar case mix; it is a better result. EDAC is reported in days per 100 discharges.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_hospital_data_dictionary:29",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "Unplanned hospital visits: By Condition",
+            "page_start": 14,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "A negative EDAC result is better and indicates that a hospital's patients spent fewer days in acute care than would be expected if admitted to an average performing hospital with the same case mix."
+          },
+          {
+            "chunk_id": "cms_hospital_data_dictionary:29",
+            "doc_title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+            "section_title": "Unplanned hospital visits: By Condition",
+            "page_start": 14,
+            "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+            "quote": "Hospital return (EDAC) results are also provided in the downloadable databases but are presented in days per 100 discharges"
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7519,
+            "output_tokens": 144,
+            "cost_usd": 0.0008239000000000001,
+            "latency_ms": 3707,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 18,
+            "output_tokens": 0,
+            "cost_usd": 3.6e-07,
+            "latency_ms": 7397,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 3211,
+            "output_tokens": 217,
+            "cost_usd": 0.00042960000000000003,
+            "latency_ms": 5041,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10748,
+        "total_output_tokens": 361,
+        "total_cost_usd": 0.001254,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3707,
+          "retrieval_ms": 7397,
+          "answer_ms": 5041,
+          "total_ms": 16147
+        },
+        "retrieved_chunk_ids": [
+          "cms_hospital_data_dictionary:29",
+          "cms_hospital_data_dictionary:140",
+          "cms_hospital_data_dictionary:34",
+          "cms_hybrid_hwr_methodology:29",
+          "cms_hospital_data_dictionary:103",
+          "cms_hybrid_hwr_methodology:103"
+        ],
+        "doc_top_similarity": 0.684885999272167,
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 16147,
+      "step_ms": {
+        "plan_ms": 3707,
+        "retrieval_ms": 7397,
+        "answer_ms": 5041,
+        "total_ms": 16147
+      },
+      "cost_usd": 0.001254,
+      "judge_cost_usd": 0.002236,
+      "input_tokens": 10748,
+      "output_tokens": 361,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "cms_hospital_data_dictionary:29",
+        "cms_hospital_data_dictionary:140",
+        "cms_hospital_data_dictionary:34",
+        "cms_hybrid_hwr_methodology:29",
+        "cms_hospital_data_dictionary:103",
+        "cms_hybrid_hwr_methodology:103"
+      ],
+      "doc_top_similarity": 0.684885999272167,
+      "judge_tokens": [
+        353,
+        153
+      ],
+      "judge_verdicts": [
+        {
+          "point": "EDAC is shown as days per 100 discharges and can be negative, zero or positive",
+          "stated": false,
+          "reason": "The answer gives the units and discusses a negative result, but does not say EDAC can also be zero or positive."
+        },
+        {
+          "point": "A negative EDAC is better: patients spent fewer days in acute care than expected",
+          "stated": true,
+          "reason": "The answer says a negative EDAC means fewer acute-care days than expected and is a better result."
+        },
+        {
+          "point": "An EDAC of zero means the hospital performs exactly as expected",
+          "stated": false,
+          "reason": "The answer does not explain what an EDAC of zero means."
+        }
+      ],
+      "points_covered": 0.3333333333333333,
+      "points_missing": 2,
+      "correct": false,
+      "reason": "2/3 points missing: EDAC is shown as days per 100 discharges and can be negative | An EDAC of zero means the hospital performs exactly as expec"
+    },
+    {
+      "id": "defx-01",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "What criteria must a hospital meet to be designated Birthing-Friendly?",
+      "error": null,
+      "answer": {
+        "question": "What criteria must a hospital meet to be designated Birthing-Friendly?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "The evidence found does not answer the question: The provided documentation does not specify the criteria for Birthing-Friendly designation. It notes that a maternal-health measure assesses whether a hospital participates in a statewide or national perinatal quality improvement collaborative, but does not say whether that is a designation requirement.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7510,
+            "output_tokens": 108,
+            "cost_usd": 0.000805,
+            "latency_ms": 7531,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 10,
+            "output_tokens": 0,
+            "cost_usd": 2.0000000000000004e-07,
+            "latency_ms": 6612,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 2428,
+            "output_tokens": 424,
+            "cost_usd": 0.0004548,
+            "latency_ms": 6900,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9948,
+        "total_output_tokens": 532,
+        "total_cost_usd": 0.00126,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 7531,
+          "retrieval_ms": 6612,
+          "answer_ms": 6900,
+          "total_ms": 21046
+        },
+        "retrieved_chunk_ids": [
+          "cms_bpci_sep1_fact_sheet:11",
+          "cms_hospital_data_dictionary:125",
+          "cms_hospital_data_dictionary:113",
+          "cms_hospital_data_dictionary:77",
+          "cms_hospital_data_dictionary:38",
+          "cms_hospital_data_dictionary:42"
+        ],
+        "doc_top_similarity": 0.542950607878381,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 21046,
+      "step_ms": {
+        "plan_ms": 7531,
+        "retrieval_ms": 6612,
+        "answer_ms": 6900,
+        "total_ms": 21046
+      },
+      "cost_usd": 0.00126,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9948,
+      "output_tokens": 532,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: answer step",
+      "correct": true,
+      "reason": null
+    },
+    {
+      "id": "oos-01",
+      "type": "out_of_scope",
+      "group": "oos_unsafe",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "What is a good recipe for chicken tikka masala?",
+      "error": null,
+      "answer": {
+        "question": "What is a good recipe for chicken tikka masala?",
+        "route": "refuse",
+        "refused": true,
+        "refusal_reason": "This asks for a recipe, which is outside the hospital-quality data and measure definitions.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7509,
+            "output_tokens": 65,
+            "cost_usd": 0.0007834000000000001,
+            "latency_ms": 4010,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          }
+        ],
+        "total_input_tokens": 7509,
+        "total_output_tokens": 65,
+        "total_cost_usd": 0.000783,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4010,
+          "total_ms": 4011
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "refuse",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 4011,
+      "step_ms": {
+        "plan_ms": 4010,
+        "total_ms": 4011
+      },
+      "cost_usd": 0.000783,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7509,
+      "output_tokens": 65,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "plan",
+      "correct": true,
+      "reason": null
+    },
+    {
+      "id": "oos-02",
+      "type": "out_of_scope",
+      "group": "oos_unsafe",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "Who won the World Series in 2024?",
+      "error": null,
+      "answer": {
+        "question": "Who won the World Series in 2024?",
+        "route": "refuse",
+        "refused": true,
+        "refusal_reason": "This asks about baseball rather than CMS hospital-quality data or measure definitions.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7507,
+            "output_tokens": 39,
+            "cost_usd": 0.0007702000000000001,
+            "latency_ms": 3453,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          }
+        ],
+        "total_input_tokens": 7507,
+        "total_output_tokens": 39,
+        "total_cost_usd": 0.00077,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3453,
+          "total_ms": 3454
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "refuse",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 3454,
+      "step_ms": {
+        "plan_ms": 3453,
+        "total_ms": 3454
+      },
+      "cost_usd": 0.00077,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7507,
+      "output_tokens": 39,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "plan",
+      "correct": true,
+      "reason": null
+    }
+  ]
+}

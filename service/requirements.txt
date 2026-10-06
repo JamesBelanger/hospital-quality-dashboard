@@ -1,0 +1,9 @@
+# Runtime dependencies of the service container (the ETL and tests have their own needs).
+# Pinned to the versions the evaluation was run against; change them through a release.
+fastapi==0.142.2
+uvicorn[standard]==0.54.0
+pydantic==2.13.5
+openai==3.24.0
+psycopg[binary]==3.3.6
+sqlglot==30.21.0
+python-dotenv==1.2.4

@@ -1,0 +1,88 @@
+{
+  "documents": [
+    {
+      "doc_id": "cms_hospital_data_dictionary",
+      "title": "Hospital Downloadable Database Data Dictionary (July 2026)",
+      "publisher": "CMS Provider Data Catalog",
+      "source_url": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf",
+      "retrieved_at": "2026-10-05T23:37:32+00:00",
+      "sha256": "a304420163abc6c677afc248a93f38108009b17697aa1c681da8a18d18d8a04d",
+      "bytes": 1237869,
+      "content_type": "application/pdf",
+      "file": "cms_hospital_data_dictionary.pdf",
+      "pages": 100
+    },
+    {
+      "doc_id": "cms_hybrid_hwr_methodology",
+      "title": "Hybrid Hospital-Wide Readmission Measure with Electronic Health Record Extracted Risk Factors, Methodology Report v1.2 (March 2023)",
+      "publisher": "CMS / Yale CORE",
+      "source_url": "https://www.cms.gov/files/document/hybrid-hospital-wide-readmission-methodology-report-03202023.pdf",
+      "retrieved_at": "2026-10-05T23:37:33+00:00",
+      "sha256": "9eb0b9a0976219fe8d4d9a856dfebc6c87a102623e974e1787b83b8d6b17e005",
+      "bytes": 2876016,
+      "content_type": "application/pdf",
+      "file": "cms_hybrid_hwr_methodology.pdf",
+      "pages": 98
+    },
+    {
+      "doc_id": "cms_hybrid_hwm_methodology",
+      "title": "Hybrid Hospital-Wide (All-Condition, All-Procedure) Risk-Standardized Mortality Measure with EHR Extracted Risk Factors, Methodology Report v2.1",
+      "publisher": "CMS / Yale CORE",
+      "source_url": "https://www.cms.gov/files/document/hybrid-hospital-wide-all-condition-all-procedure-risk-standardized-mortality-measure-electronic.pdf",
+      "retrieved_at": "2026-10-05T23:37:35+00:00",
+      "sha256": "251baf82e0bac94861903b88ca852b107478925525c2bd97d748b115461db2ec",
+      "bytes": 2480474,
+      "content_type": "application/pdf",
+      "file": "cms_hybrid_hwm_methodology.pdf",
+      "pages": 95
+    },
+    {
+      "doc_id": "hcahps_fact_sheet",
+      "title": "HCAHPS Fact Sheet (CAHPS Hospital Survey), December 2024",
+      "publisher": "CMS HCAHPS Project Team",
+      "source_url": "https://hcahpsonline.org/globalassets/hcahps/facts/hcahps_fact_sheet_december_2024.pdf",
+      "retrieved_at": "2026-10-05T23:37:36+00:00",
+      "sha256": "c35565fff2a2ea8c97016d93d59cfeb95e82ba52ddea974a02243e88cb9139c6",
+      "bytes": 405878,
+      "content_type": "application/pdf",
+      "file": "hcahps_fact_sheet.pdf",
+      "pages": 4
+    },
+    {
+      "doc_id": "hcahps_star_tech_notes",
+      "title": "Technical Notes for HCAHPS Star Ratings (January 2024 Public Reporting)",
+      "publisher": "CMS HCAHPS Project Team",
+      "source_url": "https://hcahpsonline.org/globalassets/hcahps/star-ratings/tech-notes/january-2024_star-ratings_tech-notes.pdf",
+      "retrieved_at": "2026-10-05T23:37:43+00:00",
+      "sha256": "447beb913826c44ceb47332476e28f3a75a82175c70cd66346c1aa3d591cd4f6",
+      "bytes": 427364,
+      "content_type": "application/pdf",
+      "file": "hcahps_star_tech_notes.pdf",
+      "pages": 11
+    },
+    {
+      "doc_id": "cms_bpci_sep1_fact_sheet",
+      "title": "Quality Measures Fact Sheet: Severe Sepsis and Septic Shock: Management Bundle (SEP-1), BPCI Advanced (August 2020)",
+      "publisher": "CMS Innovation Center",
+      "source_url": "https://www.cms.gov/priorities/innovation/media/document/bpci-advanced-alt-fs-my4-sepsis",
+      "retrieved_at": "2026-10-05T23:37:45+00:00",
+      "sha256": "3dc352bc6ea702c01a3b15dd861e663ea98d6157042e22fd21d19cf7edf1be03",
+      "bytes": 334609,
+      "content_type": "application/pdf",
+      "file": "cms_bpci_sep1_fact_sheet.pdf",
+      "pages": 5
+    },
+    {
+      "doc_id": "cms_bpci_psi90_fact_sheet",
+      "title": "Quality Measures Fact Sheet: Patient Safety Indicators (PSI 90), BPCI Advanced (October 2020)",
+      "publisher": "CMS Innovation Center",
+      "source_url": "https://www.cms.gov/priorities/innovation/media/document/bpciadvancedmy123psi90fact-sheet",
+      "retrieved_at": "2026-10-05T23:37:47+00:00",
+      "sha256": "6205525421ac3ff816d70b68b5072e6629a8d3932a39acfb6ea6d2364847279f",
+      "bytes": 236621,
+      "content_type": "application/pdf",
+      "file": "cms_bpci_psi90_fact_sheet.pdf",
+      "pages": 6
+    }
+  ]
+}

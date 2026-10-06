@@ -1,0 +1,2382 @@
+{
+  "config": {
+    "tag": "luna-keyword",
+    "model": "gpt-6-luna",
+    "judge_model": "gpt-6-sol",
+    "split": "all",
+    "types": "definition,definition_unanswerable",
+    "only": null,
+    "limit": null,
+    "workers": 3,
+    "retrieval_mode": "keyword",
+    "prompt_versions": {
+      "plan": "plan_v2",
+      "schema": "schema_v1",
+      "answer": "answer_v3"
+    },
+    "started_utc": "2026-10-06T00:52:28+00:00",
+    "n_selected": 26,
+    "skipped_for_spend": [],
+    "max_spend": 1.0
+  },
+  "summary": {
+    "by_group": {
+      "definition": {
+        "n": 22,
+        "k": 0
+      },
+      "unanswerable": {
+        "n": 4,
+        "k": 4
+      }
+    },
+    "overall": {
+      "n": 26,
+      "k": 4
+    },
+    "definition": {
+      "retrieval_hit": {
+        "k": 0,
+        "n": 22
+      },
+      "doc_hit": {
+        "k": 0,
+        "n": 22
+      },
+      "cited_expected": {
+        "k": 0,
+        "n": 22
+      },
+      "refused": 21,
+      "points_covered_mean": 0.0
+    },
+    "refusal_stage": {
+      "after plan: no evidence": 3,
+      "plan": 1
+    },
+    "latency_ms": {
+      "median": 9797,
+      "p90": 15405
+    },
+    "cost_usd": {
+      "ask_total": 0.02144,
+      "judge_total": 0.00268,
+      "total": 0.02412,
+      "ask_per_question": 0.000825
+    },
+    "tokens": {
+      "input": 197159,
+      "output": 3552
+    },
+    "errors": []
+  },
+  "records": [
+    {
+      "id": "def-01",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "Which measure groups feed a hospital's overall star rating, and how many stars can a hospital get?",
+      "error": null,
+      "answer": {
+        "question": "Which measure groups feed a hospital's overall star rating, and how many stars can a hospital get?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "A hospital\u2019s overall star rating uses scores from mortality, readmissions, safety, patient experience, imaging, effectiveness of care, and timeliness of care. Hospitals can receive one to five stars.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "cms_hybrid_hwm_methodology:76",
+            "doc_title": "Hybrid Hospital-Wide (All-Condition, All-Procedure) Risk-Standardized Mortality Measure with EHR Extracted Risk Factors, Methodology Report v2.1",
+            "section_title": "Number of hospitals",
+            "page_start": 48,
+            "source_url": "https://www.cms.gov/files/document/hybrid-hospital-wide-all-condition-all-procedure-risk-standardized-mortality-measure-electronic.pdf",
+            "quote": "different domains of quality (mortality, readmissions, safety, patient experience, imaging, effectiveness of care, timeliness of care)"
+          },
+          {
+            "chunk_id": "cms_hybrid_hwm_methodology:76",
+            "doc_title": "Hybrid Hospital-Wide (All-Condition, All-Procedure) Risk-Standardized Mortality Measure with EHR Extracted Risk Factors, Methodology Report v2.1",
+            "section_title": "Number of hospitals",
+            "page_start": 48,
+            "source_url": "https://www.cms.gov/files/document/hybrid-hospital-wide-all-condition-all-procedure-risk-standardized-mortality-measure-electronic.pdf",
+            "quote": "assigned one-to-five stars (the hospital's star rating)"
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7517,
+            "output_tokens": 107,
+            "cost_usd": 0.0008052000000000001,
+            "latency_ms": 10547,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 30,
+            "output_tokens": 0,
+            "cost_usd": 6.000000000000001e-07,
+            "latency_ms": 8227,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 1115,
+            "output_tokens": 192,
+            "cost_usd": 0.0002075,
+            "latency_ms": 3165,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 8662,
+        "total_output_tokens": 299,
+        "total_cost_usd": 0.001013,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 10547,
+          "retrieval_ms": 8227,
+          "answer_ms": 3165,
+          "total_ms": 21942
+        },
+        "retrieved_chunk_ids": [
+          "cms_hybrid_hwm_methodology:76"
+        ],
+        "doc_top_similarity": 0.734678006529486,
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 21942,
+      "step_ms": {
+        "plan_ms": 10547,
+        "retrieval_ms": 8227,
+        "answer_ms": 3165,
+        "total_ms": 21942
+      },
+      "cost_usd": 0.001013,
+      "judge_cost_usd": 0.00268,
+      "input_tokens": 8662,
+      "output_tokens": 299,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [
+        "cms_hybrid_hwm_methodology:76"
+      ],
+      "doc_top_similarity": 0.734678006529486,
+      "judge_tokens": [
+        350,
+        198
+      ],
+      "judge_verdicts": [
+        {
+          "point": "The overall star rating summarizes measures reported on Care Compare into a single rating",
+          "stated": false,
+          "reason": "The answer does not mention Care Compare or say the rating summarizes its reported measures into a single rating."
+        },
+        {
+          "point": "It uses five measure groups: mortality, safety of care, readmission, patient experience, timely and effective care",
+          "stated": false,
+          "reason": "The answer lists seven categories, including imaging, rather than the specified five measure groups."
+        },
+        {
+          "point": "Hospitals receive one to five stars, five being best",
+          "stated": false,
+          "reason": "The answer says hospitals can receive one to five stars but does not state that five is best."
+        },
+        {
+          "point": "Most hospitals display three stars",
+          "stated": false,
+          "reason": "The answer does not say that most hospitals display three stars."
+        }
+      ],
+      "points_covered": 0.0,
+      "points_missing": 4,
+      "correct": false,
+      "reason": "4/4 points missing: The overall star rating summarizes measures reported on Care | It uses five measure groups: mortality, safety of care, read | Hospitals receive one to five stars, five being best; retrieval miss"
+    },
+    {
+      "id": "def-02",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "What is the standardized infection ratio for hospital-acquired infections, and how is it judged against the national benchmark?",
+      "error": null,
+      "answer": {
+        "question": "What is the standardized infection ratio for hospital-acquired infections, and how is it judged against the national benchmark?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7519,
+            "output_tokens": 230,
+            "cost_usd": 0.0008669000000000001,
+            "latency_ms": 11824,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 27,
+            "output_tokens": 0,
+            "cost_usd": 5.4e-07,
+            "latency_ms": 4833,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7546,
+        "total_output_tokens": 230,
+        "total_cost_usd": 0.000867,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 11824,
+          "retrieval_ms": 4833,
+          "total_ms": 16659
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 16659,
+      "step_ms": {
+        "plan_ms": 11824,
+        "retrieval_ms": 4833,
+        "total_ms": 16659
+      },
+      "cost_usd": 0.000867,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7546,
+      "output_tokens": 230,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 4,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-03",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "What does a negative hospital return days (EDAC) result mean, and in what units is it reported?",
+      "error": null,
+      "answer": {
+        "question": "What does a negative hospital return days (EDAC) result mean, and in what units is it reported?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7519,
+            "output_tokens": 102,
+            "cost_usd": 0.0008029000000000001,
+            "latency_ms": 9395,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 15,
+            "output_tokens": 0,
+            "cost_usd": 3.0000000000000004e-07,
+            "latency_ms": 6009,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7534,
+        "total_output_tokens": 102,
+        "total_cost_usd": 0.000803,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 9395,
+          "retrieval_ms": 6009,
+          "total_ms": 15405
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 15405,
+      "step_ms": {
+        "plan_ms": 9395,
+        "retrieval_ms": 6009,
+        "total_ms": 15405
+      },
+      "cost_usd": 0.000803,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7534,
+      "output_tokens": 102,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-04",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "What do the 30-day death measures count, and is a lower rate better?",
+      "error": null,
+      "answer": {
+        "question": "What do the 30-day death measures count, and is a lower rate better?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7514,
+            "output_tokens": 174,
+            "cost_usd": 0.0008384000000000001,
+            "latency_ms": 6539,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 69,
+            "output_tokens": 0,
+            "cost_usd": 1.38e-06,
+            "latency_ms": 5249,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7583,
+        "total_output_tokens": 174,
+        "total_cost_usd": 0.00084,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6539,
+          "retrieval_ms": 5249,
+          "total_ms": 11789
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 11789,
+      "step_ms": {
+        "plan_ms": 6539,
+        "retrieval_ms": 5249,
+        "total_ms": 11789
+      },
+      "cost_usd": 0.00084,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7583,
+      "output_tokens": 174,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 4,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-05",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "What do timely and effective care measures show, and which patients do they apply to?",
+      "error": null,
+      "answer": {
+        "question": "What do timely and effective care measures show, and which patients do they apply to?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7514,
+            "output_tokens": 142,
+            "cost_usd": 0.0008224,
+            "latency_ms": 5943,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 19,
+            "output_tokens": 0,
+            "cost_usd": 3.7999999999999996e-07,
+            "latency_ms": 6875,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7533,
+        "total_output_tokens": 142,
+        "total_cost_usd": 0.000823,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 5943,
+          "retrieval_ms": 6875,
+          "total_ms": 12819
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 12819,
+      "step_ms": {
+        "plan_ms": 5943,
+        "retrieval_ms": 6875,
+        "total_ms": 12819
+      },
+      "cost_usd": 0.000823,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7533,
+      "output_tokens": 142,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-06",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "Which patients are eligible for the hybrid hospital-wide readmission measure?",
+      "error": null,
+      "answer": {
+        "question": "Which patients are eligible for the hybrid hospital-wide readmission measure?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7510,
+            "output_tokens": 102,
+            "cost_usd": 0.000802,
+            "latency_ms": 4847,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 24,
+            "output_tokens": 0,
+            "cost_usd": 4.8e-07,
+            "latency_ms": 5610,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7534,
+        "total_output_tokens": 102,
+        "total_cost_usd": 0.000802,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4847,
+          "retrieval_ms": 5610,
+          "total_ms": 10458
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 10458,
+      "step_ms": {
+        "plan_ms": 4847,
+        "retrieval_ms": 5610,
+        "total_ms": 10458
+      },
+      "cost_usd": 0.000802,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7534,
+      "output_tokens": 102,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 4,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-07",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "Which admissions does the hospital-wide readmission measure exclude?",
+      "error": null,
+      "answer": {
+        "question": "Which admissions does the hospital-wide readmission measure exclude?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7508,
+            "output_tokens": 100,
+            "cost_usd": 0.0008008000000000001,
+            "latency_ms": 6061,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 21,
+            "output_tokens": 0,
+            "cost_usd": 4.200000000000002e-07,
+            "latency_ms": 4773,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7529,
+        "total_output_tokens": 100,
+        "total_cost_usd": 0.000801,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6061,
+          "retrieval_ms": 4773,
+          "total_ms": 10834
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 10834,
+      "step_ms": {
+        "plan_ms": 6061,
+        "retrieval_ms": 4773,
+        "total_ms": 10834
+      },
+      "cost_usd": 0.000801,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7529,
+      "output_tokens": 100,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 4,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-08",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "What electronic health record data does the hybrid readmission measure add for risk adjustment?",
+      "error": null,
+      "answer": {
+        "question": "What electronic health record data does the hybrid readmission measure add for risk adjustment?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7513,
+            "output_tokens": 130,
+            "cost_usd": 0.0008163000000000001,
+            "latency_ms": 6941,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 24,
+            "output_tokens": 0,
+            "cost_usd": 4.8e-07,
+            "latency_ms": 5552,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7537,
+        "total_output_tokens": 130,
+        "total_cost_usd": 0.000817,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6941,
+          "retrieval_ms": 5552,
+          "total_ms": 12494
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 12494,
+      "step_ms": {
+        "plan_ms": 6941,
+        "retrieval_ms": 5552,
+        "total_ms": 12494
+      },
+      "cost_usd": 0.000817,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7537,
+      "output_tokens": 130,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 4,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-09",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "What changed when Medicare Advantage admissions were added to the hospital-wide readmission measure?",
+      "error": null,
+      "answer": {
+        "question": "What changed when Medicare Advantage admissions were added to the hospital-wide readmission measure?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7513,
+            "output_tokens": 103,
+            "cost_usd": 0.0008028000000000001,
+            "latency_ms": 6642,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 24,
+            "output_tokens": 0,
+            "cost_usd": 4.800000000000001e-07,
+            "latency_ms": 5062,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7537,
+        "total_output_tokens": 103,
+        "total_cost_usd": 0.000803,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6642,
+          "retrieval_ms": 5062,
+          "total_ms": 11705
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 11705,
+      "step_ms": {
+        "plan_ms": 6642,
+        "retrieval_ms": 5062,
+        "total_ms": 11705
+      },
+      "cost_usd": 0.000803,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7537,
+      "output_tokens": 103,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 4,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-10",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "What is the goal of the hybrid hospital-wide mortality measure?",
+      "error": null,
+      "answer": {
+        "question": "What is the goal of the hybrid hospital-wide mortality measure?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7509,
+            "output_tokens": 98,
+            "cost_usd": 0.0007999000000000001,
+            "latency_ms": 3332,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 25,
+            "output_tokens": 0,
+            "cost_usd": 4.999999999999994e-07,
+            "latency_ms": 6284,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7534,
+        "total_output_tokens": 98,
+        "total_cost_usd": 0.0008,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3332,
+          "retrieval_ms": 6284,
+          "total_ms": 9617
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 9617,
+      "step_ms": {
+        "plan_ms": 3332,
+        "retrieval_ms": 6284,
+        "total_ms": 9617
+      },
+      "cost_usd": 0.0008,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7534,
+      "output_tokens": 98,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-11",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "How does the hybrid hospital-wide mortality measure account for different mixes of services across hospitals?",
+      "error": null,
+      "answer": {
+        "question": "How does the hybrid hospital-wide mortality measure account for different mixes of services across hospitals?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7514,
+            "output_tokens": 100,
+            "cost_usd": 0.0008014000000000001,
+            "latency_ms": 6928,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 34,
+            "output_tokens": 0,
+            "cost_usd": 6.800000000000001e-07,
+            "latency_ms": 3878,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7548,
+        "total_output_tokens": 100,
+        "total_cost_usd": 0.000802,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6928,
+          "retrieval_ms": 3878,
+          "total_ms": 10807
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 10807,
+      "step_ms": {
+        "plan_ms": 6928,
+        "retrieval_ms": 3878,
+        "total_ms": 10807
+      },
+      "cost_usd": 0.000802,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7548,
+      "output_tokens": 100,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 4,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-12",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "How does the hospital-wide mortality measure define its outcome, and why a 30-day window?",
+      "error": null,
+      "answer": {
+        "question": "How does the hospital-wide mortality measure define its outcome, and why a 30-day window?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7516,
+            "output_tokens": 117,
+            "cost_usd": 0.0008101,
+            "latency_ms": 5524,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 34,
+            "output_tokens": 0,
+            "cost_usd": 6.800000000000003e-07,
+            "latency_ms": 5523,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7550,
+        "total_output_tokens": 117,
+        "total_cost_usd": 0.000811,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 5524,
+          "retrieval_ms": 5523,
+          "total_ms": 11047
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 11047,
+      "step_ms": {
+        "plan_ms": 5524,
+        "retrieval_ms": 5523,
+        "total_ms": 11047
+      },
+      "cost_usd": 0.000811,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7550,
+      "output_tokens": 117,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-13",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "How is a hospital's overall risk-standardized mortality rate calculated from its service-line results?",
+      "error": null,
+      "answer": {
+        "question": "How is a hospital's overall risk-standardized mortality rate calculated from its service-line results?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7515,
+            "output_tokens": 138,
+            "cost_usd": 0.0008205,
+            "latency_ms": 3858,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 33,
+            "output_tokens": 0,
+            "cost_usd": 6.599999999999998e-07,
+            "latency_ms": 5613,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7548,
+        "total_output_tokens": 138,
+        "total_cost_usd": 0.000821,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3858,
+          "retrieval_ms": 5613,
+          "total_ms": 9472
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 9472,
+      "step_ms": {
+        "plan_ms": 3858,
+        "retrieval_ms": 5613,
+        "total_ms": 9472
+      },
+      "cost_usd": 0.000821,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7548,
+      "output_tokens": 138,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-14",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "What is a hybrid measure in the hospital-wide mortality methodology report, and what is the national observed mortality rate?",
+      "error": null,
+      "answer": {
+        "question": "What is a hybrid measure in the hospital-wide mortality methodology report, and what is the national observed mortality rate?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7519,
+            "output_tokens": 321,
+            "cost_usd": 0.0009124000000000001,
+            "latency_ms": 7135,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 35,
+            "output_tokens": 0,
+            "cost_usd": 7.000000000000001e-07,
+            "latency_ms": 4482,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7554,
+        "total_output_tokens": 321,
+        "total_cost_usd": 0.000913,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 7135,
+          "retrieval_ms": 4482,
+          "total_ms": 11618
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 11618,
+      "step_ms": {
+        "plan_ms": 7135,
+        "retrieval_ms": 4482,
+        "total_ms": 11618
+      },
+      "cost_usd": 0.000913,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7554,
+      "output_tokens": 321,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-15",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "What is the minimum number of completed HCAHPS surveys for a hospital's results to be reported, and for it to get HCAHPS star ratings?",
+      "error": null,
+      "answer": {
+        "question": "What is the minimum number of completed HCAHPS surveys for a hospital's results to be reported, and for it to get HCAHPS star ratings?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7530,
+            "output_tokens": 105,
+            "cost_usd": 0.0008055,
+            "latency_ms": 3763,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 25,
+            "output_tokens": 0,
+            "cost_usd": 5.000000000000003e-07,
+            "latency_ms": 5007,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7555,
+        "total_output_tokens": 105,
+        "total_cost_usd": 0.000806,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3763,
+          "retrieval_ms": 5007,
+          "total_ms": 8771
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 8771,
+      "step_ms": {
+        "plan_ms": 3763,
+        "retrieval_ms": 5007,
+        "total_ms": 8771
+      },
+      "cost_usd": 0.000806,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7555,
+      "output_tokens": 105,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-16",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "Who is surveyed in HCAHPS, and when after discharge?",
+      "error": null,
+      "answer": {
+        "question": "Who is surveyed in HCAHPS, and when after discharge?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7511,
+            "output_tokens": 87,
+            "cost_usd": 0.0007946,
+            "latency_ms": 3749,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 14,
+            "output_tokens": 0,
+            "cost_usd": 2.7999999999999986e-07,
+            "latency_ms": 4932,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7525,
+        "total_output_tokens": 87,
+        "total_cost_usd": 0.000795,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3749,
+          "retrieval_ms": 4932,
+          "total_ms": 8682
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 8682,
+      "step_ms": {
+        "plan_ms": 3749,
+        "retrieval_ms": 4932,
+        "total_ms": 8682
+      },
+      "cost_usd": 0.000795,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7525,
+      "output_tokens": 87,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-17",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "How is the HCAHPS Summary Star Rating calculated from the individual measure star ratings?",
+      "error": null,
+      "answer": {
+        "question": "How is the HCAHPS Summary Star Rating calculated from the individual measure star ratings?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7515,
+            "output_tokens": 100,
+            "cost_usd": 0.0008015,
+            "latency_ms": 4938,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 20,
+            "output_tokens": 0,
+            "cost_usd": 4e-07,
+            "latency_ms": 2361,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7535,
+        "total_output_tokens": 100,
+        "total_cost_usd": 0.000802,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4938,
+          "retrieval_ms": 2361,
+          "total_ms": 7300
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 7300,
+      "step_ms": {
+        "plan_ms": 4938,
+        "retrieval_ms": 2361,
+        "total_ms": 7300
+      },
+      "cost_usd": 0.000802,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7535,
+      "output_tokens": 100,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 4,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-18",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "How are the 1-to-5 star ratings assigned to each individual HCAHPS measure?",
+      "error": null,
+      "answer": {
+        "question": "How are the 1-to-5 star ratings assigned to each individual HCAHPS measure?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7517,
+            "output_tokens": 116,
+            "cost_usd": 0.0008097,
+            "latency_ms": 4004,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 26,
+            "output_tokens": 0,
+            "cost_usd": 5.200000000000001e-07,
+            "latency_ms": 2637,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7543,
+        "total_output_tokens": 116,
+        "total_cost_usd": 0.00081,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4004,
+          "retrieval_ms": 2637,
+          "total_ms": 6642
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 6642,
+      "step_ms": {
+        "plan_ms": 4004,
+        "retrieval_ms": 2637,
+        "total_ms": 6642
+      },
+      "cost_usd": 0.00081,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7543,
+      "output_tokens": 116,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 4,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-19",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "What does the SEP-1 sepsis measure calculate, and which patients are in its denominator?",
+      "error": null,
+      "answer": {
+        "question": "What does the SEP-1 sepsis measure calculate, and which patients are in its denominator?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7516,
+            "output_tokens": 114,
+            "cost_usd": 0.0008086,
+            "latency_ms": 3690,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 23,
+            "output_tokens": 0,
+            "cost_usd": 4.600000000000007e-07,
+            "latency_ms": 2507,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7539,
+        "total_output_tokens": 114,
+        "total_cost_usd": 0.000809,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3690,
+          "retrieval_ms": 2507,
+          "total_ms": 6198
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 6198,
+      "step_ms": {
+        "plan_ms": 3690,
+        "retrieval_ms": 2507,
+        "total_ms": 6198
+      },
+      "cost_usd": 0.000809,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7539,
+      "output_tokens": 114,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-20",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "Which interventions make up the SEP-1 numerator, and which patients are excluded?",
+      "error": null,
+      "answer": {
+        "question": "Which interventions make up the SEP-1 numerator, and which patients are excluded?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7513,
+            "output_tokens": 103,
+            "cost_usd": 0.0008028000000000001,
+            "latency_ms": 2664,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 25,
+            "output_tokens": 0,
+            "cost_usd": 4.999999999999999e-07,
+            "latency_ms": 3997,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7538,
+        "total_output_tokens": 103,
+        "total_cost_usd": 0.000803,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2664,
+          "retrieval_ms": 3997,
+          "total_ms": 6663
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 6663,
+      "step_ms": {
+        "plan_ms": 2664,
+        "retrieval_ms": 3997,
+        "total_ms": 6663
+      },
+      "cost_usd": 0.000803,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7538,
+      "output_tokens": 103,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-21",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "Which indicators make up the CMS PSI 90 composite, and how are they combined?",
+      "error": null,
+      "answer": {
+        "question": "Which indicators make up the CMS PSI 90 composite, and how are they combined?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7514,
+            "output_tokens": 125,
+            "cost_usd": 0.0008139000000000001,
+            "latency_ms": 3560,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 24,
+            "output_tokens": 0,
+            "cost_usd": 4.799999999999996e-07,
+            "latency_ms": 3955,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7538,
+        "total_output_tokens": 125,
+        "total_cost_usd": 0.000814,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3560,
+          "retrieval_ms": 3955,
+          "total_ms": 7516
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 7516,
+      "step_ms": {
+        "plan_ms": 3560,
+        "retrieval_ms": 3955,
+        "total_ms": 7516
+      },
+      "cost_usd": 0.000814,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7538,
+      "output_tokens": 125,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 4,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "def-22",
+      "type": "definition",
+      "group": "definition",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "What period does the BPCI Advanced version of PSI 90 use, and how does it differ from the published specification?",
+      "error": null,
+      "answer": {
+        "question": "What period does the BPCI Advanced version of PSI 90 use, and how does it differ from the published specification?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7521,
+            "output_tokens": 107,
+            "cost_usd": 0.0008056000000000001,
+            "latency_ms": 5648,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 19,
+            "output_tokens": 0,
+            "cost_usd": 3.7999999999999975e-07,
+            "latency_ms": 4330,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7540,
+        "total_output_tokens": 107,
+        "total_cost_usd": 0.000806,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 5648,
+          "retrieval_ms": 4330,
+          "total_ms": 9978
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 9978,
+      "step_ms": {
+        "plan_ms": 5648,
+        "retrieval_ms": 4330,
+        "total_ms": 9978
+      },
+      "cost_usd": 0.000806,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7540,
+      "output_tokens": 107,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "retrieval_hit": false,
+      "doc_hit": false,
+      "cited_expected": false,
+      "retrieved_chunk_ids": [],
+      "doc_top_similarity": null,
+      "points_covered": 0.0,
+      "points_missing": 3,
+      "correct": false,
+      "reason": "refused at after plan: no evidence; expected chunk not retrieved"
+    },
+    {
+      "id": "defx-01",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "What criteria must a hospital meet to be designated Birthing-Friendly?",
+      "error": null,
+      "answer": {
+        "question": "What criteria must a hospital meet to be designated Birthing-Friendly?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7510,
+            "output_tokens": 117,
+            "cost_usd": 0.0008095,
+            "latency_ms": 3492,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 15,
+            "output_tokens": 0,
+            "cost_usd": 3.000000000000001e-07,
+            "latency_ms": 5604,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7525,
+        "total_output_tokens": 117,
+        "total_cost_usd": 0.00081,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3492,
+          "retrieval_ms": 5604,
+          "total_ms": 9097
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 9097,
+      "step_ms": {
+        "plan_ms": 3492,
+        "retrieval_ms": 5604,
+        "total_ms": 9097
+      },
+      "cost_usd": 0.00081,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7525,
+      "output_tokens": 117,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "correct": true,
+      "reason": null
+    },
+    {
+      "id": "defx-02",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "What is the maximum percentage by which Medicare can cut a hospital's payments under the hospital readmissions reduction program?",
+      "error": null,
+      "answer": {
+        "question": "What is the maximum percentage by which Medicare can cut a hospital's payments under the hospital readmissions reduction program?",
+        "route": "refuse",
+        "refused": true,
+        "refusal_reason": "This asks about the statutory maximum payment reduction under a CMS program, not hospital-quality data or a measure definition.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7519,
+            "output_tokens": 210,
+            "cost_usd": 0.0008569000000000001,
+            "latency_ms": 4381,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          }
+        ],
+        "total_input_tokens": 7519,
+        "total_output_tokens": 210,
+        "total_cost_usd": 0.000857,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4381,
+          "total_ms": 4382
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "refuse",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 4382,
+      "step_ms": {
+        "plan_ms": 4381,
+        "total_ms": 4382
+      },
+      "cost_usd": 0.000857,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7519,
+      "output_tokens": 210,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "plan",
+      "correct": true,
+      "reason": null
+    },
+    {
+      "id": "defx-03",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "How many predicted infections must a hospital have before CMS will report its standardized infection ratio?",
+      "error": null,
+      "answer": {
+        "question": "How many predicted infections must a hospital have before CMS will report its standardized infection ratio?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7514,
+            "output_tokens": 112,
+            "cost_usd": 0.0008074000000000001,
+            "latency_ms": 3490,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 16,
+            "output_tokens": 0,
+            "cost_usd": 3.199999999999995e-07,
+            "latency_ms": 2959,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7530,
+        "total_output_tokens": 112,
+        "total_cost_usd": 0.000808,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3490,
+          "retrieval_ms": 2959,
+          "total_ms": 6450
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 6450,
+      "step_ms": {
+        "plan_ms": 3490,
+        "retrieval_ms": 2959,
+        "total_ms": 6450
+      },
+      "cost_usd": 0.000808,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7530,
+      "output_tokens": 112,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "correct": true,
+      "reason": null
+    },
+    {
+      "id": "defx-04",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "How is the emergency department 'left without being seen' rate (OP-22) calculated, including its numerator and denominator?",
+      "error": null,
+      "answer": {
+        "question": "How is the emergency department 'left without being seen' rate (OP-22) calculated, including its numerator and denominator?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "I could not find data or documentation in this dataset that answers that question. (no documentation section was close enough to the question)",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v2",
+          "schema": "schema_v1",
+          "answer": "answer_v3"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 7522,
+            "output_tokens": 100,
+            "cost_usd": 0.0008022000000000001,
+            "latency_ms": 2991,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 21,
+            "output_tokens": 0,
+            "cost_usd": 4.200000000000002e-07,
+            "latency_ms": 1888,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          }
+        ],
+        "total_input_tokens": 7543,
+        "total_output_tokens": 100,
+        "total_cost_usd": 0.000803,
+        "repaired": false,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2991,
+          "retrieval_ms": 1888,
+          "total_ms": 4880
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v2",
+        "schema": "schema_v1",
+        "answer": "answer_v3"
+      },
+      "total_ms": 4880,
+      "step_ms": {
+        "plan_ms": 2991,
+        "retrieval_ms": 1888,
+        "total_ms": 4880
+      },
+      "cost_usd": 0.000803,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 7543,
+      "output_tokens": 100,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: no evidence",
+      "correct": true,
+      "reason": null
+    }
+  ]
+}
