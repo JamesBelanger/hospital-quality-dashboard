@@ -186,7 +186,9 @@ def test_build_row_maps_answer_fields():
 
 # ---- prompt version switches ----
 def test_prompt_versions_default_and_env(monkeypatch):
-    assert pipeline.prompt_versions() == {"plan": "plan_v4", "schema": "schema_v2", "answer": "answer_v4"}
+    # Compare with the module's own defaults, not literal names: a prompt version bump must not break this test.
+    assert pipeline.prompt_versions() == {"plan": pipeline.PLAN_PROMPT, "schema": pipeline.SCHEMA_PROMPT,
+                                          "answer": pipeline.ANSWER_PROMPT}
     monkeypatch.setenv("HQ_PLAN_PROMPT", "plan_v3")
     monkeypatch.setenv("HQ_ANSWER_PROMPT", "answer_v3")
     monkeypatch.setenv("HQ_SCHEMA_PROMPT", "schema_v1")
