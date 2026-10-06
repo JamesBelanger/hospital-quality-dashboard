@@ -181,7 +181,7 @@ def test_build_row_maps_answer_fields():
                         citations=[pipeline.Citation(chunk_id="a", doc_title="d", quote="x")])
     row = logging_store.build_row(a, "hash", "rel")
     assert row[0] == "rel" and row[1] == "hash" and row[2] == "q" and row[8] == ["a"] and row[9] == ["a"]
-    assert row[15] == 1234 and len(row) == 20
+    assert row[15] == 1234 and len(row) == 21 and row[20] is None
 
 
 # ---- prompt version switches ----

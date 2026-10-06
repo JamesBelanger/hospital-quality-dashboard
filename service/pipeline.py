@@ -2,7 +2,7 @@
 
   1. Plan call: the model picks a route (data / docs / both / refuse) and writes the SQL
      and/or a documentation search query.
-  2. Evidence: SQL runs through sql_guard + the read-only login. One repair call per question,
+  2. Evidence (documentation: the planner also picks the library, "measures" or "coverage", see Plan.doc_collection): SQL runs through sql_guard + the read-only login. One repair call per question,
      of one kind: after a failure (kind "error"), or, when the query ran but matched 0 rows,
      one check asking the planner whether a filter was wrong (kind "empty"); documentation is searched and kept only if the best vector similarity
      reaches DOC_SUPPORT_THRESHOLD.
@@ -33,7 +33,7 @@ from service.retrieval import Chunk, search_docs
 from service.sql_runner import DatabaseError, GuardRejected, run_sql
 
 PROMPTS = Path(__file__).parent / "prompts"
-PLAN_PROMPT, ANSWER_PROMPT, SCHEMA_PROMPT = "plan_v4", "answer_v4", "schema_v2"
+PLAN_PROMPT, ANSWER_PROMPT, SCHEMA_PROMPT = "plan_v5", "answer_v5", "schema_v2"
 DOC_SUPPORT_THRESHOLD = 0.35  # smoke test: 0.67-0.80 on-topic, 0.13 off-topic
 MAX_ROWS_SHOWN = 50
 REFUSAL_NO_EVIDENCE = "I could not find data or documentation in this dataset that answers that question."
@@ -59,6 +59,7 @@ class Plan(BaseModel):
     route: Literal["data", "docs", "both", "refuse"]
     sql: str | None = None
     doc_query: str | None = None
+    doc_collection: Literal["measures", "coverage"] = "measures"  # which documentation library the doc search uses
     reason: str
 
 
@@ -107,6 +108,7 @@ class Answer(BaseModel):
     retrieved_chunk_ids: list[str] = []  # docs path: ids retrieved, in rank order, whether or not they passed the threshold
     doc_top_similarity: float | None = None
     doc_query: str | None = None  # the text actually sent to documentation search (planner's rewrite, else the question)
+    doc_collection: Literal["measures", "coverage"] | None = None  # library searched; None when no documentation search ran
 
 
 def _norm(s: str) -> str:
@@ -172,6 +174,7 @@ def ask(question: str, llm: LLM | None = None, embedder: Embedder | None = None,
     retrieved_ids: list[str] = []
     top_sim: float | None = None
     doc_query_used: str | None = None
+    collection_used: str | None = None
     mode = os.environ.get("HQ_RETRIEVAL_MODE") or retrieval.DEFAULT_MODE
     versions = prompt_versions()
     system = _plan_system(versions)  # raises at once if a configured prompt version has no file
@@ -189,6 +192,7 @@ def ask(question: str, llm: LLM | None = None, embedder: Embedder | None = None,
         return Answer(
             question=question, route=route, prompt_versions=versions, usage=usage, timings=timings,
             retrieved_chunk_ids=retrieved_ids, doc_top_similarity=top_sim, doc_query=doc_query_used,
+            doc_collection=collection_used,
             model=usage[0].model if usage else None,
             total_input_tokens=sum(u.input_tokens for u in usage),
             total_output_tokens=sum(u.output_tokens for u in usage),
@@ -239,7 +243,8 @@ def ask(question: str, llm: LLM | None = None, embedder: Embedder | None = None,
             embedder = OpenAIEmbedder()
         before = (getattr(embedder, "tokens_used", None), getattr(embedder, "cost_usd", None))
         doc_query_used = plan.doc_query or question
-        found = search_docs(doc_query_used, retrieval.DEFAULT_K, embedder, mode=mode)
+        collection_used = plan.doc_collection
+        found = search_docs(doc_query_used, retrieval.DEFAULT_K, embedder, mode=mode, collection=collection_used)
         retrieved_ids = [c.chunk_id for c in found]
         if before[0] is not None:
             usage.append(Usage(embedder.tokens_used - before[0], 0, embedder.cost_usd - before[1],

@@ -136,3 +136,40 @@ def test_search_docs_explicit_options_and_vector_mode(monkeypatch):
     assert cur.queries == ["vector", "fetch"]
     with pytest.raises(ValueError):
         retrieval.search_docs("q", embedder=_Emb(), mode="bad")
+
+
+# ---- collection filter ----
+class RecordingCursor(FakeCursor):
+    def execute(self, sql, params=None):
+        super().execute(sql, params)
+        self.params = getattr(self, "params", []) + [params]
+        self.sqls = getattr(self, "sqls", []) + [sql]
+
+
+def _search_rec(monkeypatch, **kw):
+    row = lambda cid: (cid, "Doc", "Sec", None, "http://x", "body " + cid)  # noqa: E731
+    cur = RecordingCursor({"vector": [("v1", 0.9), ("v2", 0.8)], "and": [("k1",)], "or": [("k1",)],
+                           "sim": [("k1", 0.5)], "fetch": [row(c) for c in ("v1", "v2", "k1")]})
+    monkeypatch.setenv("HQ_SERVICE_URL", "postgresql://x")
+    db.close_all()
+    monkeypatch.setattr(db, "_connect", lambda url: _Conn(cur))
+    return cur, retrieval.search_docs("question", embedder=_Emb(), **kw)
+
+
+@pytest.mark.parametrize("mode", ["vector", "hybrid", "keyword"])
+def test_every_query_filters_by_collection(monkeypatch, mode):
+    cur, _ = _search_rec(monkeypatch, mode=mode, collection="coverage")
+    assert cur.sqls and all("collection = %(c)s" in s for s in cur.sqls)
+    assert all(p["c"] == "coverage" for p in cur.params)
+
+
+def test_default_collection_is_measures(monkeypatch):
+    import inspect
+    assert inspect.signature(retrieval.search_docs).parameters["collection"].default == "measures"
+    cur, _ = _search_rec(monkeypatch)
+    assert all(p["c"] == "measures" for p in cur.params)
+
+
+def test_unknown_collection_rejected(monkeypatch):
+    with pytest.raises(ValueError):
+        retrieval.search_docs("q", embedder=_Emb(), collection="lcd")

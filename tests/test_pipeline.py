@@ -47,8 +47,8 @@ def result(rows=((1, "A"),)):
     return SqlResult("SELECT 1 LIMIT 200", ["n", "name"], [list(r) for r in rows], len(rows), 3)
 
 
-def plan(route, sql=None, doc_query=None):
-    return pipeline.Plan(route=route, sql=sql, doc_query=doc_query, reason="because")
+def plan(route, sql=None, doc_query=None, doc_collection="measures"):
+    return pipeline.Plan(route=route, sql=sql, doc_query=doc_query, doc_collection=doc_collection, reason="because")
 
 
 def answer(text="Hospital A.", cites=(), supported=True):
@@ -62,7 +62,7 @@ def stubs(monkeypatch):
     class S:
         sql_results = [result()]
         chunks = [chunk()]
-        sql_calls, search_calls, search_modes = [], [], []
+        sql_calls, search_calls, search_modes, search_collections = [], [], [], []
 
     def fake_run(sql):
         S.sql_calls.append(sql)
@@ -71,12 +71,13 @@ def stubs(monkeypatch):
             raise r
         return r
 
-    def fake_search(q, k=6, embedder=None, mode="hybrid"):
+    def fake_search(q, k=6, embedder=None, mode="hybrid", collection="measures"):
         S.search_calls.append(q)
         S.search_modes.append(mode)
+        S.search_collections.append(collection)
         return S.chunks
 
-    S.sql_calls, S.search_calls, S.search_modes = [], [], []
+    S.sql_calls, S.search_calls, S.search_modes, S.search_collections = [], [], [], []
     monkeypatch.setattr(pipeline, "run_sql", fake_run)
     monkeypatch.setattr(pipeline, "search_docs", fake_search)
     return S
@@ -259,3 +260,61 @@ def test_doc_query_recorded_planner_rewrite_or_question(stubs):
     assert a.doc_query == "orig q"
     a = pipeline.ask("q", llm=FakeLLM(plan("refuse")), embedder=FakeEmbedder())
     assert a.doc_query is None
+
+
+# ---- documentation collections (measures / coverage) ----
+NCD_BODY = "Effective for services performed on or after February 15, 2018, ICDs are covered for patients with a prior MI and LVEF of 0.30 or less."
+
+
+def ncd_chunk(sim=0.8, cid="ncd_20.4:1"):
+    return Chunk(cid, "Medicare National Coverage Determination 20.4: Implantable Cardioverter Defibrillators (ICDs)",
+                 "NCD 20.4 Implantable Cardioverter Defibrillators (ICDs) — Indications and Limitations of Coverage",
+                 None, "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=110&ncdver=1", NCD_BODY, sim, 0.03)
+
+
+def test_plan_defaults_to_measures_collection():
+    assert pipeline.Plan(route="docs", doc_query="x", reason="r").doc_collection == "measures"
+    with pytest.raises(Exception):
+        pipeline.Plan(route="docs", doc_collection="lcd", reason="r")
+
+
+def test_default_prompts_are_v5():
+    assert (pipeline.PLAN_PROMPT, pipeline.ANSWER_PROMPT) == ("plan_v5", "answer_v5")
+    for name in ("plan_v5", "answer_v5"):
+        assert pipeline.load_prompt(name).strip()
+
+
+def test_coverage_plan_searches_the_coverage_collection_and_records_it(stubs):
+    stubs.chunks = [ncd_chunk()]
+    llm = FakeLLM(plan("docs", doc_query="ICD covered indications", doc_collection="coverage"),
+                  answer("NCD 20.4 covers it.", cites=[("ncd_20.4:1", "ICDs are covered for patients with a prior MI")]))
+    a = pipeline.ask("Does Medicare cover ICDs?", llm=llm, embedder=FakeEmbedder())
+    assert stubs.search_collections == ["coverage"]
+    assert not a.refused and a.doc_collection == "coverage" and a.route == "docs"
+    assert a.citations[0].chunk_id == "ncd_20.4:1" and "NCD 20.4" in a.citations[0].section_title
+
+
+def test_measures_plan_searches_measures_and_data_route_records_none(stubs):
+    llm = FakeLLM(plan("docs", doc_query="readmission"), answer("ok", cites=[("c1", "unplanned return to a hospital")]))
+    a = pipeline.ask("q", llm=llm, embedder=FakeEmbedder())
+    assert stubs.search_collections == ["measures"] and a.doc_collection == "measures"
+    b = pipeline.ask("q", llm=FakeLLM(plan("data", sql="select 1"), answer()), embedder=FakeEmbedder())
+    assert b.doc_collection is None and stubs.search_collections == ["measures"]  # no second search
+    c = pipeline.ask("q", llm=FakeLLM(plan("refuse")), embedder=FakeEmbedder())
+    assert c.refused and c.doc_collection is None
+
+
+def test_coverage_route_without_close_passage_is_refused_but_keeps_collection(stubs):
+    stubs.chunks = [ncd_chunk(sim=0.1)]
+    a = pipeline.ask("q", llm=FakeLLM(plan("docs", doc_query="x", doc_collection="coverage")), embedder=FakeEmbedder())
+    assert a.refused and a.doc_collection == "coverage"
+
+
+def test_request_log_row_carries_doc_collection(stubs):
+    from service import logging_store
+    stubs.chunks = [ncd_chunk()]
+    a = pipeline.ask("q", llm=FakeLLM(plan("docs", doc_query="x", doc_collection="coverage"),
+                                      answer("ok", cites=[("ncd_20.4:1", "ICDs are covered")])), embedder=FakeEmbedder())
+    row = logging_store.build_row(a, "h", "rel")
+    assert row[-1] == "coverage" and len(row) == logging_store._INSERT.count("%s")
+    assert logging_store.build_row(None, "h", "rel", error="e", question="q")[-1] is None

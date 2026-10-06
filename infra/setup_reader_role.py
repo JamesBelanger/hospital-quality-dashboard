@@ -36,8 +36,10 @@ create table if not exists hq_app.request_log (
     refused boolean, refusal_reason text, sql_text text, row_count int,
     retrieved_chunk_ids text[], cited_chunk_ids text[], prompt_versions jsonb,
     model text, input_tokens int, output_tokens int, cost_usd numeric(10,6),
-    latency_ms int, step_ms jsonb, repaired boolean, repair_kind text, error text
+    latency_ms int, step_ms jsonb, repaired boolean, repair_kind text, error text,
+    doc_collection text
 );
+alter table hq_app.request_log add column if not exists doc_collection text;
 create index if not exists request_log_ts_idx on hq_app.request_log (ts)
 """
 

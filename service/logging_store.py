@@ -23,8 +23,8 @@ _INSERT = """
 insert into hq_app.request_log
  (release, client_hash, question, route, refused, refusal_reason, sql_text, row_count,
   retrieved_chunk_ids, cited_chunk_ids, prompt_versions, model, input_tokens, output_tokens,
-  cost_usd, latency_ms, step_ms, repaired, repair_kind, error)
-values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+  cost_usd, latency_ms, step_ms, repaired, repair_kind, error, doc_collection)
+values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
 
 
 def _url() -> str:
@@ -36,14 +36,14 @@ def build_row(answer, client_hash: str, release: str, error: str | None = None,
     """Map an Answer (or None, when ask() raised) to the insert parameters."""
     if answer is None:
         return (release, client_hash, question, None, None, None, None, None, None, None, None, None,
-                None, None, None, latency_ms, None, None, None, error)
+                None, None, None, latency_ms, None, None, None, error, None)
     return (
         release, client_hash, answer.question, answer.route, answer.refused, answer.refusal_reason,
         answer.sql, answer.row_count, answer.retrieved_chunk_ids, [c.chunk_id for c in answer.citations],
         Jsonb(answer.prompt_versions), answer.model, answer.total_input_tokens,
         answer.total_output_tokens, answer.total_cost_usd,
         latency_ms if latency_ms is not None else answer.timings.get("total_ms"),
-        Jsonb(answer.timings), answer.repaired, answer.repair_kind, error)
+        Jsonb(answer.timings), answer.repaired, answer.repair_kind, error, answer.doc_collection)
 
 
 def log_request(answer, client_hash: str, release: str, error: str | None = None,
