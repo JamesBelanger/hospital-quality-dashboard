@@ -33,7 +33,7 @@ from service.retrieval import Chunk, search_docs
 from service.sql_runner import DatabaseError, GuardRejected, run_sql
 
 PROMPTS = Path(__file__).parent / "prompts"
-PLAN_PROMPT, ANSWER_PROMPT, SCHEMA_PROMPT = "plan_v4", "answer_v4", "schema_v2"
+PLAN_PROMPT, ANSWER_PROMPT, SCHEMA_PROMPT = "plan_v4", "answer_v5_drill", "schema_v2"  # DRILL: deliberately worse
 DOC_SUPPORT_THRESHOLD = 0.35  # smoke test: 0.67-0.80 on-topic, 0.13 off-topic
 MAX_ROWS_SHOWN = 50
 REFUSAL_NO_EVIDENCE = "I could not find data or documentation in this dataset that answers that question."
