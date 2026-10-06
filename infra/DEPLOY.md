@@ -41,7 +41,7 @@ Every deploy is a new revision tagged with its commit.
 `az group delete --name rg-hq-ask` removes everything Azure-side. Delete the app registration `github-hq-ask-deploy` separately.
 
 ## Operating it
-`/health`, `/ask` and `/status` are verified on the live service. The `az containerapp update --set-env-vars` commands below (prompt roll-back, limits) are written from the CLI reference and have **not** been run yet.
+`/health`, `/ask` and `/status` are verified on the live service. The prompt roll-back commands below were run on the live service on 2026-10-06 (see "Drill results"); the limit-changing command has not been run yet.
 
 The container keeps no state, so everything it needs to remember is a row in `hq_app.request_log` (Supabase). The daily budget, the per-client and global rate limits and `/status` are all computed from that table. If the table cannot be read, `/ask` answers 503 and does not call the model (it will not run unmetered).
 
@@ -74,3 +74,10 @@ Created by `infra/setup_reader_role.py` (re-running it rotates all three passwor
 | `hq_logger` | `HQ_LOG_URL` | INSERT and SELECT on `hq_app.request_log` | UPDATE, DELETE, TRUNCATE, create or drop; read `hq` or `hq_docs` | 5 s |
 
 Not yet covered: alerts. Nothing pages anyone when the budget is hit or the error rate rises; `/status` has to be looked at.
+
+## Drill results (2026-10-06)
+Steps are in `infra/ROLLBACK_DRILL.md`.
+
+**Drill 1: the gate stops a bad change.** Pull request #1 pointed the service at a prompt limiting answers to eight words. The pull-request run failed at the evaluation gate: definition 2/22 against a baseline of 13/22 (tolerance 2). Number questions were unaffected at 26/26, as were the decline cases (4/4 and 11/11), because those are graded on the query result or on refusing, not on wording. The build-and-deploy job was skipped. The pull request was closed without merging.
+
+**Drill 2: roll back a live prompt.** `az containerapp update --set-env-vars HQ_ANSWER_PROMPT=answer_v3` returned in about 20 seconds, and `/health` reported `answer_v3` about 45 seconds after the command started. A test question answered under `answer_v3`. `--remove-env-vars HQ_ANSWER_PROMPT` restored `answer_v4` in about 43 seconds, and no override was left on the app. Each change creates a new revision; requests during the switch were not measured.
