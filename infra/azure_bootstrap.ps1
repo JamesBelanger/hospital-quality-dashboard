@@ -97,7 +97,9 @@ if ($GitHub) {
     Write-Host "GitHub: repository secrets and variables"
     $secrets = @{ AZURE_CLIENT_ID = $clientId; AZURE_TENANT_ID = $tenant; AZURE_SUBSCRIPTION_ID = $sub
                   OPENAI_API_KEY = $cfg.OPENAI_API_KEY; HQ_READER_URL = $cfg.HQ_READER_URL; HQ_SERVICE_URL = $cfg.HQ_SERVICE_URL }
-    foreach ($k in $secrets.Keys) { $secrets[$k] | gh secret set $k --repo $Repo | Out-Null }
+    # Pass each value as an argument. Piping it in (`$value | gh secret set`) makes Windows PowerShell prepend a
+    # byte-order mark and append a line break, which corrupts the secret: the first deploy failed on exactly that.
+    foreach ($k in $secrets.Keys) { gh secret set $k --repo $Repo --body $secrets[$k] | Out-Null }
     gh variable set HQ_SERVICE_FQDN --repo $Repo --body $fqdn | Out-Null
     Write-Host "GitHub is ready. A push to $Branch that touches service/ or evals/ will test, evaluate, build and deploy."
 }
