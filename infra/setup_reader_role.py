@@ -5,7 +5,7 @@ Second of two independent safeguards for model-written SQL (the first is service
   * role `hq_service` can SELECT from `hq_docs.chunks` only (documentation retrieval),
   * every transaction is read-only,
   * statements are cancelled after 5 s (hq_reader) / 10 s (hq_service),
-  * role `hq_logger` can INSERT into and SELECT from `hq_app.request_log` and nothing else (5 s timeout).
+  * role `hq_logger` can INSERT into and SELECT from `hq_app.request_log` and `hq_app.alert_log` and nothing else (5 s timeout).
     The log lives in its own schema `hq_app`, which only that role can use; the other two cannot read it.
 
 Also enables the pgvector extension. Run as the database owner (DATABASE_URL in .env).
@@ -42,6 +42,17 @@ create table if not exists hq_app.request_log (
 alter table hq_app.request_log add column if not exists doc_collection text;
 create index if not exists request_log_ts_idx on hq_app.request_log (ts)
 """
+
+# One row per alert actually raised by ops/alert_check.py; the primary key is what suppresses repeats.
+ALERT_LOG_DDL = """
+create table if not exists hq_app.alert_log (
+    alert_key text not null,
+    period text not null,
+    fired_at timestamptz not null default now(),
+    detail jsonb,
+    primary key (alert_key, period)
+)"""
+ALERT_LOG_GRANT = "grant insert, select on hq_app.alert_log to {}"
 
 
 def _create_role(cur, name: str, password: str) -> str:
@@ -93,6 +104,7 @@ def main():
             cur.execute(sql.SQL(stmt).format(service))
         # hq_app.request_log: one row per /ask request. Only hq_logger gets anything here.
         cur.execute(REQUEST_LOG_DDL)
+        cur.execute(ALERT_LOG_DDL)
         cur.execute("revoke all on schema hq_app from public")
         cur.execute("revoke all on all tables in schema hq_app from public")
         for stmt in (
@@ -102,6 +114,8 @@ def main():
             "revoke all on hq_app.request_log from {}",
             "grant insert, select on hq_app.request_log to {}",
             "grant usage on sequence hq_app.request_log_id_seq to {}",
+            "revoke all on hq_app.alert_log from {}",
+            ALERT_LOG_GRANT,
         ):
             cur.execute(sql.SQL(stmt).format(logger))
         cur.execute("select extversion from pg_extension where extname = 'vector'")

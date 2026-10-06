@@ -1,0 +1,2 @@
+# The alert check needs only the database driver (same pin as service/requirements.txt).
+psycopg[binary]==3.3.6

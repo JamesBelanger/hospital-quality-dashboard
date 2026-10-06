@@ -1,0 +1,44 @@
+# Scheduled alert check (budget used up, request failures). Runs outside the service; see infra/DEPLOY.md, "Alerts".
+# A new alert fails the run on purpose, so GitHub's own failed-run notification is a second channel.
+# Deliberately not triggered by pushes and independent of deploy.yml.
+name: ask-service-alerts
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+    inputs:
+      test:
+        description: "Fire a synthetic test alert through the full path (the run will show as failed)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ask-service-alerts
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: ops/requirements.txt
+      - run: pip install -r ops/requirements.txt
+      - name: Check budget and error rate
+        env:
+          HQ_LOG_URL: ${{ secrets.HQ_LOG_URL }}
+          ALERT_SMTP_USER: ${{ secrets.ALERT_SMTP_USER }}
+          ALERT_SMTP_PASSWORD: ${{ secrets.ALERT_SMTP_PASSWORD }}
+          ALERT_TO: ${{ secrets.ALERT_TO }}
+          HQ_DAILY_BUDGET_USD: ${{ vars.HQ_DAILY_BUDGET_USD || '0.50' }}
+          ALERT_STATUS_URL: ${{ vars.ALERT_STATUS_URL }}
+          TEST_FLAG: ${{ inputs.test && '--test' || '' }}
+        run: python -m ops.alert_check $TEST_FLAG
