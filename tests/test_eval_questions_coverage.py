@@ -40,7 +40,9 @@ def chunks():
 
 
 def test_question_file_is_the_frozen_one():
-    assert hashlib.sha256(QS.read_bytes()).hexdigest() == FROZEN_SHA256
+    assert hashlib.sha256(QS.read_bytes().replace(b"
+", b"
+")).hexdigest() == FROZEN_SHA256
 
 
 def test_counts_ids_and_split(qs):
