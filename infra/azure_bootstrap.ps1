@@ -53,7 +53,7 @@ Az containerapp env create --name $Environment --resource-group $ResourceGroup -
     --logs-destination none --only-show-errors --output none
 
 Write-Host "3/3 container app $App (0 to 1 replicas, 0.25 vCPU, 0.5 GiB)"
-$exists = & $AzPy -IBm azure.cli containerapp show --name $App --resource-group $ResourceGroup --query name -o tsv 2>$null
+$exists = & $AzPy -IBm azure.cli containerapp list --resource-group $ResourceGroup --query "[?name=='$App'].name" -o tsv
 if (-not $exists) {
     # First creation uses a public placeholder image; the first GitHub deploy replaces it.
     Az containerapp create --name $App --resource-group $ResourceGroup --environment $Environment `
