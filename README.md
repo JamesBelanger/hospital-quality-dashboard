@@ -146,7 +146,7 @@ A first adversarial pass was run on 2026-10-07 by AI agents at my request: 103 h
 | 30 simultaneous requests from one client | all 30 answered | at most 6 at once; the rest get "busy" |
 | One slow query | stalled every other request behind one shared lock | one lock per connection, 8-second client deadline |
 
-What limited the damage before the fixes: the restricted database logins (the login that runs model-written SQL cannot read the request log or any secret), the 5-second query timeout and the daily budget. What this pass is not: an audit. Each attack had one phrasing, the after-fix numbers are on the same probes the fixes were written against, and the fixes have not been attacked on the deployed service.
+What limited the damage before the fixes: the restricted database logins (the login that runs model-written SQL cannot read the request log or any secret), the 5-second query timeout and the daily budget. What this pass is not: an audit. Each attack had one phrasing, the after-fix numbers are on the same probes the fixes were written against, and on the deployed service only the web-layer checks were repeated (they held: no API pages, oversized bodies refused, 6 of 30 simultaneous requests answered).
 
 ## Alerts
 

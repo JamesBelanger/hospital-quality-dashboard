@@ -109,11 +109,11 @@ Tested against the deployed service before the fixes (2026-10-07):
 
 The website writes every API value into the page as text, never as HTML, and only links URLs that pass a scheme check.
 
-After the fixes, on a local uvicorn process with the real app: `/docs`, `/redoc`, `/openapi.json` return 404; a 301-character question returns 422 with no echo of the input; a 100 KB body returns 413; `/ask` responses carry `nosniff` and `no-store`. Still true by design: the overall per-minute limit means heavy use by a few clients makes the demo answer "busy" for everyone.
+After the fixes, re-checked on the deployed service (release `2d5c40b`, 2026-10-07): `/docs`, `/redoc` and `/openapi.json` return 404; a 301-character question returns 422 with no echo of the input; 20 KB and 1 MB bodies return 413; `/ask` responses carry `nosniff` and `no-store`; 30 simultaneous requests from one client gave 6 answers and 24 "busy" responses (`Retry-After: 5`), and a normal request a few seconds later was answered. The release gate in the deploy pipeline passed on its first run: 55/63 (number 26/26, definition 14/22, not in the documents 4/4, off-topic or unsafe 11/11). Still true by design: the overall per-minute limit means heavy use by a few clients makes the demo answer "busy" for everyone.
 
 ## Not tested
 
-- The fixes on the deployed service (the model-level and fix runs were local, against the live data and the live request log; only the HTTP checks above ran against the deployed service, before the fixes).
+- Model-level attacks on the deployed service. The probe runs were local, against the live data and the live request log; only the HTTP checks above ran against the deployed service (before and after the fixes).
 - Load, memory, or many clients at once beyond the 30-request bursts.
 - A real network cancel of a stuck query through the pooler (the cancel path is tested with fake connections only).
 - Multi-turn or conversation attacks (the service has no memory).
