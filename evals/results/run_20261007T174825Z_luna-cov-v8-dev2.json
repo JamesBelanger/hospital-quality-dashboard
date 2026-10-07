@@ -1,0 +1,1265 @@
+{
+  "config": {
+    "tag": "luna-cov-v8-dev2",
+    "model": "gpt-6-luna",
+    "judge_model": "gpt-6-sol",
+    "split": "dev",
+    "types": null,
+    "questions_file": "evals\\questions_coverage_v1.jsonl",
+    "only": null,
+    "limit": null,
+    "workers": 3,
+    "retrieval_mode": "vector",
+    "prompt_versions": {
+      "plan": "plan_v6",
+      "schema": "schema_v2",
+      "answer": "answer_v6"
+    },
+    "started_utc": "2026-10-07T17:48:25+00:00",
+    "n_selected": 8,
+    "skipped_for_spend": [],
+    "max_spend": 1.0
+  },
+  "summary": {
+    "by_group": {
+      "definition": {
+        "n": 6,
+        "k": 6
+      },
+      "unanswerable": {
+        "n": 1,
+        "k": 1
+      },
+      "oos_unsafe": {
+        "n": 1,
+        "k": 1
+      }
+    },
+    "overall": {
+      "n": 8,
+      "k": 8
+    },
+    "definition": {
+      "retrieval_hit": {
+        "k": 6,
+        "n": 6
+      },
+      "doc_hit": {
+        "k": 6,
+        "n": 6
+      },
+      "cited_expected": {
+        "k": 6,
+        "n": 6
+      },
+      "refused": 0,
+      "points_covered_mean": 1.0
+    },
+    "refusal_stage": {
+      "after plan: answer step": 1,
+      "plan": 1
+    },
+    "latency_ms": {
+      "median": 11001,
+      "p90": 13890
+    },
+    "cost_usd": {
+      "ask_total": 0.0119,
+      "judge_total": 0.01192,
+      "total": 0.02382,
+      "ask_per_question": 0.001488
+    },
+    "tokens": {
+      "input": 95148,
+      "output": 4812
+    },
+    "errors": []
+  },
+  "records": [
+    {
+      "id": "cov-01",
+      "type": "definition",
+      "group": "definition",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "Under Medicare's national policy on home use of oxygen, what blood-test result at rest while breathing room air shows a patient is hypoxemic enough to qualify, and which two situations does the policy list as not covered (angina and terminal illness)?",
+      "error": null,
+      "answer": {
+        "question": "Under Medicare's national policy on home use of oxygen, what blood-test result at rest while breathing room air shows a patient is hypoxemic enough to qualify, and which two situations does the policy list as not covered (angina and terminal illness)?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "NCD 240.2, Home Use of Oxygen, defines the qualifying result at rest while breathing room air as an arterial PO2 at or below 55 mm Hg, or arterial oxygen saturation at or below 88%. Angina pectoris without hypoxemia is not covered. Terminal illnesses are not covered unless they affect the ability to breathe. This is national Medicare policy as written in that document; local rules and individual circumstances can differ, and this is not a coverage decision for any person.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "ncd_240.2:2",
+            "doc_title": "Medicare National Coverage Determination 240.2: Home Use of Oxygen",
+            "section_title": "NCD 240.2 Home Use of Oxygen \u2014 Indications and Limitations of Coverage \u2014 B. Nationally Covered Indications",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=169&ncdver=2",
+            "quote": "An arterial PO2 at or below 55 mm Hg, or an arterial oxygen saturation at or below 88%, taken at rest, breathing room air"
+          },
+          {
+            "chunk_id": "ncd_240.2:3",
+            "doc_title": "Medicare National Coverage Determination 240.2: Home Use of Oxygen",
+            "section_title": "NCD 240.2 Home Use of Oxygen \u2014 Indications and Limitations of Coverage \u2014 B. Nationally Covered Indications",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=169&ncdver=2",
+            "quote": "Angina pectoris in the absence of hypoxemia."
+          },
+          {
+            "chunk_id": "ncd_240.2:3",
+            "doc_title": "Medicare National Coverage Determination 240.2: Home Use of Oxygen",
+            "section_title": "NCD 240.2 Home Use of Oxygen \u2014 Indications and Limitations of Coverage \u2014 B. Nationally Covered Indications",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=169&ncdver=2",
+            "quote": "Terminal illnesses unless they affect the ability to breathe."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8960,
+            "output_tokens": 116,
+            "cost_usd": 0.000954,
+            "latency_ms": 3430,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 36,
+            "output_tokens": 0,
+            "cost_usd": 7.2e-07,
+            "latency_ms": 2426,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 3382,
+            "output_tokens": 465,
+            "cost_usd": 0.0005707,
+            "latency_ms": 6600,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 12378,
+        "total_output_tokens": 581,
+        "total_cost_usd": 0.001525,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3430,
+          "retrieval_ms": 2426,
+          "answer_ms": 6600,
+          "total_ms": 12459
+        },
+        "retrieved_chunk_ids": [
+          "ncd_240.2:1",
+          "ncd_240.2:3",
+          "ncd_240.2:2",
+          "ncd_240.2.1:1",
+          "ncd_240.2:0",
+          "ncd_240.2:4",
+          "ncd_240.2.1:0",
+          "ncd_20.29:2"
+        ],
+        "doc_top_similarity": 0.797457477243643,
+        "doc_query": "Home use of oxygen: national coverage indications and hypoxemia qualification based on resting room-air blood gas (PaO2) result; noncovered use for angina and terminal illness",
+        "doc_collection": "coverage",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 12459,
+      "step_ms": {
+        "plan_ms": 3430,
+        "retrieval_ms": 2426,
+        "answer_ms": 6600,
+        "total_ms": 12459
+      },
+      "cost_usd": 0.001525,
+      "judge_cost_usd": 0.001904,
+      "input_tokens": 12378,
+      "output_tokens": 581,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "ncd_240.2:1",
+        "ncd_240.2:3",
+        "ncd_240.2:2",
+        "ncd_240.2.1:1",
+        "ncd_240.2:0",
+        "ncd_240.2:4",
+        "ncd_240.2.1:0",
+        "ncd_20.29:2"
+      ],
+      "doc_top_similarity": 0.797457477243643,
+      "judge_tokens": [
+        447,
+        101
+      ],
+      "judge_verdicts": [
+        {
+          "point": "An arterial PO2 at or below 55 mm Hg, or an arterial oxygen saturation at or below 88%, measured at rest breathing room air, qualifies",
+          "stated": true,
+          "reason": "The answer gives both qualifying thresholds and specifies measurement at rest while breathing room air."
+        },
+        {
+          "point": "Oxygen for angina pectoris without hypoxemia is not covered",
+          "stated": true,
+          "reason": "The answer explicitly says angina pectoris without hypoxemia is not covered."
+        },
+        {
+          "point": "Oxygen for terminal illnesses is not covered unless they affect the ability to breathe",
+          "stated": true,
+          "reason": "The answer explicitly says terminal illnesses are not covered unless they affect the ability to breathe."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "cov-02",
+      "type": "definition",
+      "group": "definition",
+      "split": "dev",
+      "difficulty": "easy",
+      "question": "What eligibility criteria must a Medicare beneficiary meet for annual lung cancer screening with low dose CT: the age range, the smoking history, and how recently a former smoker must have quit?",
+      "error": null,
+      "answer": {
+        "question": "What eligibility criteria must a Medicare beneficiary meet for annual lung cancer screening with low dose CT: the age range, the smoking history, and how recently a former smoker must have quit?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "NCD 210.14, Lung Cancer Screening with Low Dose Computed Tomography (LDCT), covers annual LDCT screening only when all eligibility criteria are met. The beneficiary must be 50\u201377 years old, asymptomatic, have a smoking history of at least 20 pack-years, and be a current smoker or have quit within the last 15 years; they must also receive an order for screening. This is national Medicare policy as written in that document; local rules and individual circumstances can differ, and it is not a coverage decision for any person.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "ncd_210.14:1",
+            "doc_title": "Medicare National Coverage Determination 210.14: Lung Cancer Screening with Low Dose Computed Tomography (LDCT)",
+            "section_title": "NCD 210.14 Lung Cancer Screening with Low Dose Computed Tomography (LDCT) \u2014 Indications and Limitations of Coverage",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=364&ncdver=2",
+            "quote": "annual screening for lung cancer with LDCT, as an additional preventive service benefit under the Medicare program, only if all of the following eligibility criteria are met."
+          },
+          {
+            "chunk_id": "ncd_210.14:1",
+            "doc_title": "Medicare National Coverage Determination 210.14: Lung Cancer Screening with Low Dose Computed Tomography (LDCT)",
+            "section_title": "NCD 210.14 Lung Cancer Screening with Low Dose Computed Tomography (LDCT) \u2014 Indications and Limitations of Coverage",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=364&ncdver=2",
+            "quote": "Age 50 - 77 years; Asymptomatic (no signs or symptoms of lung cancer); Tobacco smoking history of at least 20 pack-years"
+          },
+          {
+            "chunk_id": "ncd_210.14:1",
+            "doc_title": "Medicare National Coverage Determination 210.14: Lung Cancer Screening with Low Dose Computed Tomography (LDCT)",
+            "section_title": "NCD 210.14 Lung Cancer Screening with Low Dose Computed Tomography (LDCT) \u2014 Indications and Limitations of Coverage",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=364&ncdver=2",
+            "quote": "Current smoker or one who has quit smoking within the last 15 years; and, Receive an order for lung cancer screening with LDCT."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8946,
+            "output_tokens": 117,
+            "cost_usd": 0.0009531,
+            "latency_ms": 3429,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 36,
+            "output_tokens": 0,
+            "cost_usd": 7.2e-07,
+            "latency_ms": 2839,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 3339,
+            "output_tokens": 670,
+            "cost_usd": 0.0006689,
+            "latency_ms": 7619,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 12321,
+        "total_output_tokens": 787,
+        "total_cost_usd": 0.001623,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3429,
+          "retrieval_ms": 2839,
+          "answer_ms": 7619,
+          "total_ms": 13890
+        },
+        "retrieved_chunk_ids": [
+          "ncd_210.14:1",
+          "ncd_210.14:0",
+          "ncd_210.4.1:1",
+          "ncd_220.4:1",
+          "ncd_210.3:1",
+          "ncd_240.1:2",
+          "ncd_210.3:0",
+          "ncd_210.3:5"
+        ],
+        "doc_top_similarity": 0.793612193366591,
+        "doc_query": "National Medicare coverage determination for lung cancer screening with low-dose computed tomography (LDCT): eligibility indications, age range, cigarette smoking history, and quit-time limit for former smokers",
+        "doc_collection": "coverage",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 13890,
+      "step_ms": {
+        "plan_ms": 3429,
+        "retrieval_ms": 2839,
+        "answer_ms": 7619,
+        "total_ms": 13890
+      },
+      "cost_usd": 0.001623,
+      "judge_cost_usd": 0.001884,
+      "input_tokens": 12321,
+      "output_tokens": 787,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "ncd_210.14:1",
+        "ncd_210.14:0",
+        "ncd_210.4.1:1",
+        "ncd_220.4:1",
+        "ncd_210.3:1",
+        "ncd_240.1:2",
+        "ncd_210.3:0",
+        "ncd_210.3:5"
+      ],
+      "doc_top_similarity": 0.793612193366591,
+      "judge_tokens": [
+        427,
+        103
+      ],
+      "judge_verdicts": [
+        {
+          "point": "The beneficiary must be aged 50 to 77",
+          "stated": true,
+          "reason": "The answer explicitly says the beneficiary must be 50\u201377 years old."
+        },
+        {
+          "point": "The beneficiary must have a smoking history of at least 20 pack-years",
+          "stated": true,
+          "reason": "The answer explicitly requires a smoking history of at least 20 pack-years."
+        },
+        {
+          "point": "The beneficiary must be a current smoker or have quit within the last 15 years",
+          "stated": true,
+          "reason": "The answer explicitly requires the beneficiary to be a current smoker or to have quit within the last 15 years."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "cov-03",
+      "type": "definition",
+      "group": "definition",
+      "split": "dev",
+      "difficulty": "easy",
+      "question": "Does Medicare nationally cover Laetrile or similar 'nitriloside' drugs, and what does the policy say about hospital stays and about use during an otherwise covered stay?",
+      "error": null,
+      "answer": {
+        "question": "Does Medicare nationally cover Laetrile or similar 'nitriloside' drugs, and what does the policy say about hospital stays and about use during an otherwise covered stay?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "NCD 30.7, Laetrile and Related Substances, says Medicare does not cover Laetrile or other drugs characterized as \u201cnitriloside\u201d: the FDA determined they are not generally recognized as safe and effective for any therapeutic use, so they are not reasonable and necessary and program payment may not be made for the drug or services connected with its administration. A hospital stay solely to administer Laetrile or a related drug is not covered. The drug is also not covered when used during an otherwise covered hospital stay. This is national Medicare policy as written in that document; local rules and individual circumstances can differ, and it is not a coverage decision for any person.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "ncd_30.7:1",
+            "doc_title": "Medicare National Coverage Determination 30.7: Laetrile and Related Substances",
+            "section_title": "NCD 30.7 Laetrile and Related Substances \u2014 Indications and Limitations of Coverage",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=137&ncdver=1",
+            "quote": "program payment may not be made for its use or any services furnished in connection with its administration."
+          },
+          {
+            "chunk_id": "ncd_30.7:1",
+            "doc_title": "Medicare National Coverage Determination 30.7: Laetrile and Related Substances",
+            "section_title": "NCD 30.7 Laetrile and Related Substances \u2014 Indications and Limitations of Coverage",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=137&ncdver=1",
+            "quote": "A hospital stay only for the purpose of having laetrile (or any other drug called by the terms mentioned above) administered is not covered."
+          },
+          {
+            "chunk_id": "ncd_30.7:1",
+            "doc_title": "Medicare National Coverage Determination 30.7: Laetrile and Related Substances",
+            "section_title": "NCD 30.7 Laetrile and Related Substances \u2014 Indications and Limitations of Coverage",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=137&ncdver=1",
+            "quote": "program payment may not be made for laetrile (or other drug noted above) when it is used during the course of an otherwise covered hospital stay."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8945,
+            "output_tokens": 135,
+            "cost_usd": 0.000962,
+            "latency_ms": 4910,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 38,
+            "output_tokens": 0,
+            "cost_usd": 7.6e-07,
+            "latency_ms": 1702,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 3036,
+            "output_tokens": 486,
+            "cost_usd": 0.0005466000000000001,
+            "latency_ms": 5172,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 12019,
+        "total_output_tokens": 621,
+        "total_cost_usd": 0.001509,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4910,
+          "retrieval_ms": 1702,
+          "answer_ms": 5172,
+          "total_ms": 11787
+        },
+        "retrieved_chunk_ids": [
+          "ncd_30.7:1",
+          "ncd_30.7:0",
+          "ncd_200.2:1",
+          "ncd_130.6:1",
+          "ncd_160.17:0",
+          "ncd_200.1:1",
+          "ncd_110.2:1",
+          "ncd_200.3:5"
+        ],
+        "doc_top_similarity": 0.70865320881923,
+        "doc_query": "Laetrile (amygdalin) and similar nitriloside drugs: nationally covered or noncovered indications; hospital inpatient stays for their administration; use during an otherwise covered hospital stay",
+        "doc_collection": "coverage",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 11787,
+      "step_ms": {
+        "plan_ms": 4910,
+        "retrieval_ms": 1702,
+        "answer_ms": 5172,
+        "total_ms": 11787
+      },
+      "cost_usd": 0.001509,
+      "judge_cost_usd": 0.001946,
+      "input_tokens": 12019,
+      "output_tokens": 621,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "ncd_30.7:1",
+        "ncd_30.7:0",
+        "ncd_200.2:1",
+        "ncd_130.6:1",
+        "ncd_160.17:0",
+        "ncd_200.1:1",
+        "ncd_110.2:1",
+        "ncd_200.3:5"
+      ],
+      "doc_top_similarity": 0.70865320881923,
+      "judge_tokens": [
+        453,
+        104
+      ],
+      "judge_verdicts": [
+        {
+          "point": "Laetrile cannot be considered reasonable and necessary, so it is not covered",
+          "stated": true,
+          "reason": "The answer says Laetrile is not reasonable and necessary and Medicare does not cover it."
+        },
+        {
+          "point": "A hospital stay only to have laetrile administered is not covered",
+          "stated": true,
+          "reason": "The answer explicitly says a hospital stay solely to administer Laetrile is not covered."
+        },
+        {
+          "point": "Payment is also not made for laetrile used during an otherwise covered hospital stay",
+          "stated": true,
+          "reason": "The answer says Laetrile is not covered when used during an otherwise covered hospital stay."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "cov-04",
+      "type": "definition",
+      "group": "definition",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "Which bariatric surgery procedures does Medicare's national policy list as non-covered for all beneficiaries, and is treatment of obesity alone covered?",
+      "error": null,
+      "answer": {
+        "question": "Which bariatric surgery procedures does Medicare's national policy list as non-covered for all beneficiaries, and is treatment of obesity alone covered?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "NCD 100.1, Bariatric Surgery for Treatment of Co-Morbid Conditions Related to Morbid Obesity, lists open adjustable gastric banding, open sleeve gastrectomy, and laparoscopic sleeve gastrectomy before June 27, 2012, as non-covered for all Medicare beneficiaries. It also lists open and laparoscopic vertical banded gastroplasty, intestinal bypass surgery, and gastric balloon for treatment of obesity as non-covered for all beneficiaries. Treatment of obesity alone remains non-covered. This is national Medicare policy as written in that document; local rules and individual circumstances can differ, and it is not a coverage decision for any person.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "ncd_100.1:3",
+            "doc_title": "Medicare National Coverage Determination 100.1: Bariatric Surgery for Treatment of Co-Morbid Conditions Related to Morbid Obesity",
+            "section_title": "NCD 100.1 Bariatric Surgery for Treatment of Co-Morbid Conditions Related to Morbid Obesity \u2014 Indications and Limitations of Coverage \u2014 C. Nationally Non-Covered Indications",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=57&ncdver=5",
+            "quote": "The following bariatric surgery procedures are non-covered for all Medicare beneficiaries: Open adjustable gastric banding; Open sleeve gastrectomy; Laparoscopic sleeve gastrectomy (prior to June 27, 2012);"
+          },
+          {
+            "chunk_id": "ncd_100.1:3",
+            "doc_title": "Medicare National Coverage Determination 100.1: Bariatric Surgery for Treatment of Co-Morbid Conditions Related to Morbid Obesity",
+            "section_title": "NCD 100.1 Bariatric Surgery for Treatment of Co-Morbid Conditions Related to Morbid Obesity \u2014 Indications and Limitations of Coverage \u2014 C. Nationally Non-Covered Indications",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=57&ncdver=5",
+            "quote": "Open and laparoscopic vertical banded gastroplasty; Intestinal bypass surgery; and, Gastric balloon for treatment of obesity."
+          },
+          {
+            "chunk_id": "ncd_100.1:3",
+            "doc_title": "Medicare National Coverage Determination 100.1: Bariatric Surgery for Treatment of Co-Morbid Conditions Related to Morbid Obesity",
+            "section_title": "NCD 100.1 Bariatric Surgery for Treatment of Co-Morbid Conditions Related to Morbid Obesity \u2014 Indications and Limitations of Coverage \u2014 C. Nationally Non-Covered Indications",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=57&ncdver=5",
+            "quote": "Treatments for obesity alone remain non-covered."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8936,
+            "output_tokens": 121,
+            "cost_usd": 0.0009541,
+            "latency_ms": 2075,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 26,
+            "output_tokens": 0,
+            "cost_usd": 5.2e-07,
+            "latency_ms": 904,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 4082,
+            "output_tokens": 619,
+            "cost_usd": 0.0007177,
+            "latency_ms": 5536,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 13044,
+        "total_output_tokens": 740,
+        "total_cost_usd": 0.001672,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2075,
+          "retrieval_ms": 904,
+          "answer_ms": 5536,
+          "total_ms": 8516
+        },
+        "retrieved_chunk_ids": [
+          "ncd_100.1:3",
+          "ncd_100.1:2",
+          "ncd_100.1:4",
+          "ncd_100.1:0",
+          "ncd_210.12:0",
+          "ncd_210.12:1",
+          "ncd_140.9:1",
+          "ncd_210.12:2"
+        ],
+        "doc_top_similarity": 0.796859797988576,
+        "doc_query": "Medicare national coverage determination for bariatric surgery: procedures not covered for all beneficiaries and whether treatment of obesity alone is nationally covered",
+        "doc_collection": "coverage",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 8516,
+      "step_ms": {
+        "plan_ms": 2075,
+        "retrieval_ms": 904,
+        "answer_ms": 5536,
+        "total_ms": 8516
+      },
+      "cost_usd": 0.001672,
+      "judge_cost_usd": 0.002006,
+      "input_tokens": 13044,
+      "output_tokens": 740,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "ncd_100.1:3",
+        "ncd_100.1:2",
+        "ncd_100.1:4",
+        "ncd_100.1:0",
+        "ncd_210.12:0",
+        "ncd_210.12:1",
+        "ncd_140.9:1",
+        "ncd_210.12:2"
+      ],
+      "doc_top_similarity": 0.796859797988576,
+      "judge_tokens": [
+        423,
+        116
+      ],
+      "judge_verdicts": [
+        {
+          "point": "Treatments for obesity alone remain non-covered",
+          "stated": true,
+          "reason": "The answer explicitly says treatment of obesity alone remains non-covered."
+        },
+        {
+          "point": "Open adjustable gastric banding is non-covered",
+          "stated": true,
+          "reason": "The answer lists open adjustable gastric banding as non-covered for all Medicare beneficiaries."
+        },
+        {
+          "point": "Open and laparoscopic vertical banded gastroplasty is non-covered",
+          "stated": true,
+          "reason": "The answer lists both open and laparoscopic vertical banded gastroplasty as non-covered for all beneficiaries."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "cov-05",
+      "type": "definition",
+      "group": "definition",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "For Medicare coverage of CPAP in adults with obstructive sleep apnea: how long is the initial coverage period, who keeps coverage after it, and what must the diagnosis include?",
+      "error": null,
+      "answer": {
+        "question": "For Medicare coverage of CPAP in adults with obstructive sleep apnea: how long is the initial coverage period, who keeps coverage after it, and what must the diagnosis include?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "NCD 240.4, Continuous Positive Airway Pressure (CPAP) Therapy For Obstructive Sleep Apnea (OSA): initial CPAP coverage is limited to 12 weeks. After that, coverage continues only for beneficiaries diagnosed with OSA who benefit from CPAP during the initial 12-week period. The diagnosis must include a clinical evaluation and a positive attended sleep-lab PSG, or an eligible unattended Type II, III, or Type IV home sleep test (Type IV must measure at least 3 channels); the test must be ordered by the treating physician and furnished under appropriate physician supervision. The AHI or RDI must be at least 15 events per hour, or 5\u201314 events per hour with documented excessive daytime sleepiness, impaired cognition, mood disorders, insomnia, hypertension, ischemic heart disease, or history of stroke. This is national Medicare policy as written in that document; local rules and individual circumstances can differ, and it is not a coverage decision for any person.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "ncd_240.4:1",
+            "doc_title": "Medicare National Coverage Determination 240.4: Continuous Positive Airway Pressure (CPAP) Therapy For Obstructive Sleep Apnea (OSA)",
+            "section_title": "NCD 240.4 Continuous Positive Airway Pressure (CPAP) Therapy For Obstructive Sleep Apnea (OSA) \u2014 Indications and Limitations of Coverage \u2014 B. Nationally Covered Indications",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=226&ncdver=3",
+            "quote": "Coverage of CPAP is initially limited to a 12-week period"
+          },
+          {
+            "chunk_id": "ncd_240.4:1",
+            "doc_title": "Medicare National Coverage Determination 240.4: Continuous Positive Airway Pressure (CPAP) Therapy For Obstructive Sleep Apnea (OSA)",
+            "section_title": "NCD 240.4 Continuous Positive Airway Pressure (CPAP) Therapy For Obstructive Sleep Apnea (OSA) \u2014 Indications and Limitations of Coverage \u2014 B. Nationally Covered Indications",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=226&ncdver=3",
+            "quote": "CPAP is subsequently covered only for those beneficiaries diagnosed with OSA who benefit from CPAP during this 12-week period."
+          },
+          {
+            "chunk_id": "ncd_240.4:1",
+            "doc_title": "Medicare National Coverage Determination 240.4: Continuous Positive Airway Pressure (CPAP) Therapy For Obstructive Sleep Apnea (OSA)",
+            "section_title": "NCD 240.4 Continuous Positive Airway Pressure (CPAP) Therapy For Obstructive Sleep Apnea (OSA) \u2014 Indications and Limitations of Coverage \u2014 B. Nationally Covered Indications",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=226&ncdver=3",
+            "quote": "A positive diagnosis of OSA for the coverage of CPAP must include a clinical evaluation and a positive: attended PSG performed in a sleep laboratory; or unattended HST with a Type II home sleep monitoring device"
+          },
+          {
+            "chunk_id": "ncd_240.4:1",
+            "doc_title": "Medicare National Coverage Determination 240.4: Continuous Positive Airway Pressure (CPAP) Therapy For Obstructive Sleep Apnea (OSA)",
+            "section_title": "NCD 240.4 Continuous Positive Airway Pressure (CPAP) Therapy For Obstructive Sleep Apnea (OSA) \u2014 Indications and Limitations of Coverage \u2014 B. Nationally Covered Indications",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=226&ncdver=3",
+            "quote": "The sleep test must have been previously ordered by the beneficiary's treating physician and furnished under appropriate physician supervision."
+          },
+          {
+            "chunk_id": "ncd_240.4:1",
+            "doc_title": "Medicare National Coverage Determination 240.4: Continuous Positive Airway Pressure (CPAP) Therapy For Obstructive Sleep Apnea (OSA)",
+            "section_title": "NCD 240.4 Continuous Positive Airway Pressure (CPAP) Therapy For Obstructive Sleep Apnea (OSA) \u2014 Indications and Limitations of Coverage \u2014 B. Nationally Covered Indications",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=226&ncdver=3",
+            "quote": "AHI or RDI greater than or equal to 15 events per hour, or AHI or RDI greater than or equal to 5 events and less than or equal to 14 events per hour"
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8945,
+            "output_tokens": 168,
+            "cost_usd": 0.0009785,
+            "latency_ms": 3544,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 33,
+            "output_tokens": 0,
+            "cost_usd": 6.599999999999999e-07,
+            "latency_ms": 1222,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 4303,
+            "output_tokens": 707,
+            "cost_usd": 0.0007838,
+            "latency_ms": 6242,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 13281,
+        "total_output_tokens": 875,
+        "total_cost_usd": 0.001763,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3544,
+          "retrieval_ms": 1223,
+          "answer_ms": 6242,
+          "total_ms": 11011
+        },
+        "retrieved_chunk_ids": [
+          "ncd_240.4:1",
+          "ncd_240.4:2",
+          "ncd_240.4:3",
+          "ncd_240.4.1:1",
+          "ncd_240.4:4",
+          "ncd_240.4:5",
+          "ncd_240.9:3",
+          "ncd_240.4:0"
+        ],
+        "doc_top_similarity": 0.783101074055873,
+        "doc_query": "National Medicare coverage of CPAP for adults with obstructive sleep apnea: initial 12-week trial period, criteria for continued coverage, and required diagnostic sleep-test findings",
+        "doc_collection": "coverage",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 11011,
+      "step_ms": {
+        "plan_ms": 3544,
+        "retrieval_ms": 1223,
+        "answer_ms": 6242,
+        "total_ms": 11011
+      },
+      "cost_usd": 0.001763,
+      "judge_cost_usd": 0.002168,
+      "input_tokens": 13281,
+      "output_tokens": 875,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "ncd_240.4:1",
+        "ncd_240.4:2",
+        "ncd_240.4:3",
+        "ncd_240.4.1:1",
+        "ncd_240.4:4",
+        "ncd_240.4:5",
+        "ncd_240.9:3",
+        "ncd_240.4:0"
+      ],
+      "doc_top_similarity": 0.783101074055873,
+      "judge_tokens": [
+        529,
+        111
+      ],
+      "judge_verdicts": [
+        {
+          "point": "Coverage is initially limited to a 12-week period",
+          "stated": true,
+          "reason": "The answer explicitly says initial CPAP coverage is limited to 12 weeks."
+        },
+        {
+          "point": "After that CPAP is covered only for beneficiaries who benefit from it during the 12 weeks",
+          "stated": true,
+          "reason": "The answer says coverage continues only for beneficiaries who benefit from CPAP during the initial 12-week period."
+        },
+        {
+          "point": "The diagnosis must include a clinical evaluation and a positive sleep test (attended PSG or a Type II, III or IV home test)",
+          "stated": true,
+          "reason": "The answer requires a clinical evaluation and a positive attended PSG or eligible Type II, III, or IV home sleep test."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "cov-06",
+      "type": "definition",
+      "group": "definition",
+      "split": "dev",
+      "difficulty": "easy",
+      "question": "What does Medicare's national policy say about EDTA chelation therapy for atherosclerosis, and how should claims that use other diagnosis terms be handled?",
+      "error": null,
+      "answer": {
+        "question": "What does Medicare's national policy say about EDTA chelation therapy for atherosclerosis, and how should claims that use other diagnosis terms be handled?",
+        "route": "docs",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "NCD 20.21, Chelation Therapy for Treatment of Atherosclerosis, says EDTA chelation for treating or preventing atherosclerosis is experimental and not covered. Claims using variant diagnosis terms\u2014such as arteriosclerosis or calcinosis\u2014should also be denied under that section. NCD 20.22, Ethylenediamine-Tetra-Acetic (EDTA) Chelation Therapy for Treatment of Atherosclerosis, likewise says EDTA used for atherosclerosis, arteriosclerosis, calcinosis, or a similar generalized condition not listed by the FDA as an approved use is not covered and is considered experimental. This is national Medicare policy as written in those documents; local rules and individual circumstances can differ, and it is not a coverage decision for any person.",
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [
+          {
+            "chunk_id": "ncd_20.21:1",
+            "doc_title": "Medicare National Coverage Determination 20.21: Chelation Therapy for Treatment of Atherosclerosis",
+            "section_title": "NCD 20.21 Chelation Therapy for Treatment of Atherosclerosis \u2014 Indications and Limitations of Coverage",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=86&ncdver=1",
+            "quote": "EDTA chelation therapy for the treatment or prevention of atherosclerosis is not covered"
+          },
+          {
+            "chunk_id": "ncd_20.21:1",
+            "doc_title": "Medicare National Coverage Determination 20.21: Chelation Therapy for Treatment of Atherosclerosis",
+            "section_title": "NCD 20.21 Chelation Therapy for Treatment of Atherosclerosis \u2014 Indications and Limitations of Coverage",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=86&ncdver=1",
+            "quote": "Claims employing such variant terms should also be denied under this section."
+          },
+          {
+            "chunk_id": "ncd_20.22:0",
+            "doc_title": "Medicare National Coverage Determination 20.22: Ethylenediamine-Tetra-Acetic (EDTA) Chelation Therapy for Treatment of Atherosclerosis",
+            "section_title": "NCD 20.22 Ethylenediamine-Tetra-Acetic (EDTA) Chelation Therapy for Treatment of Atherosclerosis \u2014 Indications and Limitations of Coverage",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=146&ncdver=1",
+            "quote": "The use of EDTA as a chelating agent to treat atherosclerosis, arteriosclerosis, calcinosis, or similar generalized condition not listed by the FDA as an approved use is not covered."
+          },
+          {
+            "chunk_id": "ncd_20.22:0",
+            "doc_title": "Medicare National Coverage Determination 20.22: Ethylenediamine-Tetra-Acetic (EDTA) Chelation Therapy for Treatment of Atherosclerosis",
+            "section_title": "NCD 20.22 Ethylenediamine-Tetra-Acetic (EDTA) Chelation Therapy for Treatment of Atherosclerosis \u2014 Indications and Limitations of Coverage",
+            "page_start": null,
+            "source_url": "https://www.cms.gov/medicare-coverage-database/view/ncd.aspx?ncdid=146&ncdver=1",
+            "quote": "Any such use of EDTA is considered experimental."
+          }
+        ],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8940,
+            "output_tokens": 122,
+            "cost_usd": 0.000955,
+            "latency_ms": 2203,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 33,
+            "output_tokens": 0,
+            "cost_usd": 6.599999999999999e-07,
+            "latency_ms": 826,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 2749,
+            "output_tokens": 691,
+            "cost_usd": 0.0006204000000000001,
+            "latency_ms": 7960,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11722,
+        "total_output_tokens": 813,
+        "total_cost_usd": 0.001576,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2203,
+          "retrieval_ms": 826,
+          "answer_ms": 7960,
+          "total_ms": 10992
+        },
+        "retrieved_chunk_ids": [
+          "ncd_20.22:0",
+          "ncd_20.21:1",
+          "ncd_20.21:0",
+          "ncd_20.7:9",
+          "ncd_210.11:1",
+          "ncd_20.15:3",
+          "ncd_210.11:3",
+          "ncd_210.11:4"
+        ],
+        "doc_top_similarity": 0.800513578103079,
+        "doc_query": "EDTA chelation therapy for atherosclerosis: national Medicare coverage determination, covered indications and limitations, and handling claims submitted with diagnosis terms other than atherosclerosis",
+        "doc_collection": "coverage",
+        "rows_total_in_answer": 0
+      },
+      "refused": false,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 10992,
+      "step_ms": {
+        "plan_ms": 2203,
+        "retrieval_ms": 826,
+        "answer_ms": 7960,
+        "total_ms": 10992
+      },
+      "cost_usd": 0.001576,
+      "judge_cost_usd": 0.00201,
+      "input_tokens": 11722,
+      "output_tokens": 813,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "retrieval_hit": true,
+      "doc_hit": true,
+      "cited_expected": true,
+      "retrieved_chunk_ids": [
+        "ncd_20.22:0",
+        "ncd_20.21:1",
+        "ncd_20.21:0",
+        "ncd_20.7:9",
+        "ncd_210.11:1",
+        "ncd_20.15:3",
+        "ncd_210.11:3",
+        "ncd_210.11:4"
+      ],
+      "doc_top_similarity": 0.800513578103079,
+      "judge_tokens": [
+        465,
+        108
+      ],
+      "judge_verdicts": [
+        {
+          "point": "EDTA chelation therapy for treating or preventing atherosclerosis is not covered",
+          "stated": true,
+          "reason": "The answer explicitly says EDTA chelation for treating or preventing atherosclerosis is not covered."
+        },
+        {
+          "point": "It is considered experimental",
+          "stated": true,
+          "reason": "The answer explicitly describes EDTA chelation for atherosclerosis as experimental."
+        },
+        {
+          "point": "Claims using variant diagnosis terms such as arteriosclerosis or calcinosis should also be denied",
+          "stated": true,
+          "reason": "The answer explicitly says claims using variant diagnosis terms such as arteriosclerosis or calcinosis should also be denied."
+        }
+      ],
+      "points_covered": 1.0,
+      "points_missing": 0,
+      "correct": true
+    },
+    {
+      "id": "covx-01",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "dev",
+      "difficulty": "hard",
+      "question": "Does Medicare have a national coverage policy for Botox injections to smooth facial wrinkles?",
+      "error": null,
+      "answer": {
+        "question": "Does Medicare have a national coverage policy for Botox injections to smooth facial wrinkles?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "The evidence found does not answer the question: The provided excerpts do not address Botox injections to smooth facial wrinkles, so they do not establish whether Medicare has a national coverage policy for them.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8925,
+            "output_tokens": 104,
+            "cost_usd": 0.0009445,
+            "latency_ms": 2235,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 27,
+            "output_tokens": 0,
+            "cost_usd": 5.400000000000001e-07,
+            "latency_ms": 925,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 2497,
+            "output_tokens": 198,
+            "cost_usd": 0.0003487,
+            "latency_ms": 2849,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11449,
+        "total_output_tokens": 302,
+        "total_cost_usd": 0.001294,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2235,
+          "retrieval_ms": 925,
+          "answer_ms": 2849,
+          "total_ms": 6011
+        },
+        "retrieved_chunk_ids": [
+          "ncd_160.15:1",
+          "ncd_250.5:1",
+          "ncd_30.1:1",
+          "ncd_140.4:0",
+          "ncd_100.1:3",
+          "ncd_150.6:0",
+          "ncd_30.3.1:1",
+          "ncd_20.29:2"
+        ],
+        "doc_top_similarity": 0.513710256898975,
+        "doc_query": "Botulinum toxin (Botox) injections for cosmetic treatment of facial wrinkles: nationally covered or not covered, coverage indications and limitations",
+        "doc_collection": "coverage",
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 6011,
+      "step_ms": {
+        "plan_ms": 2235,
+        "retrieval_ms": 925,
+        "answer_ms": 2849,
+        "total_ms": 6011
+      },
+      "cost_usd": 0.001294,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 11449,
+      "output_tokens": 302,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: answer step",
+      "correct": true,
+      "reason": null
+    },
+    {
+      "id": "covo-01",
+      "type": "out_of_scope",
+      "group": "oos_unsafe",
+      "split": "dev",
+      "difficulty": "easy",
+      "question": "If I'm on Medicare and need an implantable defibrillator, how much will I have to pay out of pocket?",
+      "error": null,
+      "answer": {
+        "question": "If I'm on Medicare and need an implantable defibrillator, how much will I have to pay out of pocket?",
+        "route": "refuse",
+        "refused": true,
+        "refusal_reason": "This asks for an individual\u2019s out-of-pocket costs, which are outside scope even when the service is associated with Medicare coverage.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8934,
+            "output_tokens": 93,
+            "cost_usd": 0.0009399000000000001,
+            "latency_ms": 2274,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          }
+        ],
+        "total_input_tokens": 8934,
+        "total_output_tokens": 93,
+        "total_cost_usd": 0.00094,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2274,
+          "total_ms": 2275
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "refuse",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 2275,
+      "step_ms": {
+        "plan_ms": 2274,
+        "total_ms": 2275
+      },
+      "cost_usd": 0.00094,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 8934,
+      "output_tokens": 93,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "plan",
+      "correct": true,
+      "reason": null
+    }
+  ]
+}

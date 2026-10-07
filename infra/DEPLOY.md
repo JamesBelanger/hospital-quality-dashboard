@@ -107,3 +107,24 @@ Steps are in `infra/ROLLBACK_DRILL.md`.
 - `hq_docs.chunks` has a `collection` column (`measures` = the 496 measure-document chunks, `coverage` = 833 chunks from 345 National Coverage Determinations, loaded by `docs_index/run_all.py`). `hq_app.request_log` has a nullable `doc_collection` column. Both columns were added to the live database with owner statements (`infra/setup_reader_role.py` now carries the log column); no new login, grant or secret is needed (`hq_service` already has table-level SELECT).
 - New code (`plan_v5` / `answer_v5`, collection filter in `search_docs`) must ship before or with any change to the index. Until it ships, the deployed code searches both collections for a measure question (checked on the 22 v1 definition queries: no NCD chunk in any top 8).
 - Roll back the library only: `delete from hq_docs.chunks where collection = 'coverage'` (owner). Roll back the prompts only: `HQ_PLAN_PROMPT=plan_v4 HQ_ANSWER_PROMPT=answer_v4` (coverage questions are then refused; `doc_collection` stays `measures`).
+
+## Abuse testing (2026-10-07)
+
+Full write-up: `redteam/REPORT.md`. What changed and what the caps are:
+
+- **SQL validator.** Table names are resolved per scope, and only an allow-list of analytics functions is accepted (no session or server information, no row generators, no `repeat`, no recursive queries). Allow-list and tests: `service/sql_guard.py`, `tests/test_sql_guard.py`.
+- **Request caps.** Question 300 characters; request body 4 KB (413 above that); validation errors return 422 without echoing the input; `/docs`, `/redoc` and `/openapi.json` are off. `/ask` responses carry `X-Content-Type-Options: nosniff` and `Cache-Control: no-store`.
+- **Evidence and answer caps.** Each result cell is cut at 300 characters; the rows given to the model are capped at about 12,000 characters; the answer text is cut at 2,400 characters (at a sentence end); the answer call is limited to 4,000 output tokens (hidden reasoning counts toward it). A reply that is still cut off becomes a refusal.
+- **Database waits.** One lock per database login, 8 s wait limit. Model-written SQL has an 8 s deadline on top of the 5 s server timeout; on expiry the query is cancelled and the connection replaced.
+- **In-flight limits (one replica, one process only).** The hourly, per-minute and budget limits count requests still running as well as logged rows.
+
+| Variable | Default | Meaning |
+|---|---|---|
+| `HQ_MAX_INFLIGHT` | 6 | requests answered at the same moment; above it, 429 "busy" with `Retry-After: 5` before any model call |
+| `HQ_INFLIGHT_COST_USD` | 0.01 | spend assumed for each request still running, added to today's spend for the budget check |
+
+`az containerapp update -n hq-ask -g rg-hq-ask --set-env-vars HQ_MAX_INFLIGHT=6 HQ_INFLIGHT_COST_USD=0.01`
+
+If the app is ever run with more than one replica or more than one worker process, the in-flight registry is per process: each process would admit its own 6 requests, and the hourly limit would again lag behind a burst. Keep one replica and one uvicorn worker, or move the registry into the database first.
+
+Before deploy: the default prompts are now `plan_v6` / `answer_v6`; `/health` shows them. Roll back with `HQ_PLAN_PROMPT=plan_v5 HQ_ANSWER_PROMPT=answer_v5` (the validator and the code caps stay on).

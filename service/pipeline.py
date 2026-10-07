@@ -17,6 +17,7 @@ returned with every answer.
 """
 from __future__ import annotations
 
+import dataclasses
 import json
 import os
 import re
@@ -24,18 +25,29 @@ import time
 from pathlib import Path
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 
 from service import retrieval
 from service.embedder import Embedder
 from service.llm import LLM, Usage
 from service.retrieval import Chunk, search_docs
-from service.sql_runner import DatabaseError, GuardRejected, run_sql
+from service.sql_runner import DatabaseError, GuardRejected, SqlResult, run_sql
 
 PROMPTS = Path(__file__).parent / "prompts"
-PLAN_PROMPT, ANSWER_PROMPT, SCHEMA_PROMPT = "plan_v5", "answer_v5", "schema_v2"
+PLAN_PROMPT, ANSWER_PROMPT, SCHEMA_PROMPT = "plan_v6", "answer_v6", "schema_v2"
 DOC_SUPPORT_THRESHOLD = 0.35  # smoke test: 0.67-0.80 on-topic, 0.13 off-topic
 MAX_ROWS_SHOWN = 50
+MAX_CELL_CHARS = 300  # every cell, before rows go to the answer call or back to the caller
+MAX_ROWS_CHARS = 12_000  # serialized rows handed to the answer call (and returned); trailing rows are dropped
+CELL_CUT = "…[cut]"
+# Output tokens include the model's hidden reasoning: measured answer calls used 700 to 2,900 (coverage answers with many citations) and ~1,800 for a 200-character
+# answer, so a cap near 700 cut off legitimate answers. The visible answer is bounded separately by MAX_ANSWER_CHARS.
+ANSWER_MAX_OUTPUT_TOKENS = 4_000
+REFUSAL_TOO_LONG = "The answer could not be completed within the length limit. Try a narrower question."
+MAX_ANSWER_CHARS = 2_400
+ANSWER_CUT = " […]"
+COVERAGE_CLOSING = ("This is national Medicare policy as written in that document; local rules and individual "
+                    "circumstances can differ, and it is not a coverage decision for any person.")
 REFUSAL_NO_EVIDENCE = "I could not find data or documentation in this dataset that answers that question."
 
 
@@ -111,6 +123,45 @@ class Answer(BaseModel):
     doc_collection: Literal["measures", "coverage"] | None = None  # library searched; None when no documentation search ran
 
 
+def _cap_cell(v):
+    if isinstance(v, str):
+        return v if len(v) <= MAX_CELL_CHARS else v[:MAX_CELL_CHARS] + CELL_CUT
+    if isinstance(v, (list, tuple, dict)):
+        text = json.dumps(v, default=str)
+        return v if len(text) <= MAX_CELL_CHARS else text[:MAX_CELL_CHARS] + CELL_CUT
+    return v
+
+
+def cap_result(res: SqlResult) -> SqlResult:
+    """Cut every cell at MAX_CELL_CHARS. The query's own row_count is kept."""
+    return dataclasses.replace(res, rows=[[_cap_cell(v) for v in row] for row in res.rows])
+
+
+def shown_rows(res: SqlResult) -> list[list]:
+    """The rows handed to the answer call and returned to the caller: at most MAX_ROWS_SHOWN rows and
+    MAX_ROWS_CHARS serialized characters; trailing rows are dropped (the answer call is told how many were cut)."""
+    out, size = [], 0
+    for row in res.rows[:MAX_ROWS_SHOWN]:
+        size += len(json.dumps(row, default=str)) + 2
+        if size > MAX_ROWS_CHARS:
+            break
+        out.append(row)
+    return out
+
+
+def cap_answer(text: str) -> str:
+    """At most MAX_ANSWER_CHARS: cut at the last sentence end inside the limit and mark the cut."""
+    if len(text) <= MAX_ANSWER_CHARS:
+        return text
+    head = text[:MAX_ANSWER_CHARS]
+    ends = [m.end() for m in re.finditer(r"[.!?](?=\s|$)", head)]
+    return (head[:ends[-1]] if ends else head).rstrip() + ANSWER_CUT
+
+
+def with_coverage_closing(text: str) -> str:
+    return text if "not a coverage decision" in text.lower() else text.rstrip() + " " + COVERAGE_CLOSING
+
+
 def _norm(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip().casefold()
 
@@ -135,7 +186,7 @@ def _plan_system(versions: dict[str, str]) -> str:
 def _answer_user(question: str, res, chunks: list[Chunk]) -> str:
     parts = [f"QUESTION: {question}"]
     if res is not None:
-        shown = res.rows[:MAX_ROWS_SHOWN]
+        shown = shown_rows(res)
         note = f" (showing the first {len(shown)} of {res.row_count})" if res.row_count > len(shown) else ""
         if res.row_count == 0:  # a query that ran and matched nothing is evidence: the answer is "none"
             note = " (the query ran successfully and returned 0 rows: no records match)"
@@ -158,7 +209,7 @@ def _empty_check(question: str, sql_text: str, res, system: str, call):
     new_sql = (fixed.sql or "").strip()
     if new_sql and new_sql != sql_text.strip():
         try:
-            return run_sql(new_sql), new_sql, True, "empty"
+            return cap_result(run_sql(new_sql)), new_sql, True, "empty"
         except (GuardRejected, DatabaseError):
             pass
     return res, sql_text, True, "empty"
@@ -180,8 +231,8 @@ def ask(question: str, llm: LLM | None = None, embedder: Embedder | None = None,
     system = _plan_system(versions)  # raises at once if a configured prompt version has no file
     answer_system = load_prompt(versions["answer"])
 
-    def call(step: str, system: str, user: str, schema):
-        obj, u = llm.complete(system, user, schema, **({'model': model} if model else {}))
+    def call(step: str, system: str, user: str, schema, **extra):
+        obj, u = llm.complete(system, user, schema, **({'model': model} if model else {}), **extra)
         u.step = step
         usage.append(u)
         timings[step + "_ms"] = timings.get(step + "_ms", 0) + u.latency_ms
@@ -215,7 +266,7 @@ def ask(question: str, llm: LLM | None = None, embedder: Embedder | None = None,
             t0 = time.perf_counter()
             for attempt in (0, 1):
                 try:
-                    res = run_sql(sql_text)
+                    res = cap_result(run_sql(sql_text))
                     data_error = None
                     break
                 except (GuardRejected, DatabaseError) as e:
@@ -262,13 +313,23 @@ def ask(question: str, llm: LLM | None = None, embedder: Embedder | None = None,
                       repair_kind=repair_kind, sql_error=data_error)
 
     # ---- answer ----
-    out = call("answer", answer_system, _answer_user(question, res, chunks), AnswerOut)
+    try:
+        out = call("answer", answer_system, _answer_user(question, res, chunks), AnswerOut,
+                   max_output_tokens=ANSWER_MAX_OUTPUT_TOKENS)
+    except (ValidationError, RuntimeError):  # the reply hit the output-token cap mid-JSON, or had no parsable output
+        return refuse(plan.route, REFUSAL_TOO_LONG, sql=res.sql_run if res else None,
+                      columns=res.columns if res else [], rows=shown_rows(res) if res else [],
+                      row_count=res.row_count if res else 0, repaired=repaired, repair_kind=repair_kind,
+                      sql_error=data_error)
     citations = _valid_citations(out.citations, chunks)
     base = dict(sql=res.sql_run if res else None, columns=res.columns if res else [],
-                rows=res.rows[:MAX_ROWS_SHOWN] if res else [], row_count=res.row_count if res else 0,
+                rows=shown_rows(res) if res else [], row_count=res.row_count if res else 0,
                 repaired=repaired, repair_kind=repair_kind, sql_error=data_error)
     if not out.supported:
-        return refuse(plan.route, "The evidence found does not answer the question: " + out.answer, **base)
+        return refuse(plan.route, "The evidence found does not answer the question: " + cap_answer(out.answer), **base)
     if res is None and not citations:
         return refuse(plan.route, "The answer could not be tied to a verifiable passage of the documentation.", **base)
-    return finish(plan.route, refused=False, answer=out.answer, citations=citations, **base)
+    text = cap_answer(out.answer)  # the cap comes first so the closing sentence below is never cut
+    if collection_used == "coverage":
+        text = with_coverage_closing(text)
+    return finish(plan.route, refused=False, answer=text, citations=citations, **base)

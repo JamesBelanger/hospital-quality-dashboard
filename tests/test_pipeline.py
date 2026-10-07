@@ -21,7 +21,8 @@ class FakeLLM:
     def __init__(self, *replies):
         self.replies, self.calls, self.models = list(replies), [], []
 
-    def complete(self, system, user, schema, model=None):
+    def complete(self, system, user, schema, model=None, max_output_tokens=None):
+        self.max_tokens = getattr(self, "max_tokens", []) + [(schema.__name__, max_output_tokens)]
         self.calls.append((schema.__name__, user))
         self.models.append(model)
         obj = self.replies.pop(0)
@@ -278,9 +279,9 @@ def test_plan_defaults_to_measures_collection():
         pipeline.Plan(route="docs", doc_collection="lcd", reason="r")
 
 
-def test_default_prompts_are_v5():
-    assert (pipeline.PLAN_PROMPT, pipeline.ANSWER_PROMPT) == ("plan_v5", "answer_v5")
-    for name in ("plan_v5", "answer_v5"):
+def test_default_prompts_are_v6():
+    assert (pipeline.PLAN_PROMPT, pipeline.ANSWER_PROMPT) == ("plan_v6", "answer_v6")
+    for name in ("plan_v6", "answer_v6"):
         assert pipeline.load_prompt(name).strip()
 
 

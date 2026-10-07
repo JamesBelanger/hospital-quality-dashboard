@@ -1,0 +1,3800 @@
+{
+  "config": {
+    "tag": "luna-v8-nu-c",
+    "model": "gpt-6-luna",
+    "judge_model": "gpt-6-sol",
+    "split": "test",
+    "types": "numeric,definition_unanswerable",
+    "questions_file": null,
+    "only": null,
+    "limit": null,
+    "workers": 3,
+    "retrieval_mode": "vector",
+    "prompt_versions": {
+      "plan": "plan_v6",
+      "schema": "schema_v2",
+      "answer": "answer_v6"
+    },
+    "started_utc": "2026-10-07T18:10:32+00:00",
+    "n_selected": 30,
+    "skipped_for_spend": [],
+    "max_spend": 1.0
+  },
+  "summary": {
+    "by_group": {
+      "numeric": {
+        "n": 26,
+        "k": 26
+      },
+      "unanswerable": {
+        "n": 4,
+        "k": 4
+      }
+    },
+    "overall": {
+      "n": 30,
+      "k": 30
+    },
+    "numeric": {
+      "row_recall_mean": 1.0,
+      "order_ok": {
+        "k": 14,
+        "n": 15
+      },
+      "answer_states_value": {
+        "k": 11,
+        "n": 11
+      },
+      "refused": 0,
+      "sql_error": 0,
+      "repaired": 0
+    },
+    "refusal_stage": {
+      "plan": 2,
+      "after plan: answer step": 2
+    },
+    "latency_ms": {
+      "median": 7932,
+      "p90": 14329
+    },
+    "cost_usd": {
+      "ask_total": 0.04061,
+      "judge_total": 0,
+      "total": 0.04061,
+      "ask_per_question": 0.001354
+    },
+    "tokens": {
+      "input": 310790,
+      "output": 19078
+    },
+    "errors": []
+  },
+  "records": [
+    {
+      "id": "num-01",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "How many hospitals in Texas are in the CMS hospital quality data?",
+      "error": null,
+      "answer": {
+        "question": "How many hospitals in Texas are in the CMS hospital quality data?",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "There are 467 hospitals in Texas in the CMS hospital quality data.",
+        "sql": "SELECT COUNT(*) AS texas_hospital_count FROM hq.hospitals WHERE UPPER(state) = 'TX' LIMIT 200",
+        "columns": [
+          "texas_hospital_count"
+        ],
+        "rows": [
+          [
+            467
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8923,
+            "output_tokens": 138,
+            "cost_usd": 0.0009613000000000001,
+            "latency_ms": 4954,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1041,
+            "output_tokens": 33,
+            "cost_usd": 0.0001206,
+            "latency_ms": 1999,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9964,
+        "total_output_tokens": 171,
+        "total_cost_usd": 0.001082,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4954,
+          "sql_ms": 963,
+          "answer_ms": 1999,
+          "total_ms": 7919
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 7919,
+      "step_ms": {
+        "plan_ms": 4954,
+        "sql_ms": 963,
+        "answer_ms": 1999,
+        "total_ms": 7919
+      },
+      "cost_usd": 0.001082,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9964,
+      "output_tokens": 171,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 143,
+      "answer_states_value": true
+    },
+    {
+      "id": "num-02",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "What is the average 30-day pneumonia readmission rate across all U.S. hospitals that have a rate? Round to two decimals.",
+      "error": null,
+      "answer": {
+        "question": "What is the average 30-day pneumonia readmission rate across all U.S. hospitals that have a rate? Round to two decimals.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The average across hospitals of the Pneumonia (PN) 30-Day Readmission Rate is 17.34.",
+        "sql": "SELECT 'READM_30_PN' AS measure_id, m.measure_name, ROUND(CAST(AVG(latest.score) AS DECIMAL), 2) AS average_30_day_pneumonia_readmission_rate FROM (SELECT mv.facility_id, mv.measure_id, mv.score, ROW_NUMBER() OVER (PARTITION BY mv.facility_id, mv.measure_id ORDER BY mv.period_end DESC NULLS LAST) AS period_rank FROM hq.measure_values AS mv WHERE UPPER(mv.measure_id) = UPPER('READM_30_PN')) AS latest JOIN hq.hospitals AS h ON UPPER(h.facility_id) = UPPER(latest.facility_id) JOIN hq.measures AS m ON UPPER(m.measure_id) = UPPER(latest.measure_id) WHERE latest.period_rank = 1 AND latest.score IS NOT NULL GROUP BY m.measure_name LIMIT 200",
+        "columns": [
+          "measure_id",
+          "measure_name",
+          "average_30_day_pneumonia_readmission_rate"
+        ],
+        "rows": [
+          [
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.34
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8937,
+            "output_tokens": 604,
+            "cost_usd": 0.0011957,
+            "latency_ms": 6774,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1253,
+            "output_tokens": 43,
+            "cost_usd": 0.00014680000000000002,
+            "latency_ms": 1723,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10190,
+        "total_output_tokens": 647,
+        "total_cost_usd": 0.001343,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6774,
+          "sql_ms": 4477,
+          "answer_ms": 1723,
+          "total_ms": 12977
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 12977,
+      "step_ms": {
+        "plan_ms": 6774,
+        "sql_ms": 4477,
+        "answer_ms": 1723,
+        "total_ms": 12977
+      },
+      "cost_usd": 0.001343,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10190,
+      "output_tokens": 647,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 449,
+      "answer_states_value": true
+    },
+    {
+      "id": "num-03",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "What is the 30-day heart failure death rate at Houston Methodist Hospital in Houston, Texas?",
+      "error": null,
+      "answer": {
+        "question": "What is the 30-day heart failure death rate at Houston Methodist Hospital in Houston, Texas?",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Houston Methodist Hospital\u2019s 30-day death rate for heart failure patients is 6.0, for the period July 1, 2022, through June 30, 2025.",
+        "sql": "SELECT facility_name, measure_id, measure_name, score AS death_rate, period_start, period_end FROM hq.v_tx_latest WHERE UPPER(facility_name) = UPPER('Houston Methodist Hospital') AND UPPER(city) = UPPER('Houston') AND UPPER(measure_id) = UPPER('MORT_30_HF') LIMIT 200",
+        "columns": [
+          "facility_name",
+          "measure_id",
+          "measure_name",
+          "death_rate",
+          "period_start",
+          "period_end"
+        ],
+        "rows": [
+          [
+            "HOUSTON METHODIST HOSPITAL",
+            "MORT_30_HF",
+            "Death rate for heart failure patients",
+            6.0,
+            "2022-07-01",
+            "2025-06-30"
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8929,
+            "output_tokens": 269,
+            "cost_usd": 0.0010274000000000001,
+            "latency_ms": 3985,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1156,
+            "output_tokens": 58,
+            "cost_usd": 0.00014460000000000002,
+            "latency_ms": 3069,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10085,
+        "total_output_tokens": 327,
+        "total_cost_usd": 0.001172,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3985,
+          "sql_ms": 1835,
+          "answer_ms": 3069,
+          "total_ms": 8892
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 8892,
+      "step_ms": {
+        "plan_ms": 3985,
+        "sql_ms": 1835,
+        "answer_ms": 3069,
+        "total_ms": 8892
+      },
+      "cost_usd": 0.001172,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10085,
+      "output_tokens": 327,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 131,
+      "answer_states_value": true
+    },
+    {
+      "id": "num-04",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "How many Texas hospitals have an overall star rating of 5?",
+      "error": null,
+      "answer": {
+        "question": "How many Texas hospitals have an overall star rating of 5?",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "29 Texas hospitals have an overall star rating of 5.",
+        "sql": "SELECT COUNT(*) AS texas_hospitals_with_five_star_rating FROM hq.hospitals WHERE UPPER(state) = UPPER('TX') AND overall_rating = 5 LIMIT 200",
+        "columns": [
+          "texas_hospitals_with_five_star_rating"
+        ],
+        "rows": [
+          [
+            29
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8923,
+            "output_tokens": 180,
+            "cost_usd": 0.0009823,
+            "latency_ms": 3890,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1059,
+            "output_tokens": 31,
+            "cost_usd": 0.00012140000000000001,
+            "latency_ms": 1670,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 9982,
+        "total_output_tokens": 211,
+        "total_cost_usd": 0.001104,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3890,
+          "sql_ms": 145,
+          "answer_ms": 1670,
+          "total_ms": 5706
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 5706,
+      "step_ms": {
+        "plan_ms": 3890,
+        "sql_ms": 145,
+        "answer_ms": 1670,
+        "total_ms": 5706
+      },
+      "cost_usd": 0.001104,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 9982,
+      "output_tokens": 211,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 141,
+      "answer_states_value": true
+    },
+    {
+      "id": "num-05",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "Which Texas hospital has the highest percentage of patients who would definitely recommend it, and what is the percentage? If hospitals tie, give the one that comes first alphabetically.",
+      "error": null,
+      "answer": {
+        "question": "Which Texas hospital has the highest percentage of patients who would definitely recommend it, and what is the percentage? If hospitals tie, give the one that comes first alphabetically.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "ELECTRA MEMORIAL HOSPITAL has the highest percentage of patients who would definitely recommend it, at 96.0%.",
+        "sql": "SELECT facility_name, top_box_pct AS percentage FROM hq.v_hcahps WHERE UPPER(measure_id) = UPPER('H_RECMND_DY') AND top_box_pct IS NOT NULL ORDER BY top_box_pct DESC, facility_name ASC LIMIT 1",
+        "columns": [
+          "facility_name",
+          "percentage"
+        ],
+        "rows": [
+          [
+            "ELECTRA MEMORIAL HOSPITAL",
+            96.0
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8944,
+            "output_tokens": 206,
+            "cost_usd": 0.0009974,
+            "latency_ms": 3391,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1104,
+            "output_tokens": 47,
+            "cost_usd": 0.0001339,
+            "latency_ms": 3513,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10048,
+        "total_output_tokens": 253,
+        "total_cost_usd": 0.001131,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3391,
+          "sql_ms": 706,
+          "answer_ms": 3513,
+          "total_ms": 7613
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 7613,
+      "step_ms": {
+        "plan_ms": 3391,
+        "sql_ms": 706,
+        "answer_ms": 3513,
+        "total_ms": 7613
+      },
+      "cost_usd": 0.001131,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10048,
+      "output_tokens": 253,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 240,
+      "answer_states_value": true
+    },
+    {
+      "id": "num-06",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "How many hospitals in Harris County, Texas have a 30-day pneumonia death rate?",
+      "error": null,
+      "answer": {
+        "question": "How many hospitals in Harris County, Texas have a 30-day pneumonia death rate?",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "21 hospitals in Harris County, Texas have a reported 30-day pneumonia death rate.",
+        "sql": "SELECT COUNT(DISTINCT t.facility_id) AS hospital_count FROM hq.v_tx_latest AS t JOIN hq.hospitals AS h ON h.facility_id = t.facility_id WHERE UPPER(h.county) = UPPER('Harris') AND UPPER(h.state) = UPPER('TX') AND UPPER(t.measure_id) = UPPER('MORT_30_PN') AND t.score IS NOT NULL LIMIT 200",
+        "columns": [
+          "hospital_count"
+        ],
+        "rows": [
+          [
+            21
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8927,
+            "output_tokens": 485,
+            "cost_usd": 0.0011352,
+            "latency_ms": 6076,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1108,
+            "output_tokens": 36,
+            "cost_usd": 0.00012880000000000001,
+            "latency_ms": 1761,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10035,
+        "total_output_tokens": 521,
+        "total_cost_usd": 0.001264,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6076,
+          "sql_ms": 246,
+          "answer_ms": 1761,
+          "total_ms": 8085
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 8085,
+      "step_ms": {
+        "plan_ms": 6076,
+        "sql_ms": 246,
+        "answer_ms": 1761,
+        "total_ms": 8085
+      },
+      "cost_usd": 0.001264,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10035,
+      "output_tokens": 521,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 172,
+      "answer_states_value": true
+    },
+    {
+      "id": "num-07",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "How many U.S. hospitals report a C. difficile infection ratio of exactly zero?",
+      "error": null,
+      "answer": {
+        "question": "How many U.S. hospitals report a C. difficile infection ratio of exactly zero?",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "580 U.S. hospitals report an exactly zero ratio for Clostridium Difficile (C. Diff).",
+        "sql": "SELECT m.measure_id, m.measure_name, COUNT(DISTINCT latest.facility_id) AS hospital_count FROM (SELECT mv.facility_id, mv.measure_id, mv.score, ROW_NUMBER() OVER (PARTITION BY mv.facility_id, UPPER(mv.measure_id) ORDER BY mv.period_end DESC NULLS LAST, mv.period_start DESC NULLS LAST) AS rn FROM hq.measure_values AS mv WHERE UPPER(mv.measure_id) = UPPER('HAI_6_SIR')) AS latest JOIN hq.hospitals AS h ON h.facility_id = latest.facility_id JOIN hq.measures AS m ON UPPER(m.measure_id) = UPPER(latest.measure_id) WHERE latest.rn = 1 AND latest.score = 0 GROUP BY m.measure_id, m.measure_name LIMIT 200",
+        "columns": [
+          "measure_id",
+          "measure_name",
+          "hospital_count"
+        ],
+        "rows": [
+          [
+            "HAI_6_SIR",
+            "Clostridium Difficile (C.Diff)",
+            580
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8927,
+            "output_tokens": 936,
+            "cost_usd": 0.0013607,
+            "latency_ms": 10866,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1213,
+            "output_tokens": 42,
+            "cost_usd": 0.00014230000000000002,
+            "latency_ms": 1557,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10140,
+        "total_output_tokens": 978,
+        "total_cost_usd": 0.001503,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 10866,
+          "sql_ms": 1607,
+          "answer_ms": 1557,
+          "total_ms": 14031
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 14031,
+      "step_ms": {
+        "plan_ms": 10866,
+        "sql_ms": 1607,
+        "answer_ms": 1557,
+        "total_ms": 14031
+      },
+      "cost_usd": 0.001503,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10140,
+      "output_tokens": 978,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 263,
+      "answer_states_value": true
+    },
+    {
+      "id": "num-08",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "easy",
+      "question": "What is the median percentage of emergency department patients who left without being seen among Texas hospitals that report it? Round to one decimal.",
+      "error": null,
+      "answer": {
+        "question": "What is the median percentage of emergency department patients who left without being seen among Texas hospitals that report it? Round to one decimal.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The median percentage of Texas hospitals reporting this measure was 1.0%.",
+        "sql": "SELECT measure_id, measure_name, ROUND(CAST((PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY score)) AS DECIMAL), 1) AS median_percentage FROM hq.v_tx_latest WHERE UPPER(measure_id) = UPPER('OP_22') AND score IS NOT NULL GROUP BY measure_id, measure_name LIMIT 200",
+        "columns": [
+          "measure_id",
+          "measure_name",
+          "median_percentage"
+        ],
+        "rows": [
+          [
+            "OP_22",
+            "Left before being seen",
+            1.0
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8936,
+            "output_tokens": 312,
+            "cost_usd": 0.0010496,
+            "latency_ms": 4600,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1120,
+            "output_tokens": 35,
+            "cost_usd": 0.0001295,
+            "latency_ms": 2143,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10056,
+        "total_output_tokens": 347,
+        "total_cost_usd": 0.001179,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4600,
+          "sql_ms": 205,
+          "answer_ms": 2143,
+          "total_ms": 6950
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 6950,
+      "step_ms": {
+        "plan_ms": 4600,
+        "sql_ms": 205,
+        "answer_ms": 2143,
+        "total_ms": 6950
+      },
+      "cost_usd": 0.001179,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10056,
+      "output_tokens": 347,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 252,
+      "answer_states_value": true
+    },
+    {
+      "id": "num-09",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "Which five states or territories have the highest average 30-day heart failure readmission rate, counting only those with at least 20 hospitals that report it? Give the state code, number of hospitals and average (2 decimals). Break ties by state abbreviation.",
+      "error": null,
+      "answer": {
+        "question": "Which five states or territories have the highest average 30-day heart failure readmission rate, counting only those with at least 20 hospitals that report it? Give the state code, number of hospitals and average (2 decimals). Break ties by state abbreviation.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The five highest state or territory averages for the Heart failure (HF) 30-Day Readmission Rate, among those with at least 20 reporting hospitals, are: PR \u2014 40 hospitals, 23.29; WV \u2014 37 hospitals, 22.10; MA \u2014 53 hospitals, 22.03; NY \u2014 137 hospitals, 21.89; NH \u2014 23 hospitals, 21.86. These are averages across hospitals of the readmission rate, not counts of patients.",
+        "sql": "WITH latest AS (SELECT mv.facility_id, mv.measure_id, mv.score, ROW_NUMBER() OVER (PARTITION BY mv.facility_id, mv.measure_id ORDER BY mv.period_end DESC NULLS LAST) AS rn FROM hq.measure_values AS mv WHERE UPPER(mv.measure_id) = UPPER('READM_30_HF')) SELECT h.state AS state_code, COUNT(DISTINCT h.facility_id) AS hospital_count, ROUND(CAST(AVG(l.score) AS DECIMAL), 2) AS average_readmission_rate, m.measure_id, m.measure_name FROM latest AS l JOIN hq.hospitals AS h ON h.facility_id = l.facility_id JOIN hq.measures AS m ON UPPER(m.measure_id) = UPPER(l.measure_id) WHERE l.rn = 1 AND l.score IS NOT NULL GROUP BY h.state, m.measure_id, m.measure_name HAVING COUNT(DISTINCT h.facility_id) >= 20 ORDER BY average_readmission_rate DESC, state_code ASC LIMIT 5",
+        "columns": [
+          "state_code",
+          "hospital_count",
+          "average_readmission_rate",
+          "measure_id",
+          "measure_name"
+        ],
+        "rows": [
+          [
+            "PR",
+            40,
+            23.29,
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate"
+          ],
+          [
+            "WV",
+            37,
+            22.1,
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate"
+          ],
+          [
+            "MA",
+            53,
+            22.03,
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate"
+          ],
+          [
+            "NY",
+            137,
+            21.89,
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate"
+          ],
+          [
+            "NH",
+            23,
+            21.86,
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate"
+          ]
+        ],
+        "row_count": 5,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8961,
+            "output_tokens": 821,
+            "cost_usd": 0.0013066,
+            "latency_ms": 8712,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1440,
+            "output_tokens": 215,
+            "cost_usd": 0.0002515,
+            "latency_ms": 3007,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10401,
+        "total_output_tokens": 1036,
+        "total_cost_usd": 0.001558,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 8712,
+          "sql_ms": 2003,
+          "answer_ms": 3007,
+          "total_ms": 13724
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 5
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 13724,
+      "step_ms": {
+        "plan_ms": 8712,
+        "sql_ms": 2003,
+        "answer_ms": 3007,
+        "total_ms": 13724
+      },
+      "cost_usd": 0.001558,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10401,
+      "output_tokens": 1036,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 5,
+      "truth_rows": 5,
+      "gen_rows": 5,
+      "reason": null,
+      "truth_ms": 166
+    },
+    {
+      "id": "num-10",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "List the 10 Texas hospitals with the highest 30-day heart attack death rate, with city and rate. Break ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "List the 10 Texas hospitals with the highest 30-day heart attack death rate, with city and rate. Break ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The 10 Texas hospitals with the highest 30-day heart attack death rates shown are:\n1. MIDLAND MEMORIAL HOSPITAL \u2014 Midland: 14.5\n2. CHI ST JOSEPH HEALTH REGIONAL HOSPITAL \u2014 Bryan: 14.4\n3. MEMORIAL HERMANN MEMORIAL CITY HOSPITAL \u2014 Houston: 14.4\n4. HENDRICK MEDICAL CENTER BROWNWOOD \u2014 Brownwood: 14.2\n5. CHRISTUS ST MICHAEL HEALTH SYSTEM \u2014 Texarkana: 14.1\n6. DE TAR HOSPITAL NAVARRO \u2014 Victoria: 14.1\n7. MEDICAL CENTER OF MCKINNEY \u2014 McKinney: 14.1\n8. SHANNON MEDICAL CENTER \u2014 San Angelo: 14.0\n9. MEDICAL CITY DALLAS HOSPITAL \u2014 Dallas: 13.9\n10. THE HOSPITALS OF PROVIDENCE - EAST CAMPUS \u2014 El Paso: 13.8",
+        "sql": "SELECT facility_name, city, score AS death_rate, measure_id, measure_name FROM hq.v_tx_latest WHERE UPPER(measure_id) = UPPER('MORT_30_AMI') AND score IS NOT NULL ORDER BY score DESC, facility_name ASC LIMIT 10",
+        "columns": [
+          "facility_name",
+          "city",
+          "death_rate",
+          "measure_id",
+          "measure_name"
+        ],
+        "rows": [
+          [
+            "MIDLAND MEMORIAL HOSPITAL",
+            "MIDLAND",
+            14.5,
+            "MORT_30_AMI",
+            "Death rate for heart attack patients"
+          ],
+          [
+            "CHI ST JOSEPH HEALTH REGIONAL HOSPITAL",
+            "BRYAN",
+            14.4,
+            "MORT_30_AMI",
+            "Death rate for heart attack patients"
+          ],
+          [
+            "MEMORIAL HERMANN MEMORIAL CITY HOSPITAL",
+            "HOUSTON",
+            14.4,
+            "MORT_30_AMI",
+            "Death rate for heart attack patients"
+          ],
+          [
+            "HENDRICK MEDICAL CENTER BROWNWOOD",
+            "BROWNWOOD",
+            14.2,
+            "MORT_30_AMI",
+            "Death rate for heart attack patients"
+          ],
+          [
+            "CHRISTUS ST MICHAEL HEALTH SYSTEM",
+            "TEXARKANA",
+            14.1,
+            "MORT_30_AMI",
+            "Death rate for heart attack patients"
+          ],
+          [
+            "DE TAR HOSPITAL NAVARRO",
+            "VICTORIA",
+            14.1,
+            "MORT_30_AMI",
+            "Death rate for heart attack patients"
+          ],
+          [
+            "MEDICAL CENTER OF MCKINNEY",
+            "MCKINNEY",
+            14.1,
+            "MORT_30_AMI",
+            "Death rate for heart attack patients"
+          ],
+          [
+            "SHANNON MEDICAL CENTER",
+            "SAN ANGELO",
+            14.0,
+            "MORT_30_AMI",
+            "Death rate for heart attack patients"
+          ],
+          [
+            "MEDICAL CITY DALLAS HOSPITAL",
+            "DALLAS",
+            13.9,
+            "MORT_30_AMI",
+            "Death rate for heart attack patients"
+          ],
+          [
+            "THE HOSPITALS OF PROVIDENCE - EAST CAMPUS",
+            "EL PASO",
+            13.8,
+            "MORT_30_AMI",
+            "Death rate for heart attack patients"
+          ]
+        ],
+        "row_count": 10,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8938,
+            "output_tokens": 277,
+            "cost_usd": 0.0010323,
+            "latency_ms": 3699,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1469,
+            "output_tokens": 323,
+            "cost_usd": 0.00030839999999999996,
+            "latency_ms": 10160,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10407,
+        "total_output_tokens": 600,
+        "total_cost_usd": 0.001341,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3699,
+          "sql_ms": 223,
+          "answer_ms": 10160,
+          "total_ms": 14083
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 10
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 14083,
+      "step_ms": {
+        "plan_ms": 3699,
+        "sql_ms": 223,
+        "answer_ms": 10160,
+        "total_ms": 14083
+      },
+      "cost_usd": 0.001341,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10407,
+      "output_tokens": 600,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 10,
+      "truth_rows": 10,
+      "gen_rows": 10,
+      "reason": null,
+      "truth_ms": 138
+    },
+    {
+      "id": "num-11",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "In Texas, what is the average percentage of patients who rated the hospital 9 or 10, by hospital type? Include only types with at least 5 hospitals that have the score, and show the number of hospitals and the average (1 decimal), highest average first.",
+      "error": null,
+      "answer": {
+        "question": "In Texas, what is the average percentage of patients who rated the hospital 9 or 10, by hospital type? Include only types with at least 5 hospitals that have the score, and show the number of hospitals and the average (1 decimal), highest average first.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "In Texas, the average percentage of patients who rated the hospital 9 or 10, averaged across hospitals, was: Critical Access Hospitals \u2014 35 hospitals, 81.2%; Acute Care - Veterans Administration \u2014 5 hospitals, 76.4%; Acute Care Hospitals \u2014 254 hospitals, 72.3%.",
+        "sql": "SELECT h.hospital_type, v.measure_id, v.measure_name, COUNT(DISTINCT v.facility_id) AS hospital_count, ROUND(CAST(AVG(v.score) AS DECIMAL), 1) AS average_percentage FROM hq.v_tx_latest AS v JOIN hq.hospitals AS h ON h.facility_id = v.facility_id WHERE UPPER(v.measure_id) = UPPER('H_HSP_RATING_9_10') AND h.state = 'TX' AND h.hospital_type IS NOT NULL GROUP BY h.hospital_type, v.measure_id, v.measure_name HAVING COUNT(DISTINCT v.facility_id) >= 5 ORDER BY average_percentage DESC LIMIT 200",
+        "columns": [
+          "hospital_type",
+          "measure_id",
+          "measure_name",
+          "hospital_count",
+          "average_percentage"
+        ],
+        "rows": [
+          [
+            "Critical Access Hospitals",
+            "H_HSP_RATING_9_10",
+            "Patients who gave their hospital a rating of 9 or 10 on a scale from 0 (lowest) to 10 (highest) \u2014 Patients who gave a rating of \"9\" or \"10\" (high)",
+            35,
+            81.2
+          ],
+          [
+            "Acute Care - Veterans Administration",
+            "H_HSP_RATING_9_10",
+            "Patients who gave their hospital a rating of 9 or 10 on a scale from 0 (lowest) to 10 (highest) \u2014 Patients who gave a rating of \"9\" or \"10\" (high)",
+            5,
+            76.4
+          ],
+          [
+            "Acute Care Hospitals",
+            "H_HSP_RATING_9_10",
+            "Patients who gave their hospital a rating of 9 or 10 on a scale from 0 (lowest) to 10 (highest) \u2014 Patients who gave a rating of \"9\" or \"10\" (high)",
+            254,
+            72.3
+          ]
+        ],
+        "row_count": 3,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8965,
+            "output_tokens": 419,
+            "cost_usd": 0.001106,
+            "latency_ms": 4409,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1433,
+            "output_tokens": 117,
+            "cost_usd": 0.0002018,
+            "latency_ms": 2411,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10398,
+        "total_output_tokens": 536,
+        "total_cost_usd": 0.001308,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4409,
+          "sql_ms": 220,
+          "answer_ms": 2411,
+          "total_ms": 7041
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 3
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 7041,
+      "step_ms": {
+        "plan_ms": 4409,
+        "sql_ms": 220,
+        "answer_ms": 2411,
+        "total_ms": 7041
+      },
+      "cost_usd": 0.001308,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10398,
+      "output_tokens": 536,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 3,
+      "truth_rows": 3,
+      "gen_rows": 3,
+      "reason": null,
+      "truth_ms": 180
+    },
+    {
+      "id": "num-12",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "How many Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) have a sepsis care score above the Texas average? Also give how many Houston-area hospitals have a score and the Texas average (1 decimal). The Texas average is over all Texas hospitals with a score.",
+      "error": null,
+      "answer": {
+        "question": "How many Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) have a sepsis care score above the Texas average? Also give how many Houston-area hospitals have a score and the Texas average (1 decimal). The Texas average is over all Texas hospitals with a score.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "17 Houston-area hospitals scored above the Texas average. 35 Houston-area hospitals had a score, and the Texas average was 66.5.",
+        "sql": "WITH tx_average AS (SELECT AVG(score) AS avg_score FROM hq.v_tx_latest WHERE UPPER(measure_id) = UPPER('SEP_1')), houston_scores AS (SELECT facility_id, score FROM hq.v_tx_latest WHERE UPPER(measure_id) = UPPER('SEP_1') AND is_houston_area = TRUE AND UPPER(county) IN ('HARRIS', 'FORT BEND', 'MONTGOMERY', 'GALVESTON', 'BRAZORIA')) SELECT COUNT(DISTINCT hs.facility_id) FILTER(WHERE hs.score > ta.avg_score) AS houston_area_hospitals_above_texas_average, COUNT(DISTINCT hs.facility_id) AS houston_area_hospitals_with_score, ROUND(CAST(ta.avg_score AS DECIMAL), 1) AS texas_average_score FROM tx_average AS ta CROSS JOIN houston_scores AS hs GROUP BY ta.avg_score LIMIT 200",
+        "columns": [
+          "houston_area_hospitals_above_texas_average",
+          "houston_area_hospitals_with_score",
+          "texas_average_score"
+        ],
+        "rows": [
+          [
+            17,
+            35,
+            66.5
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8973,
+            "output_tokens": 636,
+            "cost_usd": 0.0012153,
+            "latency_ms": 10286,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1292,
+            "output_tokens": 48,
+            "cost_usd": 0.0001532,
+            "latency_ms": 1685,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10265,
+        "total_output_tokens": 684,
+        "total_cost_usd": 0.001369,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 10286,
+          "sql_ms": 257,
+          "answer_ms": 1685,
+          "total_ms": 12230
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 12230,
+      "step_ms": {
+        "plan_ms": 10286,
+        "sql_ms": 257,
+        "answer_ms": 1685,
+        "total_ms": 12230
+      },
+      "cost_usd": 0.001369,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10265,
+      "output_tokens": 684,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 270,
+      "answer_states_value": true
+    },
+    {
+      "id": "num-13",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "How many Texas hospitals have each overall star rating from 1 to 5? Leave out hospitals with no rating. List by rating, 1 first.",
+      "error": null,
+      "answer": {
+        "question": "How many Texas hospitals have each overall star rating from 1 to 5? Leave out hospitals with no rating. List by rating, 1 first.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Texas hospitals by overall star rating: 1 star: 7; 2 stars: 37; 3 stars: 69; 4 stars: 74; 5 stars: 29.",
+        "sql": "SELECT overall_rating, COUNT(*) AS hospital_count FROM hq.hospitals WHERE UPPER(state) = 'TX' AND overall_rating BETWEEN 1 AND 5 GROUP BY overall_rating ORDER BY overall_rating LIMIT 200",
+        "columns": [
+          "overall_rating",
+          "hospital_count"
+        ],
+        "rows": [
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            37
+          ],
+          [
+            3,
+            69
+          ],
+          [
+            4,
+            74
+          ],
+          [
+            5,
+            29
+          ]
+        ],
+        "row_count": 5,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8941,
+            "output_tokens": 178,
+            "cost_usd": 0.0009831,
+            "latency_ms": 5152,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1105,
+            "output_tokens": 61,
+            "cost_usd": 0.000141,
+            "latency_ms": 1644,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10046,
+        "total_output_tokens": 239,
+        "total_cost_usd": 0.001124,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 5152,
+          "sql_ms": 180,
+          "answer_ms": 1644,
+          "total_ms": 6978
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 5
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 6978,
+      "step_ms": {
+        "plan_ms": 5152,
+        "sql_ms": 180,
+        "answer_ms": 1644,
+        "total_ms": 6978
+      },
+      "cost_usd": 0.001124,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10046,
+      "output_tokens": 239,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 5,
+      "truth_rows": 5,
+      "gen_rows": 5,
+      "reason": null,
+      "truth_ms": 212
+    },
+    {
+      "id": "num-14",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "Which five Texas counties have the most hospitals, and how many does each have? Break ties by county name.",
+      "error": null,
+      "answer": {
+        "question": "Which five Texas counties have the most hospitals, and how many does each have? Break ties by county name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The five Texas counties with the most hospitals are Harris (50), Dallas (30), Tarrant (30), Bexar (20), and Denton (17). Dallas comes before Tarrant because the counts are tied and counties are ordered by name.",
+        "sql": "SELECT county, COUNT(*) AS hospital_count FROM hq.hospitals WHERE state = 'TX' AND county IS NOT NULL GROUP BY county ORDER BY hospital_count DESC, county ASC LIMIT 5",
+        "columns": [
+          "county",
+          "hospital_count"
+        ],
+        "rows": [
+          [
+            "HARRIS",
+            50
+          ],
+          [
+            "DALLAS",
+            30
+          ],
+          [
+            "TARRANT",
+            30
+          ],
+          [
+            "BEXAR",
+            20
+          ],
+          [
+            "DENTON",
+            17
+          ]
+        ],
+        "row_count": 5,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8932,
+            "output_tokens": 184,
+            "cost_usd": 0.0009852,
+            "latency_ms": 4052,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1099,
+            "output_tokens": 70,
+            "cost_usd": 0.0001449,
+            "latency_ms": 1945,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10031,
+        "total_output_tokens": 254,
+        "total_cost_usd": 0.00113,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4052,
+          "sql_ms": 136,
+          "answer_ms": 1945,
+          "total_ms": 6136
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 5
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 6136,
+      "step_ms": {
+        "plan_ms": 4052,
+        "sql_ms": 136,
+        "answer_ms": 1945,
+        "total_ms": 6136
+      },
+      "cost_usd": 0.00113,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10031,
+      "output_tokens": 254,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 5,
+      "truth_rows": 5,
+      "gen_rows": 5,
+      "reason": null,
+      "truth_ms": 152
+    },
+    {
+      "id": "num-15",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "Compare Houston and Dallas: for Texas hospitals located in each city, how many have a 30-day heart failure death rate and what is the average rate (2 decimals)?",
+      "error": null,
+      "answer": {
+        "question": "Compare Houston and Dallas: for Texas hospitals located in each city, how many have a 30-day heart failure death rate and what is the average rate (2 decimals)?",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Dallas has 10 Texas hospitals with a reported 30-day heart failure death rate, with an average rate of 9.92. Houston has 13 hospitals with a reported rate, with an average rate of 8.44. These averages are across hospitals, not counts of patients.",
+        "sql": "SELECT city, COUNT(DISTINCT facility_id) AS hospitals_with_rate, ROUND(CAST(AVG(score) AS DECIMAL), 2) AS average_30_day_heart_failure_death_rate FROM hq.v_tx_latest WHERE measure_id = 'MORT_30_HF' AND (UPPER(city) = 'HOUSTON' OR UPPER(city) = 'DALLAS') AND score IS NOT NULL GROUP BY city ORDER BY UPPER(city) LIMIT 200",
+        "columns": [
+          "city",
+          "hospitals_with_rate",
+          "average_30_day_heart_failure_death_rate"
+        ],
+        "rows": [
+          [
+            "DALLAS",
+            10,
+            9.92
+          ],
+          [
+            "HOUSTON",
+            13,
+            8.44
+          ]
+        ],
+        "row_count": 2,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8944,
+            "output_tokens": 349,
+            "cost_usd": 0.0010689,
+            "latency_ms": 4893,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1172,
+            "output_tokens": 77,
+            "cost_usd": 0.0001557,
+            "latency_ms": 1650,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10116,
+        "total_output_tokens": 426,
+        "total_cost_usd": 0.001225,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4893,
+          "sql_ms": 179,
+          "answer_ms": 1650,
+          "total_ms": 6724
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 2
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 6724,
+      "step_ms": {
+        "plan_ms": 4893,
+        "sql_ms": 179,
+        "answer_ms": 1650,
+        "total_ms": 6724
+      },
+      "cost_usd": 0.001225,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10116,
+      "output_tokens": 426,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 2,
+      "truth_rows": 2,
+      "gen_rows": 2,
+      "reason": null,
+      "truth_ms": 139
+    },
+    {
+      "id": "num-16",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "Among Texas hospitals that report a central-line bloodstream infection ratio, how many have a ratio above 1.0 (more infections than predicted), and how many hospitals report the ratio?",
+      "error": null,
+      "answer": {
+        "question": "Among Texas hospitals that report a central-line bloodstream infection ratio, how many have a ratio above 1.0 (more infections than predicted), and how many hospitals report the ratio?",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Among Texas hospitals reporting the central-line bloodstream infection ratio, 19 have a ratio above 1.0, out of 151 hospitals reporting.",
+        "sql": "SELECT measure_id, measure_name, COUNT(DISTINCT facility_id) FILTER(WHERE score > 1.0) AS hospitals_above_1_0, COUNT(DISTINCT facility_id) AS hospitals_reporting FROM hq.v_tx_latest WHERE UPPER(measure_id) = UPPER('HAI_1_SIR') GROUP BY measure_id, measure_name LIMIT 200",
+        "columns": [
+          "measure_id",
+          "measure_name",
+          "hospitals_above_1_0",
+          "hospitals_reporting"
+        ],
+        "rows": [
+          [
+            "HAI_1_SIR",
+            "Central Line Associated Bloodstream Infection (ICU + select Wards)",
+            19,
+            151
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8946,
+            "output_tokens": 331,
+            "cost_usd": 0.0010600999999999998,
+            "latency_ms": 4077,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1159,
+            "output_tokens": 48,
+            "cost_usd": 0.0001399,
+            "latency_ms": 3049,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10105,
+        "total_output_tokens": 379,
+        "total_cost_usd": 0.0012,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4077,
+          "sql_ms": 147,
+          "answer_ms": 3049,
+          "total_ms": 7274
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 7274,
+      "step_ms": {
+        "plan_ms": 4077,
+        "sql_ms": 147,
+        "answer_ms": 3049,
+        "total_ms": 7274
+      },
+      "cost_usd": 0.0012,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10105,
+      "output_tokens": 379,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 153,
+      "answer_states_value": true
+    },
+    {
+      "id": "num-17",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "In Travis County, Texas, list each hospital's percentage of emergency department patients who left without being seen, highest first. Leave out hospitals with no score; break ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "In Travis County, Texas, list each hospital's percentage of emergency department patients who left without being seen, highest first. Leave out hospitals with no score; break ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Travis County hospitals, highest first:\n- BAYLOR SCOTT & WHITE MEDICAL CENTER PFLUGERVILLE \u2014 2.0%\n- BAYLOR SCOTT & WHITE MEDICAL CENTER- AUSTIN \u2014 1.0%\n- NORTH AUSTIN MEDICAL CENTER \u2014 1.0%\n- ST DAVID'S MEDICAL CENTER \u2014 1.0%\n- ST DAVID'S SOUTH AUSTIN MEDICAL CENTER \u2014 1.0%\n- THE HOSPITAL AT WESTLAKE MEDICAL CENTER \u2014 0.0%",
+        "sql": "SELECT facility_name AS hospital_name, score AS left_without_being_seen_percentage FROM hq.v_tx_latest WHERE UPPER(county) = UPPER('Travis') AND UPPER(measure_id) = UPPER('OP_22') AND score IS NOT NULL ORDER BY score DESC, facility_name ASC LIMIT 200",
+        "columns": [
+          "hospital_name",
+          "left_without_being_seen_percentage"
+        ],
+        "rows": [
+          [
+            "BAYLOR SCOTT & WHITE MEDICAL CENTER PFLUGERVILLE",
+            2.0
+          ],
+          [
+            "BAYLOR SCOTT & WHITE MEDICAL CENTER- AUSTIN",
+            1.0
+          ],
+          [
+            "NORTH AUSTIN MEDICAL CENTER",
+            1.0
+          ],
+          [
+            "ST DAVID'S MEDICAL CENTER",
+            1.0
+          ],
+          [
+            "ST DAVID'S SOUTH AUSTIN MEDICAL CENTER",
+            1.0
+          ],
+          [
+            "THE HOSPITAL AT WESTLAKE MEDICAL CENTER",
+            0.0
+          ]
+        ],
+        "row_count": 6,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8947,
+            "output_tokens": 251,
+            "cost_usd": 0.0010202,
+            "latency_ms": 3601,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1216,
+            "output_tokens": 175,
+            "cost_usd": 0.00020910000000000001,
+            "latency_ms": 3070,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10163,
+        "total_output_tokens": 426,
+        "total_cost_usd": 0.001229,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3601,
+          "sql_ms": 185,
+          "answer_ms": 3070,
+          "total_ms": 6860
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 6
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 6860,
+      "step_ms": {
+        "plan_ms": 3601,
+        "sql_ms": 185,
+        "answer_ms": 3070,
+        "total_ms": 6860
+      },
+      "cost_usd": 0.001229,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10163,
+      "output_tokens": 426,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 6,
+      "truth_rows": 6,
+      "gen_rows": 6,
+      "reason": null,
+      "truth_ms": 153
+    },
+    {
+      "id": "num-18",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "medium",
+      "question": "Which 10 U.S. hospitals have the highest percentage of patients saying their room and bathroom were always clean, among hospitals with at least 300 completed surveys? Show hospital, city, state, the percentage and the number of completed surveys. Break ties by more completed surveys first, then hospital name.",
+      "error": null,
+      "answer": {
+        "question": "Which 10 U.S. hospitals have the highest percentage of patients saying their room and bathroom were always clean, among hospitals with at least 300 completed surveys? Show hospital, city, state, the percentage and the number of completed surveys. Break ties by more completed surveys first, then hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The 10 highest-ranked hospitals meeting the 300-survey minimum for patients reporting their room and bathroom were always clean are:\n\n| Hospital | City | State | Percentage | Completed surveys |\n|---|---|---|---:|---:|\n| AHN WEXFORD HOSPITAL | WEXFORD | PA | 90.0% | 1,170 |\n| ST LUKE'S HOSPITAL - CARBON CAMPUS | LEHIGHTON | PA | 89.0% | 755 |\n| ST ELIZABETH DEARBORN HOSPITAL | LAWRENCEBURG | IN | 89.0% | 404 |\n| INTERMOUNTAIN HEALTH CEDAR CITY HOSPITAL | CEDAR CITY | UT | 88.0% | 440 |\n| MONTROSE REGIONAL HEALTH | MONTROSE | CO | 88.0% | 359 |\n| HCA FLORIDA TWIN CITIES HOSPITAL | NICEVILLE | FL | 87.0% | 411 |\n| LARKIN COMMUNITY HOSPITAL PALM SPRINGS CAMPUS | HIALEAH | FL | 87.0% | 380 |\n| DOCTORS CENTER HOSPITAL ORLANDO HEALTH DORADO | DORADO | PR | 87.0% | 342 |\n| WELIA HEALTH | MORA | MN | 87.0% | 324 |\n| BAPTIST MEMORIAL HOSPITAL UNION CITY | UNION CITY | TN | 87.0% | 321 |",
+        "sql": "SELECT h.facility_name AS hospital, h.city, h.state, r.score AS percentage, r.denominator AS completed_surveys, m.measure_id, m.measure_name FROM (SELECT mv.facility_id, mv.measure_id, mv.score, mv.denominator, ROW_NUMBER() OVER (PARTITION BY mv.facility_id, UPPER(mv.measure_id) ORDER BY mv.period_end DESC NULLS LAST, mv.period_start DESC NULLS LAST) AS period_rank FROM hq.measure_values AS mv WHERE UPPER(mv.measure_id) = UPPER('H_CLEAN_HSP_A_P') AND mv.value_type = 'answer_percent') AS r JOIN hq.hospitals AS h ON h.facility_id = r.facility_id JOIN hq.measures AS m ON UPPER(m.measure_id) = UPPER(r.measure_id) WHERE r.period_rank = 1 AND r.score IS NOT NULL AND r.denominator >= 300 ORDER BY r.score DESC, r.denominator DESC, h.facility_name ASC LIMIT 10",
+        "columns": [
+          "hospital",
+          "city",
+          "state",
+          "percentage",
+          "completed_surveys",
+          "measure_id",
+          "measure_name"
+        ],
+        "rows": [
+          [
+            "AHN WEXFORD HOSPITAL",
+            "WEXFORD",
+            "PA",
+            90.0,
+            1170.0,
+            "H_CLEAN_HSP_A_P",
+            "Patients who reported that their room and bathroom were \"Always\" clean \u2014 Room was \"always\" clean"
+          ],
+          [
+            "ST LUKE'S HOSPITAL - CARBON CAMPUS",
+            "LEHIGHTON",
+            "PA",
+            89.0,
+            755.0,
+            "H_CLEAN_HSP_A_P",
+            "Patients who reported that their room and bathroom were \"Always\" clean \u2014 Room was \"always\" clean"
+          ],
+          [
+            "ST ELIZABETH DEARBORN HOSPITAL",
+            "LAWRENCEBURG",
+            "IN",
+            89.0,
+            404.0,
+            "H_CLEAN_HSP_A_P",
+            "Patients who reported that their room and bathroom were \"Always\" clean \u2014 Room was \"always\" clean"
+          ],
+          [
+            "INTERMOUNTAIN HEALTH CEDAR CITY HOSPITAL",
+            "CEDAR CITY",
+            "UT",
+            88.0,
+            440.0,
+            "H_CLEAN_HSP_A_P",
+            "Patients who reported that their room and bathroom were \"Always\" clean \u2014 Room was \"always\" clean"
+          ],
+          [
+            "MONTROSE REGIONAL HEALTH",
+            "MONTROSE",
+            "CO",
+            88.0,
+            359.0,
+            "H_CLEAN_HSP_A_P",
+            "Patients who reported that their room and bathroom were \"Always\" clean \u2014 Room was \"always\" clean"
+          ],
+          [
+            "HCA FLORIDA TWIN CITIES HOSPITAL",
+            "NICEVILLE",
+            "FL",
+            87.0,
+            411.0,
+            "H_CLEAN_HSP_A_P",
+            "Patients who reported that their room and bathroom were \"Always\" clean \u2014 Room was \"always\" clean"
+          ],
+          [
+            "LARKIN COMMUNITY HOSPITAL PALM SPRINGS CAMPUS",
+            "HIALEAH",
+            "FL",
+            87.0,
+            380.0,
+            "H_CLEAN_HSP_A_P",
+            "Patients who reported that their room and bathroom were \"Always\" clean \u2014 Room was \"always\" clean"
+          ],
+          [
+            "DOCTORS CENTER HOSPITAL ORLANDO HEALTH DORADO",
+            "DORADO",
+            "PR",
+            87.0,
+            342.0,
+            "H_CLEAN_HSP_A_P",
+            "Patients who reported that their room and bathroom were \"Always\" clean \u2014 Room was \"always\" clean"
+          ],
+          [
+            "WELIA HEALTH",
+            "MORA",
+            "MN",
+            87.0,
+            324.0,
+            "H_CLEAN_HSP_A_P",
+            "Patients who reported that their room and bathroom were \"Always\" clean \u2014 Room was \"always\" clean"
+          ],
+          [
+            "BAPTIST MEMORIAL HOSPITAL UNION CITY",
+            "UNION CITY",
+            "TN",
+            87.0,
+            321.0,
+            "H_CLEAN_HSP_A_P",
+            "Patients who reported that their room and bathroom were \"Always\" clean \u2014 Room was \"always\" clean"
+          ]
+        ],
+        "row_count": 10,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8970,
+            "output_tokens": 746,
+            "cost_usd": 0.00127,
+            "latency_ms": 6796,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1935,
+            "output_tokens": 405,
+            "cost_usd": 0.000396,
+            "latency_ms": 5045,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10905,
+        "total_output_tokens": 1151,
+        "total_cost_usd": 0.001666,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6796,
+          "sql_ms": 2423,
+          "answer_ms": 5045,
+          "total_ms": 14266
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 10
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 14266,
+      "step_ms": {
+        "plan_ms": 6796,
+        "sql_ms": 2423,
+        "answer_ms": 5045,
+        "total_ms": 14266
+      },
+      "cost_usd": 0.001666,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10905,
+      "output_tokens": 1151,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 10,
+      "truth_rows": 10,
+      "gen_rows": 10,
+      "reason": null,
+      "truth_ms": 250
+    },
+    {
+      "id": "num-19",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "Within each Texas hospital ownership type, which hospital has the lowest 30-day pneumonia death rate? Show ownership type, hospital, city and rate, lowest rate first. Break ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "Within each Texas hospital ownership type, which hospital has the lowest 30-day pneumonia death rate? Show ownership type, hospital, city and rate, lowest rate first. Break ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Within each Texas ownership type, the hospital with the lowest 30-day pneumonia death rate is:\n\n| Ownership type | Hospital | City | Rate |\n|---|---|---|---:|\n| Voluntary non-profit - Private | HOUSTON METHODIST HOSPITAL | HOUSTON | 8.0 |\n| Government - State | UT OF TEXAS SOUTHWESTERN UNIVERSITY HOSPITAL - WILLIAM P. CLEMENTS JR. | DALLAS | 9.1 |\n| Veterans Health Administration | TEMPLE VA MEDICAL CENTER (VA CENTRAL TEXAS HEALTHCARE SYSTEM) | TEMPLE | 9.8 |\n| Proprietary | HCA HOUSTON HEALTHCARE PEARLAND | PEARLAND | 10.9 |\n| Government - Hospital District or Authority | PARKLAND HEALTH & HOSPITAL SYSTEM | DALLAS | 10.9 |\n| Voluntary non-profit - Church | Baylor St Lukes Medical Center | HOUSTON | 11.7 |\n| Voluntary non-profit - Other | UT HEALTH EAST TEXAS QUITMAN HOSPITAL | QUITMAN | 12.0 |\n| Physician | BAYLOR SCOTT & WHITE THE HEART HOSPITAL PLANO | PLANO | 12.1 |\n| Government - Local | GUADALUPE REGIONAL MEDICAL CENTER | SEGUIN | 15.0 |",
+        "sql": "SELECT hospital_ownership AS ownership_type, facility_name AS hospital, city, score AS pneumonia_death_rate, measure_id, measure_name FROM (SELECT v.hospital_ownership, v.facility_name, v.city, v.score, v.measure_id, v.measure_name, ROW_NUMBER() OVER (PARTITION BY v.hospital_ownership ORDER BY v.score ASC, v.facility_name ASC) AS ownership_rank FROM hq.v_tx_latest AS v WHERE UPPER(v.measure_id) = UPPER('MORT_30_PN') AND v.score IS NOT NULL) AS ranked WHERE ownership_rank = 1 ORDER BY pneumonia_death_rate ASC, hospital ASC LIMIT 200",
+        "columns": [
+          "ownership_type",
+          "hospital",
+          "city",
+          "pneumonia_death_rate",
+          "measure_id",
+          "measure_name"
+        ],
+        "rows": [
+          [
+            "Voluntary non-profit - Private",
+            "HOUSTON METHODIST HOSPITAL",
+            "HOUSTON",
+            8.0,
+            "MORT_30_PN",
+            "Death rate for pneumonia patients"
+          ],
+          [
+            "Government - State",
+            "UT OF TEXAS  SOUTHWESTERN UNIVERSITY HOSPITAL - WILLIAM P. CLEMENTS JR.",
+            "DALLAS",
+            9.1,
+            "MORT_30_PN",
+            "Death rate for pneumonia patients"
+          ],
+          [
+            "Veterans Health Administration",
+            "TEMPLE VA MEDICAL CENTER (VA CENTRAL TEXAS HEALTHCARE SYSTEM)",
+            "TEMPLE",
+            9.8,
+            "MORT_30_PN",
+            "Death rate for pneumonia patients"
+          ],
+          [
+            "Proprietary",
+            "HCA HOUSTON HEALTHCARE PEARLAND",
+            "PEARLAND",
+            10.9,
+            "MORT_30_PN",
+            "Death rate for pneumonia patients"
+          ],
+          [
+            "Government - Hospital District or Authority",
+            "PARKLAND HEALTH & HOSPITAL SYSTEM",
+            "DALLAS",
+            10.9,
+            "MORT_30_PN",
+            "Death rate for pneumonia patients"
+          ],
+          [
+            "Voluntary non-profit - Church",
+            "Baylor St Lukes Medical Center",
+            "HOUSTON",
+            11.7,
+            "MORT_30_PN",
+            "Death rate for pneumonia patients"
+          ],
+          [
+            "Voluntary non-profit - Other",
+            "UT HEALTH EAST TEXAS QUITMAN HOSPITAL",
+            "QUITMAN",
+            12.0,
+            "MORT_30_PN",
+            "Death rate for pneumonia patients"
+          ],
+          [
+            "Physician",
+            "BAYLOR SCOTT & WHITE THE HEART HOSPITAL PLANO",
+            "PLANO",
+            12.1,
+            "MORT_30_PN",
+            "Death rate for pneumonia patients"
+          ],
+          [
+            "Government - Local",
+            "GUADALUPE REGIONAL MEDICAL CENTER",
+            "SEGUIN",
+            15.0,
+            "MORT_30_PN",
+            "Death rate for pneumonia patients"
+          ]
+        ],
+        "row_count": 9,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8949,
+            "output_tokens": 377,
+            "cost_usd": 0.0010834,
+            "latency_ms": 4188,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1598,
+            "output_tokens": 369,
+            "cost_usd": 0.0003443,
+            "latency_ms": 3535,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10547,
+        "total_output_tokens": 746,
+        "total_cost_usd": 0.001428,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4188,
+          "sql_ms": 222,
+          "answer_ms": 3535,
+          "total_ms": 7946
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 9
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 7946,
+      "step_ms": {
+        "plan_ms": 4188,
+        "sql_ms": 222,
+        "answer_ms": 3535,
+        "total_ms": 7946
+      },
+      "cost_usd": 0.001428,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10547,
+      "output_tokens": 746,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": false,
+      "matched": 9,
+      "truth_rows": 9,
+      "gen_rows": 9,
+      "reason": null,
+      "truth_ms": 145
+    },
+    {
+      "id": "num-20",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "What share of all Texas hospitals does each ownership type account for? Give the count and the share in percent (1 decimal), largest first.",
+      "error": null,
+      "answer": {
+        "question": "What share of all Texas hospitals does each ownership type account for? Give the count and the share in percent (1 decimal), largest first.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Among the shown Texas hospitals, ownership types account for: Proprietary, 171 (36.6%); Voluntary non-profit - Private, 134 (28.7%); Government - Hospital District or Authority, 78 (16.7%); Physician, 27 (5.8%); Voluntary non-profit - Other, 18 (3.9%); Government - State, 15 (3.2%); Government - Local, 11 (2.4%); Veterans Health Administration, 5 (1.1%); Voluntary non-profit - Church, 5 (1.1%); Department of Defense, 3 (0.6%).",
+        "sql": "SELECT h.hospital_ownership AS ownership_type, COUNT(*) AS hospital_count, ROUND(CAST(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER () AS DECIMAL), 1) AS share_percent FROM hq.hospitals AS h WHERE UPPER(h.state) = 'TX' GROUP BY h.hospital_ownership ORDER BY hospital_count DESC, ownership_type LIMIT 200",
+        "columns": [
+          "ownership_type",
+          "hospital_count",
+          "share_percent"
+        ],
+        "rows": [
+          [
+            "Proprietary",
+            171,
+            36.6
+          ],
+          [
+            "Voluntary non-profit - Private",
+            134,
+            28.7
+          ],
+          [
+            "Government - Hospital District or Authority",
+            78,
+            16.7
+          ],
+          [
+            "Physician",
+            27,
+            5.8
+          ],
+          [
+            "Voluntary non-profit - Other",
+            18,
+            3.9
+          ],
+          [
+            "Government - State",
+            15,
+            3.2
+          ],
+          [
+            "Government - Local",
+            11,
+            2.4
+          ],
+          [
+            "Veterans Health Administration",
+            5,
+            1.1
+          ],
+          [
+            "Voluntary non-profit - Church",
+            5,
+            1.1
+          ],
+          [
+            "Department of Defense",
+            3,
+            0.6
+          ]
+        ],
+        "row_count": 10,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8938,
+            "output_tokens": 331,
+            "cost_usd": 0.0010593000000000002,
+            "latency_ms": 3762,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1255,
+            "output_tokens": 159,
+            "cost_usd": 0.000205,
+            "latency_ms": 2355,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10193,
+        "total_output_tokens": 490,
+        "total_cost_usd": 0.001264,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3762,
+          "sql_ms": 340,
+          "answer_ms": 2355,
+          "total_ms": 6459
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 10
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 6459,
+      "step_ms": {
+        "plan_ms": 3762,
+        "sql_ms": 340,
+        "answer_ms": 2355,
+        "total_ms": 6459
+      },
+      "cost_usd": 0.001264,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10193,
+      "output_tokens": 490,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 10,
+      "truth_rows": 10,
+      "gen_rows": 10,
+      "reason": null,
+      "truth_ms": 141
+    },
+    {
+      "id": "num-21",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "Using the number of eligible discharges behind each Texas hospital's 30-day pneumonia readmission rate, which five counties account for the largest shares of the statewide total? Give county, discharges and share in percent (1 decimal; the share is of all Texas counties, not just the five). Break ties by county.",
+      "error": null,
+      "answer": {
+        "question": "Using the number of eligible discharges behind each Texas hospital's 30-day pneumonia readmission rate, which five counties account for the largest shares of the statewide total? Give county, discharges and share in percent (1 decimal; the share is of all Texas counties, not just the five). Break ties by county.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The five counties with the largest shares of eligible discharges behind the Pneumonia (PN) 30-Day Readmission Rate are: Harris \u2014 17,137 discharges (15.2%); Tarrant \u2014 9,890 (8.8%); Bexar \u2014 8,427 (7.5%); Dallas \u2014 6,721 (6.0%); and Collin \u2014 4,655 (4.1%). Shares are of the statewide total across all Texas counties.",
+        "sql": "WITH latest_records AS (SELECT h.facility_id, h.county, mv.denominator, ROW_NUMBER() OVER (PARTITION BY h.facility_id, mv.measure_id ORDER BY mv.period_end DESC, mv.period_start DESC) AS rn FROM hq.measure_values AS mv JOIN hq.hospitals AS h ON h.facility_id = mv.facility_id WHERE h.state = 'TX' AND UPPER(mv.measure_id) = UPPER('READM_30_PN')), county_totals AS (SELECT county, SUM(denominator) AS eligible_discharges FROM latest_records WHERE rn = 1 AND county IS NOT NULL AND denominator IS NOT NULL GROUP BY county) SELECT ct.county, ct.eligible_discharges AS discharges, ROUND(100.0 * ct.eligible_discharges / NULLIF(SUM(ct.eligible_discharges) OVER (), 0), 1) AS share_percent, m.measure_id, m.measure_name FROM county_totals AS ct CROSS JOIN hq.measures AS m WHERE UPPER(m.measure_id) = UPPER('READM_30_PN') ORDER BY ct.eligible_discharges DESC, ct.county ASC LIMIT 5",
+        "columns": [
+          "county",
+          "discharges",
+          "share_percent",
+          "measure_id",
+          "measure_name"
+        ],
+        "rows": [
+          [
+            "HARRIS",
+            17137.0,
+            15.2,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate"
+          ],
+          [
+            "TARRANT",
+            9890.0,
+            8.8,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate"
+          ],
+          [
+            "BEXAR",
+            8427.0,
+            7.5,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate"
+          ],
+          [
+            "DALLAS",
+            6721.0,
+            6.0,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate"
+          ],
+          [
+            "COLLIN",
+            4655.0,
+            4.1,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate"
+          ]
+        ],
+        "row_count": 5,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8974,
+            "output_tokens": 1532,
+            "cost_usd": 0.0016634,
+            "latency_ms": 13178,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1515,
+            "output_tokens": 123,
+            "cost_usd": 0.000213,
+            "latency_ms": 2031,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10489,
+        "total_output_tokens": 1655,
+        "total_cost_usd": 0.001876,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 13178,
+          "sql_ms": 312,
+          "answer_ms": 2031,
+          "total_ms": 15522
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 5
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 15522,
+      "step_ms": {
+        "plan_ms": 13178,
+        "sql_ms": 312,
+        "answer_ms": 2031,
+        "total_ms": 15522
+      },
+      "cost_usd": 0.001876,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10489,
+      "output_tokens": 1655,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 5,
+      "truth_rows": 5,
+      "gen_rows": 5,
+      "reason": null,
+      "truth_ms": 137
+    },
+    {
+      "id": "num-22",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "Among Texas hospitals that have both a 30-day heart failure readmission rate and a 30-day heart failure death rate, which are in the best quarter on both, meaning at or below the 25th percentile (interpolated, calculated across those same hospitals) for each rate? Show hospital, city and both rates, ordered by the two rates added together (lowest first), then hospital name.",
+      "error": null,
+      "answer": {
+        "question": "Among Texas hospitals that have both a 30-day heart failure readmission rate and a 30-day heart failure death rate, which are in the best quarter on both, meaning at or below the 25th percentile (interpolated, calculated across those same hospitals) for each rate? Show hospital, city and both rates, ordered by the two rates added together (lowest first), then hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "These 18 Texas hospitals have both rates at or below the 25th percentile among hospitals with both measures. They are listed in the requested order; rates are percentages as reported.\n\n| Hospital | City | Heart failure readmission rate | Heart failure death rate |\n|---|---|---:|---:|\n| HOUSTON METHODIST HOSPITAL | HOUSTON | 18.9 | 6.0 |\n| HOUSTON METHODIST WILLOWBROOK HOSPITAL | HOUSTON | 20.0 | 6.1 |\n| UT OF TEXAS  SOUTHWESTERN UNIVERSITY HOSPITAL - WILLIAM P. CLEMENTS JR. | DALLAS | 19.2 | 7.0 |\n| HOUSTON METHODIST THE WOODLANDS HOSPITAL | THE WOODLANDS | 19.2 | 7.6 |\n| HOUSTON METHODIST BAYTOWN HOSPITAL | BAYTOWN | 19.2 | 7.7 |\n| Baylor St Lukes Medical Center | HOUSTON | 20.0 | 7.2 |\n| HOUSTON METHODIST SUGARLAND HOSPITAL | SUGAR LAND | 20.5 | 6.9 |\n| BAYLOR SCOTT & WHITE MEDICAL CENTER - TEMPLE | TEMPLE | 19.3 | 8.4 |\n| KNAPP MEDICAL CENTER | WESLACO | 20.3 | 7.4 |\n| VHS HARLINGEN HOSPITAL COMPANY LLC | HARLINGEN | 20.1 | 7.9 |\n| MEDICAL CITY FORT WORTH | FORT WORTH | 20.4 | 7.9 |\n| HCA HOUSTON HEALTHCARE CLEAR LAKE | WEBSTER | 20.3 | 8.1 |\n| TEMPLE VA MEDICAL CENTER (VA CENTRAL TEXAS HEALTHCARE SYSTEM) | TEMPLE | 20.3 | 8.4 |\n| TEXAS HEALTH PRESBYTERIAN HOSPITAL DENTON | DENTON | 19.5 | 9.3 |\n| ST DAVID'S MEDICAL CENTER | AUSTIN | 20.5 | 8.4 |\n| HARLINGEN MEDICAL CENTER | HARLINGEN | 20.5 | 8.8 |\n| MATAGORDA REGIONAL MEDICAL CENTER | BAY CITY | 20.5 | 9.0 |\n| PARKLAND HEALTH & HOSPITAL SYSTEM | DALLAS | 20.5 | 9.1 |",
+        "sql": "WITH paired AS (SELECT r.facility_id, r.facility_name, r.city, r.score AS heart_failure_readmission_rate, d.score AS heart_failure_death_rate FROM hq.v_tx_latest AS r JOIN hq.v_tx_latest AS d ON d.facility_id = r.facility_id WHERE UPPER(r.measure_id) = UPPER('READM_30_HF') AND UPPER(d.measure_id) = UPPER('MORT_30_HF')), quartiles AS (SELECT PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY heart_failure_readmission_rate) AS readmission_p25, PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY heart_failure_death_rate) AS death_p25 FROM paired) SELECT p.facility_name AS hospital, p.city, p.heart_failure_readmission_rate, p.heart_failure_death_rate FROM paired AS p CROSS JOIN quartiles AS q WHERE p.heart_failure_readmission_rate <= q.readmission_p25 AND p.heart_failure_death_rate <= q.death_p25 ORDER BY p.heart_failure_readmission_rate + p.heart_failure_death_rate, p.facility_name LIMIT 200",
+        "columns": [
+          "hospital",
+          "city",
+          "heart_failure_readmission_rate",
+          "heart_failure_death_rate"
+        ],
+        "rows": [
+          [
+            "HOUSTON METHODIST HOSPITAL",
+            "HOUSTON",
+            18.9,
+            6.0
+          ],
+          [
+            "HOUSTON METHODIST WILLOWBROOK HOSPITAL",
+            "HOUSTON",
+            20.0,
+            6.1
+          ],
+          [
+            "UT OF TEXAS  SOUTHWESTERN UNIVERSITY HOSPITAL - WILLIAM P. CLEMENTS JR.",
+            "DALLAS",
+            19.2,
+            7.0
+          ],
+          [
+            "HOUSTON METHODIST THE WOODLANDS HOSPITAL",
+            "THE WOODLANDS",
+            19.2,
+            7.6
+          ],
+          [
+            "HOUSTON METHODIST BAYTOWN HOSPITAL",
+            "BAYTOWN",
+            19.2,
+            7.7
+          ],
+          [
+            "Baylor St Lukes Medical Center",
+            "HOUSTON",
+            20.0,
+            7.2
+          ],
+          [
+            "HOUSTON METHODIST SUGARLAND HOSPITAL",
+            "SUGAR LAND",
+            20.5,
+            6.9
+          ],
+          [
+            "BAYLOR SCOTT & WHITE MEDICAL CENTER - TEMPLE",
+            "TEMPLE",
+            19.3,
+            8.4
+          ],
+          [
+            "KNAPP MEDICAL CENTER",
+            "WESLACO",
+            20.3,
+            7.4
+          ],
+          [
+            "VHS HARLINGEN HOSPITAL COMPANY LLC",
+            "HARLINGEN",
+            20.1,
+            7.9
+          ],
+          [
+            "MEDICAL CITY FORT WORTH",
+            "FORT WORTH",
+            20.4,
+            7.9
+          ],
+          [
+            "HCA HOUSTON HEALTHCARE CLEAR LAKE",
+            "WEBSTER",
+            20.3,
+            8.1
+          ],
+          [
+            "TEMPLE VA MEDICAL CENTER (VA CENTRAL TEXAS HEALTHCARE SYSTEM)",
+            "TEMPLE",
+            20.3,
+            8.4
+          ],
+          [
+            "TEXAS HEALTH PRESBYTERIAN HOSPITAL DENTON",
+            "DENTON",
+            19.5,
+            9.3
+          ],
+          [
+            "ST DAVID'S MEDICAL CENTER",
+            "AUSTIN",
+            20.5,
+            8.4
+          ],
+          [
+            "HARLINGEN MEDICAL CENTER",
+            "HARLINGEN",
+            20.5,
+            8.8
+          ],
+          [
+            "MATAGORDA REGIONAL MEDICAL CENTER",
+            "BAY CITY",
+            20.5,
+            9.0
+          ],
+          [
+            "PARKLAND HEALTH & HOSPITAL SYSTEM",
+            "DALLAS",
+            20.5,
+            9.1
+          ]
+        ],
+        "row_count": 18,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8991,
+            "output_tokens": 561,
+            "cost_usd": 0.0011795999999999998,
+            "latency_ms": 7718,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1836,
+            "output_tokens": 633,
+            "cost_usd": 0.0005001000000000001,
+            "latency_ms": 6349,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10827,
+        "total_output_tokens": 1194,
+        "total_cost_usd": 0.00168,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 7718,
+          "sql_ms": 260,
+          "answer_ms": 6349,
+          "total_ms": 14329
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 18
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 14329,
+      "step_ms": {
+        "plan_ms": 7718,
+        "sql_ms": 260,
+        "answer_ms": 6349,
+        "total_ms": 14329
+      },
+      "cost_usd": 0.00168,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10827,
+      "output_tokens": 1194,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 18,
+      "truth_rows": 18,
+      "gen_rows": 18,
+      "reason": null,
+      "truth_ms": 187
+    },
+    {
+      "id": "num-23",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "Which Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) beat the national average on all three of: 30-day pneumonia readmission rate (lower is better), 30-day heart failure death rate (lower is better) and sepsis care percentage (higher is better)? National averages are over all U.S. hospitals with a score. Show the hospital and the three values, lowest readmission rate first, ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "Which Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) beat the national average on all three of: 30-day pneumonia readmission rate (lower is better), 30-day heart failure death rate (lower is better) and sepsis care percentage (higher is better)? National averages are over all U.S. hospitals with a score. Show the hospital and the three values, lowest readmission rate first, ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Seven hospitals meet all three criteria, ordered by pneumonia readmission rate from lowest to highest. Values are pneumonia readmission rate, heart failure death rate, and sepsis care percentage, respectively:\n- HOUSTON METHODIST THE WOODLANDS HOSPITAL: 15.9, 7.6, 88.0\n- ST LUKE'S HOSPITAL AT THE VINTAGE: 16.3, 10.4, 64.0\n- ST LUKE'S SUGAR LAND HOSPITAL: 16.4, 8.7, 69.0\n- HOUSTON METHODIST BAYTOWN HOSPITAL: 16.7, 7.7, 74.0\n- HCA HOUSTON HEALTHCARE WEST: 16.9, 8.8, 67.0\n- Baylor St Lukes Medical Center: 17.1, 7.2, 70.0\n- HOUSTON METHODIST SUGARLAND HOSPITAL: 17.3, 6.9, 75.0",
+        "sql": "SELECT facility_name AS hospital, MAX(score) FILTER(WHERE UPPER(measure_id) = 'READM_30_PN') AS pneumonia_readmission_rate, MAX(score) FILTER(WHERE UPPER(measure_id) = 'MORT_30_HF') AS heart_failure_death_rate, MAX(score) FILTER(WHERE UPPER(measure_id) = 'SEP_1') AS sepsis_care_percentage FROM hq.v_benchmarks WHERE UPPER(state) = 'TX' AND UPPER(county) IN ('HARRIS', 'FORT BEND', 'MONTGOMERY', 'GALVESTON', 'BRAZORIA') AND UPPER(measure_id) IN ('READM_30_PN', 'MORT_30_HF', 'SEP_1') GROUP BY facility_id, facility_name HAVING COUNT(DISTINCT UPPER(measure_id)) = 3 AND MAX(score) FILTER(WHERE UPPER(measure_id) = 'READM_30_PN') < MAX(national_avg) FILTER(WHERE UPPER(measure_id) = 'READM_30_PN') AND MAX(score) FILTER(WHERE UPPER(measure_id) = 'MORT_30_HF') < MAX(national_avg) FILTER(WHERE UPPER(measure_id) = 'MORT_30_HF') AND MAX(score) FILTER(WHERE UPPER(measure_id) = 'SEP_1') > MAX(national_avg) FILTER(WHERE UPPER(measure_id) = 'SEP_1') ORDER BY pneumonia_readmission_rate ASC, hospital ASC LIMIT 200",
+        "columns": [
+          "hospital",
+          "pneumonia_readmission_rate",
+          "heart_failure_death_rate",
+          "sepsis_care_percentage"
+        ],
+        "rows": [
+          [
+            "HOUSTON METHODIST THE WOODLANDS HOSPITAL",
+            15.9,
+            7.6,
+            88.0
+          ],
+          [
+            "ST LUKE'S HOSPITAL AT THE VINTAGE",
+            16.3,
+            10.4,
+            64.0
+          ],
+          [
+            "ST LUKE'S SUGAR LAND HOSPITAL",
+            16.4,
+            8.7,
+            69.0
+          ],
+          [
+            "HOUSTON METHODIST BAYTOWN HOSPITAL",
+            16.7,
+            7.7,
+            74.0
+          ],
+          [
+            "HCA HOUSTON HEALTHCARE WEST",
+            16.9,
+            8.8,
+            67.0
+          ],
+          [
+            "Baylor St Lukes Medical Center",
+            17.1,
+            7.2,
+            70.0
+          ],
+          [
+            "HOUSTON METHODIST SUGARLAND HOSPITAL",
+            17.3,
+            6.9,
+            75.0
+          ]
+        ],
+        "row_count": 7,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 9006,
+            "output_tokens": 1116,
+            "cost_usd": 0.0014586,
+            "latency_ms": 11093,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1637,
+            "output_tokens": 350,
+            "cost_usd": 0.00033870000000000005,
+            "latency_ms": 4799,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10643,
+        "total_output_tokens": 1466,
+        "total_cost_usd": 0.001797,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 11093,
+          "sql_ms": 476,
+          "answer_ms": 4799,
+          "total_ms": 16370
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 7
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 16370,
+      "step_ms": {
+        "plan_ms": 11093,
+        "sql_ms": 476,
+        "answer_ms": 4799,
+        "total_ms": 16370
+      },
+      "cost_usd": 0.001797,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10643,
+      "output_tokens": 1466,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 7,
+      "truth_rows": 7,
+      "gen_rows": 7,
+      "reason": null,
+      "truth_ms": 212
+    },
+    {
+      "id": "num-24",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "Which 10 Texas hospitals have a 30-day heart failure readmission rate that is highest relative to their own pneumonia readmission rate? Rank by heart failure rate minus pneumonia rate (largest gap first), show both rates and the gap, and break ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "Which 10 Texas hospitals have a 30-day heart failure readmission rate that is highest relative to their own pneumonia readmission rate? Rank by heart failure rate minus pneumonia rate (largest gap first), show both rates and the gap, and break ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The 10 Texas hospitals with the largest heart failure\u2013minus\u2013pneumonia readmission-rate gaps are:\n\n| Rank | Hospital | Heart failure rate | Pneumonia rate | Gap |\n|---:|---|---:|---:|---:|\n| 1 | ST LUKE'S PATIENTS MEDICAL CENTER | 23.0 | 14.7 | 8.3 |\n| 2 | HUNTSVILLE MEMORIAL HOSPITAL | 23.4 | 15.4 | 8.0 |\n| 3 | BAYLOR SCOTT & WHITE MEDICAL CENTER GRAPEVINE | 23.1 | 16.5 | 6.6 |\n| 4 | FORT DUNCAN MEDICAL CENTER | 22.5 | 15.9 | 6.6 |\n| 5 | LAKE GRANBURY MEDICAL CENTER | 22.6 | 16.0 | 6.6 |\n| 6 | NAVARRO REGIONAL HOSPITAL | 24.1 | 17.5 | 6.6 |\n| 7 | LONGVIEW REGIONAL MEDICAL CENTER | 23.3 | 17.1 | 6.2 |\n| 8 | LAREDO MEDICAL CENTER | 22.6 | 16.5 | 6.1 |\n| 9 | LAVACA MEDICAL CENTER | 21.6 | 15.7 | 5.9 |\n| 10 | METHODIST CHARLTON MEDICAL CENTER | 21.7 | 15.9 | 5.8 |",
+        "sql": "SELECT hf.facility_name AS hospital_name, hf.measure_id AS heart_failure_measure_id, hf.measure_name AS heart_failure_measure_name, hf.score AS heart_failure_readmission_rate, pn.measure_id AS pneumonia_measure_id, pn.measure_name AS pneumonia_measure_name, pn.score AS pneumonia_readmission_rate, ROUND(CAST((hf.score - pn.score) AS DECIMAL), 2) AS rate_gap FROM hq.v_tx_latest AS hf JOIN hq.v_tx_latest AS pn ON pn.facility_id = hf.facility_id WHERE UPPER(hf.measure_id) = UPPER('READM_30_HF') AND UPPER(pn.measure_id) = UPPER('READM_30_PN') AND hf.score IS NOT NULL AND pn.score IS NOT NULL ORDER BY hf.score - pn.score DESC, UPPER(hf.facility_name) LIMIT 10",
+        "columns": [
+          "hospital_name",
+          "heart_failure_measure_id",
+          "heart_failure_measure_name",
+          "heart_failure_readmission_rate",
+          "pneumonia_measure_id",
+          "pneumonia_measure_name",
+          "pneumonia_readmission_rate",
+          "rate_gap"
+        ],
+        "rows": [
+          [
+            "ST LUKE'S PATIENTS MEDICAL CENTER",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            23.0,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            14.7,
+            8.3
+          ],
+          [
+            "HUNTSVILLE MEMORIAL HOSPITAL",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            23.4,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            15.4,
+            8.0
+          ],
+          [
+            "BAYLOR SCOTT & WHITE MEDICAL CENTER  GRAPEVINE",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            23.1,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.5,
+            6.6
+          ],
+          [
+            "FORT DUNCAN MEDICAL CENTER",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            22.5,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            15.9,
+            6.6
+          ],
+          [
+            "LAKE GRANBURY MEDICAL CENTER",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            22.6,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.0,
+            6.6
+          ],
+          [
+            "NAVARRO REGIONAL HOSPITAL",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            24.1,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.5,
+            6.6
+          ],
+          [
+            "LONGVIEW REGIONAL MEDICAL CENTER",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            23.3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.1,
+            6.2
+          ],
+          [
+            "LAREDO MEDICAL CENTER",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            22.6,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.5,
+            6.1
+          ],
+          [
+            "LAVACA MEDICAL CENTER",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            21.6,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            15.7,
+            5.9
+          ],
+          [
+            "METHODIST CHARLTON MEDICAL CENTER",
+            "READM_30_HF",
+            "Heart failure (HF) 30-Day Readmission Rate",
+            21.7,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            15.9,
+            5.8
+          ]
+        ],
+        "row_count": 10,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8964,
+            "output_tokens": 659,
+            "cost_usd": 0.0012259,
+            "latency_ms": 6972,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1970,
+            "output_tokens": 413,
+            "cost_usd": 0.0004035,
+            "latency_ms": 4122,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10934,
+        "total_output_tokens": 1072,
+        "total_cost_usd": 0.001629,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6972,
+          "sql_ms": 287,
+          "answer_ms": 4122,
+          "total_ms": 11383
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 10
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 11383,
+      "step_ms": {
+        "plan_ms": 6972,
+        "sql_ms": 287,
+        "answer_ms": 4122,
+        "total_ms": 11383
+      },
+      "cost_usd": 0.001629,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10934,
+      "output_tokens": 1072,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 10,
+      "truth_rows": 10,
+      "gen_rows": 10,
+      "reason": null,
+      "truth_ms": 167
+    },
+    {
+      "id": "num-25",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "Considering Texas counties with at least 3 hospitals that have a 30-day pneumonia death rate, which 10 hospitals are furthest above the average of their own county? Show hospital, county, rate, county average and the difference (2 decimals), largest difference first, ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "Considering Texas counties with at least 3 hospitals that have a 30-day pneumonia death rate, which 10 hospitals are furthest above the average of their own county? Show hospital, county, rate, county average and the difference (2 decimals), largest difference first, ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The county average is an average across hospitals of the 30-day pneumonia death rate, not a count of patients. The 10 hospitals furthest above their county average are:\n\n| Hospital | County | Rate | County average | Difference |\n|---|---|---:|---:|---:|\n| MEDICAL CITY DALLAS HOSPITAL | DALLAS | 17.2 | 13.39 | 3.81 |\n| ASCENSION SETON CEDAR PARK | WILLIAMSON | 18.7 | 15.18 | 3.53 |\n| DALLAS REGIONAL MEDICAL CENTER | DALLAS | 16.8 | 13.39 | 3.41 |\n| BAPTIST BEAUMONT HOSPITAL | JEFFERSON | 20.5 | 17.33 | 3.17 |\n| ADVENTHEALTH CENTRAL TEXAS | BELL | 17.0 | 13.85 | 3.15 |\n| ST DAVID'S SOUTH AUSTIN MEDICAL CENTER | TRAVIS | 18.3 | 15.16 | 3.14 |\n| TEXAS HEALTH PRESBYTERIAN HOSPITAL ALLEN | COLLIN | 16.1 | 13.07 | 3.03 |\n| BAPTIST MEDICAL CENTER | BEXAR | 16.9 | 13.89 | 3.01 |\n| WHITE ROCK MEDICAL CENTER | DALLAS | 16.3 | 13.39 | 2.91 |\n| MEDICAL CITY DENTON | DENTON | 16.5 | 13.63 | 2.87 |",
+        "sql": "WITH pneumonia_rates AS (SELECT facility_id, facility_name, county, score FROM hq.v_tx_latest WHERE UPPER(measure_id) = UPPER('MORT_30_PN') AND score IS NOT NULL), county_rates AS (SELECT county, AVG(score) AS county_avg, COUNT(*) AS hospital_count FROM pneumonia_rates GROUP BY county HAVING COUNT(*) >= 3) SELECT p.facility_name AS hospital, p.county, p.score AS rate, ROUND(CAST(c.county_avg AS DECIMAL), 2) AS county_average, ROUND(CAST((p.score - c.county_avg) AS DECIMAL), 2) AS difference FROM pneumonia_rates AS p JOIN county_rates AS c ON p.county = c.county ORDER BY (p.score - c.county_avg) DESC, p.facility_name LIMIT 10",
+        "columns": [
+          "hospital",
+          "county",
+          "rate",
+          "county_average",
+          "difference"
+        ],
+        "rows": [
+          [
+            "MEDICAL CITY DALLAS HOSPITAL",
+            "DALLAS",
+            17.2,
+            13.39,
+            3.81
+          ],
+          [
+            "ASCENSION SETON CEDAR PARK",
+            "WILLIAMSON",
+            18.7,
+            15.18,
+            3.53
+          ],
+          [
+            "DALLAS REGIONAL MEDICAL CENTER",
+            "DALLAS",
+            16.8,
+            13.39,
+            3.41
+          ],
+          [
+            "BAPTIST BEAUMONT HOSPITAL",
+            "JEFFERSON",
+            20.5,
+            17.33,
+            3.17
+          ],
+          [
+            "ADVENTHEALTH CENTRAL TEXAS",
+            "BELL",
+            17.0,
+            13.85,
+            3.15
+          ],
+          [
+            "ST DAVID'S SOUTH AUSTIN MEDICAL CENTER",
+            "TRAVIS",
+            18.3,
+            15.16,
+            3.14
+          ],
+          [
+            "TEXAS HEALTH PRESBYTERIAN HOSPITAL ALLEN",
+            "COLLIN",
+            16.1,
+            13.07,
+            3.03
+          ],
+          [
+            "BAPTIST MEDICAL CENTER",
+            "BEXAR",
+            16.9,
+            13.89,
+            3.01
+          ],
+          [
+            "WHITE ROCK MEDICAL CENTER",
+            "DALLAS",
+            16.3,
+            13.39,
+            2.91
+          ],
+          [
+            "MEDICAL CITY DENTON",
+            "DENTON",
+            16.5,
+            13.63,
+            2.87
+          ]
+        ],
+        "row_count": 10,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8969,
+            "output_tokens": 705,
+            "cost_usd": 0.0012494000000000001,
+            "latency_ms": 6984,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1541,
+            "output_tokens": 471,
+            "cost_usd": 0.00038960000000000004,
+            "latency_ms": 5218,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10510,
+        "total_output_tokens": 1176,
+        "total_cost_usd": 0.001639,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6984,
+          "sql_ms": 287,
+          "answer_ms": 5218,
+          "total_ms": 12490
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 10
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 12490,
+      "step_ms": {
+        "plan_ms": 6984,
+        "sql_ms": 287,
+        "answer_ms": 5218,
+        "total_ms": 12490
+      },
+      "cost_usd": 0.001639,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10510,
+      "output_tokens": 1176,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 10,
+      "truth_rows": 10,
+      "gen_rows": 10,
+      "reason": null,
+      "truth_ms": 194
+    },
+    {
+      "id": "num-26",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "Among states and territories with at least 20 hospitals reporting a 30-day heart failure readmission rate, where does Texas rank by average rate (rank 1 = lowest average)? Give Texas's average (2 decimals), its rank and the number of states and territories ranked.",
+      "error": null,
+      "answer": {
+        "question": "Among states and territories with at least 20 hospitals reporting a 30-day heart failure readmission rate, where does Texas rank by average rate (rank 1 = lowest average)? Give Texas's average (2 decimals), its rank and the number of states and territories ranked.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Texas\u2019s average 30-day heart failure readmission rate is 21.26. It ranks 20th-lowest among 42 states and territories with at least 20 hospitals reporting.",
+        "sql": "WITH latest_rates AS (SELECT mv.facility_id, mv.score, ROW_NUMBER() OVER (PARTITION BY mv.facility_id ORDER BY mv.period_end DESC NULLS LAST) AS rn FROM hq.measure_values AS mv WHERE UPPER(mv.measure_id) = UPPER('READM_30_HF')), state_averages AS (SELECT h.state, AVG(lr.score) AS average_rate FROM latest_rates AS lr JOIN hq.hospitals AS h ON h.facility_id = lr.facility_id WHERE lr.rn = 1 AND lr.score IS NOT NULL GROUP BY h.state HAVING COUNT(DISTINCT h.facility_id) >= 20), state_ranks AS (SELECT state, average_rate, RANK() OVER (ORDER BY average_rate ASC) AS rank, COUNT(*) OVER () AS states_ranked FROM state_averages) SELECT state, ROUND(CAST(average_rate AS DECIMAL), 2) AS average_rate, rank, states_ranked FROM state_ranks WHERE UPPER(state) = UPPER('TX') LIMIT 200",
+        "columns": [
+          "state",
+          "average_rate",
+          "rank",
+          "states_ranked"
+        ],
+        "rows": [
+          [
+            "TX",
+            21.26,
+            20,
+            42
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8965,
+            "output_tokens": 1157,
+            "cost_usd": 0.001475,
+            "latency_ms": 12820,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1295,
+            "output_tokens": 57,
+            "cost_usd": 0.000158,
+            "latency_ms": 1664,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10260,
+        "total_output_tokens": 1214,
+        "total_cost_usd": 0.001633,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 12820,
+          "sql_ms": 890,
+          "answer_ms": 1664,
+          "total_ms": 15375
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 15375,
+      "step_ms": {
+        "plan_ms": 12820,
+        "sql_ms": 890,
+        "answer_ms": 1664,
+        "total_ms": 15375
+      },
+      "cost_usd": 0.001633,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10260,
+      "output_tokens": 1214,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 139,
+      "answer_states_value": true
+    },
+    {
+      "id": "defx-01",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "What criteria must a hospital meet to be designated Birthing-Friendly?",
+      "error": null,
+      "answer": {
+        "question": "What criteria must a hospital meet to be designated Birthing-Friendly?",
+        "route": "refuse",
+        "refused": true,
+        "refusal_reason": "The database and documentation cover hospital-quality measures and Medicare national coverage policy, not the criteria for the Birthing-Friendly designation.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8923,
+            "output_tokens": 160,
+            "cost_usd": 0.0009723,
+            "latency_ms": 2787,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          }
+        ],
+        "total_input_tokens": 8923,
+        "total_output_tokens": 160,
+        "total_cost_usd": 0.000972,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2787,
+          "total_ms": 2788
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "refuse",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 2788,
+      "step_ms": {
+        "plan_ms": 2787,
+        "total_ms": 2788
+      },
+      "cost_usd": 0.000972,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 8923,
+      "output_tokens": 160,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "plan",
+      "correct": true,
+      "reason": null
+    },
+    {
+      "id": "defx-02",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "What is the maximum percentage by which Medicare can cut a hospital's payments under the hospital readmissions reduction program?",
+      "error": null,
+      "answer": {
+        "question": "What is the maximum percentage by which Medicare can cut a hospital's payments under the hospital readmissions reduction program?",
+        "route": "refuse",
+        "refused": true,
+        "refusal_reason": "This asks about a Medicare hospital payment reduction, which is outside the supported hospital-quality data and coverage-policy questions, and payment amounts are excluded.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8932,
+            "output_tokens": 157,
+            "cost_usd": 0.0009717,
+            "latency_ms": 2883,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          }
+        ],
+        "total_input_tokens": 8932,
+        "total_output_tokens": 157,
+        "total_cost_usd": 0.000972,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2883,
+          "total_ms": 2884
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "refuse",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 2884,
+      "step_ms": {
+        "plan_ms": 2883,
+        "total_ms": 2884
+      },
+      "cost_usd": 0.000972,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 8932,
+      "output_tokens": 157,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "plan",
+      "correct": true,
+      "reason": null
+    },
+    {
+      "id": "defx-03",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "How many predicted infections must a hospital have before CMS will report its standardized infection ratio?",
+      "error": null,
+      "answer": {
+        "question": "How many predicted infections must a hospital have before CMS will report its standardized infection ratio?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "The evidence found does not answer the question: The excerpts explain what standardized infection ratios measure, but do not state how many predicted infections are required for CMS to report one.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8927,
+            "output_tokens": 98,
+            "cost_usd": 0.0009417000000000001,
+            "latency_ms": 2010,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 23,
+            "output_tokens": 0,
+            "cost_usd": 4.6e-07,
+            "latency_ms": 2830,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 4349,
+            "output_tokens": 112,
+            "cost_usd": 0.0004909000000000001,
+            "latency_ms": 2918,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 13299,
+        "total_output_tokens": 210,
+        "total_cost_usd": 0.001433,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 2010,
+          "retrieval_ms": 2830,
+          "answer_ms": 2918,
+          "total_ms": 7759
+        },
+        "retrieved_chunk_ids": [
+          "cms_hospital_data_dictionary:10",
+          "cms_hospital_data_dictionary:122",
+          "cms_hybrid_hwr_methodology:24",
+          "cms_hybrid_hwm_methodology:85",
+          "cms_hybrid_hwm_methodology:74",
+          "cms_bpci_sep1_fact_sheet:11",
+          "cms_hybrid_hwr_methodology:25",
+          "cms_hospital_data_dictionary:65"
+        ],
+        "doc_top_similarity": 0.644961483385424,
+        "doc_query": "CMS standardized infection ratio (SIR) reporting minimum predicted infections or expected cases threshold for reporting hospital-acquired infection measures",
+        "doc_collection": "measures",
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 7759,
+      "step_ms": {
+        "plan_ms": 2010,
+        "retrieval_ms": 2830,
+        "answer_ms": 2918,
+        "total_ms": 7759
+      },
+      "cost_usd": 0.001433,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 13299,
+      "output_tokens": 210,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: answer step",
+      "correct": true,
+      "reason": null
+    },
+    {
+      "id": "defx-04",
+      "type": "definition_unanswerable",
+      "group": "unanswerable",
+      "split": "test",
+      "difficulty": "hard",
+      "question": "How is the emergency department 'left without being seen' rate (OP-22) calculated, including its numerator and denominator?",
+      "error": null,
+      "answer": {
+        "question": "How is the emergency department 'left without being seen' rate (OP-22) calculated, including its numerator and denominator?",
+        "route": "docs",
+        "refused": true,
+        "refusal_reason": "The evidence found does not answer the question: The documentation identifies OP-22 as \u201cLeft Without Being Seen,\u201d but does not explain how it is calculated or provide its numerator or denominator.",
+        "answer": null,
+        "sql": null,
+        "columns": [],
+        "rows": [],
+        "row_count": 0,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8935,
+            "output_tokens": 110,
+            "cost_usd": 0.0009485,
+            "latency_ms": 3254,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 25,
+            "output_tokens": 0,
+            "cost_usd": 5.000000000000001e-07,
+            "latency_ms": 1354,
+            "model": "text-embedding-3-small",
+            "step": "embed"
+          },
+          {
+            "input_tokens": 2936,
+            "output_tokens": 242,
+            "cost_usd": 0.00041460000000000005,
+            "latency_ms": 2858,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11896,
+        "total_output_tokens": 352,
+        "total_cost_usd": 0.001364,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 3254,
+          "retrieval_ms": 1354,
+          "answer_ms": 2858,
+          "total_ms": 7468
+        },
+        "retrieved_chunk_ids": [
+          "cms_hospital_data_dictionary:138",
+          "cms_hospital_data_dictionary:156",
+          "cms_hospital_data_dictionary:157",
+          "cms_hospital_data_dictionary:27",
+          "cms_hospital_data_dictionary:151",
+          "cms_hospital_data_dictionary:141",
+          "cms_hospital_data_dictionary:158",
+          "cms_hospital_data_dictionary:136"
+        ],
+        "doc_top_similarity": 0.602223576883145,
+        "doc_query": "OP-22 Left Before Being Seen (emergency department left without being seen) measure: numerator, denominator, and rate calculation methodology",
+        "doc_collection": "measures",
+        "rows_total_in_answer": 0
+      },
+      "refused": true,
+      "route": "docs",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 7468,
+      "step_ms": {
+        "plan_ms": 3254,
+        "retrieval_ms": 1354,
+        "answer_ms": 2858,
+        "total_ms": 7468
+      },
+      "cost_usd": 0.001364,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 11896,
+      "output_tokens": 352,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": "after plan: answer step",
+      "correct": true,
+      "reason": null
+    }
+  ]
+}

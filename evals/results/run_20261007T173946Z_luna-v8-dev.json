@@ -1,0 +1,3023 @@
+{
+  "config": {
+    "tag": "luna-v8-dev",
+    "model": "gpt-6-luna",
+    "judge_model": "gpt-6-sol",
+    "split": "dev",
+    "types": null,
+    "questions_file": null,
+    "only": null,
+    "limit": null,
+    "workers": 3,
+    "retrieval_mode": "vector",
+    "prompt_versions": {
+      "plan": "plan_v6",
+      "schema": "schema_v2",
+      "answer": "answer_v6"
+    },
+    "started_utc": "2026-10-07T17:39:46+00:00",
+    "n_selected": 12,
+    "skipped_for_spend": [],
+    "max_spend": 1.0
+  },
+  "summary": {
+    "by_group": {
+      "numeric": {
+        "n": 12,
+        "k": 11
+      }
+    },
+    "overall": {
+      "n": 12,
+      "k": 11
+    },
+    "numeric": {
+      "row_recall_mean": 0.9958,
+      "order_ok": {
+        "k": 11,
+        "n": 11
+      },
+      "answer_states_value": {
+        "k": 1,
+        "n": 1
+      },
+      "refused": 0,
+      "sql_error": 0,
+      "repaired": 0
+    },
+    "latency_ms": {
+      "median": 16716,
+      "p90": 23714
+    },
+    "cost_usd": {
+      "ask_total": 0.02452,
+      "judge_total": 0,
+      "total": 0.02452,
+      "ask_per_question": 0.002043
+    },
+    "tokens": {
+      "input": 135360,
+      "output": 21965
+    },
+    "errors": []
+  },
+  "records": [
+    {
+      "id": "seed-01",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "easy",
+      "question": "List the Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) that have a 30-day pneumonia readmission rate, with county, ownership, overall star rating, the rate and the number of eligible discharges behind it. Leave out hospitals without a rate. Lowest rate first; break ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "List the Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) that have a 30-day pneumonia readmission rate, with county, ownership, overall star rating, the rate and the number of eligible discharges behind it. Leave out hospitals without a rate. Lowest rate first; break ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The results include 35 Houston-area hospitals with a reported 30-day pneumonia readmission rate, ordered from lowest to highest; ties are by hospital name. Eligible discharges are shown as the count behind each rate. Sweeny Community Hospital has no overall star rating reported. [\u2026]",
+        "sql": "SELECT facility_name, county, hospital_ownership, overall_rating, measure_id, measure_name, score AS readmission_rate, denominator AS eligible_discharges FROM hq.v_tx_latest WHERE is_houston_area IS TRUE AND UPPER(measure_id) = UPPER('READM_30_PN') AND score IS NOT NULL ORDER BY score ASC, facility_name ASC LIMIT 200",
+        "columns": [
+          "facility_name",
+          "county",
+          "hospital_ownership",
+          "overall_rating",
+          "measure_id",
+          "measure_name",
+          "readmission_rate",
+          "eligible_discharges"
+        ],
+        "rows": [
+          [
+            "ST LUKE'S PATIENTS MEDICAL CENTER",
+            "HARRIS",
+            "Proprietary",
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            14.7,
+            185.0
+          ],
+          [
+            "HOUSTON METHODIST HOSPITAL",
+            "HARRIS",
+            "Voluntary non-profit - Private",
+            5,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            15.3,
+            1676.0
+          ],
+          [
+            "HOUSTON METHODIST THE WOODLANDS HOSPITAL",
+            "MONTGOMERY",
+            "Voluntary non-profit - Private",
+            5,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            15.9,
+            1382.0
+          ],
+          [
+            "MEMORIAL HERMANN MEMORIAL CITY HOSPITAL",
+            "HARRIS",
+            "Voluntary non-profit - Private",
+            4,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.3,
+            674.0
+          ],
+          [
+            "ST LUKE'S HOSPITAL AT THE VINTAGE",
+            "HARRIS",
+            "Voluntary non-profit - Private",
+            4,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.3,
+            361.0
+          ],
+          [
+            "ST LUKE'S SUGAR LAND HOSPITAL",
+            "FORT BEND",
+            "Voluntary non-profit - Private",
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.4,
+            208.0
+          ],
+          [
+            "UNIVERSITY OF TEXAS MEDICAL BRANCH GALVESTON",
+            "GALVESTON",
+            "Government - State",
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.5,
+            1177.0
+          ],
+          [
+            "HARRIS HEALTH",
+            "HARRIS",
+            "Government - Hospital District or Authority",
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.7,
+            80.0
+          ],
+          [
+            "HOUSTON METHODIST BAYTOWN HOSPITAL",
+            "HARRIS",
+            "Voluntary non-profit - Private",
+            5,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.7,
+            976.0
+          ],
+          [
+            "OAKBEND MEDICAL CENTER",
+            "FORT BEND",
+            "Government - Hospital District or Authority",
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.7,
+            111.0
+          ],
+          [
+            "MEMORIAL HERMANN SUGAR LAND HOSPITAL",
+            "FORT BEND",
+            "Voluntary non-profit - Private",
+            4,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.8,
+            603.0
+          ],
+          [
+            "ST LUKE'S THE WOODLANDS HOSPITAL",
+            "MONTGOMERY",
+            "Voluntary non-profit - Private",
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.8,
+            593.0
+          ],
+          [
+            "SWEENY COMMUNITY HOSPITAL",
+            "BRAZORIA",
+            "Government - Hospital District or Authority",
+            null,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.8,
+            30.0
+          ],
+          [
+            "HCA HOUSTON HEALTHCARE WEST",
+            "HARRIS",
+            "Proprietary",
+            1,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.9,
+            370.0
+          ],
+          [
+            "HCA HOUSTON HEALTHCARE SOUTHEAST",
+            "HARRIS",
+            "Proprietary",
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.0,
+            522.0
+          ],
+          [
+            "ST JOSEPH MEDICAL CENTER",
+            "HARRIS",
+            "Physician",
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.0,
+            73.0
+          ],
+          [
+            "Baylor St Lukes Medical Center",
+            "HARRIS",
+            "Voluntary non-profit - Church",
+            4,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.1,
+            363.0
+          ],
+          [
+            "MEMORIAL HERMANN - TEXAS MEDICAL CENTER",
+            "HARRIS",
+            "Voluntary non-profit - Private",
+            4,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.2,
+            861.0
+          ],
+          [
+            "CHI ST LUKE'S HEALTH BRAZOSPORT",
+            "BRAZORIA",
+            "Voluntary non-profit - Private",
+            4,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.3,
+            275.0
+          ],
+          [
+            "HOUSTON METHODIST SUGARLAND HOSPITAL",
+            "FORT BEND",
+            "Voluntary non-profit - Private",
+            5,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.3,
+            1821.0
+          ]
+        ],
+        "row_count": 34,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8981,
+            "output_tokens": 346,
+            "cost_usd": 0.0010711,
+            "latency_ms": 6067,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 3227,
+            "output_tokens": 1581,
+            "cost_usd": 0.0011132,
+            "latency_ms": 12588,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 12208,
+        "total_output_tokens": 1927,
+        "total_cost_usd": 0.002184,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6067,
+          "sql_ms": 1201,
+          "answer_ms": 12588,
+          "total_ms": 19858
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 34
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 19858,
+      "step_ms": {
+        "plan_ms": 6067,
+        "sql_ms": 1201,
+        "answer_ms": 12588,
+        "total_ms": 19858
+      },
+      "cost_usd": 0.002184,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 12208,
+      "output_tokens": 1927,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 34,
+      "truth_rows": 34,
+      "gen_rows": 34,
+      "reason": null,
+      "truth_ms": 144
+    },
+    {
+      "id": "seed-02",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "Which measures have no reported score for more than half of Texas hospitals? Show the 25 with the highest percent missing: measure ID, domain, measure name (first 60 characters), hospitals with a score, total Texas hospitals and percent missing (one decimal). Break ties by measure ID.",
+      "error": null,
+      "answer": {
+        "question": "Which measures have no reported score for more than half of Texas hospitals? Show the 25 with the highest percent missing: measure ID, domain, measure name (first 60 characters), hospitals with a score, total Texas hospitals and percent missing (one decimal). Break ties by measure ID.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "These are the 25 measures with the highest percent missing among Texas hospitals; all have no score for more than half of the 467 hospitals. Measure names are shown as their first 60 characters. [\u2026]",
+        "sql": "WITH texas_hospitals AS (SELECT facility_id FROM hq.hospitals WHERE UPPER(state) = 'TX'), total AS (SELECT COUNT(*) AS total_hospitals FROM texas_hospitals), ranked_values AS (SELECT mv.facility_id, UPPER(mv.measure_id) AS measure_id, mv.score, ROW_NUMBER() OVER (PARTITION BY mv.facility_id, UPPER(mv.measure_id) ORDER BY mv.period_end DESC NULLS LAST, mv.period_start DESC NULLS LAST, mv.id DESC) AS period_rank FROM hq.measure_values AS mv JOIN texas_hospitals AS th ON th.facility_id = mv.facility_id), scored AS (SELECT measure_id, COUNT(DISTINCT facility_id) FILTER(WHERE score IS NOT NULL) AS hospitals_with_score FROM ranked_values WHERE period_rank = 1 GROUP BY measure_id) SELECT m.measure_id, m.domain, LEFT(m.measure_name, 60) AS measure_name, COALESCE(s.hospitals_with_score, 0) AS hospitals_with_score, t.total_hospitals AS total_texas_hospitals, ROUND(100.0 * (t.total_hospitals - COALESCE(s.hospitals_with_score, 0)) / NULLIF(t.total_hospitals, 0), 1) AS percent_missing FROM hq.measures AS m CROSS JOIN total AS t LEFT JOIN scored AS s ON s.measure_id = UPPER(m.measure_id) WHERE t.total_hospitals - COALESCE(s.hospitals_with_score, 0) > t.total_hospitals / 2.0 ORDER BY percent_missing DESC, m.measure_id LIMIT 25",
+        "columns": [
+          "measure_id",
+          "domain",
+          "measure_name",
+          "hospitals_with_score",
+          "total_texas_hospitals",
+          "percent_missing"
+        ],
+        "rows": [
+          [
+            "EDV",
+            "timely_effective",
+            "Emergency department volume",
+            0,
+            467,
+            100.0
+          ],
+          [
+            "GMCS",
+            "timely_effective",
+            "Global Malnutrition Composite Score",
+            0,
+            467,
+            100.0
+          ],
+          [
+            "GMCS_Malnutrition_Diagnosis_Documented",
+            "timely_effective",
+            "Global Malnutrition Composite Score: Malnutrition Diagnosis ",
+            0,
+            467,
+            100.0
+          ],
+          [
+            "GMCS_Malnutrition_Screening",
+            "timely_effective",
+            "Global Malnutrition Composite Score: Malnutrition Risk Scree",
+            0,
+            467,
+            100.0
+          ],
+          [
+            "GMCS_Nutrition_Assessment",
+            "timely_effective",
+            "Global Malnutrition Composite Score: Nutrition Assessment",
+            0,
+            467,
+            100.0
+          ],
+          [
+            "GMCS_Nutritional_Care_Plan",
+            "timely_effective",
+            "Global Malnutrition Composite Score: Nutritional Care Plan",
+            0,
+            467,
+            100.0
+          ],
+          [
+            "Hybrid_HWR",
+            "unplanned_visits",
+            "Hybrid Hospital-Wide All-Cause Readmission Measure (HWR)",
+            0,
+            467,
+            100.0
+          ],
+          [
+            "OP_31",
+            "timely_effective",
+            "Improvement in Patient's Visual Function within 90 Days Foll",
+            2,
+            467,
+            99.6
+          ],
+          [
+            "STK_03",
+            "timely_effective",
+            "Anticoagulation Therapy for Atrial Fibrillation/Flutter",
+            12,
+            467,
+            97.4
+          ],
+          [
+            "HH_ORAE",
+            "timely_effective",
+            "Hospital Harm - Opioid Related Adverse Events",
+            21,
+            467,
+            95.5
+          ],
+          [
+            "OP_40",
+            "timely_effective",
+            "ST-Segment Elevation Myocardial Infarction (STEMI)",
+            26,
+            467,
+            94.4
+          ],
+          [
+            "HAI_4_CILOWER",
+            "hai",
+            "SSI - Abdominal Hysterectomy: Lower Confidence Limit",
+            50,
+            467,
+            89.3
+          ],
+          [
+            "OP_35_ADM",
+            "unplanned_visits",
+            "Rate of inpatient admissions for patients receiving outpatie",
+            54,
+            467,
+            88.4
+          ],
+          [
+            "OP_35_ED",
+            "unplanned_visits",
+            "Rate of emergency department (ED) visits for patients receiv",
+            54,
+            467,
+            88.4
+          ],
+          [
+            "HAI_4_CIUPPER",
+            "hai",
+            "SSI - Abdominal Hysterectomy: Upper Confidence Limit",
+            67,
+            467,
+            85.7
+          ],
+          [
+            "HAI_4_SIR",
+            "hai",
+            "SSI - Abdominal Hysterectomy",
+            67,
+            467,
+            85.7
+          ],
+          [
+            "HH_HYPO",
+            "timely_effective",
+            "Hospital Harm - Severe Hypoglycemia",
+            73,
+            467,
+            84.4
+          ],
+          [
+            "HH_HYPER",
+            "timely_effective",
+            "Hospital Harm - Severe Hyperglycemia",
+            79,
+            467,
+            83.1
+          ],
+          [
+            "MORT_30_CABG",
+            "complications_deaths",
+            "Death rate for CABG surgery patients",
+            79,
+            467,
+            83.1
+          ],
+          [
+            "STK_05",
+            "timely_effective",
+            "Antithrombotic Therapy by End of Hospital Day 2",
+            89,
+            467,
+            80.9
+          ]
+        ],
+        "row_count": 25,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8968,
+            "output_tokens": 1227,
+            "cost_usd": 0.0015103000000000002,
+            "latency_ms": 13430,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 2306,
+            "output_tokens": 1126,
+            "cost_usd": 0.0007936,
+            "latency_ms": 9554,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11274,
+        "total_output_tokens": 2353,
+        "total_cost_usd": 0.002304,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 13430,
+          "sql_ms": 728,
+          "answer_ms": 9554,
+          "total_ms": 23714
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 25
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 23714,
+      "step_ms": {
+        "plan_ms": 13430,
+        "sql_ms": 728,
+        "answer_ms": 9554,
+        "total_ms": 23714
+      },
+      "cost_usd": 0.002304,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 11274,
+      "output_tokens": 2353,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 25,
+      "truth_rows": 25,
+      "gen_rows": 25,
+      "reason": null,
+      "truth_ms": 637
+    },
+    {
+      "id": "seed-03",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "For Texas hospitals, compare the average 'would definitely recommend' percentage and the average overall star rating by ownership type. Count every Texas hospital of the type (even without a recommend score), keep only types with at least 5 hospitals, and list the highest average recommend percentage first.",
+      "error": null,
+      "answer": {
+        "question": "For Texas hospitals, compare the average 'would definitely recommend' percentage and the average overall star rating by ownership type. Count every Texas hospital of the type (even without a recommend score), keep only types with at least 5 hospitals, and list the highest average recommend percentage first.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Among Texas ownership types with at least 5 hospitals, the average \u201cwould definitely recommend\u201d percentages are hospital averages, not patient counts; hospital counts include every hospital of that type, even those without a recommend score. Ordered from highest average recommend percentage: Government - Local \u2014 11 hospitals, 79.0%, average overall rating 3.0 stars; Government - State \u2014 15, 79.0%, 3.67 stars; Physician \u2014 27, 78.85%, 3.67 stars; Government - Hospital District or Authority \u2014 78, 75.73%, 2.77 stars; Voluntary non-profit - Other \u2014 18, 74.36%, 3.43 stars; Veterans Health Administration \u2014 5, 74.2%, 4.4 stars; Voluntary non-profit - Private \u2014 134, 73.52%, 3.7 stars; Voluntary non-profit - Church \u2014 5, 73.5%, 3.75 stars; Proprietary \u2014 171, 68.58%, 3.01 stars.",
+        "sql": "SELECT h.hospital_ownership AS ownership_type, COUNT(*) AS texas_hospital_count, ROUND(CAST(AVG(c.top_box_pct) AS DECIMAL), 2) AS avg_would_definitely_recommend_pct, ROUND(CAST(AVG(h.overall_rating) AS DECIMAL), 2) AS avg_overall_star_rating FROM hq.hospitals AS h LEFT JOIN hq.v_hcahps AS c ON c.facility_id = h.facility_id AND UPPER(c.measure_id) = UPPER('H_RECMND_DY') WHERE UPPER(h.state) = UPPER('TX') GROUP BY h.hospital_ownership HAVING COUNT(*) >= 5 ORDER BY avg_would_definitely_recommend_pct DESC NULLS LAST, ownership_type LIMIT 200",
+        "columns": [
+          "ownership_type",
+          "texas_hospital_count",
+          "avg_would_definitely_recommend_pct",
+          "avg_overall_star_rating"
+        ],
+        "rows": [
+          [
+            "Government - Local",
+            11,
+            79.0,
+            3.0
+          ],
+          [
+            "Government - State",
+            15,
+            79.0,
+            3.67
+          ],
+          [
+            "Physician",
+            27,
+            78.85,
+            3.67
+          ],
+          [
+            "Government - Hospital District or Authority",
+            78,
+            75.73,
+            2.77
+          ],
+          [
+            "Voluntary non-profit - Other",
+            18,
+            74.36,
+            3.43
+          ],
+          [
+            "Veterans Health Administration",
+            5,
+            74.2,
+            4.4
+          ],
+          [
+            "Voluntary non-profit - Private",
+            134,
+            73.52,
+            3.7
+          ],
+          [
+            "Voluntary non-profit - Church",
+            5,
+            73.5,
+            3.75
+          ],
+          [
+            "Proprietary",
+            171,
+            68.58,
+            3.01
+          ]
+        ],
+        "row_count": 9,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8966,
+            "output_tokens": 592,
+            "cost_usd": 0.0011925999999999998,
+            "latency_ms": 6933,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1411,
+            "output_tokens": 328,
+            "cost_usd": 0.00030510000000000004,
+            "latency_ms": 5059,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10377,
+        "total_output_tokens": 920,
+        "total_cost_usd": 0.001498,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6933,
+          "sql_ms": 2732,
+          "answer_ms": 5059,
+          "total_ms": 14727
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 9
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 14727,
+      "step_ms": {
+        "plan_ms": 6933,
+        "sql_ms": 2732,
+        "answer_ms": 5059,
+        "total_ms": 14727
+      },
+      "cost_usd": 0.001498,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10377,
+      "output_tokens": 920,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 9,
+      "truth_rows": 9,
+      "gen_rows": 9,
+      "reason": null,
+      "truth_ms": 144
+    },
+    {
+      "id": "seed-04",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "Rank the Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) that have a 30-day heart failure readmission rate within their own county (rank 1 = lowest rate; hospitals with equal rates share a rank). Show county, rank, hospital and rate.",
+      "error": null,
+      "answer": {
+        "question": "Rank the Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) that have a 30-day heart failure readmission rate within their own county (rank 1 = lowest rate; hospitals with equal rates share a rank). Show county, rank, hospital and rate.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The result contains 34 hospitals. To summarize the county rankings, the rank-1 hospitals (lowest rates in their counties) are:\n\n| County | Rank | Hospital | Rate |\n|---|---:|---|---:|\n| BRAZORIA | 1 | CHI ST LUKE'S HEALTH BRAZOSPORT | 23.0 |\n| FORT BEND | 1 | HOUSTON METHODIST SUGARLAND HOSPITAL | 20.5 |\n| GALVESTON | 1 | UNIVERSITY OF TEXAS MEDICAL BRANCH GALVESTON | 22.2 |\n| HARRIS | 1 | HOUSTON METHODIST HOSPITAL | 18.9 |\n| MONTGOMERY | 1 | HOUSTON METHODIST THE WOODLANDS HOSPITAL | 19.2 |\n\nThe full result also includes the other county-ranked hospitals and shared ranks where rates are equal.",
+        "sql": "SELECT county, RANK() OVER (PARTITION BY county ORDER BY score ASC) AS rank, facility_name AS hospital, score AS rate FROM hq.v_tx_latest WHERE is_houston_area = TRUE AND UPPER(measure_id) = UPPER('READM_30_HF') ORDER BY county, rank, hospital LIMIT 200",
+        "columns": [
+          "county",
+          "rank",
+          "hospital",
+          "rate"
+        ],
+        "rows": [
+          [
+            "BRAZORIA",
+            1,
+            "CHI ST LUKE'S HEALTH BRAZOSPORT",
+            23.0
+          ],
+          [
+            "BRAZORIA",
+            2,
+            "HCA HOUSTON HEALTHCARE PEARLAND",
+            23.5
+          ],
+          [
+            "FORT BEND",
+            1,
+            "HOUSTON METHODIST SUGARLAND HOSPITAL",
+            20.5
+          ],
+          [
+            "FORT BEND",
+            2,
+            "ST LUKE'S SUGAR LAND HOSPITAL",
+            20.7
+          ],
+          [
+            "FORT BEND",
+            3,
+            "MEMORIAL HERMANN KATY HOSPITAL",
+            21.5
+          ],
+          [
+            "FORT BEND",
+            4,
+            "MEMORIAL HERMANN SUGAR LAND HOSPITAL",
+            21.9
+          ],
+          [
+            "FORT BEND",
+            5,
+            "OAKBEND MEDICAL CENTER",
+            22.4
+          ],
+          [
+            "GALVESTON",
+            1,
+            "UNIVERSITY OF TEXAS MEDICAL BRANCH GALVESTON",
+            22.2
+          ],
+          [
+            "HARRIS",
+            1,
+            "HOUSTON METHODIST HOSPITAL",
+            18.9
+          ],
+          [
+            "HARRIS",
+            2,
+            "HOUSTON METHODIST BAYTOWN HOSPITAL",
+            19.2
+          ],
+          [
+            "HARRIS",
+            3,
+            "Baylor St Lukes Medical Center",
+            20.0
+          ],
+          [
+            "HARRIS",
+            3,
+            "HOUSTON METHODIST WILLOWBROOK HOSPITAL",
+            20.0
+          ],
+          [
+            "HARRIS",
+            5,
+            "HCA HOUSTON HEALTHCARE CLEAR LAKE",
+            20.3
+          ],
+          [
+            "HARRIS",
+            6,
+            "HCA HOUSTON HEALTHCARE TOMBALL",
+            20.8
+          ],
+          [
+            "HARRIS",
+            7,
+            "ST LUKE'S HOSPITAL AT THE VINTAGE",
+            20.9
+          ],
+          [
+            "HARRIS",
+            8,
+            "HARRIS HEALTH",
+            21.0
+          ],
+          [
+            "HARRIS",
+            8,
+            "HCA HOUSTON HEALTHCARE WEST",
+            21.0
+          ],
+          [
+            "HARRIS",
+            10,
+            "HCA HOUSTON HEALTHCARE SOUTHEAST",
+            21.1
+          ],
+          [
+            "HARRIS",
+            11,
+            "HCA HOUSTON HEALTHCARE MEDICAL CENTER",
+            21.2
+          ],
+          [
+            "HARRIS",
+            11,
+            "HOUSTON METHODIST CLEAR LAKE HOSPITAL",
+            21.2
+          ]
+        ],
+        "row_count": 34,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8972,
+            "output_tokens": 335,
+            "cost_usd": 0.0010647,
+            "latency_ms": 4783,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1998,
+            "output_tokens": 901,
+            "cost_usd": 0.0006502999999999999,
+            "latency_ms": 11012,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10970,
+        "total_output_tokens": 1236,
+        "total_cost_usd": 0.001715,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 4783,
+          "sql_ms": 203,
+          "answer_ms": 11012,
+          "total_ms": 15999
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 34
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 15999,
+      "step_ms": {
+        "plan_ms": 4783,
+        "sql_ms": 203,
+        "answer_ms": 11012,
+        "total_ms": 15999
+      },
+      "cost_usd": 0.001715,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10970,
+      "output_tokens": 1236,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 34,
+      "truth_rows": 34,
+      "gen_rows": 34,
+      "reason": null,
+      "truth_ms": 100
+    },
+    {
+      "id": "seed-05",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "hard",
+      "question": "For Texas hospitals with a 30-day pneumonia readmission rate, show the 20 whose rate is furthest below the Texas average: hospital, county, rate, Texas average, difference from the Texas average, the average of their own county and the difference from it (all rounded to 2 decimals). Most below average first; break ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "For Texas hospitals with a 30-day pneumonia readmission rate, show the 20 whose rate is furthest below the Texas average: hospital, county, rate, Texas average, difference from the Texas average, the average of their own county and the difference from it (all rounded to 2 decimals). Most below average first; break ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The Texas average is 17.32, an average across hospitals of the 30-day pneumonia readmission rate\u2014not a count of patients. The 20 hospitals furthest below it are shown first; ties are ordered by hospital name. Differences are hospital rate minus the comparison average.\n\n| Hospital | County | Rate | Texas average | Difference from Texas average | County average | Difference from county average |\n|---|---|---:|---:|---:|---:|---:|\n| ST LUKE'S PATIENTS MEDICAL CENTER | HARRIS | 14.70 | 17.32 | -2.62 | 17.25 | -2.55 |\n| BAPTIST MEDICAL CENTER | BEXAR | 15.00 | 17.32 | -2.32 | 17.28 | -2.28 |\n| HOUSTON METHODIST HOSPITAL | HARRIS | 15.30 | 17.32 | -2.02 | 17.25 | -1.95 |\n| HUNTSVILLE MEMORIAL HOSPITAL | WALKER | 15.40 | 17.32 | -1.92 | 15.40 | 0.00 |\n| TEXAS HEALTH HARRIS METHODIST HOSPITAL ALLIANCE | TARRANT | 15.40 | 17.32 | -1.92 | 17.23 | -1.83 |\n| TEXAS HEALTH HARRIS METHODIST HOSPITAL CLEBURNE | JOHNSON | 15.40 | 17.32 | -1.92 | 15.40 | 0.00 |\n| UNIVERSITY MEDICAL CENTER | LUBBOCK | 15.40 | 17.32 | -1.92 | 16.67 | -1.27 |\n| METHODIST MIDLOTHIAN MEDICAL CENTER | ELLIS | 15.60 | 17.32 | -1.72 | 17.13 | -1.53 |\n| CHRISTUS SPOHN HOSPITAL ALICE | JIM WELLS | 15.70 | 17.32 | -1.62 | 15.70 | 0.00 |\n| LAVACA MEDICAL CENTER | LAVACA | 15.70 | 17.32 | -1.62 | 16.70 | -1.00 |\n| METHODIST DALLAS MEDICAL CENTER | DALLAS | 15.70 | 17.32 | -1.62 | 17.40 | -1.70 |\n| RIO GRANDE REGIONAL HOSPITAL | HIDALGO | 15.70 | 17.32 | -1.62 | 17.18 | -1.48 |\n| TEXAS HEALTH HOSPITAL FRISCO | DENTON | 15.80 | 17.32 | -1.52 | 17.54 | -1.74 |\n| FORT DUNCAN MEDICAL CENTER | MAVERICK | 15.90 | 17.32 | -1.42 | 15.90 | 0.00 |\n| HOUSTON METHODIST THE WOODLANDS HOSPITAL | MONTGOMERY | 15.90 | 17.32 | -1.42 | 17.00 | -1.10 |\n| MATAGORDA REGIONAL MEDICAL CENTER | MATAGORDA | 15.90 | 17.32 | -1.42 | 15.90 | 0.00 |\n| METHODIST CHARLTON MEDICAL CENTER | DALLAS | 15.90 | 17.32 | -1.42 | 17.40 | -1.50 |\n| PETERSON REGIONAL MEDICAL CENTER | KERR | 15.90 | 17.32 | -1.42 | 15.90 | 0.00 |\n| BAYLOR SCOTT & WHITE MEDICAL CENTER -TAYLOR | WILLIAMSON | 16.00 | 17.32 | -1.32 | 17.72 | -1.72 |\n| HARLINGEN MEDICAL CENTER | CAMERON | 16.00 | 17.32 | -1.32 | 17.53 | -1.53 |",
+        "sql": "WITH pneumonia_rates AS (SELECT facility_name, county, score, AVG(score) OVER () AS texas_average, AVG(score) OVER (PARTITION BY county) AS county_average FROM hq.v_tx_latest WHERE UPPER(measure_id) = UPPER('READM_30_PN') AND score IS NOT NULL), differences AS (SELECT facility_name, county, score, texas_average, county_average, score - texas_average AS difference_from_texas_average, score - county_average AS difference_from_county_average FROM pneumonia_rates) SELECT facility_name AS hospital, county, ROUND(CAST(score AS DECIMAL), 2) AS rate, ROUND(CAST(texas_average AS DECIMAL), 2) AS texas_average, ROUND(CAST(difference_from_texas_average AS DECIMAL), 2) AS difference_from_texas_average, ROUND(CAST(county_average AS DECIMAL), 2) AS county_average, ROUND(CAST(difference_from_county_average AS DECIMAL), 2) AS difference_from_county_average FROM differences ORDER BY difference_from_texas_average ASC, facility_name ASC LIMIT 20",
+        "columns": [
+          "hospital",
+          "county",
+          "rate",
+          "texas_average",
+          "difference_from_texas_average",
+          "county_average",
+          "difference_from_county_average"
+        ],
+        "rows": [
+          [
+            "ST LUKE'S PATIENTS MEDICAL CENTER",
+            "HARRIS",
+            14.7,
+            17.32,
+            -2.62,
+            17.25,
+            -2.55
+          ],
+          [
+            "BAPTIST MEDICAL CENTER",
+            "BEXAR",
+            15.0,
+            17.32,
+            -2.32,
+            17.28,
+            -2.28
+          ],
+          [
+            "HOUSTON METHODIST HOSPITAL",
+            "HARRIS",
+            15.3,
+            17.32,
+            -2.02,
+            17.25,
+            -1.95
+          ],
+          [
+            "HUNTSVILLE MEMORIAL HOSPITAL",
+            "WALKER",
+            15.4,
+            17.32,
+            -1.92,
+            15.4,
+            0.0
+          ],
+          [
+            "TEXAS HEALTH HARRIS METHODIST HOSPITAL ALLIANCE",
+            "TARRANT",
+            15.4,
+            17.32,
+            -1.92,
+            17.23,
+            -1.83
+          ],
+          [
+            "TEXAS HEALTH HARRIS METHODIST HOSPITAL CLEBURNE",
+            "JOHNSON",
+            15.4,
+            17.32,
+            -1.92,
+            15.4,
+            0.0
+          ],
+          [
+            "UNIVERSITY MEDICAL CENTER",
+            "LUBBOCK",
+            15.4,
+            17.32,
+            -1.92,
+            16.67,
+            -1.27
+          ],
+          [
+            "METHODIST MIDLOTHIAN MEDICAL CENTER",
+            "ELLIS",
+            15.6,
+            17.32,
+            -1.72,
+            17.13,
+            -1.53
+          ],
+          [
+            "CHRISTUS SPOHN HOSPITAL ALICE",
+            "JIM WELLS",
+            15.7,
+            17.32,
+            -1.62,
+            15.7,
+            0.0
+          ],
+          [
+            "LAVACA MEDICAL CENTER",
+            "LAVACA",
+            15.7,
+            17.32,
+            -1.62,
+            16.7,
+            -1.0
+          ],
+          [
+            "METHODIST DALLAS MEDICAL CENTER",
+            "DALLAS",
+            15.7,
+            17.32,
+            -1.62,
+            17.4,
+            -1.7
+          ],
+          [
+            "RIO GRANDE REGIONAL HOSPITAL",
+            "HIDALGO",
+            15.7,
+            17.32,
+            -1.62,
+            17.18,
+            -1.48
+          ],
+          [
+            "TEXAS HEALTH HOSPITAL FRISCO",
+            "DENTON",
+            15.8,
+            17.32,
+            -1.52,
+            17.54,
+            -1.74
+          ],
+          [
+            "FORT DUNCAN MEDICAL CENTER",
+            "MAVERICK",
+            15.9,
+            17.32,
+            -1.42,
+            15.9,
+            0.0
+          ],
+          [
+            "HOUSTON METHODIST THE WOODLANDS HOSPITAL",
+            "MONTGOMERY",
+            15.9,
+            17.32,
+            -1.42,
+            17.0,
+            -1.1
+          ],
+          [
+            "MATAGORDA REGIONAL MEDICAL CENTER",
+            "MATAGORDA",
+            15.9,
+            17.32,
+            -1.42,
+            15.9,
+            0.0
+          ],
+          [
+            "METHODIST CHARLTON MEDICAL CENTER",
+            "DALLAS",
+            15.9,
+            17.32,
+            -1.42,
+            17.4,
+            -1.5
+          ],
+          [
+            "PETERSON REGIONAL MEDICAL CENTER",
+            "KERR",
+            15.9,
+            17.32,
+            -1.42,
+            15.9,
+            0.0
+          ],
+          [
+            "BAYLOR SCOTT & WHITE MEDICAL CENTER -TAYLOR",
+            "WILLIAMSON",
+            16.0,
+            17.32,
+            -1.32,
+            17.72,
+            -1.72
+          ],
+          [
+            "HARLINGEN MEDICAL CENTER",
+            "CAMERON",
+            16.0,
+            17.32,
+            -1.32,
+            17.53,
+            -1.53
+          ]
+        ],
+        "row_count": 20,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8982,
+            "output_tokens": 606,
+            "cost_usd": 0.0012012000000000001,
+            "latency_ms": 5557,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 2153,
+            "output_tokens": 1116,
+            "cost_usd": 0.0007733,
+            "latency_ms": 9051,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11135,
+        "total_output_tokens": 1722,
+        "total_cost_usd": 0.001975,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 5557,
+          "sql_ms": 195,
+          "answer_ms": 9051,
+          "total_ms": 14804
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 20
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 14804,
+      "step_ms": {
+        "plan_ms": 5557,
+        "sql_ms": 195,
+        "answer_ms": 9051,
+        "total_ms": 14804
+      },
+      "cost_usd": 0.001975,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 11135,
+      "output_tokens": 1722,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 20,
+      "truth_rows": 20,
+      "gen_rows": 20,
+      "reason": null,
+      "truth_ms": 147
+    },
+    {
+      "id": "seed-06",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "hard",
+      "question": "Using every U.S. hospital that has a 30-day heart failure death rate, compute each hospital's national percentile (percent rank: 0 = lowest death rate, 1 = highest). Return the Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) with their rate and percentile (3 decimals), lowest percentile first, ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "Using every U.S. hospital that has a 30-day heart failure death rate, compute each hospital's national percentile (percent rank: 0 = lowest death rate, 1 = highest). Return the Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) with their rate and percentile (3 decimals), lowest percentile first, ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The 32 Houston-area hospitals are listed from lowest to highest national percentile; each rate is the 30-day heart failure death rate.\n\n| Hospital | Rate | National percentile |\n|---|---:|---:|\n| HOUSTON METHODIST HOSPITAL | 6.0 | 0.004 |\n| HOUSTON METHODIST WILLOWBROOK HOSPITAL | 6.1 | 0.005 |\n| HOUSTON METHODIST SUGARLAND HOSPITAL | 6.9 | 0.013 |\n| HOUSTON VA MEDICAL CENTER | 7.0 | 0.016 |\n| Baylor St Lukes Medical Center | 7.2 | 0.021 |\n| HOUSTON METHODIST THE WOODLANDS HOSPITAL | 7.6 | 0.034 |\n| HOUSTON METHODIST BAYTOWN HOSPITAL | 7.7 | 0.037 |\n| HCA HOUSTON HEALTHCARE CLEAR LAKE | 8.1 | 0.058 |\n| MEMORIAL HERMANN MEMORIAL CITY HOSPITAL | 8.1 | 0.058 |\n| MEMORIAL HERMANN - TEXAS MEDICAL CENTER | 8.2 | 0.065 |\n| UNIVERSITY OF TEXAS MEDICAL BRANCH GALVESTON | 8.6 | 0.093 |\n| ST LUKE'S SUGAR LAND HOSPITAL | 8.7 | 0.104 |\n| HCA HOUSTON HEALTHCARE KINGWOOD | 8.8 | 0.112 |\n| HCA HOUSTON HEALTHCARE TOMBALL | 8.8 | 0.112 |\n| HCA HOUSTON HEALTHCARE WEST | 8.8 | 0.112 |\n| HCA HOUSTON HEALTHCARE MEDICAL CENTER | 9.1 | 0.143 |\n| HOUSTON METHODIST CLEAR LAKE HOSPITAL | 9.1 | 0.143 |\n| HOUSTON METHODIST WEST HOSPITAL | 9.3 | 0.170 |\n| HARRIS HEALTH | 9.7 | 0.236 |\n| HCA HOUSTON HEALTHCARE CONROE | 9.8 | 0.256 |\n| HCA HOUSTON HEALTHCARE NORTHWEST | 9.9 | 0.274 |\n| MEMORIAL HERMANN HOSPITAL SYSTEM | 9.9 | 0.274 |\n| MEMORIAL HERMANN SUGAR LAND HOSPITAL | 9.9 | 0.274 |\n| MEMORIAL HERMANN NORTHEAST HOSPITAL | 10.3 | 0.352 |\n| ST LUKE'S HOSPITAL AT THE VINTAGE | 10.4 | 0.370 |\n| OAKBEND MEDICAL CENTER | 10.7 | 0.431 |\n| ST LUKE'S PATIENTS MEDICAL CENTER | 10.8 | 0.448 |\n| HCA HOUSTON HEALTHCARE PEARLAND | 11.1 | 0.513 |\n| ST LUKE'S THE WOODLANDS HOSPITAL | 11.1 | 0.513 |\n| CHI ST LUKE'S HEALTH BRAZOSPORT | 11.5 | 0.599 |\n| HCA HOUSTON HEALTHCARE SOUTHEAST | 12.0 | 0.694 |\n| MEMORIAL HERMANN KATY HOSPITAL | 12.1 | 0.711 |",
+        "sql": "WITH latest_rates AS (SELECT mv.facility_id, mv.score, ROW_NUMBER() OVER (PARTITION BY mv.facility_id, mv.measure_id ORDER BY mv.period_end DESC NULLS LAST, mv.period_start DESC NULLS LAST) AS period_rank FROM hq.measure_values AS mv WHERE UPPER(mv.measure_id) = UPPER('MORT_30_HF') AND mv.score IS NOT NULL), national_percentiles AS (SELECT lr.facility_id, lr.score, PERCENT_RANK() OVER (ORDER BY lr.score) AS national_percentile FROM latest_rates AS lr WHERE lr.period_rank = 1) SELECT h.facility_name AS hospital_name, np.score AS heart_failure_30_day_death_rate, ROUND(CAST(np.national_percentile AS DECIMAL), 3) AS national_percentile FROM national_percentiles AS np JOIN hq.hospitals AS h ON h.facility_id = np.facility_id WHERE UPPER(h.state) = UPPER('TX') AND UPPER(h.county) IN ('HARRIS', 'FORT BEND', 'MONTGOMERY', 'GALVESTON', 'BRAZORIA') ORDER BY np.national_percentile ASC, h.facility_name ASC LIMIT 200",
+        "columns": [
+          "hospital_name",
+          "heart_failure_30_day_death_rate",
+          "national_percentile"
+        ],
+        "rows": [
+          [
+            "HOUSTON METHODIST HOSPITAL",
+            6.0,
+            0.004
+          ],
+          [
+            "HOUSTON METHODIST WILLOWBROOK HOSPITAL",
+            6.1,
+            0.005
+          ],
+          [
+            "HOUSTON METHODIST SUGARLAND HOSPITAL",
+            6.9,
+            0.013
+          ],
+          [
+            "HOUSTON VA MEDICAL CENTER",
+            7.0,
+            0.016
+          ],
+          [
+            "Baylor St Lukes Medical Center",
+            7.2,
+            0.021
+          ],
+          [
+            "HOUSTON METHODIST THE WOODLANDS HOSPITAL",
+            7.6,
+            0.034
+          ],
+          [
+            "HOUSTON METHODIST BAYTOWN HOSPITAL",
+            7.7,
+            0.037
+          ],
+          [
+            "HCA HOUSTON HEALTHCARE CLEAR LAKE",
+            8.1,
+            0.058
+          ],
+          [
+            "MEMORIAL HERMANN MEMORIAL CITY HOSPITAL",
+            8.1,
+            0.058
+          ],
+          [
+            "MEMORIAL HERMANN - TEXAS MEDICAL CENTER",
+            8.2,
+            0.065
+          ],
+          [
+            "UNIVERSITY OF TEXAS MEDICAL BRANCH GALVESTON",
+            8.6,
+            0.093
+          ],
+          [
+            "ST LUKE'S SUGAR LAND HOSPITAL",
+            8.7,
+            0.104
+          ],
+          [
+            "HCA HOUSTON HEALTHCARE KINGWOOD",
+            8.8,
+            0.112
+          ],
+          [
+            "HCA HOUSTON HEALTHCARE TOMBALL",
+            8.8,
+            0.112
+          ],
+          [
+            "HCA HOUSTON HEALTHCARE WEST",
+            8.8,
+            0.112
+          ],
+          [
+            "HCA HOUSTON HEALTHCARE MEDICAL CENTER",
+            9.1,
+            0.143
+          ],
+          [
+            "HOUSTON METHODIST CLEAR LAKE HOSPITAL",
+            9.1,
+            0.143
+          ],
+          [
+            "HOUSTON METHODIST WEST HOSPITAL",
+            9.3,
+            0.17
+          ],
+          [
+            "HARRIS HEALTH",
+            9.7,
+            0.236
+          ],
+          [
+            "HCA HOUSTON HEALTHCARE CONROE",
+            9.8,
+            0.256
+          ]
+        ],
+        "row_count": 32,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8989,
+            "output_tokens": 710,
+            "cost_usd": 0.0012539,
+            "latency_ms": 7392,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 2058,
+            "output_tokens": 959,
+            "cost_usd": 0.0006852999999999999,
+            "latency_ms": 7847,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11047,
+        "total_output_tokens": 1669,
+        "total_cost_usd": 0.001939,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 7392,
+          "sql_ms": 2193,
+          "answer_ms": 7847,
+          "total_ms": 17434
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 32
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 17434,
+      "step_ms": {
+        "plan_ms": 7392,
+        "sql_ms": 2193,
+        "answer_ms": 7847,
+        "total_ms": 17434
+      },
+      "cost_usd": 0.001939,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 11047,
+      "output_tokens": 1669,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 32,
+      "truth_rows": 32,
+      "gen_rows": 32,
+      "reason": null,
+      "truth_ms": 249
+    },
+    {
+      "id": "seed-07",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "hard",
+      "question": "For the 'patients who rated the hospital 9 or 10' survey measure, do any Texas hospitals have scores from more than one reporting period (so a change from the prior period could be computed)? Give the number of Texas hospitals with a score, the largest number of reporting periods any one hospital has, and how many hospitals have more than one period.",
+      "error": null,
+      "answer": {
+        "question": "For the 'patients who rated the hospital 9 or 10' survey measure, do any Texas hospitals have scores from more than one reporting period (so a change from the prior period could be computed)? Give the number of Texas hospitals with a score, the largest number of reporting periods any one hospital has, and how many hospitals have more than one period.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "For \u201cpatients who rated the hospital 9 or 10,\u201d 297 Texas hospitals had a score. The largest number of reporting periods for any one hospital was 1, and 0 hospitals had more than one period. So, none had scores from multiple periods.",
+        "sql": "WITH hospital_periods AS (SELECT h.facility_id, COUNT(DISTINCT (mv.period_start, mv.period_end)) AS reporting_periods FROM hq.measure_values AS mv JOIN hq.hospitals AS h ON h.facility_id = mv.facility_id WHERE UPPER(mv.measure_id) = UPPER('H_HSP_RATING_9_10') AND h.state = 'TX' AND mv.score IS NOT NULL GROUP BY h.facility_id) SELECT m.measure_id, m.measure_name, COUNT(hp.facility_id) AS texas_hospitals_with_score, MAX(hp.reporting_periods) AS largest_reporting_period_count, COUNT(*) FILTER(WHERE hp.reporting_periods > 1) AS hospitals_with_multiple_periods FROM hospital_periods AS hp JOIN hq.measures AS m ON UPPER(m.measure_id) = UPPER('H_HSP_RATING_9_10') GROUP BY m.measure_id, m.measure_name LIMIT 200",
+        "columns": [
+          "measure_id",
+          "measure_name",
+          "texas_hospitals_with_score",
+          "largest_reporting_period_count",
+          "hospitals_with_multiple_periods"
+        ],
+        "rows": [
+          [
+            "H_HSP_RATING_9_10",
+            "Patients who gave their hospital a rating of 9 or 10 on a scale from 0 (lowest) to 10 (highest) \u2014 Patients who gave a rating of \"9\" or \"10\" (high)",
+            297,
+            1,
+            0
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8982,
+            "output_tokens": 675,
+            "cost_usd": 0.0012357,
+            "latency_ms": 6886,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1363,
+            "output_tokens": 73,
+            "cost_usd": 0.0001728,
+            "latency_ms": 1841,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10345,
+        "total_output_tokens": 748,
+        "total_cost_usd": 0.001409,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6886,
+          "sql_ms": 195,
+          "answer_ms": 1841,
+          "total_ms": 8923
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 8923,
+      "step_ms": {
+        "plan_ms": 6886,
+        "sql_ms": 195,
+        "answer_ms": 1841,
+        "total_ms": 8923
+      },
+      "cost_usd": 0.001409,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10345,
+      "output_tokens": 748,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 145,
+      "answer_states_value": true
+    },
+    {
+      "id": "seed-08",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "hard",
+      "question": "Build a quality composite for Texas hospitals from three standardized scores (z-scores, using the sample standard deviation across all Texas hospitals that have that measure): 30-day pneumonia readmission rate (sign flipped so higher is better), 'would definitely recommend' percentage, and sepsis care percentage. Average the three z-scores per hospital (2 decimals), keeping only hospitals with all three. Return the 10 highest and the 10 lowest composites, top group first (highest first), then bottom group (lowest first); break ties by hospital name, then county.",
+      "error": null,
+      "answer": {
+        "question": "Build a quality composite for Texas hospitals from three standardized scores (z-scores, using the sample standard deviation across all Texas hospitals that have that measure): 30-day pneumonia readmission rate (sign flipped so higher is better), 'would definitely recommend' percentage, and sepsis care percentage. Average the three z-scores per hospital (2 decimals), keeping only hospitals with all three. Return the 10 highest and the 10 lowest composites, top group first (highest first), then bottom group (lowest first); break ties by hospital name, then county.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Composite = the average of the three sample-standardized scores across Texas hospitals with each measure; the pneumonia readmission z-score is sign-flipped so higher is better. Scores are shown to 2 decimals. Hospitals with all three measures are ranked below, highest group first and lowest group second.\n\n| Group/rank | Hospital (county) | Readmission z (flipped) | Recommend z | Sepsis z | Composite |\n|---|---|---:|---:|---:|---:|\n| Highest 1 | METHODIST MIDLOTHIAN MEDICAL CENTER (ELLIS) | 1.72 | 1.05 | 1.81 | 1.53 |\n| Highest 2 | CHRISTUS MOTHER FRANCES HOSPITAL- JACKSONVILLE (CHEROKEE) | 1.12 | 1.99 | 0.92 | 1.34 |\n| Highest 3 | HOUSTON METHODIST THE WOODLANDS HOSPITAL (MONTGOMERY) | 1.42 | 1.16 | 1.37 | 1.32 |\n| Highest 4 | GRAHAM REGIONAL MEDICAL CENTER (YOUNG) | 0.22 | 1.57 | 1.69 | 1.16 |\n| Highest 5 | TEXAS HEALTH HOSPITAL FRISCO (DENTON) | 1.52 | 0.74 | 0.86 | 1.04 |\n| Highest 6 | UT HEALTH EAST TEXAS PITTSBURG HOSPITAL (CAMP) | 0.12 | 1.57 | 1.30 | 1.00 |\n| Highest 7 | METHODIST DALLAS MEDICAL CENTER (DALLAS) | 1.62 | 0.12 | 1.24 | 0.99 |\n| Highest 8 | BAYLOR SCOTT & WHITE MEDICAL CENTER GRAPEVINE (TARRANT) | 0.82 | 0.64 | 1.43 | 0.96 |\n| Highest 9 | TEXAS HEALTH HOSPITAL MANSFIELD (TARRANT) | 0.52 | 0.74 | 1.49 | 0.92 |\n| Highest 10 | TEXAS HEALTH HARRIS METHODIST HOSPITAL CLEBURNE (JOHNSON) | 1.93 | -0.19 | 0.92 | 0.88 |\n| Lowest 1 | BAYLOR SCOTT AND WHITE MEDICAL CENTER SUNNYVALE (DALLAS) | -0.59 | -2.27 | -1.56 | -1.47 |\n| Lowest 2 | PARIS REGIONAL MEDICAL CENTER (LAMAR) | -1.39 | -1.96 | -0.93 | -1.42 |\n| Lowest 3 | WOODLAND HEIGHTS MEDICAL CENTER (ANGELINA) | -1.89 | -0.61 | -1.69 | -1.40 |\n| Lowest 4 | HENDRICK MEDICAL CENTER BROWNWOOD (BROWN) | -1.79 | -1.96 | -0.42 | -1.39 |\n| Lowest 5 | THE MEDICAL CENTER OF SOUTHEAST TEXAS (JEFFERSON) | 0.02 | -2.06 | -2.01 | -1.35 |\n| Lowest 6 | UNITED REGIONAL HEALTH CARE SYSTEM (WICHITA) | -4.20 | 0.01 | 0.16 | -1.34 |\n| Lowest 7 | CARROLLTON REGIONAL MEDICAL CENTER (DENTON) | -1.29 | -1.96 | -0.74 | -1.33 |\n| Lowest 8 | NACOGDOCHES MEDICAL CENTER (NACOGDOCHES) | -3.10 | -0.30 | -0.35 | -1.25 |\n| Lowest 9 | LAS PALMAS MEDICAL CENTER A CAMPUS OF LPDS HEALTHC (EL PASO) | -3.20 | -1.34 | 0.86 | -1.22 |\n| Lowest 10 | EL CAMPO MEMORIAL HOSPITAL (WHARTON) | -0.18 | -2.06 | -1.31 | -1.18 |",
+        "sql": "WITH texas_z AS (SELECT facility_id, facility_name, county, measure_id, (score - AVG(score) OVER (PARTITION BY measure_id)) / NULLIF(STDDEV(score) OVER (PARTITION BY measure_id), 0) AS z_score FROM hq.v_tx_latest WHERE measure_id IN ('READM_30_PN', 'H_RECMND_DY', 'SEP_1') AND score IS NOT NULL), hospital_components AS (SELECT facility_id, facility_name, county, MAX(z_score) FILTER(WHERE measure_id = 'READM_30_PN') AS readm_z, MAX(z_score) FILTER(WHERE measure_id = 'H_RECMND_DY') AS recommend_z, MAX(z_score) FILTER(WHERE measure_id = 'SEP_1') AS sepsis_z FROM texas_z GROUP BY facility_id, facility_name, county HAVING COUNT(DISTINCT measure_id) = 3 AND COUNT(z_score) = 3), composites AS (SELECT facility_id, facility_name, county, -readm_z AS readm_higher_is_better_z, recommend_z, sepsis_z, (-readm_z + recommend_z + sepsis_z) / 3.0 AS composite_raw FROM hospital_components), ranked AS (SELECT *, ROW_NUMBER() OVER (ORDER BY composite_raw DESC, UPPER(facility_name), UPPER(county)) AS highest_rank, ROW_NUMBER() OVER (ORDER BY composite_raw ASC, UPPER(facility_name), UPPER(county)) AS lowest_rank FROM composites), measure_labels AS (SELECT MAX(measure_name) FILTER(WHERE measure_id = 'READM_30_PN') AS readm_name, MAX(measure_name) FILTER(WHERE measure_id = 'H_RECMND_DY') AS recommend_name, MAX(measure_name) FILTER(WHERE measure_id = 'SEP_1') AS sepsis_name FROM hq.measures WHERE measure_id IN ('READM_30_PN', 'H_RECMND_DY', 'SEP_1')), selected AS (SELECT 1 AS group_order, 'Highest' AS composite_group, highest_rank AS group_rank, facility_id, facility_name, county, readm_higher_is_better_z, recommend_z, sepsis_z, composite_raw FROM ranked WHERE highest_rank <= 10 UNION ALL SELECT 2 AS group_order, 'Lowest' AS composite_group, lowest_rank AS group_rank, facility_id, facility_name, county, readm_higher_is_better_z, recommend_z, sepsis_z, composite_raw FROM ranked WHERE lowest_rank <= 10) SELECT composite_group, group_rank, facility_id, facility_name, county, 'READM_30_PN' AS readmission_measure_id, measure_labels.readm_name AS readmission_measure_name, ROUND(readm_higher_is_better_z, 2) AS readmission_z_flipped, 'H_RECMND_DY' AS recommend_measure_id, measure_labels.recommend_name AS recommend_measure_name, ROUND(recommend_z, 2) AS recommend_z, 'SEP_1' AS sepsis_measure_id, measure_labels.sepsis_name AS sepsis_measure_name, ROUND(sepsis_z, 2) AS sepsis_z, ROUND(composite_raw, 2) AS composite FROM selected CROSS JOIN measure_labels ORDER BY group_order, CASE WHEN group_order = 1 THEN composite_raw END DESC, CASE WHEN group_order = 2 THEN composite_raw END ASC, UPPER(facility_name), UPPER(county) LIMIT 200",
+        "columns": [
+          "composite_group",
+          "group_rank",
+          "facility_id",
+          "facility_name",
+          "county",
+          "readmission_measure_id",
+          "readmission_measure_name",
+          "readmission_z_flipped",
+          "recommend_measure_id",
+          "recommend_measure_name",
+          "recommend_z",
+          "sepsis_measure_id",
+          "sepsis_measure_name",
+          "sepsis_z",
+          "composite"
+        ],
+        "rows": [
+          [
+            "Highest",
+            1,
+            "670300",
+            "METHODIST MIDLOTHIAN MEDICAL CENTER",
+            "ELLIS",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            1.72,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            1.05,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            1.81,
+            1.53
+          ],
+          [
+            "Highest",
+            2,
+            "451319",
+            "CHRISTUS MOTHER FRANCES HOSPITAL- JACKSONVILLE",
+            "CHEROKEE",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            1.12,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            1.99,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            0.92,
+            1.34
+          ],
+          [
+            "Highest",
+            3,
+            "670122",
+            "HOUSTON METHODIST THE WOODLANDS HOSPITAL",
+            "MONTGOMERY",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            1.42,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            1.16,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            1.37,
+            1.32
+          ],
+          [
+            "Highest",
+            4,
+            "671300",
+            "GRAHAM REGIONAL MEDICAL CENTER",
+            "YOUNG",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            0.22,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            1.57,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            1.69,
+            1.16
+          ],
+          [
+            "Highest",
+            5,
+            "670260",
+            "TEXAS HEALTH HOSPITAL FRISCO",
+            "DENTON",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            1.52,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            0.74,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            0.86,
+            1.04
+          ],
+          [
+            "Highest",
+            6,
+            "451367",
+            "UT HEALTH EAST TEXAS PITTSBURG HOSPITAL",
+            "CAMP",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            0.12,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            1.57,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            1.3,
+            1.0
+          ],
+          [
+            "Highest",
+            7,
+            "450051",
+            "METHODIST DALLAS MEDICAL CENTER",
+            "DALLAS",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            1.62,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            0.12,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            1.24,
+            0.99
+          ],
+          [
+            "Highest",
+            8,
+            "450563",
+            "BAYLOR SCOTT & WHITE MEDICAL CENTER  GRAPEVINE",
+            "TARRANT",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            0.82,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            0.64,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            1.43,
+            0.96
+          ],
+          [
+            "Highest",
+            9,
+            "670309",
+            "TEXAS HEALTH HOSPITAL MANSFIELD",
+            "TARRANT",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            0.52,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            0.74,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            1.49,
+            0.92
+          ],
+          [
+            "Highest",
+            10,
+            "450148",
+            "TEXAS HEALTH HARRIS METHODIST HOSPITAL CLEBURNE",
+            "JOHNSON",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            1.93,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            -0.19,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            0.92,
+            0.88
+          ],
+          [
+            "Lowest",
+            1,
+            "670060",
+            "BAYLOR SCOTT AND WHITE MEDICAL CENTER SUNNYVALE",
+            "DALLAS",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            -0.59,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            -2.27,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            -1.56,
+            -1.47
+          ],
+          [
+            "Lowest",
+            2,
+            "450196",
+            "PARIS REGIONAL MEDICAL CENTER",
+            "LAMAR",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            -1.39,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            -1.96,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            -0.93,
+            -1.42
+          ],
+          [
+            "Lowest",
+            3,
+            "450484",
+            "WOODLAND HEIGHTS MEDICAL CENTER",
+            "ANGELINA",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            -1.89,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            -0.61,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            -1.69,
+            -1.4
+          ],
+          [
+            "Lowest",
+            4,
+            "450587",
+            "HENDRICK MEDICAL CENTER BROWNWOOD",
+            "BROWN",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            -1.79,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            -1.96,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            -0.42,
+            -1.39
+          ],
+          [
+            "Lowest",
+            5,
+            "450518",
+            "THE MEDICAL CENTER OF SOUTHEAST TEXAS",
+            "JEFFERSON",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            0.02,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            -2.06,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            -2.01,
+            -1.35
+          ],
+          [
+            "Lowest",
+            6,
+            "450010",
+            "UNITED REGIONAL HEALTH CARE SYSTEM",
+            "WICHITA",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            -4.2,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            0.01,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            0.16,
+            -1.34
+          ],
+          [
+            "Lowest",
+            7,
+            "450730",
+            "CARROLLTON REGIONAL MEDICAL CENTER",
+            "DENTON",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            -1.29,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            -1.96,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            -0.74,
+            -1.33
+          ],
+          [
+            "Lowest",
+            8,
+            "450656",
+            "NACOGDOCHES MEDICAL CENTER",
+            "NACOGDOCHES",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            -3.1,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            -0.3,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            -0.35,
+            -1.25
+          ],
+          [
+            "Lowest",
+            9,
+            "450107",
+            "LAS PALMAS MEDICAL CENTER A CAMPUS OF LPDS HEALTHC",
+            "EL PASO",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            -3.2,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            -1.34,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            0.86,
+            -1.22
+          ],
+          [
+            "Lowest",
+            10,
+            "450694",
+            "EL CAMPO MEMORIAL HOSPITAL",
+            "WHARTON",
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            -0.18,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            -2.06,
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            -1.31,
+            -1.18
+          ]
+        ],
+        "row_count": 20,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 9022,
+            "output_tokens": 2767,
+            "cost_usd": 0.0022857,
+            "latency_ms": 23499,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 4333,
+            "output_tokens": 1134,
+            "cost_usd": 0.0010003,
+            "latency_ms": 9064,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 13355,
+        "total_output_tokens": 3901,
+        "total_cost_usd": 0.003286,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 23499,
+          "sql_ms": 256,
+          "answer_ms": 9064,
+          "total_ms": 32821
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 20
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 32821,
+      "step_ms": {
+        "plan_ms": 23499,
+        "sql_ms": 256,
+        "answer_ms": 9064,
+        "total_ms": 32821
+      },
+      "cost_usd": 0.003286,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 13355,
+      "output_tokens": 3901,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": false,
+      "row_recall": 0.95,
+      "order_ok": true,
+      "matched": 19,
+      "truth_rows": 20,
+      "gen_rows": 20,
+      "reason": "19/20 truth rows matched",
+      "truth_ms": 242
+    },
+    {
+      "id": "seed-09",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "Which Texas hospitals have a 30-day pneumonia readmission rate below the Texas average but a 'would definitely recommend' percentage below the Texas average (each average over Texas hospitals with that measure)? Show the 20 with the lowest readmission rates: hospital, county, both rates and both averages (readmission average to 2 decimals, recommend average to 1). Ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "Which Texas hospitals have a 30-day pneumonia readmission rate below the Texas average but a 'would definitely recommend' percentage below the Texas average (each average over Texas hospitals with that measure)? Show the 20 with the lowest readmission rates: hospital, county, both rates and both averages (readmission average to 2 decimals, recommend average to 1). Ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "The 20 hospitals with the lowest 30-day pneumonia readmission rates among those meeting both criteria are shown below. Readmission and recommendation figures are percentages; the Texas averages are 17.32% and 72.9%, respectively.\n\n| Hospital | County | Readmission rate | Would definitely recommend | Texas readmission average | Texas recommendation average |\n|---|---|---:|---:|---:|---:|\n| ST LUKE'S PATIENTS MEDICAL CENTER | HARRIS | 14.7% | 67.0% | 17.32% | 72.9% |\n| BAPTIST MEDICAL CENTER | BEXAR | 15.0% | 64.0% | 17.32% | 72.9% |\n| HUNTSVILLE MEMORIAL HOSPITAL | WALKER | 15.4% | 63.0% | 17.32% | 72.9% |\n| TEXAS HEALTH HARRIS METHODIST HOSPITAL ALLIANCE | TARRANT | 15.4% | 72.0% | 17.32% | 72.9% |\n| TEXAS HEALTH HARRIS METHODIST HOSPITAL CLEBURNE | JOHNSON | 15.4% | 71.0% | 17.32% | 72.9% |\n| CHRISTUS SPOHN HOSPITAL ALICE | JIM WELLS | 15.7% | 69.0% | 17.32% | 72.9% |\n| RIO GRANDE REGIONAL HOSPITAL | HIDALGO | 15.7% | 65.0% | 17.32% | 72.9% |\n| FORT DUNCAN MEDICAL CENTER | MAVERICK | 15.9% | 55.0% | 17.32% | 72.9% |\n| MATAGORDA REGIONAL MEDICAL CENTER | MATAGORDA | 15.9% | 67.0% | 17.32% | 72.9% |\n| METHODIST CHARLTON MEDICAL CENTER | DALLAS | 15.9% | 68.0% | 17.32% | 72.9% |\n| LAKE GRANBURY MEDICAL CENTER | HOOD | 16.0% | 51.0% | 17.32% | 72.9% |\n| TEXAS HEALTH PRESBYTERIAN HOSPITAL KAUFMAN | KAUFMAN | 16.0% | 71.0% | 17.32% | 72.9% |\n| DALLAS VA MEDICAL CENTER (VA NORTH TEXAS HEALTHCARE SYSTEM) | DALLAS | 16.2% | 63.0% | 17.32% | 72.9% |\n| TEXAS HEALTH HARRIS METHODIST HOSPITAL AZLE | TARRANT | 16.2% | 67.0% | 17.32% | 72.9% |\n| COVENANT HOSPITAL PLAINVIEW | HALE | 16.3% | 71.0% | 17.32% | 72.9% |\n| MEMORIAL HERMANN MEMORIAL CITY HOSPITAL | HARRIS | 16.3% | 71.0% | 17.32% | 72.9% |\n| PARKLAND HEALTH & HOSPITAL SYSTEM | DALLAS | 16.4% | 70.0% | 17.32% | 72.9% |\n| ST LUKE'S SUGAR LAND HOSPITAL | FORT BEND | 16.4% | 63.0% | 17.32% | 72.9% |\n| UT HEALTH EAST TEXAS HENDERSON HOSPITAL | RUSK | 16.4% | 70.0% | 17.32% | 72.9% |\n| ASCENSION SETON MEDICAL CENTER AUSTIN | TRAVIS | 16.5% | 67.0% | 17.32% | 72.9% |",
+        "sql": "WITH readmission_avg AS (SELECT AVG(score) AS avg_score FROM hq.v_tx_latest WHERE UPPER(measure_id) = 'READM_30_PN' AND score IS NOT NULL), recommend_avg AS (SELECT AVG(score) AS avg_score FROM hq.v_tx_latest WHERE UPPER(measure_id) = 'H_RECMND_DY' AND score IS NOT NULL) SELECT r.facility_name AS hospital, r.county, r.score AS readmission_rate, c.score AS would_definitely_recommend_pct, ROUND(CAST(ra.avg_score AS DECIMAL), 2) AS texas_readmission_avg, ROUND(CAST(ca.avg_score AS DECIMAL), 1) AS texas_recommend_avg FROM hq.v_tx_latest AS r JOIN hq.v_tx_latest AS c ON c.facility_id = r.facility_id AND UPPER(c.measure_id) = 'H_RECMND_DY' CROSS JOIN readmission_avg AS ra CROSS JOIN recommend_avg AS ca WHERE UPPER(r.measure_id) = 'READM_30_PN' AND r.score IS NOT NULL AND c.score IS NOT NULL AND r.score < ra.avg_score AND c.score < ca.avg_score ORDER BY r.score ASC, r.facility_name ASC LIMIT 20",
+        "columns": [
+          "hospital",
+          "county",
+          "readmission_rate",
+          "would_definitely_recommend_pct",
+          "texas_readmission_avg",
+          "texas_recommend_avg"
+        ],
+        "rows": [
+          [
+            "ST LUKE'S PATIENTS MEDICAL CENTER",
+            "HARRIS",
+            14.7,
+            67.0,
+            17.32,
+            72.9
+          ],
+          [
+            "BAPTIST MEDICAL CENTER",
+            "BEXAR",
+            15.0,
+            64.0,
+            17.32,
+            72.9
+          ],
+          [
+            "HUNTSVILLE MEMORIAL HOSPITAL",
+            "WALKER",
+            15.4,
+            63.0,
+            17.32,
+            72.9
+          ],
+          [
+            "TEXAS HEALTH HARRIS METHODIST HOSPITAL ALLIANCE",
+            "TARRANT",
+            15.4,
+            72.0,
+            17.32,
+            72.9
+          ],
+          [
+            "TEXAS HEALTH HARRIS METHODIST HOSPITAL CLEBURNE",
+            "JOHNSON",
+            15.4,
+            71.0,
+            17.32,
+            72.9
+          ],
+          [
+            "CHRISTUS SPOHN HOSPITAL ALICE",
+            "JIM WELLS",
+            15.7,
+            69.0,
+            17.32,
+            72.9
+          ],
+          [
+            "RIO GRANDE REGIONAL HOSPITAL",
+            "HIDALGO",
+            15.7,
+            65.0,
+            17.32,
+            72.9
+          ],
+          [
+            "FORT DUNCAN MEDICAL CENTER",
+            "MAVERICK",
+            15.9,
+            55.0,
+            17.32,
+            72.9
+          ],
+          [
+            "MATAGORDA REGIONAL MEDICAL CENTER",
+            "MATAGORDA",
+            15.9,
+            67.0,
+            17.32,
+            72.9
+          ],
+          [
+            "METHODIST CHARLTON MEDICAL CENTER",
+            "DALLAS",
+            15.9,
+            68.0,
+            17.32,
+            72.9
+          ],
+          [
+            "LAKE GRANBURY MEDICAL CENTER",
+            "HOOD",
+            16.0,
+            51.0,
+            17.32,
+            72.9
+          ],
+          [
+            "TEXAS HEALTH PRESBYTERIAN HOSPITAL KAUFMAN",
+            "KAUFMAN",
+            16.0,
+            71.0,
+            17.32,
+            72.9
+          ],
+          [
+            "DALLAS VA MEDICAL CENTER (VA NORTH TEXAS HEALTHCARE SYSTEM)",
+            "DALLAS",
+            16.2,
+            63.0,
+            17.32,
+            72.9
+          ],
+          [
+            "TEXAS HEALTH HARRIS METHODIST HOSPITAL AZLE",
+            "TARRANT",
+            16.2,
+            67.0,
+            17.32,
+            72.9
+          ],
+          [
+            "COVENANT HOSPITAL PLAINVIEW",
+            "HALE",
+            16.3,
+            71.0,
+            17.32,
+            72.9
+          ],
+          [
+            "MEMORIAL HERMANN MEMORIAL CITY HOSPITAL",
+            "HARRIS",
+            16.3,
+            71.0,
+            17.32,
+            72.9
+          ],
+          [
+            "PARKLAND HEALTH & HOSPITAL SYSTEM",
+            "DALLAS",
+            16.4,
+            70.0,
+            17.32,
+            72.9
+          ],
+          [
+            "ST LUKE'S SUGAR LAND HOSPITAL",
+            "FORT BEND",
+            16.4,
+            63.0,
+            17.32,
+            72.9
+          ],
+          [
+            "UT HEALTH EAST TEXAS HENDERSON HOSPITAL",
+            "RUSK",
+            16.4,
+            70.0,
+            17.32,
+            72.9
+          ],
+          [
+            "ASCENSION SETON MEDICAL CENTER AUSTIN",
+            "TRAVIS",
+            16.5,
+            67.0,
+            17.32,
+            72.9
+          ]
+        ],
+        "row_count": 20,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8989,
+            "output_tokens": 722,
+            "cost_usd": 0.0012599,
+            "latency_ms": 7916,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 2117,
+            "output_tokens": 1052,
+            "cost_usd": 0.0007377000000000001,
+            "latency_ms": 7375,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11106,
+        "total_output_tokens": 1774,
+        "total_cost_usd": 0.001998,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 7916,
+          "sql_ms": 367,
+          "answer_ms": 7375,
+          "total_ms": 15660
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 20
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 15660,
+      "step_ms": {
+        "plan_ms": 7916,
+        "sql_ms": 367,
+        "answer_ms": 7375,
+        "total_ms": 15660
+      },
+      "cost_usd": 0.001998,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 11106,
+      "output_tokens": 1774,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 20,
+      "truth_rows": 20,
+      "gen_rows": 20,
+      "reason": null,
+      "truth_ms": 171
+    },
+    {
+      "id": "seed-10",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "For Texas counties with at least 3 hospitals that have a 30-day pneumonia readmission rate, show the number of hospitals, how many have a rate, the plain mean rate and the mean weighted by each hospital's number of eligible discharges (2 decimals). Lowest weighted mean first; break ties by county.",
+      "error": null,
+      "answer": {
+        "question": "For Texas counties with at least 3 hospitals that have a 30-day pneumonia readmission rate, show the number of hospitals, how many have a rate, the plain mean rate and the mean weighted by each hospital's number of eligible discharges (2 decimals). Lowest weighted mean first; break ties by county.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "For the pneumonia 30-day readmission rate, counties are ordered by the eligible-discharge-weighted mean, lowest first. The plain mean is the average across hospitals of the rate; the weighted mean gives each hospital\u2019s rate weight according to its eligible discharges.\n\n| County | Hospitals | Hospitals with a rate | Plain mean rate | Weighted mean rate |\n|---|---:|---:|---:|---:|\n| MONTGOMERY | 8 | 3 | 17.00 | 16.66 |\n| LUBBOCK | 8 | 3 | 16.67 | 17.02 |\n| BEXAR | 20 | 8 | 17.28 | 17.08 |\n| FORT BEND | 10 | 5 | 16.92 | 17.18 |\n| TARRANT | 30 | 16 | 17.23 | 17.31 |\n| HARRIS | 50 | 22 | 17.25 | 17.40 |\n| HIDALGO | 7 | 5 | 17.18 | 17.42 |\n| DALLAS | 30 | 16 | 17.40 | 17.44 |\n| SMITH | 4 | 3 | 17.27 | 17.45 |\n| BELL | 7 | 4 | 17.88 | 17.46 |\n| CAMERON | 6 | 4 | 17.53 | 17.46 |\n| BRAZORIA | 3 | 3 | 17.30 | 17.48 |\n| ELLIS | 3 | 3 | 17.13 | 17.52 |\n| TRAVIS | 14 | 8 | 17.53 | 17.64 |\n| POTTER | 5 | 3 | 17.80 | 17.73 |\n| COLLIN | 15 | 9 | 17.49 | 17.88 |\n| DENTON | 17 | 7 | 17.54 | 17.89 |\n| JEFFERSON | 3 | 3 | 17.97 | 18.16 |\n| WILLIAMSON | 9 | 5 | 17.72 | 18.16 |\n| EL PASO | 12 | 7 | 17.50 | 18.43 |",
+        "sql": "WITH ranked_rates AS (SELECT mv.facility_id, mv.measure_id, mv.score, mv.denominator, ROW_NUMBER() OVER (PARTITION BY mv.facility_id, mv.measure_id ORDER BY mv.period_end DESC NULLS LAST, mv.period_start DESC NULLS LAST) AS period_rank FROM hq.measure_values AS mv WHERE UPPER(mv.measure_id) = UPPER('READM_30_PN')), latest_rates AS (SELECT facility_id, score, denominator FROM ranked_rates WHERE period_rank = 1) SELECT h.county, COUNT(*) AS number_of_hospitals, COUNT(lr.score) AS hospitals_with_rate, m.measure_id, m.measure_name, ROUND(CAST(AVG(lr.score) FILTER(WHERE lr.score IS NOT NULL) AS DECIMAL), 2) AS plain_mean_rate, ROUND(CAST((SUM(lr.score * lr.denominator) FILTER(WHERE lr.score IS NOT NULL AND lr.denominator IS NOT NULL AND lr.denominator > 0) / NULLIF(SUM(lr.denominator) FILTER(WHERE lr.score IS NOT NULL AND lr.denominator IS NOT NULL AND lr.denominator > 0), 0)) AS DECIMAL), 2) AS discharge_weighted_mean_rate FROM hq.hospitals AS h LEFT JOIN latest_rates AS lr ON lr.facility_id = h.facility_id CROSS JOIN hq.measures AS m WHERE UPPER(h.state) = UPPER('TX') AND h.county IS NOT NULL AND UPPER(m.measure_id) = UPPER('READM_30_PN') GROUP BY h.county, m.measure_id, m.measure_name HAVING COUNT(lr.score) >= 3 ORDER BY discharge_weighted_mean_rate ASC, h.county ASC LIMIT 200",
+        "columns": [
+          "county",
+          "number_of_hospitals",
+          "hospitals_with_rate",
+          "measure_id",
+          "measure_name",
+          "plain_mean_rate",
+          "discharge_weighted_mean_rate"
+        ],
+        "rows": [
+          [
+            "MONTGOMERY",
+            8,
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.0,
+            16.66
+          ],
+          [
+            "LUBBOCK",
+            8,
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.67,
+            17.02
+          ],
+          [
+            "BEXAR",
+            20,
+            8,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.28,
+            17.08
+          ],
+          [
+            "FORT BEND",
+            10,
+            5,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            16.92,
+            17.18
+          ],
+          [
+            "TARRANT",
+            30,
+            16,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.23,
+            17.31
+          ],
+          [
+            "HARRIS",
+            50,
+            22,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.25,
+            17.4
+          ],
+          [
+            "HIDALGO",
+            7,
+            5,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.18,
+            17.42
+          ],
+          [
+            "DALLAS",
+            30,
+            16,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.4,
+            17.44
+          ],
+          [
+            "SMITH",
+            4,
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.27,
+            17.45
+          ],
+          [
+            "BELL",
+            7,
+            4,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.88,
+            17.46
+          ],
+          [
+            "CAMERON",
+            6,
+            4,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.53,
+            17.46
+          ],
+          [
+            "BRAZORIA",
+            3,
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.3,
+            17.48
+          ],
+          [
+            "ELLIS",
+            3,
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.13,
+            17.52
+          ],
+          [
+            "TRAVIS",
+            14,
+            8,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.53,
+            17.64
+          ],
+          [
+            "POTTER",
+            5,
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.8,
+            17.73
+          ],
+          [
+            "COLLIN",
+            15,
+            9,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.49,
+            17.88
+          ],
+          [
+            "DENTON",
+            17,
+            7,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.54,
+            17.89
+          ],
+          [
+            "JEFFERSON",
+            3,
+            3,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.97,
+            18.16
+          ],
+          [
+            "WILLIAMSON",
+            9,
+            5,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.72,
+            18.16
+          ],
+          [
+            "EL PASO",
+            12,
+            7,
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.5,
+            18.43
+          ]
+        ],
+        "row_count": 20,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8973,
+            "output_tokens": 1161,
+            "cost_usd": 0.0014778000000000003,
+            "latency_ms": 12073,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 2334,
+            "output_tokens": 772,
+            "cost_usd": 0.0006194,
+            "latency_ms": 7836,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11307,
+        "total_output_tokens": 1933,
+        "total_cost_usd": 0.002097,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 12073,
+          "sql_ms": 1470,
+          "answer_ms": 7836,
+          "total_ms": 21381
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 20
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 21381,
+      "step_ms": {
+        "plan_ms": 12073,
+        "sql_ms": 1470,
+        "answer_ms": 7836,
+        "total_ms": 21381
+      },
+      "cost_usd": 0.002097,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 11307,
+      "output_tokens": 1933,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 20,
+      "truth_rows": 20,
+      "gen_rows": 20,
+      "reason": null,
+      "truth_ms": 167
+    },
+    {
+      "id": "seed-11",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "Build a one-row-per-hospital scorecard for Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties): 30-day pneumonia readmission rate, 30-day heart failure death rate, central-line infection ratio, sepsis care percentage, 'would definitely recommend' percentage and the HCAHPS summary star rating (blank if not reported). Show the top 25 by recommend percentage, highest first, hospitals with no recommend score last, ties by hospital name.",
+      "error": null,
+      "answer": {
+        "question": "Build a one-row-per-hospital scorecard for Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties): 30-day pneumonia readmission rate, 30-day heart failure death rate, central-line infection ratio, sepsis care percentage, 'would definitely recommend' percentage and the HCAHPS summary star rating (blank if not reported). Show the top 25 by recommend percentage, highest first, hospitals with no recommend score last, ties by hospital name.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Top 25 hospitals, ordered by \u201cwould definitely recommend\u201d percentage (highest first); blank cells indicate values not reported. [\u2026]",
+        "sql": "SELECT facility_name AS hospital_name, county, readm_pn_pct AS pneumonia_30_day_readmission_rate, mort_hf_pct AS heart_failure_30_day_death_rate, hai_clabsi_sir AS central_line_infection_ratio, sepsis_bundle_pct AS sepsis_care_percentage, recommend_pct AS definitely_recommend_percentage, hcahps_star AS hcahps_summary_star_rating FROM hq.v_scorecard WHERE is_houston_area IS TRUE ORDER BY recommend_pct DESC NULLS LAST, facility_name ASC LIMIT 25",
+        "columns": [
+          "hospital_name",
+          "county",
+          "pneumonia_30_day_readmission_rate",
+          "heart_failure_30_day_death_rate",
+          "central_line_infection_ratio",
+          "sepsis_care_percentage",
+          "definitely_recommend_percentage",
+          "hcahps_summary_star_rating"
+        ],
+        "rows": [
+          [
+            "MEMORIAL HERMANN HOUSTON PHYSICIANS HOSPITAL",
+            "HARRIS",
+            null,
+            null,
+            null,
+            null,
+            87.0,
+            5.0
+          ],
+          [
+            "HOUSTON METHODIST CLEAR LAKE HOSPITAL",
+            "HARRIS",
+            17.8,
+            9.1,
+            0.589,
+            65.0,
+            84.0,
+            4.0
+          ],
+          [
+            "HOUSTON METHODIST THE WOODLANDS HOSPITAL",
+            "MONTGOMERY",
+            15.9,
+            7.6,
+            0.357,
+            88.0,
+            84.0,
+            4.0
+          ],
+          [
+            "HOUSTON METHODIST WEST HOSPITAL",
+            "HARRIS",
+            17.6,
+            9.3,
+            0.469,
+            77.0,
+            83.0,
+            4.0
+          ],
+          [
+            "TEXAS ORTHOPEDIC HOSPITAL",
+            "HARRIS",
+            null,
+            null,
+            null,
+            null,
+            83.0,
+            4.0
+          ],
+          [
+            "HOUSTON METHODIST HOSPITAL",
+            "HARRIS",
+            15.3,
+            6.0,
+            0.363,
+            60.0,
+            82.0,
+            4.0
+          ],
+          [
+            "SUGAR LAND SURGICAL HOSPITAL LLP",
+            "FORT BEND",
+            null,
+            null,
+            null,
+            null,
+            82.0,
+            null
+          ],
+          [
+            "CHI ST LUKES LAKESIDE HOSPITAL",
+            "MONTGOMERY",
+            null,
+            null,
+            null,
+            null,
+            81.0,
+            4.0
+          ],
+          [
+            "ST LUKE'S HOSPITAL AT THE VINTAGE",
+            "HARRIS",
+            16.3,
+            10.4,
+            0.0,
+            64.0,
+            81.0,
+            3.0
+          ],
+          [
+            "HOUSTON METHODIST SUGARLAND HOSPITAL",
+            "FORT BEND",
+            17.3,
+            6.9,
+            0.826,
+            75.0,
+            80.0,
+            4.0
+          ],
+          [
+            "TOPS SURGICAL SPECIALTY HOSPITAL",
+            "HARRIS",
+            null,
+            null,
+            null,
+            null,
+            80.0,
+            4.0
+          ],
+          [
+            "HOUSTON METHODIST WILLOWBROOK HOSPITAL",
+            "HARRIS",
+            17.6,
+            6.1,
+            0.183,
+            82.0,
+            79.0,
+            4.0
+          ],
+          [
+            "SWEENY COMMUNITY HOSPITAL",
+            "BRAZORIA",
+            16.8,
+            null,
+            null,
+            43.0,
+            79.0,
+            null
+          ],
+          [
+            "HOUSTON METHODIST BAYTOWN HOSPITAL",
+            "HARRIS",
+            16.7,
+            7.7,
+            0.0,
+            74.0,
+            78.0,
+            4.0
+          ],
+          [
+            "ST LUKE'S THE WOODLANDS HOSPITAL",
+            "MONTGOMERY",
+            16.8,
+            11.1,
+            0.527,
+            64.0,
+            78.0,
+            4.0
+          ],
+          [
+            "MEMORIAL HERMANN SURGICAL HOSPITAL KINGWOOD",
+            "HARRIS",
+            null,
+            null,
+            null,
+            null,
+            73.0,
+            null
+          ],
+          [
+            "UNIVERSITY OF TEXAS MEDICAL BRANCH GALVESTON",
+            "GALVESTON",
+            16.5,
+            8.6,
+            0.231,
+            35.0,
+            72.0,
+            3.0
+          ],
+          [
+            "HARRIS HEALTH",
+            "HARRIS",
+            16.7,
+            9.7,
+            1.142,
+            49.0,
+            71.0,
+            3.0
+          ],
+          [
+            "HOUSTON VA MEDICAL CENTER",
+            "HARRIS",
+            17.9,
+            7.0,
+            0.313,
+            null,
+            71.0,
+            4.0
+          ],
+          [
+            "MEMORIAL HERMANN - TEXAS MEDICAL CENTER",
+            "HARRIS",
+            17.2,
+            8.2,
+            0.317,
+            39.0,
+            71.0,
+            3.0
+          ]
+        ],
+        "row_count": 25,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 9011,
+            "output_tokens": 517,
+            "cost_usd": 0.0011596,
+            "latency_ms": 5202,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 2371,
+            "output_tokens": 1388,
+            "cost_usd": 0.0009311,
+            "latency_ms": 9443,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11382,
+        "total_output_tokens": 1905,
+        "total_cost_usd": 0.002091,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 5202,
+          "sql_ms": 304,
+          "answer_ms": 9443,
+          "total_ms": 14951
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 25
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 14951,
+      "step_ms": {
+        "plan_ms": 5202,
+        "sql_ms": 304,
+        "answer_ms": 9443,
+        "total_ms": 14951
+      },
+      "cost_usd": 0.002091,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 11382,
+      "output_tokens": 1905,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 25,
+      "truth_rows": 25,
+      "gen_rows": 25,
+      "reason": null,
+      "truth_ms": 296
+    },
+    {
+      "id": "seed-12",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "hard",
+      "question": "For six measures, what share of Texas hospitals do better than the national average (average over all U.S. hospitals with a score)? Measures: 30-day pneumonia readmission rate, 30-day heart failure death rate, central-line infection ratio (lower is better for these three), sepsis care percentage, 'would definitely recommend' percentage and HCAHPS summary star rating (higher is better for these three). Return measure ID, the national average (2 decimals), Texas hospitals with a score, how many beat the national average and the share in percent (1 decimal), highest share first, ties by measure ID.",
+      "error": null,
+      "answer": {
+        "question": "For six measures, what share of Texas hospitals do better than the national average (average over all U.S. hospitals with a score)? Measures: 30-day pneumonia readmission rate, 30-day heart failure death rate, central-line infection ratio (lower is better for these three), sepsis care percentage, 'would definitely recommend' percentage and HCAHPS summary star rating (higher is better for these three). Return measure ID, the national average (2 decimals), Texas hospitals with a score, how many beat the national average and the share in percent (1 decimal), highest share first, ties by measure ID.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Shares are ordered highest first. National averages are averages across U.S. hospitals with a score for each measure, not patient counts; Texas hospitals beat the average using the stated lower- or higher-is-better direction.\n- HAI_1_SIR (central-line infection ratio; lower is better): national average 0.58; 151 Texas hospitals with a score; 99 beat the average; share 65.6%.\n- MORT_30_HF (30-day heart failure death rate; lower is better): national average 11.07; 206 Texas hospitals with a score; 132 beat the average; share 64.1%.\n- SEP_1 (sepsis care percentage; higher is better): national average 63.79; 233 Texas hospitals with a score; 146 beat the average; share 62.7%.\n- READM_30_PN (30-day pneumonia readmission rate; lower is better): national average 17.34; 258 Texas hospitals with a score; 150 beat the average; share 58.1%.\n- H_RECMND_DY (would definitely recommend percentage; higher is better): national average 71.22; 297 Texas hospitals with a score; 158 beat the average; share 53.2%.\n- H_STAR_RATING (HCAHPS summary star rating; higher is better): national average 3.27; 229 Texas hospitals with a score; 92 beat the average; share 40.2%.",
+        "sql": "WITH latest_rows AS (SELECT mv.facility_id, mv.measure_id, mv.measure_name, mv.score, h.state, ROW_NUMBER() OVER (PARTITION BY mv.facility_id, mv.measure_id ORDER BY mv.period_end DESC, mv.period_start DESC) AS rn FROM hq.measure_values AS mv JOIN hq.hospitals AS h ON h.facility_id = mv.facility_id WHERE UPPER(mv.measure_id) IN ('READM_30_PN', 'MORT_30_HF', 'HAI_1_SIR', 'SEP_1', 'H_RECMND_DY', 'H_STAR_RATING')), scored_latest AS (SELECT facility_id, measure_id, measure_name, score, state FROM latest_rows WHERE rn = 1 AND score IS NOT NULL), national_averages AS (SELECT measure_id, AVG(score) AS national_avg FROM scored_latest GROUP BY measure_id), texas_comparison AS (SELECT t.measure_id, MAX(t.measure_name) AS measure_name, n.national_avg, COUNT(*) AS texas_hospitals_with_score, COUNT(*) FILTER(WHERE (t.measure_id IN ('READM_30_PN', 'MORT_30_HF', 'HAI_1_SIR') AND t.score < n.national_avg) OR (t.measure_id IN ('SEP_1', 'H_RECMND_DY', 'H_STAR_RATING') AND t.score > n.national_avg)) AS texas_hospitals_beat_national FROM scored_latest AS t JOIN national_averages AS n ON n.measure_id = t.measure_id WHERE t.state = 'TX' GROUP BY t.measure_id, n.national_avg) SELECT measure_id, measure_name, ROUND(CAST(national_avg AS DECIMAL), 2) AS national_average, texas_hospitals_with_score, texas_hospitals_beat_national, ROUND(CAST(texas_hospitals_beat_national AS DECIMAL) * 100 / NULLIF(texas_hospitals_with_score, 0), 1) AS share_percent FROM texas_comparison ORDER BY share_percent DESC, measure_id LIMIT 200",
+        "columns": [
+          "measure_id",
+          "measure_name",
+          "national_average",
+          "texas_hospitals_with_score",
+          "texas_hospitals_beat_national",
+          "share_percent"
+        ],
+        "rows": [
+          [
+            "HAI_1_SIR",
+            "Central Line Associated Bloodstream Infection (ICU + select Wards)",
+            0.58,
+            151,
+            99,
+            65.6
+          ],
+          [
+            "MORT_30_HF",
+            "Death rate for heart failure patients",
+            11.07,
+            206,
+            132,
+            64.1
+          ],
+          [
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            63.79,
+            233,
+            146,
+            62.7
+          ],
+          [
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.34,
+            258,
+            150,
+            58.1
+          ],
+          [
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            71.22,
+            297,
+            158,
+            53.2
+          ],
+          [
+            "H_STAR_RATING",
+            "Summary star rating \u2014 Summary star rating",
+            3.27,
+            229,
+            92,
+            40.2
+          ]
+        ],
+        "row_count": 6,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 9035,
+            "output_tokens": 1416,
+            "cost_usd": 0.0016115,
+            "latency_ms": 12628,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1819,
+            "output_tokens": 461,
+            "cost_usd": 0.0004124,
+            "latency_ms": 4460,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10854,
+        "total_output_tokens": 1877,
+        "total_cost_usd": 0.002024,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 12628,
+          "sql_ms": 1283,
+          "answer_ms": 4460,
+          "total_ms": 18373
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 6
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 18373,
+      "step_ms": {
+        "plan_ms": 12628,
+        "sql_ms": 1283,
+        "answer_ms": 4460,
+        "total_ms": 18373
+      },
+      "cost_usd": 0.002024,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10854,
+      "output_tokens": 1877,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 6,
+      "truth_rows": 6,
+      "gen_rows": 6,
+      "reason": null,
+      "truth_ms": 319
+    }
+  ]
+}

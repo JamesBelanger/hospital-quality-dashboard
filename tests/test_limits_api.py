@@ -211,7 +211,7 @@ def test_env_prompt_versions_are_what_ask_reports(monkeypatch):
     monkeypatch.setenv("HQ_SCHEMA_PROMPT", "schema_v1")
 
     class Refuser:
-        def complete(self, system, user, schema, model=None):
+        def complete(self, system, user, schema, model=None, max_output_tokens=None):
             from service.llm import Usage
             return pipeline.Plan(route="refuse", reason="no"), Usage(1, 1, 0.0, 1, "m")
     a = pipeline.ask("q", llm=Refuser())

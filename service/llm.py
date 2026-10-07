@@ -37,7 +37,8 @@ class Usage:
 
 
 class LLM(Protocol):
-    def complete(self, system: str, user: str, schema: type[T], model: str | None = None) -> tuple[T, Usage]: ...
+    def complete(self, system: str, user: str, schema: type[T], model: str | None = None,
+                 max_output_tokens: int | None = None) -> tuple[T, Usage]: ...
 
 
 def cost_usd(model: str, input_tokens: int, output_tokens: int) -> float:
@@ -56,10 +57,12 @@ class OpenAILLM:
 
         self._client = OpenAI()
 
-    def complete(self, system: str, user: str, schema: type[T], model: str | None = None) -> tuple[T, Usage]:
+    def complete(self, system: str, user: str, schema: type[T], model: str | None = None,
+                 max_output_tokens: int | None = None) -> tuple[T, Usage]:
         model = model or os.environ.get("HQ_MODEL") or DEFAULT_MODEL
         t0 = time.perf_counter()
-        resp = self._client.responses.parse(model=model, instructions=system, input=user, text_format=schema)
+        extra = {"max_output_tokens": max_output_tokens} if max_output_tokens else {}
+        resp = self._client.responses.parse(model=model, instructions=system, input=user, text_format=schema, **extra)
         ms = int((time.perf_counter() - t0) * 1000)
         if resp.output_parsed is None:
             raise RuntimeError("model returned no parsable output")

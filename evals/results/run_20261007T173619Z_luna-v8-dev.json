@@ -1,0 +1,885 @@
+{
+  "config": {
+    "tag": "luna-v8-dev",
+    "model": "gpt-6-luna",
+    "judge_model": "gpt-6-sol",
+    "split": "dev",
+    "types": null,
+    "questions_file": null,
+    "only": null,
+    "limit": null,
+    "workers": 3,
+    "retrieval_mode": "vector",
+    "prompt_versions": {
+      "plan": "plan_v6",
+      "schema": "schema_v2",
+      "answer": "answer_v6"
+    },
+    "started_utc": "2026-10-07T17:36:19+00:00",
+    "n_selected": 12,
+    "skipped_for_spend": [],
+    "max_spend": 1.0
+  },
+  "summary": {
+    "by_group": {
+      "numeric": {
+        "n": 12,
+        "k": 3
+      }
+    },
+    "overall": {
+      "n": 12,
+      "k": 3
+    },
+    "numeric": {
+      "row_recall_mean": 0.75,
+      "order_ok": {
+        "k": 3,
+        "n": 3
+      },
+      "answer_states_value": {
+        "k": 1,
+        "n": 1
+      },
+      "refused": 0,
+      "sql_error": 0,
+      "repaired": 0
+    },
+    "latency_ms": {
+      "median": 17121,
+      "p90": 23094
+    },
+    "cost_usd": {
+      "ask_total": 0.00749,
+      "judge_total": 0,
+      "total": 0.00749,
+      "ask_per_question": 0.000624
+    },
+    "tokens": {
+      "input": 43102,
+      "output": 6359
+    },
+    "errors": [
+      "seed-01",
+      "seed-02",
+      "seed-04",
+      "seed-05",
+      "seed-06",
+      "seed-09",
+      "seed-10",
+      "seed-11"
+    ]
+  },
+  "records": [
+    {
+      "id": "seed-01",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "easy",
+      "question": "List the Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) that have a 30-day pneumonia readmission rate, with county, ownership, overall star rating, the rate and the number of eligible discharges behind it. Leave out hospitals without a rate. Lowest rate first; break ties by hospital name.",
+      "error": "ValidationError: 1 validation error for AnswerOut\n  Invalid JSON: EOF while parsing a string at line 1 column 1377 [type=json_invalid, input_value='{\"answer\":\"Here are the ...or Authority | 3 | 16.7', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+      "correct": false,
+      "refused": null,
+      "answer": null,
+      "total_ms": 17206,
+      "cost_usd": 0.0,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reason": "pipeline raised: ValidationError"
+    },
+    {
+      "id": "seed-02",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "Which measures have no reported score for more than half of Texas hospitals? Show the 25 with the highest percent missing: measure ID, domain, measure name (first 60 characters), hospitals with a score, total Texas hospitals and percent missing (one decimal). Break ties by measure ID.",
+      "error": "ValidationError: 1 validation error for AnswerOut\n  Invalid JSON: EOF while parsing a string at line 1 column 1921 [type=json_invalid, input_value='{\"answer\":\"These are the... patients receiv | 54 |', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+      "correct": false,
+      "refused": null,
+      "answer": null,
+      "total_ms": 20968,
+      "cost_usd": 0.0,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reason": "pipeline raised: ValidationError"
+    },
+    {
+      "id": "seed-03",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "For Texas hospitals, compare the average 'would definitely recommend' percentage and the average overall star rating by ownership type. Count every Texas hospital of the type (even without a recommend score), keep only types with at least 5 hospitals, and list the highest average recommend percentage first.",
+      "error": null,
+      "answer": {
+        "question": "For Texas hospitals, compare the average 'would definitely recommend' percentage and the average overall star rating by ownership type. Count every Texas hospital of the type (even without a recommend score), keep only types with at least 5 hospitals, and list the highest average recommend percentage first.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "For Texas ownership types with at least 5 hospitals, the figures are ordered by average \u201cwould definitely recommend\u201d percentage, highest first. These are averages across hospitals of the recommend measure and overall star rating, not counts of patients; hospital counts include all hospitals of each type, including those without a recommend score.\n\nGovernment - Local: 11 hospitals; recommend average 79.0%; overall star average 3.0.\nGovernment - State: 15 hospitals; 79.0%; 3.67 stars.\nPhysician: 27 hospitals; 78.85%; 3.67 stars.\nGovernment - Hospital District or Authority: 78 hospitals; 75.73%; 2.77 stars.\nVoluntary non-profit - Other: 18 hospitals; 74.36%; 3.43 stars.\nVeterans Health Administration: 5 hospitals; 74.2%; 4.4 stars.\nVoluntary non-profit - Private: 134 hospitals; 73.52%; 3.7 stars.\nVoluntary non-profit - Church: 5 hospitals; 73.5%; 3.75 stars.\nProprietary: 171 hospitals; 68.58%; 3.01 stars.",
+        "sql": "SELECT h.hospital_ownership AS ownership_type, COUNT(h.facility_id) AS hospital_count, m.measure_id, m.measure_name, ROUND(CAST(AVG(v.score) AS DECIMAL), 2) AS avg_definitely_recommend_pct, ROUND(CAST(AVG(h.overall_rating) AS DECIMAL), 2) AS avg_overall_star_rating FROM hq.hospitals AS h CROSS JOIN hq.measures AS m LEFT JOIN hq.v_tx_latest AS v ON v.facility_id = h.facility_id AND UPPER(v.measure_id) = UPPER('H_RECMND_DY') WHERE h.is_texas = TRUE AND UPPER(m.measure_id) = UPPER('H_RECMND_DY') GROUP BY h.hospital_ownership, m.measure_id, m.measure_name HAVING COUNT(h.facility_id) >= 5 ORDER BY AVG(v.score) DESC NULLS LAST, h.hospital_ownership LIMIT 200",
+        "columns": [
+          "ownership_type",
+          "hospital_count",
+          "measure_id",
+          "measure_name",
+          "avg_definitely_recommend_pct",
+          "avg_overall_star_rating"
+        ],
+        "rows": [
+          [
+            "Government - Local",
+            11,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            79.0,
+            3.0
+          ],
+          [
+            "Government - State",
+            15,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            79.0,
+            3.67
+          ],
+          [
+            "Physician",
+            27,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            78.85,
+            3.67
+          ],
+          [
+            "Government - Hospital District or Authority",
+            78,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            75.73,
+            2.77
+          ],
+          [
+            "Voluntary non-profit - Other",
+            18,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            74.36,
+            3.43
+          ],
+          [
+            "Veterans Health Administration",
+            5,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            74.2,
+            4.4
+          ],
+          [
+            "Voluntary non-profit - Private",
+            134,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            73.52,
+            3.7
+          ],
+          [
+            "Voluntary non-profit - Church",
+            5,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            73.5,
+            3.75
+          ],
+          [
+            "Proprietary",
+            171,
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            68.58,
+            3.01
+          ]
+        ],
+        "row_count": 9,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8966,
+            "output_tokens": 1191,
+            "cost_usd": 0.0014921,
+            "latency_ms": 14605,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1756,
+            "output_tokens": 565,
+            "cost_usd": 0.0004581,
+            "latency_ms": 8314,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10722,
+        "total_output_tokens": 1756,
+        "total_cost_usd": 0.00195,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 14605,
+          "sql_ms": 172,
+          "answer_ms": 8314,
+          "total_ms": 23094
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 9
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 23094,
+      "step_ms": {
+        "plan_ms": 14605,
+        "sql_ms": 172,
+        "answer_ms": 8314,
+        "total_ms": 23094
+      },
+      "cost_usd": 0.00195,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10722,
+      "output_tokens": 1756,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 9,
+      "truth_rows": 9,
+      "gen_rows": 9,
+      "reason": null,
+      "truth_ms": 2689
+    },
+    {
+      "id": "seed-04",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "Rank the Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) that have a 30-day heart failure readmission rate within their own county (rank 1 = lowest rate; hospitals with equal rates share a rank). Show county, rank, hospital and rate.",
+      "error": "ValidationError: 1 validation error for AnswerOut\n  Invalid JSON: EOF while parsing a string at line 1 column 995 [type=json_invalid, input_value='{\"answer\":\"Heart failure...HEALTHCARE TOMBALL | 20', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+      "correct": false,
+      "refused": null,
+      "answer": null,
+      "total_ms": 12529,
+      "cost_usd": 0.0,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reason": "pipeline raised: ValidationError"
+    },
+    {
+      "id": "seed-05",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "hard",
+      "question": "For Texas hospitals with a 30-day pneumonia readmission rate, show the 20 whose rate is furthest below the Texas average: hospital, county, rate, Texas average, difference from the Texas average, the average of their own county and the difference from it (all rounded to 2 decimals). Most below average first; break ties by hospital name.",
+      "error": "ValidationError: 1 validation error for AnswerOut\n  Invalid JSON: EOF while parsing a string at line 1 column 1418 [type=json_invalid, input_value='{\"answer\":\"Here are the ...L HOSPITAL | HIDALGO | ', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+      "correct": false,
+      "refused": null,
+      "answer": null,
+      "total_ms": 14998,
+      "cost_usd": 0.0,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reason": "pipeline raised: ValidationError"
+    },
+    {
+      "id": "seed-06",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "hard",
+      "question": "Using every U.S. hospital that has a 30-day heart failure death rate, compute each hospital's national percentile (percent rank: 0 = lowest death rate, 1 = highest). Return the Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties) with their rate and percentile (3 decimals), lowest percentile first, ties by hospital name.",
+      "error": "ValidationError: 1 validation error for AnswerOut\n  Invalid JSON: EOF while parsing a string at line 1 column 1282 [type=json_invalid, input_value='{\"answer\":\"The results s...| HARRIS HEALTH | 9.7 |', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+      "correct": false,
+      "refused": null,
+      "answer": null,
+      "total_ms": 23465,
+      "cost_usd": 0.0,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reason": "pipeline raised: ValidationError"
+    },
+    {
+      "id": "seed-07",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "hard",
+      "question": "For the 'patients who rated the hospital 9 or 10' survey measure, do any Texas hospitals have scores from more than one reporting period (so a change from the prior period could be computed)? Give the number of Texas hospitals with a score, the largest number of reporting periods any one hospital has, and how many hospitals have more than one period.",
+      "error": null,
+      "answer": {
+        "question": "For the 'patients who rated the hospital 9 or 10' survey measure, do any Texas hospitals have scores from more than one reporting period (so a change from the prior period could be computed)? Give the number of Texas hospitals with a score, the largest number of reporting periods any one hospital has, and how many hospitals have more than one period.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Yes, the results show 297 Texas hospitals with a score. The largest number of reporting periods for any one hospital is 1, and 0 hospitals have more than one period, so none have scores from multiple periods to compare.",
+        "sql": "SELECT UPPER(m.measure_id) AS measure_id, m.measure_name, COUNT(*) AS texas_hospitals_with_score, MAX(p.reporting_periods) AS max_reporting_periods_per_hospital, COUNT(*) FILTER(WHERE p.reporting_periods > 1) AS hospitals_with_multiple_periods FROM (SELECT mv.facility_id, COUNT(DISTINCT (mv.period_start, mv.period_end)) AS reporting_periods FROM hq.measure_values AS mv JOIN hq.hospitals AS h ON h.facility_id = mv.facility_id WHERE UPPER(mv.measure_id) = UPPER('H_HSP_RATING_9_10') AND h.state = 'TX' AND mv.score IS NOT NULL GROUP BY mv.facility_id) AS p CROSS JOIN hq.measures AS m WHERE UPPER(m.measure_id) = UPPER('H_HSP_RATING_9_10') GROUP BY m.measure_id, m.measure_name LIMIT 200",
+        "columns": [
+          "measure_id",
+          "measure_name",
+          "texas_hospitals_with_score",
+          "max_reporting_periods_per_hospital",
+          "hospitals_with_multiple_periods"
+        ],
+        "rows": [
+          [
+            "H_HSP_RATING_9_10",
+            "Patients who gave their hospital a rating of 9 or 10 on a scale from 0 (lowest) to 10 (highest) \u2014 Patients who gave a rating of \"9\" or \"10\" (high)",
+            297,
+            1,
+            0
+          ]
+        ],
+        "row_count": 1,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 8982,
+            "output_tokens": 673,
+            "cost_usd": 0.0012347,
+            "latency_ms": 6566,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1362,
+            "output_tokens": 66,
+            "cost_usd": 0.00016920000000000002,
+            "latency_ms": 3098,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10344,
+        "total_output_tokens": 739,
+        "total_cost_usd": 0.001404,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 6566,
+          "sql_ms": 188,
+          "answer_ms": 3098,
+          "total_ms": 9854
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 1
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 9854,
+      "step_ms": {
+        "plan_ms": 6566,
+        "sql_ms": 188,
+        "answer_ms": 3098,
+        "total_ms": 9854
+      },
+      "cost_usd": 0.001404,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10344,
+      "output_tokens": 739,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": null,
+      "matched": 1,
+      "truth_rows": 1,
+      "gen_rows": 1,
+      "reason": null,
+      "truth_ms": 419,
+      "answer_states_value": true
+    },
+    {
+      "id": "seed-08",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "hard",
+      "question": "Build a quality composite for Texas hospitals from three standardized scores (z-scores, using the sample standard deviation across all Texas hospitals that have that measure): 30-day pneumonia readmission rate (sign flipped so higher is better), 'would definitely recommend' percentage, and sepsis care percentage. Average the three z-scores per hospital (2 decimals), keeping only hospitals with all three. Return the 10 highest and the 10 lowest composites, top group first (highest first), then bottom group (lowest first); break ties by hospital name, then county.",
+      "error": null,
+      "answer": {
+        "question": "Build a quality composite for Texas hospitals from three standardized scores (z-scores, using the sample standard deviation across all Texas hospitals that have that measure): 30-day pneumonia readmission rate (sign flipped so higher is better), 'would definitely recommend' percentage, and sepsis care percentage. Average the three z-scores per hospital (2 decimals), keeping only hospitals with all three. Return the 10 highest and the 10 lowest composites, top group first (highest first), then bottom group (lowest first); break ties by hospital name, then county.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Composite z-scores average the three standardized measures, with the pneumonia readmission score sign-flipped. Top 10 (highest first): 1. METHODIST MIDLOTHIAN MEDICAL CENTER (ELLIS), 1.53; 2. CHRISTUS MOTHER FRANCES HOSPITAL- JACKSONVILLE (CHEROKEE), 1.34; 3. HOUSTON METHODIST THE WOODLANDS HOSPITAL (MONTGOMERY), 1.32; 4. GRAHAM REGIONAL MEDICAL CENTER (YOUNG), 1.16; 5. TEXAS HEALTH HOSPITAL FRISCO (DENTON), 1.04; 6. UT HEALTH EAST TEXAS PITTSBURG HOSPITAL (CAMP), 1.0; 7. METHODIST DALLAS MEDICAL CENTER (DALLAS), 0.99; 8. BAYLOR SCOTT & WHITE MEDICAL CENTER  GRAPEVINE (TARRANT), 0.96; 9. TEXAS HEALTH HOSPITAL MANSFIELD (TARRANT), 0.92; 10. TEXAS HEALTH HARRIS METHODIST HOSPITAL CLEBURNE (JOHNSON), 0.88. Bottom 10 (lowest first): 1. BAYLOR SCOTT AND WHITE MEDICAL CENTER SUNNYVALE (DALLAS), -1.47; 2. PARIS REGIONAL MEDICAL CENTER (LAMAR), -1.42; 3. WOODLAND HEIGHTS MEDICAL CENTER (ANGELINA), -1.4; 4. HENDRICK MEDICAL CENTER BROWNWOOD (BROWN), -1.39; 5. THE MEDICAL CENTER OF SOUTHEAST TEXAS (JEFFERSON), -1.35; 6. UNITED REGIONAL HEALTH CARE SYSTEM (WICHITA), -1.34; 7. CARROLLTON REGIONAL MEDICAL CENTER (DENTON), -1.33; 8. NACOGDOCHES MEDICAL CENTER (NACOGDOCHES), -1.25; 9. LAS PALMAS MEDICAL CENTER A CAMPUS OF LPDS HEALTHC (EL PASO), -1.22; 10. EL CAMPO MEMORIAL HOSPITAL (WHARTON), -1.18.",
+        "sql": "WITH tx AS (SELECT facility_id, facility_name, county, UPPER(measure_id) AS measure_id, score FROM hq.v_tx_latest WHERE UPPER(measure_id) IN ('READM_30_PN', 'H_RECMND_DY', 'SEP_1') AND score IS NOT NULL), measure_stats AS (SELECT measure_id, AVG(score) AS mean_score, STDDEV(score) AS sample_sd FROM tx GROUP BY measure_id), standardized AS (SELECT t.facility_id, t.facility_name, t.county, t.measure_id, CASE WHEN t.measure_id = 'READM_30_PN' THEN -((t.score - s.mean_score) / NULLIF(s.sample_sd, 0)) ELSE (t.score - s.mean_score) / NULLIF(s.sample_sd, 0) END AS z_score FROM tx AS t JOIN measure_stats AS s ON s.measure_id = t.measure_id), composites AS (SELECT facility_id, facility_name, county, AVG(z_score) AS composite FROM standardized GROUP BY facility_id, facility_name, county HAVING COUNT(*) = 3), ranked AS (SELECT facility_id, facility_name, county, composite, ROW_NUMBER() OVER (ORDER BY composite DESC, facility_name, county) AS top_rank, ROW_NUMBER() OVER (ORDER BY composite ASC, facility_name, county) AS bottom_rank FROM composites), selected AS (SELECT 1 AS group_order, 'Top' AS group_name, top_rank AS group_rank, facility_name, county, composite FROM ranked WHERE top_rank <= 10 UNION ALL SELECT 2 AS group_order, 'Bottom' AS group_name, bottom_rank AS group_rank, facility_name, county, composite FROM ranked WHERE bottom_rank <= 10) SELECT group_name, group_rank, facility_name, county, ROUND(CAST(composite AS DECIMAL), 2) AS composite_z_score FROM selected ORDER BY group_order, group_rank LIMIT 200",
+        "columns": [
+          "group_name",
+          "group_rank",
+          "facility_name",
+          "county",
+          "composite_z_score"
+        ],
+        "rows": [
+          [
+            "Top",
+            1,
+            "METHODIST MIDLOTHIAN MEDICAL CENTER",
+            "ELLIS",
+            1.53
+          ],
+          [
+            "Top",
+            2,
+            "CHRISTUS MOTHER FRANCES HOSPITAL- JACKSONVILLE",
+            "CHEROKEE",
+            1.34
+          ],
+          [
+            "Top",
+            3,
+            "HOUSTON METHODIST THE WOODLANDS HOSPITAL",
+            "MONTGOMERY",
+            1.32
+          ],
+          [
+            "Top",
+            4,
+            "GRAHAM REGIONAL MEDICAL CENTER",
+            "YOUNG",
+            1.16
+          ],
+          [
+            "Top",
+            5,
+            "TEXAS HEALTH HOSPITAL FRISCO",
+            "DENTON",
+            1.04
+          ],
+          [
+            "Top",
+            6,
+            "UT HEALTH EAST TEXAS PITTSBURG HOSPITAL",
+            "CAMP",
+            1.0
+          ],
+          [
+            "Top",
+            7,
+            "METHODIST DALLAS MEDICAL CENTER",
+            "DALLAS",
+            0.99
+          ],
+          [
+            "Top",
+            8,
+            "BAYLOR SCOTT & WHITE MEDICAL CENTER  GRAPEVINE",
+            "TARRANT",
+            0.96
+          ],
+          [
+            "Top",
+            9,
+            "TEXAS HEALTH HOSPITAL MANSFIELD",
+            "TARRANT",
+            0.92
+          ],
+          [
+            "Top",
+            10,
+            "TEXAS HEALTH HARRIS METHODIST HOSPITAL CLEBURNE",
+            "JOHNSON",
+            0.88
+          ],
+          [
+            "Bottom",
+            1,
+            "BAYLOR SCOTT AND WHITE MEDICAL CENTER SUNNYVALE",
+            "DALLAS",
+            -1.47
+          ],
+          [
+            "Bottom",
+            2,
+            "PARIS REGIONAL MEDICAL CENTER",
+            "LAMAR",
+            -1.42
+          ],
+          [
+            "Bottom",
+            3,
+            "WOODLAND HEIGHTS MEDICAL CENTER",
+            "ANGELINA",
+            -1.4
+          ],
+          [
+            "Bottom",
+            4,
+            "HENDRICK MEDICAL CENTER BROWNWOOD",
+            "BROWN",
+            -1.39
+          ],
+          [
+            "Bottom",
+            5,
+            "THE MEDICAL CENTER OF SOUTHEAST TEXAS",
+            "JEFFERSON",
+            -1.35
+          ],
+          [
+            "Bottom",
+            6,
+            "UNITED REGIONAL HEALTH CARE SYSTEM",
+            "WICHITA",
+            -1.34
+          ],
+          [
+            "Bottom",
+            7,
+            "CARROLLTON REGIONAL MEDICAL CENTER",
+            "DENTON",
+            -1.33
+          ],
+          [
+            "Bottom",
+            8,
+            "NACOGDOCHES MEDICAL CENTER",
+            "NACOGDOCHES",
+            -1.25
+          ],
+          [
+            "Bottom",
+            9,
+            "LAS PALMAS MEDICAL CENTER A CAMPUS OF LPDS HEALTHC",
+            "EL PASO",
+            -1.22
+          ],
+          [
+            "Bottom",
+            10,
+            "EL CAMPO MEMORIAL HOSPITAL",
+            "WHARTON",
+            -1.18
+          ]
+        ],
+        "row_count": 20,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 9022,
+            "output_tokens": 1434,
+            "cost_usd": 0.0016192000000000001,
+            "latency_ms": 12095,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 2090,
+            "output_tokens": 626,
+            "cost_usd": 0.000522,
+            "latency_ms": 7709,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 11112,
+        "total_output_tokens": 2060,
+        "total_cost_usd": 0.002141,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 12095,
+          "sql_ms": 182,
+          "answer_ms": 7709,
+          "total_ms": 19989
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 20
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 19989,
+      "step_ms": {
+        "plan_ms": 12095,
+        "sql_ms": 182,
+        "answer_ms": 7709,
+        "total_ms": 19989
+      },
+      "cost_usd": 0.002141,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 11112,
+      "output_tokens": 2060,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": false,
+      "row_recall": 0.0,
+      "order_ok": true,
+      "matched": 0,
+      "truth_rows": 20,
+      "gen_rows": 20,
+      "reason": "0/20 truth rows matched",
+      "truth_ms": 988
+    },
+    {
+      "id": "seed-09",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "Which Texas hospitals have a 30-day pneumonia readmission rate below the Texas average but a 'would definitely recommend' percentage below the Texas average (each average over Texas hospitals with that measure)? Show the 20 with the lowest readmission rates: hospital, county, both rates and both averages (readmission average to 2 decimals, recommend average to 1). Ties by hospital name.",
+      "error": "ValidationError: 1 validation error for AnswerOut\n  Invalid JSON: EOF while parsing a string at line 1 column 1545 [type=json_invalid, input_value='{\"answer\":\"The 20 hospit...ITAL | FORT BEND | 16.4', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+      "correct": false,
+      "refused": null,
+      "answer": null,
+      "total_ms": 14064,
+      "cost_usd": 0.0,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reason": "pipeline raised: ValidationError"
+    },
+    {
+      "id": "seed-10",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "For Texas counties with at least 3 hospitals that have a 30-day pneumonia readmission rate, show the number of hospitals, how many have a rate, the plain mean rate and the mean weighted by each hospital's number of eligible discharges (2 decimals). Lowest weighted mean first; break ties by county.",
+      "error": "ValidationError: 1 validation error for AnswerOut\n  Invalid JSON: EOF while parsing a string at line 1 column 415 [type=json_invalid, input_value='{\"answer\":\"There are 20 ..., 17.4\\\\n- Hidalgo: 7, ', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+      "correct": false,
+      "refused": null,
+      "answer": null,
+      "total_ms": 17037,
+      "cost_usd": 0.0,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reason": "pipeline raised: ValidationError"
+    },
+    {
+      "id": "seed-11",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "medium",
+      "question": "Build a one-row-per-hospital scorecard for Houston-area hospitals (Harris, Fort Bend, Montgomery, Galveston and Brazoria counties): 30-day pneumonia readmission rate, 30-day heart failure death rate, central-line infection ratio, sepsis care percentage, 'would definitely recommend' percentage and the HCAHPS summary star rating (blank if not reported). Show the top 25 by recommend percentage, highest first, hospitals with no recommend score last, ties by hospital name.",
+      "error": "ValidationError: 1 validation error for AnswerOut\n  Invalid JSON: EOF while parsing a string at line 1 column 1264 [type=json_invalid, input_value='{\"answer\":\"Top 25 Housto... | 6.1 | 0.183 | 82.0 |', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid",
+      "correct": false,
+      "refused": null,
+      "answer": null,
+      "total_ms": 16095,
+      "cost_usd": 0.0,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reason": "pipeline raised: ValidationError"
+    },
+    {
+      "id": "seed-12",
+      "type": "numeric",
+      "group": "numeric",
+      "split": "dev",
+      "difficulty": "hard",
+      "question": "For six measures, what share of Texas hospitals do better than the national average (average over all U.S. hospitals with a score)? Measures: 30-day pneumonia readmission rate, 30-day heart failure death rate, central-line infection ratio (lower is better for these three), sepsis care percentage, 'would definitely recommend' percentage and HCAHPS summary star rating (higher is better for these three). Return measure ID, the national average (2 decimals), Texas hospitals with a score, how many beat the national average and the share in percent (1 decimal), highest share first, ties by measure ID.",
+      "error": null,
+      "answer": {
+        "question": "For six measures, what share of Texas hospitals do better than the national average (average over all U.S. hospitals with a score)? Measures: 30-day pneumonia readmission rate, 30-day heart failure death rate, central-line infection ratio (lower is better for these three), sepsis care percentage, 'would definitely recommend' percentage and HCAHPS summary star rating (higher is better for these three). Return measure ID, the national average (2 decimals), Texas hospitals with a score, how many beat the national average and the share in percent (1 decimal), highest share first, ties by measure ID.",
+        "route": "data",
+        "refused": false,
+        "refusal_reason": null,
+        "answer": "Among the six measures, Texas hospitals\u2019 shares above or below the national average, as appropriate for the measure, are: HAI_1_SIR \u2014 national average 0.58; 151 Texas hospitals with a score, 99 beat the average (65.6%). MORT_30_HF \u2014 11.07; 206 with a score, 132 beat it (64.1%). SEP_1 \u2014 63.79; 233 with a score, 146 beat it (62.7%). READM_30_PN \u2014 17.34; 258 with a score, 150 beat it (58.1%). H_RECMND_DY \u2014 71.22; 297 with a score, 158 beat it (53.2%). H_STAR_RATING \u2014 3.27; 229 with a score, 92 beat it (40.2%).",
+        "sql": "WITH selected_measures AS (SELECT m.measure_id, m.measure_name, m.higher_is_better FROM hq.measures AS m WHERE m.measure_id IN ('READM_30_PN', 'MORT_30_HF', 'HAI_1_SIR', 'SEP_1', 'H_RECMND_DY', 'H_STAR_RATING')), scored_periods AS (SELECT mv.facility_id, mv.measure_id, mv.score, ROW_NUMBER() OVER (PARTITION BY mv.facility_id, mv.measure_id ORDER BY mv.period_end DESC NULLS LAST, mv.period_start DESC NULLS LAST) AS period_rank FROM hq.measure_values AS mv JOIN selected_measures AS sm ON sm.measure_id = mv.measure_id WHERE mv.score IS NOT NULL), latest_scores AS (SELECT sp.facility_id, sp.measure_id, sp.score FROM scored_periods AS sp WHERE sp.period_rank = 1), national AS (SELECT ls.measure_id, AVG(ls.score) AS national_average, sm.higher_is_better FROM latest_scores AS ls JOIN hq.hospitals AS h ON h.facility_id = ls.facility_id JOIN selected_measures AS sm ON sm.measure_id = ls.measure_id GROUP BY ls.measure_id, sm.higher_is_better), texas AS (SELECT ls.measure_id, COUNT(*) AS texas_hospitals_with_score, COUNT(*) FILTER(WHERE (n.higher_is_better AND ls.score > n.national_average) OR (NOT n.higher_is_better AND ls.score < n.national_average)) AS texas_hospitals_beating_average FROM latest_scores AS ls JOIN hq.hospitals AS h ON h.facility_id = ls.facility_id JOIN national AS n ON n.measure_id = ls.measure_id WHERE h.state = 'TX' GROUP BY ls.measure_id) SELECT sm.measure_id, sm.measure_name, ROUND(CAST(n.national_average AS DECIMAL), 2) AS national_average, t.texas_hospitals_with_score, t.texas_hospitals_beating_average, ROUND(100.0 * t.texas_hospitals_beating_average / NULLIF(t.texas_hospitals_with_score, 0), 1) AS share_beating_national_pct FROM selected_measures AS sm JOIN national AS n ON n.measure_id = sm.measure_id JOIN texas AS t ON t.measure_id = sm.measure_id ORDER BY share_beating_national_pct DESC, sm.measure_id LIMIT 200",
+        "columns": [
+          "measure_id",
+          "measure_name",
+          "national_average",
+          "texas_hospitals_with_score",
+          "texas_hospitals_beating_average",
+          "share_beating_national_pct"
+        ],
+        "rows": [
+          [
+            "HAI_1_SIR",
+            "Central Line Associated Bloodstream Infection (ICU + select Wards)",
+            0.58,
+            151,
+            99,
+            65.6
+          ],
+          [
+            "MORT_30_HF",
+            "Death rate for heart failure patients",
+            11.07,
+            206,
+            132,
+            64.1
+          ],
+          [
+            "SEP_1",
+            "Appropriate care for severe sepsis and septic shock",
+            63.79,
+            233,
+            146,
+            62.7
+          ],
+          [
+            "READM_30_PN",
+            "Pneumonia (PN) 30-Day Readmission Rate",
+            17.34,
+            258,
+            150,
+            58.1
+          ],
+          [
+            "H_RECMND_DY",
+            "Patients who reported YES, they would definitely recommend the hospital \u2014 \"YES\", patients would definitely recommend the hospital",
+            71.22,
+            297,
+            158,
+            53.2
+          ],
+          [
+            "H_STAR_RATING",
+            "Summary star rating \u2014 Summary star rating",
+            3.27,
+            229,
+            92,
+            40.2
+          ]
+        ],
+        "row_count": 6,
+        "citations": [],
+        "prompt_versions": {
+          "plan": "plan_v6",
+          "schema": "schema_v2",
+          "answer": "answer_v6"
+        },
+        "model": "gpt-6-luna",
+        "usage": [
+          {
+            "input_tokens": 9035,
+            "output_tokens": 1524,
+            "cost_usd": 0.0016655,
+            "latency_ms": 13956,
+            "model": "gpt-6-luna",
+            "step": "plan"
+          },
+          {
+            "input_tokens": 1889,
+            "output_tokens": 280,
+            "cost_usd": 0.00032889999999999997,
+            "latency_ms": 4382,
+            "model": "gpt-6-luna",
+            "step": "answer"
+          }
+        ],
+        "total_input_tokens": 10924,
+        "total_output_tokens": 1804,
+        "total_cost_usd": 0.001994,
+        "repaired": false,
+        "repair_kind": null,
+        "sql_error": null,
+        "timings": {
+          "plan_ms": 13956,
+          "sql_ms": 2341,
+          "answer_ms": 4382,
+          "total_ms": 20680
+        },
+        "retrieved_chunk_ids": [],
+        "doc_top_similarity": null,
+        "doc_query": null,
+        "doc_collection": null,
+        "rows_total_in_answer": 6
+      },
+      "refused": false,
+      "route": "data",
+      "model": "gpt-6-luna",
+      "prompt_versions": {
+        "plan": "plan_v6",
+        "schema": "schema_v2",
+        "answer": "answer_v6"
+      },
+      "total_ms": 20680,
+      "step_ms": {
+        "plan_ms": 13956,
+        "sql_ms": 2341,
+        "answer_ms": 4382,
+        "total_ms": 20680
+      },
+      "cost_usd": 0.001994,
+      "judge_cost_usd": 0.0,
+      "input_tokens": 10924,
+      "output_tokens": 1804,
+      "repaired": false,
+      "sql_error": null,
+      "refusal_stage": null,
+      "correct": true,
+      "row_recall": 1.0,
+      "order_ok": true,
+      "matched": 6,
+      "truth_rows": 6,
+      "gen_rows": 6,
+      "reason": null,
+      "truth_ms": 372
+    }
+  ]
+}

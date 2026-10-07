@@ -67,11 +67,12 @@ The planner is one model call that returns a route (`data`, `docs`, `both` or `r
 
 Safeguards:
 
-- **Two independent SQL defenses.** `service/sql_guard.py` accepts only a single `SELECT` (CTEs and set operations allowed), rejects writes, DDL, `COPY`, `SET`, locks, `SELECT ... INTO` and file or settings functions, allows only eight named tables and views in schema `hq`, and caps results at 200 rows. The query then runs under a database login (`hq_reader`) that can only `SELECT` from `hq`, in read-only transactions with a 5-second timeout.
+- **Two independent SQL defenses.** `service/sql_guard.py` accepts only a single `SELECT` (CTEs and set operations allowed; no recursion), rejects writes, DDL, `COPY`, `SET`, locks and `SELECT ... INTO`, allows only eight named tables and views in schema `hq` (names are resolved scope by scope), allows only functions on an explicit list of analytics functions, and caps results at 200 rows. The query then runs under a database login (`hq_reader`) that can only `SELECT` from `hq`, in read-only transactions with a 5-second timeout.
 - **Separate logins by job.** The documentation search login can read only `hq_docs.chunks`. The logging login can only insert into and select from `hq_app.request_log`. Neither the reader nor the search login can read the log. Created by `infra/setup_reader_role.py`.
 - **Citations are checked.** A citation with an unknown chunk id, or a quote that is not in that chunk, is dropped. A documentation answer left with no valid citation becomes a refusal.
 - **Weak documentation matches are not used.** A passage is kept only if its best vector similarity reaches 0.35.
-- **Limits that survive restarts.** The daily budget ($0.50 of model spend per UTC day), per-client rate (20 an hour) and overall rate (30 a minute) are computed from the request log, before any model call. If the log cannot be read, `/ask` returns 503 rather than run unmetered. Questions are capped at 300 characters. The log stores a salted hash of the client address, not the address.
+- **Limits that survive restarts.** The daily budget ($0.50 of model spend per UTC day), per-client rate (20 an hour) and overall rate (30 a minute) are computed from the request log plus the requests still being answered, before any model call. At most 6 questions are answered at once. If the log cannot be read, `/ask` returns 503 rather than run unmetered. Questions are capped at 300 characters. The log stores a salted hash of the client address, not the address.
+- **Bounded output.** The question is treated as data, not instructions: requests to change tone, persona, format or wording are ignored or declined. Answers are cut at 2,400 characters, result cells at 300, and the coverage closing sentence is added in code if the model leaves it out.
 - **Coverage answers are bounded.** They come only from the text of National Coverage Determinations, name the determination, and end by saying this is national policy and not a decision about any person. Questions about what one person will pay, whether their claim will be approved, other insurers, or local coverage rules are declined.
 - **An alert outside the service.** A scheduled check reads the request log every 30 minutes and raises an alert when the daily budget is nearly or fully used, or when requests start failing (see [Alerts](#alerts)).
 - **Nothing ships on a worse score.** The deploy pipeline runs the tests and the evaluation set and compares against a stored baseline before it builds anything (see [Evaluation](#evaluation) and [What broke](#what-broke)).
@@ -128,6 +129,24 @@ How to read the coverage numbers. The questions were written by the same AI agen
 7. **Drill 1: the gate stops a bad change.** Pull request #1 pointed the service at a prompt limiting answers to eight words. The gate failed it at definition 2/22 against a baseline of 13/22 (tolerance 2). Number questions stayed 26/26 and declines 4/4 and 11/11, because those are graded on the query result or on refusing, not on wording. The build and deploy job was skipped and the pull request was closed unmerged. Sources: `infra/DEPLOY.md` (drill results), `infra/ROLLBACK_DRILL.md`.
 8. **Drill 2: roll back a live prompt with one command.** `az containerapp update --set-env-vars HQ_ANSWER_PROMPT=answer_v3` returned in about 20 s and `/health` reported `answer_v3` about 45 s after the command started; removing the override restored `answer_v4` in about 43 s. This path skips the gate on purpose, which is why prompt versions are shown on `/health` and recorded with every request. Requests during the switch were not measured. Sources: `infra/DEPLOY.md`, `infra/ROLLBACK_DRILL.md`.
 9. **New documents reached the live table before the code that separates them.** The 833 coverage chunks were loaded into the same table the deployed service searches, while the deployed code still searched every row. Until the new release shipped, a live question could have retrieved a coverage passage and been answered without the coverage wording rules. It was caught in review of the load step, not by a test. A check showed no coverage chunk reached the top 8 for any of the 22 definition test queries, and the release that filters by document set closed it. Loading into a separate table first would have avoided the window. Source: `infra/DEPLOY.md`.
+
+## Abuse testing
+
+A first adversarial pass was run on 2026-10-07 by AI agents at my request: 103 hand-written attack questions through the real pipeline (three runs each), 256 SQL strings fed straight to the validator, 219 direct actions as each restricted database login, and HTTP checks against the deployed service. Full write-up: [`redteam/REPORT.md`](redteam/REPORT.md).
+
+| Area | Before the fixes | After |
+|---|---|---|
+| Prompt, secret or other visitors' questions leaked | none | none |
+| Data written or changed | none | none |
+| Model-level probes (103) | 94 pass, 4 borderline, 5 fail | no failures on the same probes |
+| SQL validator | a crafted query could read database system tables (role names, settings); any function not on a deny list was accepted | names resolved per scope; function allow-list; 64 new must-reject tests |
+| Attacker-chosen wording in answers | obeyed (all caps, a supplied closing phrase, pirate voice) | declined |
+| Answer length | up to 9,300 characters | capped at 2,400 |
+| Coverage closing sentence | dropped on request in 1 of 3 runs | added in code |
+| 30 simultaneous requests from one client | all 30 answered | at most 6 at once; the rest get "busy" |
+| One slow query | stalled every other request behind one shared lock | one lock per connection, 8-second client deadline |
+
+What limited the damage before the fixes: the restricted database logins (the login that runs model-written SQL cannot read the request log or any secret), the 5-second query timeout and the daily budget. What this pass is not: an audit. Each attack had one phrasing, the after-fix numbers are on the same probes the fixes were written against, and the fixes have not been attacked on the deployed service.
 
 ## Alerts
 
@@ -225,6 +244,7 @@ docs_index/     Download, chunk and embed the documents: 7 measure documents (ma
 evals/          Question sets, grading harness (run.py), baseline.json, results/ (every run report), README with decisions log
 infra/          Azure bootstrap, database login setup, DEPLOY.md runbook, ROLLBACK_DRILL.md
 ops/            alert_check.py: scheduled budget and error alert
+redteam/        Abuse-testing probes, runner, validator and login test scripts, REPORT.md
 tests/          Offline tests for the validator, pipeline, limits, retrieval and the question files
 .github/workflows/deploy.yml   Test, evaluation gate, build, deploy, smoke test
 .github/workflows/alert.yml    Alert check every 30 minutes
